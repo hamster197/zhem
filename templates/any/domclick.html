@@ -1,0 +1,46 @@
+<feed>
+  <feed_version>2</feed_version>
+    {% for post in tppost %}
+  <object>
+    <Category>flatSale</Category>
+    <ExternalId>{{ post.pk }}</ExternalId>
+    <RoomType>both</RoomType>
+    <Description>{{ post.prim }}</Description>
+    <Address>Сочи, {{ post.adress }} {{ post.dom_numb }} {{ post.kvart_numb }}</Address>
+    <FlatRoomsCount>{{ post.komnat }}</FlatRoomsCount>
+        <Phones>
+      <PhoneSchema>
+        <CountryCode>+7</CountryCode>
+        <Number>{{ post.author.userprofile1.tel  }}</Number>
+      </PhoneSchema>
+      <PhoneSchema>
+        <CountryCode>+7</CountryCode>
+        <Number>{{ post.author.userprofile1.tel  }}</Number>
+      </PhoneSchema>
+    </Phones>
+    <TotalArea>{{ post.ploshad }}</TotalArea>
+    <FloorNumber>{{ post.etag }}</FloorNumber>
+    <SubAgent>
+      <Email>{{ post.author.email }}</Email>
+      <Phone>+7{{ post.author.userprofile1.tel  }}</Phone>
+      <FirstName>{{  post.author.first_name }}</FirstName>
+      <LastName>{{ post.author.last_name }}</LastName>
+    </SubAgent>
+    <Photos>
+	{% for i in post.idd_gal.all %}
+      <PhotoSchema>
+        <FullUrl>http://35.195.61.28{{ i.npict.url }}</FullUrl>
+
+      </PhotoSchema>
+        {% endfor %}
+    </Photos>
+    <Building>
+        <FloorsCount>{{ post.etagnost }}</FloorsCount>
+    </Building>
+    <BargainTerms>
+      <Price>{{ post.cena_agenstv }}</Price>
+      <Currency>rur </Currency>
+    </BargainTerms>
+  </object>
+{% endfor %}
+</feed>

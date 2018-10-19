@@ -1,0 +1,240 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+<div class="row">
+
+    <div class="col s12">
+     <div class="card">
+    <div class="card-content">Каналы привлечения клиентов:
+    </div>
+   <div class="chip">
+    Avito {{ tavito }}
+  </div>
+<!--   <div class="chip">
+    Avito Turbo {{ tAvitoTurbo }}
+  </div>-->
+  <div class="chip">
+    Vestum {{ tCian }}
+  </div>
+   <div class="chip">
+    Сайт компании {{  tsait }}
+  </div>
+   <div class="chip">
+    По рекомендации {{ trec }}
+  </div>
+   <div class="chip">
+    Yandex Недвижимость {{ tyandex }}
+  </div>
+   <div class="chip">
+    Домклик {{ tdomclick }}
+  </div>
+  <div class="chip">
+   Другое {{ trazn }}
+  </div>
+ </div>
+{% load material_form %}
+     <form method="post" class="post-form">
+        {% csrf_token %}
+    {% form form=tpform %}{% endform %}
+        <button type="submit"  name="_submit" class="btn">Поиск</button>
+
+</form>
+   </div>
+
+    <div class="card-tabs">
+      <ul class="tabs tabs-fixed-width">
+
+        <li class="tab"><a class="active"  href="#test6">Открытые сделки <span class="new badge blue" data-badge-caption="">{{ topen_otchet_sum }}</span></a></li>
+          <li class="tab"><a href="#test5">Закрытые сделки<span class="new badge blue" data-badge-caption="">{{ tcloset_otchet_sum }}</span></a></li>
+        <li class="tab"><a href="#test7">Срыв сделки<span class="new badge blue" data-badge-caption="">{{ tsriv_otchet_sum }}</span></a></li>
+          <li class="tab"><a href="#test8">Рассрочка<span class="new badge blue" data-badge-caption="">{{ trasr_otchet_sum }}</span></a></li>
+      </ul>
+    </div>
+
+
+    <body class="card-content grey lighten-4">
+      <div id="test5">
+          <table class="bordered">
+        <thead>
+            <tr>
+              <th>Риелтор</th>
+              <th>Дата создания</th>
+              <th>Дата закрытия</th>
+
+      {% if request.user.groups.all.0.name == 'Администрация' %}
+              <th>Канал привлечения</th>
+      {% endif %}
+              <th>Название</th>
+              <th>Стоимость</th>
+              <th>Коммисия</th>
+          </tr>
+        </thead>
+     <tbody>
+         {%  for closet_otchet in tClOtchet %}
+
+          <tr>
+              <td><a href="{% url 'crm:otch_detail' idd=closet_otchet.pk %}">{{ closet_otchet.all_rielts }}</a></td>
+
+            <td>{{ closet_otchet.date_sozd }}</td>
+            <td>{{ closet_otchet.date_zakr }}</td>
+
+      {% if request.user.groups.all.0.name == 'Администрация' %}
+              <td>{{ closet_otchet.ot_kuda_kl }}</td>
+       {% endif %}
+            <td>{{ closet_otchet.nazv_nov }}</td>
+            <td>{{ closet_otchet.stoimost }}</td>
+            <td>{{ closet_otchet.komisia }}</td>
+          </tr>
+         {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+  <div id="test6">
+      <tbody>
+           <table class="bordered">
+        <thead>
+          <tr>
+              <th>Риелтор</th>
+            {% if tgroup == 'Администрация'  %}
+              <th></th><th></th>
+             {% endif %}
+              {% if tgroup == 'Администрация Адлер'  %}
+              <th></th><th></th>
+             {% endif %}
+              <th>Дата создания</th>
+              <th>Дата закрытия</th>
+          {% if request.user.groups.all.0.name == 'Администрация' %}
+              <th>Канал привлечения</th>
+          {% endif %}
+              <th>Название</th>
+              <th>Стоимость</th>
+              <th>Коммисия</th>
+          </tr>
+        </thead>
+               <tbody >
+
+         {%  for open_otchet in tOpOtchet %}
+          <tr>
+            <td><a href="{% url 'crm:otch_detail' idd=open_otchet.pk %}">{{ open_otchet.all_rielts }}
+
+                    {% if open_otchet.date_zakr|timesince >= "1440 min" %}<span class="new badge red" data-badge-caption="">Просрочка!</span>{% endif %}</td>
+        {% if tgroup == 'Администрация' or tgroup == 'Администрация Адлер' %}
+            <td><a href="{% url 'crm:otch_edit' idd=open_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Редактировать</button></a></td>
+          <td><a href="{% url 'crm:sdelka_zakr' idd=open_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Закрыть</button></a></td>
+        {% endif %}
+            <td>{{ open_otchet.date_sozd }} </td>
+            <td>{{ open_otchet.date_zakr }}</td>
+          {% if request.user.groups.all.0.name == 'Администрация' %}
+              <td>{{ open_otchet.ot_kuda_kl }}</td>
+          {% endif %}
+            <td>{{ open_otchet.nazv_nov }}</td>
+            <td>{{ open_otchet.stoimost }}</td>
+            <td>{{ open_otchet.komisia }}</td>
+          </tr>
+         {% endfor %}
+        </tbody>
+      </table>
+
+      </div>
+
+    <div id="test7">
+      <tbody>
+           <table class="bordered">
+        <thead>
+          <tr>
+            <th>Риелтор</th>
+           <!--
+            {% if tgroup == 'Администрация'  %}
+              <th></th><th></th>
+             {% endif %}
+              {% if tgroup == 'Администрация Адлер'  %}
+              <th></th><th></th>
+             {% endif %}
+             -->
+              <th>Дата создания</th>
+              <th>Дата закрытия</th>
+          {% if request.user.groups.all.0.name == 'Администрация' %}
+              <th>Канал привлечения</th>
+          {% endif %}
+              <th>Название</th>
+              <th>Стоимость</th>
+              <th>Коммисия</th>
+          </tr>
+        </thead>
+               <tbody >
+
+         {%  for sriv_otchet in tSRotchet %}
+          <tr>
+            <td><a href="{% url 'crm:otch_detail' idd=sriv_otchet.pk %}">{{ sriv_otchet.all_rielts }}
+        {% if tgroup == 'Администрация' or tgroup == 'Администрация Адлер' %}
+            <!--
+            <td><a href="{% url 'crm:otch_edit' idd=sriv_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Редактировать</button></a></td>
+          <td><a href="{% url 'crm:sdelka_zakr' idd=sriv_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Закрыть</button></a></td>
+        {% endif %}-->
+            <td>{{ sriv_otchet.date_sozd }}</td>
+            <td>{{ sriv_otchet.date_zakr }}</td>
+          {% if request.user.groups.all.0.name == 'Администрация' %}
+              <td>{{ sriv_otchet.ot_kuda_kl }}</td>
+          {% endif %}
+            <td>{{ sriv_otchet.nazv_nov }}</td>
+            <td>{{ sriv_otchet.stoimost }}</td>
+            <td>{{ sriv_otchet.komisia }}</td>
+          </tr>
+         {% endfor %}
+        </tbody>
+      </table>
+
+      </div>
+
+    <div id="test8">
+      <tbody>
+           <table class="bordered">
+        <thead>
+          <tr>
+              <th>Риелтор</th>
+            {% if tgroup == 'Администрация'  %}
+              <th></th><th></th>
+             {% endif %}
+              {% if tgroup == 'Администрация Адлер'  %}
+              <th></th><th></th>
+             {% endif %}
+              <th>Дата создания</th>
+              <th>Дата закрытия</th>
+              <th>Внесено комисии</th>
+              <th>Название</th>
+              <th>Стоимость</th>
+              <th>Коммисия</th>
+          </tr>
+        </thead>
+               <tbody >
+
+         {%  for rasr_otchet in tRasrOtchet %}
+          <tr>
+            <td><a href="{% url 'crm:otch_detail' idd=rasr_otchet.pk %}">{{ rasr_otchet.all_rielts }}
+        {% if tgroup == 'Администрация' or tgroup == 'Администрация Адлер' %}
+            <td><a href="{% url 'crm:otch_edit' idd=rasr_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Редактировать</button></a></td>
+          <td><a href="{% url 'crm:sdelka_zakr' idd=rasr_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Закрыть</button></a></td>
+        {% endif %}
+            <td>{{ rasr_otchet.date_sozd }}</td>
+            <td>{{ rasr_otchet.date_zakr }}</td>
+            <td>{{ rasr_otchet.vneseno_komisii }}</td>
+            <td>{{ rasr_otchet.nazv_nov }}</td>
+            <td>{{ rasr_otchet.stoimost }}</td>
+            <td>{{ rasr_otchet.komisia }}</td>
+          </tr>
+         {% endfor %}
+        </tbody>
+      </table>
+
+      </div>
+
+</div>
+
+
+
+
+{% endblock %}

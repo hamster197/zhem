@@ -1,0 +1,61 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+ {% load material_form %}
+
+    <div class="row">
+      <div class="col s9">
+          <div class="card">
+               <div class="card-content">
+
+        <table class="bordered">
+        <thead>
+          <tr>
+              <th>Дата создания</th>
+              <th>ID</th>
+              <th>Цена</th>
+              <th>Название</th>
+              <th></th>
+          </tr>
+        </thead>
+
+
+   {% if tsp %}
+
+    {% for sp in tsp %}
+        <tbody>
+          <tr>
+            <td> {{ sp.date_sozd }} </td>
+            <td>{{ sp.pk }}</td>
+            <td> {{ sp.prais }} </td>
+            <td> {{ sp.nazv }}</td>
+            <td><a href="{% url 'crm:cianedit' idd=sp.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Редактировать</button></a></td>
+            <td><a href="{% url 'crm:newvigrgal' idd=sp.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>фото</button></a></td>
+            <td><a href="{% url 'crm:ciandelsubj' idd=sp.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Удалить</button></a></td>
+          </tr>
+
+        </tbody>
+
+
+    {% endfor %}
+     </div>
+
+
+
+
+                </div>
+           </div>
+      </div>
+    </div>    </table>
+  {% endif %}
+  <div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">access_time</i>
+    </a>
+    <ul>
+      <li><a href="{% url 'crm:newvigr' %}" class="btn-floating red"title = "Подать новое"><i class="material-icons">fiber_new</i></a></li>
+      <li><a href="{% url 'crm:cianindex' %}" class="btn-floating yellow darken-1"title = "Oпубликованно"><i class="material-icons">check</i></a></li>
+      <li><a <a href="{% url 'crm:cianindexupl' %}"  class="btn-floating green" title = "Не опубликованно"><i class="material-icons">close</i></a></li>
+
+    </ul>
+  </div>
+{% endblock %}

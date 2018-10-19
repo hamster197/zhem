@@ -1,0 +1,193 @@
+{% extends 'crm/main.html' %}
+
+{% block content %}
+
+    <div class="row">
+         <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+
+<nav>
+    <div class="nav-wrapper">
+    <a href="" class="brand-logo">Автор: {{ tp_uch.author.first_name }} {{ tp_uch.author.last_name }} {{ tp_uch.author.userprofile1.tel }}</a>
+  </div>
+</nav>
+
+ <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#test1">Главное</a></li>
+        <li class="tab col s3"><a href="#test2">Примечание</a></li>
+          {%  ifequal request.user tp_uch.author %}<li class="tab col s3"><a href="#test3">Данные клиента</a></li>{% endifequal %}
+
+      </ul>
+    </div>
+
+    <div id="test1" class="col s12">
+      <table class="bordered">
+        <thead>
+          <tr>
+              <td>Дата публикации: </td>
+              <td><strong> {{tp_uch.date_sozd  }}</strong></td>
+          </tr>
+          <tr>
+            <td>Район: </td>
+            <td><strong> {{tp_uch.raion  }}</strong></td>
+          </tr>
+       <tr>
+            <td>Площадь: </td>
+            <td><strong>{{tp_uch.ploshad}}</strong></td>
+          </tr>
+          <tr>
+            <td>Газ: </td>
+            <td><strong>{{tp_uch.gaz}}</strong></td>
+          </tr>
+                 <tr>
+            <td>Назначение земли: </td>
+            <td><strong>{{ tp_uch.nazn_zemli  }}</strong></td>
+          </tr>
+          <tr>
+            <td>Документы:</td>
+            <td><strong> {{ tp_uch.documenti }}</strong></td>
+          </tr>
+          <tr>
+            <td>Цена агенства: </td>
+            <td><div class="card-panel blue darken-1"><strong>{{ tp_uch.cena_agenstv }} руб.</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div id="test2" class="col s12">
+             <table class="bordered">
+        <thead>
+          <tr>
+              <td>Примечание: </td>
+              <td><strong>{{tp_uch.prim}}</strong></td>
+          </tr>
+          <tr>
+            <td>Цена агенства: </td>
+            <td><div class="card-panel blue darken-1"><strong>{{ tp_uch.cena_agenstv }} руб.</strong></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+    {%  ifequal request.user tp_uch.author %}<div id="test3" class="col s12">
+        <div id="test2" class="col s12">
+             <table class="bordered">
+          <tr>
+              <td>ФИО собственника:  </td>
+              <td><strong>{{tp_uch.client_fio }}</strong></td>
+          </tr>
+          <tr>
+            <td>Телефон собственника: </td>
+            <td><strong>{{tp_uch.tel}}</strong</td>
+          </tr>
+          <tr>
+            <td>Адрес: </td>
+            <td><strong>{{tp_uch.adress}}</strong</td>
+          </tr>
+              <tr>
+              <td>Цена собственника:  </td>
+              <td><strong>{{tp_uch.cena_sobstv}} руб.</strong></td>
+          </tr>
+          <tr>
+            <td>Цена агенства: </td>
+            <td><div class="card-panel blue darken-1"><strong>{{ tp_uch.cena_agenstv }} руб.</strong></td>
+          </tr>
+                         </tbody>
+      </table>
+    </div>{% endifequal %}
+
+
+  </div>
+                </div>
+            </div>
+         </div>
+    </div>
+
+</div></div>
+
+<!--
+{% load el_pagination_tags %}
+{% paginate tp_my_kl %}
+  <ul class="collection with-header">
+        <li class="collection-header"><h4>Мои клиенты:</h4></li>
+      {% for my_kl in tp_my_kl %}
+          <li class="collection-item"><div>{{ my_kl.date_sozd }}  {{ my_kl.client_fio }} Бюджет от {{ my_kl.budg_ot }}<a href="{% url 'crm:client_detail' idd=my_kl.pk %}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+      {% endfor %}
+  {% get_pages %}
+    <ul class="pagination">
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.path }}" rel="page" class="endless_page_link">{{ page.number }}</a>
+            </li>
+        {% endfor %}
+   </ul></div>
+  </ul>
+
+
+   <ul class="collection with-header">
+        <li class="collection-header"><h4>Клиенты отдела:</h4></li>
+{% load el_pagination_tags %}
+{% paginate tp_otd_kl %}
+
+    {% for otd_kl in tp_otd_kl %}
+  <li><a href=""></a></li>
+     <li class="collection-item"><div>{{ otd_kl.date_sozd }}  {{ otd_kl.client_fio }} Бюджет от {{ otd_kl.budg_ot }}    <a href="{% url 'crm:client_detail' idd=otd_kl.pk %}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+
+  {% endfor %}
+  {% get_pages %}
+    <ul class="pagination">
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.path }}" rel="page" class="endless_page_link">{{ page.number }}</a>
+            </li>
+        {% endfor %}
+   </ul>
+</div>
+   </ul>
+
+    <ul class="collection with-header">
+        <li class="collection-header"><h4>Клиенты агенства:</h4></li>
+        {% load el_pagination_tags %}
+{% paginate tp_all_kl %}
+
+    {% for all_kl in tp_all_kl %}
+  <li><a href=""></a></li>
+   <li class="collection-item"><div>{{ all_kl.date_sozd }}  {{ all_kl.client_fio }} Бюджет от {{ all_kl.budg_ot }} <a href="{% url 'crm:client_detail' idd=all_kl.pk %}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+
+  {% endfor %}
+{% get_pages %}
+    <ul class="pagination">
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.path }}" rel="page" class="endless_page_link">{{ page.number }}</a>
+            </li>
+        {% endfor %}
+   </ul>
+</div>
+
+    </ul>
+
+
+  <div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">access_time</i>
+    </a>
+    <ul>
+      {% ifequal request.user tp_uch.author %} <li><a href="{% url 'crm:uc_edit' idd=tp_uch.id %} " class="btn-floating blue" title = "Редактировать"><i class="material-icons">edit</i></a></li>{% endifequal %}
+      <li><a href="{% url 'crm:unpub_uc_index' %}" class="btn-floating yellow darken-1"title = "Личные"><i class="material-icons">account_box</i></a></li>
+      <li><a <a href="{% url 'crm:pub_uc_index' %}"  class="btn-floating green" title = "В агенстве"><i class="material-icons">announcement</i></a></li>
+        <li><a href="{% url 'crm:uc_print' idd=tp_uch.pk %}" class="btn-floating indigo darken-4" title = "Распечатать" target="_blank"><i class="material-icons">local_printshop</i></a></li>
+
+    </ul>
+
+
+  </div>
+ -->
+{% endblock %}

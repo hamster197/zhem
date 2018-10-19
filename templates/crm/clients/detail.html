@@ -1,0 +1,207 @@
+
+{% extends 'crm/main.html' %}
+    {% block content %}
+
+    <div class="row">
+         <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+
+  <div class="row">
+    <div class="col s12">
+
+
+<nav>
+    <div class="nav-wrapper">
+    <a href="" class="brand-logo">ID: {{ tpclient.id }} Автор: {{ tpclient.auth.first_name }} {{ tpclient.auth.last_name }} {{ tpclient.auth.userprofile1.tel }}</a>
+
+  </div>
+</nav>
+
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#test1">Главное</a></li>
+        <li class="tab col s3"><a href="#test2">Работа с клиентом</a></li>
+        <li class="tab col s3"><a href="#test3">Примечание</a></li>
+        {% ifequal request.user tpclient.auth %}
+        <li class="tab col s3"><a href="#test4">Данные клиента</a></li>
+        {% endifequal %}
+      </ul>
+    </div>
+
+    <div id="test1" class="col s12">
+      <table class="bordered">
+       <tbody>
+          <tr>
+              <td>Дата публикации:</td>
+              <td><strong> {{tpclient.date_sozd  }}</strong></td>
+
+          </tr>
+        </thead>
+
+
+          <tr>
+            <td>Район:</td>
+            <td><strong>{{tpclient.raion  }}</strong></td>
+
+          </tr>
+          <tr>
+            <td>Что ищет: </strong></td>
+            <td><strong>{{tpclient.category}}</td>
+
+          </tr>
+          <tr>
+            <td>Цель покупки:</td>
+            <td> <strong>{{tpclient.cel_pokupki}}</strong></td>
+
+          </tr>
+        <tr>
+            <td>Бюджет от: </td>
+            <td><strong>{{tpclient.budg_ot  }}</strong></td>
+
+          </tr>
+          <tr>
+            <td>Бюджет до:</td>
+            <td><strong> {{ tpclient.budg_do }}</strong></td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="test2" class="col s12">
+        <table class="bordered">
+        <thead>
+          <tr>
+              <tD>Проведена первичная работа: </tD>
+              <td><strong> {{tpclient.ferst_work  }}</strong></td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Причина отказа: </td>
+            <td><strong>{{tpclient.prich_otkaza}}</strong></td>
+          </tr>
+          <tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div id="test3" class="col s12">
+        <table class="bordered">
+        <thead> <tbody>
+          <tr>
+
+              <td><strong>{{tpclient.prim}}</strong></td>
+          </tr>
+        </thead>
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+  {% ifequal request.user tpclient.auth %}
+    <div id="test4" class="col s12">
+    <table class="bordered">
+        <thead>
+          <tr>
+              <td>ФИО собственника: </td>
+              <td><strong>{{tpclient.client_fio }}</strong></td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Телефон собственника:  </td>
+            <td><strong>{{tpclient.tel}}</strong></td>
+          </tr>
+          <tr>
+            <td>e-mail собственника: </td>
+            <td><strong>{{tpclient.email}}</strong></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  {% endifequal %}
+{% load el_pagination_tags %}
+{% paginate tp_pub_obj %}
+      <ul class="collection with-header">
+        <li class="collection-header"><h4>Доступные обьекты:</h4></li>
+        {% for pub_obj in tp_pub_obj %}
+            {% if tpclient.category == 'Квартиры' %}
+                <li><a href=""> {{ pub_obj.datep }} ; </a></li>
+                <li class="collection-item"><div>Дата публикации: {{ pub_obj.datep }}; <strong> Цена собств:</strong> {{ pub_obj.cena_sobstv }}; <strong>Район: </strong> {{ pub_obj.raion }}<a href="{% url 'crm:flat_detail' idd=pub_obj.pk %}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+            {% endif %}
+            {% if tpclient.category == 'Дома' %}
+                <li class="collection-item"><div>Дата публикации: {{ pub_obj.date_sozd }};  <strong> Цена собств:</strong>  {{ pub_obj.cena_sobstv }}; <strong>Район: </strong>{{ pub_obj.raion  }}<a href="{% url 'crm:dom_detail' idd=pub_obj.pk %}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+            {% endif %}
+            {% if tpclient.category == 'Участки' %}
+                <li class="collection-item"><div>Дата публикации: {{ pub_obj.date_sozd }};  <strong> Цена собств:</strong>  {{ pub_obj.cena_sobstv }}; <strong>Район: </strong>{{ pub_obj.raion  }}<a href="{% url 'crm:uc_detail' idd=pub_obj.pk %}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+            {% endif %}
+        {% endfor %}
+      {% get_pages %}
+    <ul class="pagination">
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.path }}" rel="page" class="endless_page_link">{{ page.number }}</a>
+            </li>
+        {% endfor %}
+   </ul>
+      </ul>
+
+  {% load el_pagination_tags %}
+{% paginate tp_unp_obj %}
+      <ul class="collection with-header">
+        <li class="collection-header"><h4>Мои обьекты:</h4></li>
+  {% for un_pub_obj in tp_unp_obj %}
+        {% if tpclient.category == 'Квартиры' %}
+              <li class="collection-item"><div>Дата публикации: {{ un_pub_obj.datep }} ; <strong> Цена собств:</strong> {{ un_pub_obj.cena_sobstv }}; <strong>Район: </strong> {{ un_pub_obj.raion }}<a href="{% url 'crm:flat_detail' idd=un_pub_obj.pk %}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+      {% endif %}
+      {% if tpclient.category == 'Дома' %}
+               <li class="collection-item"><div>Дата публикации: {{ un_pub_obj.date_sozd }};  <strong> Цена собств:</strong>  {{ un_pub_obj.cena_sobstv }}; <strong>Район: </strong>{{ un_pub_obj.raion  }}<a href="{% url 'crm:dom_detail' idd=un_pub_obj.pk %}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+      {% endif %}
+      {% if tpclient.category == 'Участки' %}
+         <li class="collection-item"><div>Дата публикации: {{ un_pub_obj.date_sozd }};  <strong> Цена собств:</strong>  {{ un_pub_obj.cena_sobstv }}; <strong>Район: </strong>{{ un_pub_obj.raion  }}<a href="{% url 'crm:uc_detail' idd=un_pub_obj.pk %}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+      {% endif %}
+
+  {% endfor %}
+{% get_pages %}
+    <ul class="pagination">
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.path }}" rel="page" class="endless_page_link">{{ page.number }}</a>
+            </li>
+        {% endfor %}
+   </ul>
+      </ul>
+
+  </div>
+                </div>
+            </div>
+         </div>
+    </div>
+
+
+
+
+  <div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">access_time</i>
+    </a>
+    <ul>
+        {% ifequal request.user tpclient.auth %} <li><a href="{% url 'crm:edit_client' idd=tpclient.id %}" class="btn-floating blue" title = "Редактировать"><i class="material-icons">edit</i></a></li>{% endifequal %}
+        <li><a href="{% url 'crm:own_clienws' %}" class="btn-floating red" title = "Личные"><i class="material-icons">accessibility</i></a></li>
+      <li><a href="{% url 'crm:otd_clienws' %}" class="btn-floating yellow darken-1"title = "В отделе"><i class="material-icons">account_box</i></a></li>
+      <li><a <a href="{% url 'crm:all_clienws' %}"  class="btn-floating green" title = "В агенстве"><i class="material-icons">announcement</i></a></li>
+
+    </ul>
+
+
+  </div>
+
+
+{% endblock %}

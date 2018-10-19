@@ -1,0 +1,115 @@
+<feed>
+  <feed_version>21</feed_version>
+    {% for post in tppost %}
+  <object>
+    <Category>{{ post.category }}</Category>
+    <ExternalId>{{ post.pk }}</ExternalId>
+    <RoomType>both</RoomType>
+    <Description>{{ post.note }}</Description>
+    <Address>Сочи, {{ post.street }}</Address>
+    <FlatRoomsCount>{{ post.komnat }}</FlatRoomsCount>
+        <Phones>
+      <PhoneSchema>
+        <CountryCode>+7</CountryCode>
+        <Number>{{ post.author.userprofile1.tel  }}</Number>
+      </PhoneSchema>
+      <PhoneSchema>
+        <CountryCode>+7</CountryCode>
+        <Number>{{ post.author.userprofile1.tel  }}</Number>
+      </PhoneSchema>
+    </Phones>
+    <TotalArea>{{ post.plosgad }}</TotalArea>
+    <FloorNumber>{{ post.etag }}</FloorNumber>
+    <SubAgent>
+      <Email>{{ post.author.email }}</Email>
+      <Phone>+7{{ post.author.userprofile1.tel  }}</Phone>
+      <FirstName>{{  post.author.first_name }}</FirstName>
+      <LastName>{{ post.author.last_name }}</LastName>
+    </SubAgent>
+    <Photos>
+	{% for i in post.idd_gal.all %}
+      <PhotoSchema>
+        <FullUrl>http://77.222.63.187{{ i.npict.url }}</FullUrl>
+      </PhotoSchema>
+        {% endfor %}
+    </Photos>
+     <BalconiesCount>
+         {%  if post.balcons == "Да" %}
+            1
+         {% else %}
+            0
+         {% endif %}
+     </BalconiesCount>
+    <Building>
+        <FloorsCount>{{ post.etagnost }}</FloorsCount>
+        <PassengerLiftsCount>
+         {%  if post.lift == "Да" %}
+            1
+         {% else %}
+            0
+         {% endif %}
+        </PassengerLiftsCount>
+    </Building>
+    <BargainTerms>
+      <Price>{{ post.prais }}</Price>
+      <Currency>rur </Currency>
+    </BargainTerms>
+  </object>
+{% endfor %}
+   {% for apost in atppost %}
+  <object>
+    <Category>{{ apost.category }}</Category>
+    <ExternalId>{{ apost.pk }}</ExternalId>
+    <RoomType>both</RoomType>
+    <Description>{{ apost.note }}</Description>
+    <Address>Сочи, {{ apost.street }}</Address>
+    <FlatRoomsCount>{{ apost.komnat }}</FlatRoomsCount>
+        <Phones>
+      <PhoneSchema>
+        <CountryCode>+7</CountryCode>
+        <Number>{{ apost.author.userprofile1.tel  }}</Number>
+      </PhoneSchema>
+      <PhoneSchema>
+        <CountryCode>+7</CountryCode>
+        <Number>{{ apost.author.userprofile1.tel  }}</Number>
+      </PhoneSchema>
+    </Phones>
+    <TotalArea>{{ apost.plosgad }}</TotalArea>
+    <FloorNumber>{{ apost.etag }}</FloorNumber>
+    <SubAgent>
+      <Email>{{ apost.author.email }}</Email>
+      <Phone>+7{{ apost.author.userprofile1.tel  }}</Phone>
+      <FirstName>{{  apost.author.first_name }}</FirstName>
+      <LastName>{{ apost.author.last_name }}</LastName>
+    </SubAgent>
+    <Photos>
+	{% for i in apost.idd_gal.all %}
+      <PhotoSchema>
+        <FullUrl>http://77.222.63.187{{ i.npict.url }}</FullUrl>
+      </PhotoSchema>
+        {% endfor %}
+    </Photos>
+     <BalconiesCount>
+         {%  if apost.balcons == "Да" %}
+            1
+         {% else %}
+            0
+         {% endif %}
+     </BalconiesCount>
+    <Building>
+        <FloorsCount>{{ apost.etagnost }}</FloorsCount>
+        <PassengerLiftsCount>
+         {%  if apost.lift == "Да" %}
+            1
+         {% else %}
+            0
+         {% endif %}
+        </PassengerLiftsCount>
+    </Building>
+    <BargainTerms>
+      <Price>{{ apost.prais }}</Price>
+      <Currency>rur </Currency>
+    </BargainTerms>
+  </object>
+{% endfor %}
+</feed>

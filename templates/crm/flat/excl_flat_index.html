@@ -1,0 +1,148 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+  <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content">
+
+
+   <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s2"><a href="#test5">Студии<span class="new badge" data-badge-caption="">{{ tsc }}</span></a></li>
+        <li class="tab col s2"><a href="#test1">Однокомнатные<span class="new badge" data-badge-caption="">{{ tofc }}</span></a></li>
+        <li class="tab col s2"><a href="#test2">Двухкомнатные<span class="new badge" data-badge-caption="">{{ ttwfc }}</span></a></li>
+        <li class="tab col s2"><a href="#test3">Трехкомнатные<span class="new badge" data-badge-caption="">{{ ttrc }}</span></a></li>
+        <li class="tab col s2"><a class="active" href="#test4"><span class="new badge" data-badge-caption="">{{ tmc }}</span>В агенстве</a></li>
+      </ul>
+    </div>
+    <div id="test5" class="col s12">
+
+              <table>
+        <thead>
+          <tr>
+              <th>ID</th>
+              <th>Район</th>
+              <th>Улица</th>
+              <th>Цена</th>
+              <th>Контакты</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for studia in ts %}
+          <tr>
+            <td>{{ studia.id }}</td>
+            <td>{{ studia.raion }}</td>
+            <td>{{ studia.adress }}</td>
+            <td>{{ studia.ploshad }}</td>
+            <td>{{ studia.cena_agenstv }}</td>
+            <td>{{ studia.author.last_name }} {{ studia.author.first_name }}<h6> {{ studia.author.userprofile1.tel }}</h6></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+
+
+    <div id="test1" class="col s12">
+              <table>
+        <thead>
+          <tr>
+              <th>ID</th>
+              <th>Район</th>
+              <th>Улица</th>
+              <th>Площадь</th>
+              <th>Цена</th>
+              <th>Контакты</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for oneflat in tof %}
+          <tr>
+            <td>{{ oneflat.id }}</td>
+            <td>{{ oneflat.raion }}</td>
+            <td>{{ oneflat.adress }}</td>
+            <td>{{ oneflat.ploshad }}</td>
+            <td>{{ oneflat.cena_agenstv }}</td>
+            <td>{{ oneflat.author.last_name }} {{ oneflat.author.first_name }}<h6> {{ oneflat.author.userprofile1.tel }}</h6></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div id="test2" class="col s12">
+
+                      <table>
+        <thead>
+          <tr>
+              <th>ID</th>
+              <th>Район</th>
+              <th>Улица</th>
+              <th>Площадь</th>
+              <th>Цена</th>
+              <th>Контакты</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for twoflat in ttwf %}
+          <tr>
+            <td>{{ twoflat.id }}</td>
+            <td>{{ twoflat.raion }}</td>
+            <td>{{ twoflat.adress }}</td>
+            <td>{{ twoflat.ploshad }}</td>
+            <td>{{ twoflat.cena_agenstv }}</td>
+            <td>{{ twoflat.author.last_name }} {{ twoflat.author.first_name }}<h6> {{ twoflat.author.userprofile1.tel }}</h6></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+    <div id="test3" class="col s12">
+              <table>
+        <thead>
+          <tr>
+              <th>ID</th>
+              <th>Район</th>
+              <th>Улица</th>
+              <th>Площадь</th>
+              <th>Цена</th>
+              <th>Контакты</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for treeflat in ttr %}
+          <tr>
+            <td>{{ treeflat.id }}</td>
+            <td>{{ treeflat.raion }}</td>
+            <td>{{ treeflat.adress }}</td>
+            <td>{{ treeflat.ploshad }}</td>
+            <td>{{ treeflat.cena_agenstv }}</td>
+            <td>{{ treeflat.author.last_name }} {{ treeflat.author.first_name }}<h6> {{ treeflat.author.userprofile1.tel }}</h6></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+
+    <div id="test4" class="col s12">Test 4</div>
+  </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

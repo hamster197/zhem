@@ -1,0 +1,347 @@
+{% extends 'crm/main.html' %}
+
+{% block content %}
+{% if request.user.groups.all.0.name == 'Администрация' %}
+<script>
+##########################################################################
+ ### Yandex
+##########################################################################
+</script>
+    <div class="row">
+      <div class="col s4">
+            <div class="row">
+    <div class="col s12">
+      <div class="card  ">
+        <div class="card-content ">
+          <span class="card-title">Яндекс</span>
+            <script src="https://www.google.com/jsapi"></script>
+  <script>
+   google.load("visualization", "1", {packages:["corechart"]});
+   google.setOnLoadCallback(drawChart);
+   function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+     ['Даты', ''],
+     ['{{ y|safe }}', {{ tc|safe }}],
+     ['{{ y2|safe }}', {{ tc2|safe }}],
+     ['{{ y3|safe }}', {{ tc3|safe }}],
+     ['{{ y4|safe }}', {{ tc4|safe }}],
+    ]);
+    var options = {
+     title: 'Посещения за сегодня: {{ tc|safe }}' ,
+     hAxis: {title: 'Даты'},
+     vAxis: {title: 'посетителей'}
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById('oil'));
+    chart.draw(data, options);
+   }
+  </script>
+<script>
+
+</script>
+  <div id="oil" style="width: 100%; height: 200px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+<script>
+##########################################################################
+### Cian
+##########################################################################
+</script>
+      <div class="col s4">
+            <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content">
+          <span class="card-title">Однокомнатные: {{ tOneCrs }} руб.</span>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Студии',      {{ tstcount }}],
+          ['Однокомнатные',     {{ tonecount }}],
+          ['Двухкомнатные',      {{ ttwo_count }}],
+          ['Трехкомнатные',      {{ ttreecount }}],
+          ['Многокомнатные',     {{ tmanycount }}],
+          ['Дома',      {{ thouse_count }}],
+
+        ]);
+
+        var options = {
+          title: 'Двухкомнатные: {{ tTwoCrs }} руб. Трехкомнатные {{ tTreCrs }} руб.',
+          pieHole: 0.14,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="donutchart" style="width: 100%; height: 200px;"></div>
+  </body>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+<script>
+##########################################################################
+### CRM
+##########################################################################
+</script>
+      <div class="col s4">  <div class="row">
+    <div class="col s12">
+      <div class="card ">
+        <div class="card-content">
+          <span class="card-title">Домклик</span>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['С кадастром ',     {{ tdmcadastr }}],
+          ['Без кадастра',    {{ tdmall  }}]
+        ]);
+
+        var options = {
+          title: 'Обьявления в ЦРМ; {{ tdmAll }}'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 100%; height: 200px;"></div>
+  </body>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+<script>
+##########################################################################
+### All Pribil
+##########################################################################
+</script>
+ <div class="col s12">
+         <div class="row">
+      <div class="col s8">
+ <div class="col s12">  <div class="row">
+    <div class="col s12">
+      <div class="card ">
+        <div class="card-content">
+          <span class="card-title"></span>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+         ['Дата:', 'Прибыль'],
+         ['{{ tdm1|safe }}', {{ tdsum1|safe }}],
+         ['{{ tdm2|safe }}', {{ tdsum2|safe }}],
+         ['{{ tdm3|safe }}', {{ tdsum3|safe }}],
+         ['{{ tdm4|safe }}', {{ tdsum4|safe }}],
+         ['{{ tdm5|safe }}', {{ tdsum5|safe }}],
+         ['{{ tdm6|safe }}', {{ tdsum6|safe }}]
+      ]);
+
+    var options = {
+      title : 'Прибыль компании за полгода',
+      vAxis: {title: 'Сумма'},
+      hAxis: {title: 'Дата'},
+      seriesType: 'bars',
+      series: {5: {type: 'line'}}
+    };
+
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+    </script>
+
+    <div id="chart_div" style="width: 100%; height: 200px;"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+##########################################################################
+### Moth Pribil
+##########################################################################
+</script>
+<div class="col s4">
+         <div class="row">
+      <div class="col s12">
+ <div class="col s12">  <div class="row">
+    <div class="col s12">
+      <div class="card ">
+        <div class="card-content">
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Сочи ',     {{ tssochi|safe  }}],
+          ['Адлер',      {{ tsadler|safe  }}],
+        ]);
+
+        var options = {
+          title: 'Прибыль компании в текущем месяце:',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart_3d" style="width: 100%; height: 200px;"></div>
+  </body>
+  </head>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</div>
+
+
+    </div>
+ </div>
+   <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content ">
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s4"><a  class="active" href="#test1">Рейтинг по отделам</a></li>
+        <li class="tab col s4"><a  href="#test2">Сочи</a></li>
+        <li class="tab col s4 "><a href="#test3">Адлер</a></li>
+      </ul>
+    </div>
+<script>
+##########################################################################
+### Reiting po otdelam
+##########################################################################
+</script>
+    <div id="test1" class="col s12">
+      <table>
+        <thead>
+          <tr>
+              <th>Отдел</th>
+              <th>Коммисия</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for rOtd in trOtd %}
+          <tr>
+            <td>{{ rOtd.otd }}</td>
+            <td>{{ rOtd.kommisia }} руб.</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+<script>
+##########################################################################
+### Reiting po SOchi
+##########################################################################
+</script>
+    <div id="test2" class="col s12">
+      <table>
+        <thead>
+          <tr>
+              <th>ФИО</th>
+              <th>Сделок</th>
+              <th>Коммисия</th>
+              <th>Объектов в ЦРМ</th>
+              <th>Объектов в Циан</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for sOtd in tsOtd %}
+          <tr>
+            <td>{{ sOtd.auth_ful_name }}</td>
+            <td>{{ sOtd.sdelok_calc }}</td>
+            <td>{{ sOtd.sdelok_sum }}</td>
+            <td>{{ sOtd.crm_count }}</td>
+            <td>{{ sOtd.cian_count }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+<script>
+##########################################################################
+### Reiting Adler
+##########################################################################
+</script>
+    <div id="test3" class="col s12">
+<table>
+        <thead>
+          <tr>
+              <th>ФИО</th>
+              <th>Сделок</th>
+              <th>Коммисия</th>
+              <th>Объектов в ЦРМ</th>
+              <th>Объектов в Циан</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for aOtd in taOtd %}
+          <tr>
+            <td>{{ aOtd.auth_ful_name }}</td>
+            <td>{{ aOtd.sdelok_calc }}</td>
+            <td>{{ aOtd.sdelok_sum }}</td>
+            <td>{{ aOtd.crm_count }}</td>
+            <td>{{ aOtd.cian_count }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col s12"></div>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+

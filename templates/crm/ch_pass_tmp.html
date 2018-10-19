@@ -1,0 +1,43 @@
+{% extends 'crm/main.html' %}
+    {% block content1 %}
+
+
+
+{% block content %}
+
+
+    {# Load the tag library #}
+
+
+{% load material_form %}
+    <div class="row">
+         <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+
+
+<form method="post" class="post-form">
+  {% csrf_token %}
+            <h1>Смена пароля</h1>
+  {% form form=tpform %}{% endform %}
+        <button type="submit" name="_submit" class="btn">Сменить пароль</button>
+
+               </div>
+            </div>
+         </div>
+    </div>
+
+
+
+</form>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+{% endblock content1 %}

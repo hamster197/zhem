@@ -1,0 +1,53 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+{%  ifequal request.user pCall.auth %}
+  <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title">{{ pCall.client_name }} / {{ pCall.cena }} руб./ {{ pCall.tel }}</span>
+          <p>
+             <table>
+                    <tbody>
+                        <tr>
+                        <td><strong>Район:</strong></td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td><strong>Что ищет:</strong></td>
+                        <td>{{ pCall.subj }}</td>
+                        </tr>
+                     <tbody>
+             </table>
+              <strong>Первичная информация:</strong> </br> {{ pCall.prim }} </p></br>
+
+
+{% load material_form %}
+    <div class="row">
+         <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <form method="post" class="post-form">
+                    {% csrf_token %}
+                        {% form form=tForm layout=form.layout %}{% endform %}
+                        <button type="submit" name="_submit" class="btn">Сохранить</button>
+                </div>
+            </div>
+         </div>
+     </div>
+</form>
+
+
+        </div>
+        <div class="card-action">
+          <a href="{% url 'zvn:perez' idd=pCall.pk %}">Перезвонить</a>
+          <a href="{% url 'zvn:nd' idd=pCall.pk %}">Недозвонился</a>
+          <a href="{% url 'zvn:work' idd=pCall.pk %}">В работу</a>
+          <a href="{% url 'zvn:arh' idd=pCall.pk %}">В архив</a>
+          <a href="{% url 'zvn:all' idd=pCall.pk %}">В общий доступ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endifequal %}
+{% endblock %}

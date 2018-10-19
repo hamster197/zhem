@@ -1,0 +1,92 @@
+<realty-feed xmlns="http://webmaster.yandex.ru/schemas/feed/realty/2010-06">
+ <generation-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</generation-date>
+ {% for post in tppost %}
+ <offer internal-id="{{ post.pk }}">
+    <type>Продажа</type>
+    <category>квартира</category>
+    <property-type>Жилая</property-type>
+ <creation-date>{{ post.datep|date:"Y-m-d" }}T01:11:30+03:00</creation-date>
+ <last-update-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</last-update-date>
+ <location>
+    <country>Россия</country>
+    <region>Краснодарский край</region>
+    <locality-name>Сочи</locality-name>
+    <address>{{ post.adress }} {{ post.dom_numb }}</address>
+    {% if post.kvart_numb  %}
+        <apartment>{{  post.kvart_numb }}</apartment>
+    {% endif %}
+</location>
+<sales-agent>
+    <phone>{{ post.author.userprofile1.tel }}</phone>
+    <name>{{  post.author.first_name }} {{ post.author.last_name }}</name>
+    <email>strygina_irina@mail.ru</email>
+</sales-agent>
+<price>
+    <value>{{ post.cena_agenstv }}</value>
+    <currency>RUR</currency>
+</price>
+    <deal-status>прямая продажа</deal-status>
+    <description>{{ post.prim }} {{ tdm }}и недорог
+</description>
+{% for i in post.idd_gal.all %}
+    <image>
+      http://77.222.63.187{{ i.npict.url }}
+    </image>
+{% endfor %}
+<area>
+    <value>{{ post.ploshad }}</value>
+    <unit>кв.м</unit>
+</area>
+<living-space>
+   <value>{{ post.ploshad }}</value>
+   <unit>кв.м</unit>
+</living-space>
+<gas-supply>
+    {% if post.gaz == 'Есть' %}
+        да
+    {% else %}
+        нет
+    {% endif %}
+</gas-supply>
+<bathroom-unit>
+    {%  if post.san_usel == 'Совмещенный' %}
+        совмещенный
+    {% endif %}
+    {%  if post.san_usel == 'Раздельный' %}
+        раздельный
+    {% endif %}
+</bathroom-unit>
+<renovation>
+    {% if post.remont == 'Черновой' %}черновая отделка{% endif %}
+    {% if post.remont == 'Чистовой' %}с отделкой{% endif %}
+    {% if post.remont == 'Дизайнерский' %}дизайнерский{% endif %}
+    {% if post.remont == 'Жилой' %}евро{% endif %}
+    {% if post.remont == 'Новый' %}хороший{% endif %}
+</renovation>
+<security>{{ post.security }}</security>
+<rubbish-chute>{{ post.rubbish_chute }}</rubbish-chute>
+<lift>{{ post.lift }}</lift>
+<balcony>{{ post.balcony }}</balcony>
+    {% if post.komnat == 'Студия' %}
+        <rooms>1</rooms>
+    {% endif %}
+    {% if post.komnat == 'Однокомнатная' %}
+        <rooms>1</rooms>
+    {% endif %}
+    {% if post.komnat == 'Двухкомнатная' %}
+        <rooms>2</rooms>
+    {% endif %}
+    {% if post.komnat == 'Трехкомнатная' %}
+        <rooms>3</rooms>
+    {% endif %}
+    {% if post.komnat == 'Многокомнатная' %}
+        <rooms>4</rooms>
+    {% endif %}
+    <floor>{{ post.etag }}</floor>
+    <floors-total>{{ post.etagnost }}</floors-total>
+ {% if post.kadastr %}
+    <cadastral-number> {{ post.kadastr }} </cadastral-number>
+ {% endif %}
+ </offer>
+ {% endfor %}
+</realty-feed>

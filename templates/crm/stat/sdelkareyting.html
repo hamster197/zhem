@@ -1,0 +1,337 @@
+{% extends 'crm/main.html' %}
+
+{% block content %}
+<div class="row">
+
+    <div class="col s12">
+     <div class="card">
+    <div class="card-content">
+    <div class="row">
+      <div class="col s6">
+ {% load material_form %}
+    <form method="POST">
+        {% csrf_token %}
+        {% form form=MForm %}{% endform %}
+        <button type="submit" name="_submit" class="btn">Поиск по месяцу</button>
+    </form>
+</form>
+
+      </div>
+
+
+<br class="col s6">
+      <div class="collection">
+        <a href="{% url 'crm:sdelkarieltKvSearch' %}" class="collection-item">Поиск 1 квартал</a>
+        <a href="{% url 'crm:sdelkarielt2KvSearch' %}" class="collection-item">Поиск 2 квартал</a>
+        <a href="{% url 'crm:sdelkarielt3KvSearch' %}" class="collection-item">Поиск 3 квартал</a>
+        <a href="{% url 'crm:sdelkarielt4KvSearch' %}" class="collection-item">Поиск 4 квартал</a>
+        <a href="{% url 'crm:sdelkarieltGodSearch' %}" class="collection-item">Поиск текущий год</a>
+      </div>
+    </div>
+
+  </div>
+  </div>
+ </div>
+
+
+
+
+    <div class="row">
+      <div class="col s12">
+          <div class="card">
+                <div class="card-content">
+
+
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+      {% if not request.user.groups.all.0.name == 'Администрация Адлер' %}
+          {% if not  request.user.groups.all.0.name == 'Офис в Адлере' %}
+                  <li class="tab col s3"><a class="active" href="#test1">Сочи</a></li>
+           {% endif %}
+      {% endif %}
+      {% if request.user.groups.all.0.name == 'Администрация' or request.user.groups.all.0.name == 'Администрация Адлер' or request.user.groups.all.0.name == 'Офис в Адлере' %}
+        <li class="tab col s3"><a href="#test2">Адлер</a></li>
+      {% endif %}
+         {% ifequal request.user.groups.all.0.name 'Администрация'  %}
+            <li class="tab col s3"><a href="#test3">Рейтинг по отделам</a></li>
+        {% endifequal %}
+      {% if tnach == 'Да' %}
+          <li class="tab col s3"><a href="#test4">В отделе</a></li>
+      {% endif %}
+      </ul>
+    </div>
+
+      {% if not request.user.groups.all.0.name == 'Администрация Адлер' %}
+          {% if not  request.user.groups.all.0.name == 'Офис в Адлере' %}
+    <div id="test1" class="col s12">
+            <div class="card-panel red lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for great_bal in great %}
+         <tr>
+             <td><H5>{{ great_bal.auth_ful_name }}</H5> </td>
+             {% ifequal request.user.groups.all.0.name 'Администрация'  %}
+             <td><strong>{{ great_bal.sdelok_calc  }}</strong> сделок</td>
+             <td><strong>{{ great_bal.sdelok_sum  }}</strong>   руб.</td>
+             <td><strong>{{ great_bal.crm_count  }}</strong>   об. ЦРМ</td>
+             <td><strong>{{ great_bal.cian_count  }}</strong>   об. ЦИАН</td>
+             {% endifequal %}
+             <td><blockquote>Отлично</blockquote></td>
+        </tr>
+    {% endfor %}
+       </table>
+    </tbody>
+
+    </div>
+
+    <div class="card-panel orange lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for good_bal in good %}
+         <tr>
+             <td><H5>{{ good_bal.auth_ful_name }}</H5> </td>
+           {% ifequal request.user.groups.all.0.name 'Администрация' %}
+             <td><strong>{{ good_bal.sdelok_calc  }}</strong> сделок</td>
+             <td><strong>{{ good_bal.sdelok_sum  }}</strong>   руб.</td>
+             <td><strong>{{ good_bal.crm_count  }}</strong>   об. ЦРМ</td>
+             <td><strong>{{ good_bal.cian_count  }}</strong>   об. ЦИАН</td>
+            {% endifequal %}
+             <td><blockquote>Хорошо</blockquote></td>
+        </tr>
+
+    {% endfor %}
+       </table>
+    </tbody>
+    </div>
+
+    <div class="card-panel yellow lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for udl_bal in udl %}
+        <tr>
+             <td><H5>{{ udl_bal.auth_ful_name }} </H5> </td>
+            {% ifequal request.user.groups.all.0.name 'Администрация' %}
+             <td><strong>{{ udl_bal.sdelok_calc  }}</strong> сделок</td>
+             <td><strong>{{ udl_bal.sdelok_sum  }}</strong>   руб.</td>
+             <td><strong>{{ udl_bal.crm_count  }}</strong>   об. ЦРМ</td>
+             <td><strong>{{ udl_bal.cian_count  }}</strong>   об. ЦИАН</td>
+            {% endifequal %}
+             <td><blockquote>Удовлетворительно</blockquote></td>
+        </tr>
+    {% endfor %}
+   </table>
+    </tbody>
+    </div>
+
+    <div class="card-panel  light-blue accent-2 lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for zero_bal in zero %}
+          <tr>
+            <td><h5>{{ zero_bal.auth_ful_name }}</h5></td>
+          {% ifequal request.user.groups.all.0.name 'Администрация' %}
+            <td><strong>{{ zero_bal.sdelok_calc }}</strong> сделок</td>
+            <td><strong>{{ zero_bal.sdelok_sum  }}</strong>   руб.</td>
+            <td><strong>{{ zero_bal.crm_count  }}</strong>   об. ЦРМ</td>
+            <td><strong>{{ zero_bal.cian_count  }}</strong>   об. ЦИАН</td>
+              {% endifequal %}
+            <td><blockquote>Неудовлетворительно</blockquote></td>
+          </tr>
+    {% endfor %}
+    </table>
+    </tbody>
+    </div></div>
+           {% endif %}
+      {% endif %}
+
+{% if request.user.groups.all.0.name == 'Администрация' or request.user.groups.all.0.name == 'Администрация Адлер' or request.user.groups.all.0.name == 'Офис в Адлере' %}
+    <div id="test2" class="col s12">
+               <div class="card-panel red lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for Agreat_bal in Agreat %}
+         <tr>
+             <td><H5>{{ Agreat_bal.auth_ful_name }}</H5> </td>
+             {% if request.user.groups.all.0.name == 'Администрация' or request.user.groups.all.0.name == 'Администрация Адлер' %}
+             <td><strong>{{ Agreat_bal.sdelok_calc  }}</strong> сделок</td>
+             <td><strong>{{ Agreat_bal.sdelok_sum  }}</strong>   руб.</td>
+             <td><strong>{{ Agreat_bal.crm_count  }}</strong>   об. ЦРМ</td>
+             <td><strong>{{ Agreat_bal.cian_count  }}</strong>   об. ЦИАН</td>
+             {% endif %}
+             <td><blockquote>Отлично</blockquote></td>
+        </tr>
+    {% endfor %}
+       </table>
+    </tbody>
+
+    </div>
+
+
+
+
+        <div class="card-panel orange lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for Agood_bal in Agood %}
+         <tr>
+             <td><H5>{{ Agood_bal.auth_ful_name }}</H5> </td>
+           {% if request.user.groups.all.0.name == 'Администрация' or request.user.groups.all.0.name == 'Администрация Адлер' %}
+             <td><strong>{{ Agood_bal.sdelok_calc  }}</strong> сделок</td>
+             <td><strong>{{ Agood_bal.sdelok_sum  }}</strong>   руб.</td>
+             <td><strong>{{ Agood_bal.crm_count  }}</strong>   об. ЦРМ</td>
+             <td><strong>{{ Agood_bal.cian_count  }}</strong>   об. ЦИАН</td>
+            {% endif %}
+             <td><blockquote>Хорошо</blockquote></td>
+        </tr>
+
+    {% endfor %}
+       </table>
+    </tbody>
+    </div>
+
+    <div class="card-panel yellow lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for Audl_bal in Audl %}
+        <tr>
+             <td><H5>{{ Audl_bal.auth_ful_name }} </H5> </td>
+            {% if request.user.groups.all.0.name == 'Администрация' or request.user.groups.all.0.name == 'Администрация Адлер' %}
+             <td><strong>{{ Audl_bal.sdelok_calc  }}</strong> сделок</td>
+             <td><strong>{{ Audl_bal.sdelok_sum  }}</strong>   руб.</td>
+             <td><strong>{{ Audl_bal.crm_count  }}</strong>   об. ЦРМ</td>
+             <td><strong>{{ Audl_bal.cian_count  }}</strong>   об. ЦИАН</td>
+            {% endif %}
+             <td><blockquote>Удовлетворительно</blockquote></td>
+        </tr>
+    {% endfor %}
+   </table>
+    </tbody>
+    </div>
+
+    <div class="card-panel  light-blue accent-2 lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for Azero_bal in Azero %}
+          <tr>
+            <td><h5>{{ Azero_bal.auth_ful_name }}</h5></td>
+          {% if request.user.groups.all.0.name == 'Администрация' or request.user.groups.all.0.name == 'Администрация Адлер' %}
+            <td><strong>{{ Azero_bal.sdelok_calc }}</strong> сделок</td>
+            <td><strong>{{ Azero_bal.sdelok_sum  }}</strong>   руб.</td>
+            <td><strong>{{ Azero_bal.crm_count  }}</strong>   об. ЦРМ</td>
+            <td><strong>{{ Azero_bal.cian_count  }}</strong>   об. ЦИАН</td>
+          {% endif %}
+            <td><blockquote>Неудовлетворительно</blockquote></td>
+          </tr>
+    {% endfor %}
+    </table>
+    </div>
+    </div>
+{% endif %}
+
+
+
+
+
+
+{% ifequal request.user.groups.all.0.name 'Администрация'  %}
+    <div id="test3" class="col s12">
+    <table class="bordered">
+    <tbody>
+    {% for otd in todtd %}
+        <tr>
+             <td><H5>{{  otd.otd }}</H5> </td>
+             <td><strong>{{  otd.kommisia  }}</strong>   руб.</td>
+        </tr>
+    {% endfor %}
+   </table>
+    </tbody>
+
+    </div>
+{% endifequal %}
+
+
+
+
+
+
+{% if tnach == 'Да' %}
+    <div id="test4" class="col s12">
+                   <div class="card-panel red lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for Ngreat_bal in Ngreat %}
+         <tr>
+             <td><H5>{{ Ngreat_bal.auth_ful_name }}</H5> </td>
+             <td><strong>{{ Ngreat_bal.sdelok_calc  }}</strong> сделок</td>
+             <td><strong>{{ Ngreat_bal.sdelok_sum  }}</strong>   руб.</td>
+             <td><strong>{{ Ngreat_bal.crm_count  }}</strong>   об. ЦРМ</td>
+             <td><strong>{{ Ngreat_bal.cian_count  }}</strong>   об. ЦИАН</td>
+             <td><blockquote>Отлично</blockquote></td>
+        </tr>
+    {% endfor %}
+       </table>
+    </tbody>
+
+    </div>
+
+
+     <div class="card-panel orange lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for Ngood_bal in Ngood %}
+         <tr>
+             <td><H5>{{ Ngood_bal.auth_ful_name }}</H5> </td>
+             <td><strong>{{ Ngood_bal.sdelok_calc  }}</strong> сделок</td>
+             <td><strong>{{ Ngood_bal.sdelok_sum  }}</strong>   руб.</td>
+             <td><strong>{{ Ngood_bal.crm_count  }}</strong>   об. ЦРМ</td>
+             <td><strong>{{ Ngood_bal.cian_count  }}</strong>   об. ЦИАН</td>
+             <td><blockquote>Хорошо</blockquote></td>
+        </tr>
+
+    {% endfor %}
+       </table>
+    </tbody>
+    </div>
+
+    <div class="card-panel yellow lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for Nudl_bal in Nudl %}
+        <tr>
+             <td><H5>{{ Nudl_bal.auth_ful_name }}</H5> </td>
+             <td><strong>{{ Nudl_bal.sdelok_calc  }}</strong> сделок</td>
+             <td><strong>{{ Nudl_bal.sdelok_sum  }}</strong>   руб.</td>
+             <td><strong>{{ Nudl_bal.crm_count  }}</strong>   об. ЦРМ</td>
+             <td><strong>{{ Nudl_bal.cian_count  }}</strong>   об. ЦИАН</td>
+             <td><blockquote>Удовлетворительно</blockquote></td>
+        </tr>
+    {% endfor %}
+   </table>
+    </tbody>
+    </div>
+
+    <div class="card-panel  light-blue accent-2 lighten-2">
+    <table class="bordered">
+    <tbody>
+    {% for Nzero_bal in Nzero %}
+          <tr>
+            <td><h5>{{ Nzero_bal.auth_ful_name }}</h5></td>
+            <td><strong>{{ Nzero_bal.sdelok_calc }}</strong> сделок</td>
+            <td><strong>{{ Nzero_bal.sdelok_sum  }}</strong>   руб.</td>
+            <td><strong>{{ Nzero_bal.crm_count  }}</strong>   об. ЦРМ</td>
+            <td><strong>{{ Nzero_bal.cian_count  }}</strong>   об. ЦИАН</td>
+            <td><blockquote>Неудовлетворительно</blockquote></td>
+          </tr>
+    {% endfor %}
+    </table>
+    </div>
+    </div>
+    </div>
+{% endif %}
+
+  </div>
+
+
+ </div></div></div></div>
+{% endblock %}

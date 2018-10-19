@@ -1,0 +1,35 @@
+{% extends 'crm/main.html' %}
+
+{% block content %}
+              <table class="bordered">
+        <thead>
+          <tr>
+              <th><strong>Ф.И.О.</strong></th>
+              <th><strong>Отдел</strong></th>
+               <th><strong>Всего в ЦРМ</strong></th>
+              <th><strong>Нет № дома</strong></th>
+              <th><strong>Нет № кв или кадастра</strong></th>
+              <th><strong>Мало фото</strong></th>
+              <th><strong>Мало текста</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for post in tpost   %}
+          <tr>
+            <td>{{  post.FIO }}</td>
+            <td>{{  post.otdel }}</td>
+            <td>{{  post.vsego }}</td>
+            <td>{{  post.dom_numb_err }}</td>
+            <td>{{  post.kv_numb_err }}</td>
+            <td>{{  post.photo_err }}</td>
+            <td>{{  post.text_err }}</td>
+
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+
+{% endblock %}

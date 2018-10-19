@@ -1,0 +1,78 @@
+<realty-feed xmlns="http://webmaster.yandex.ru/schemas/feed/realty/2010-06">
+ <generation-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</generation-date>
+{% if tdom %}
+    {% for doma in tdom %}
+    <offer internal-id="{{ doma.pk }}">
+    <type>Продажа</type>
+    <property-type>Жилая</property-type>
+    <category>дом</category>
+ <creation-date>{{ doma.datep|date:"Y-m-d" }}T01:11:30+03:00</creation-date>
+ <last-update-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</last-update-date>
+ <location>
+    <country>Россия</country>
+    <region>Краснодарский край</region>
+    <locality-name>Сочи</locality-name>
+    <address>{{ doma.adress }}</address>
+</location>
+<sales-agent>
+    <phone>{{ doma.author.userprofile1.tel }}</phone>
+    <name>{{  doma.author.first_name }} {{ doma.author.last_name }}</name>
+    <email>{{ doma.author.email }}</email>
+</sales-agent>
+<price>
+  <value>{{ doma.cena_agenstv }}</value>
+  <currency>RUR</currency>
+</price>
+<description>{{ doma.prim }}</description>
+<area>
+  <value>{{ doma.ploshad }}</value>
+  <unit>кв. м</unit>
+</area>
+<lot-area>
+  <value>{{ doma.h_ploshad_uch }}</value>
+  <unit>кв. м</unit>
+</lot-area>
+{%  if doma.h_tip_doma_choises == 'Монолитный' %}
+    <building-type>монолит</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Блочный' %}
+    <building-type>блочный</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Каркасно-монолитный' %}
+    <building-type>кирпично-монолитный</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Кирпичный' %}
+    <building-type>кирпичный</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Деревянный' %}
+    <building-type>деревянный</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Панельный' %}
+    <building-type>панельный</building-type>
+{% endif %}
+{%  if doma.h_vid_prava  == 'Поселений (ИЖС)'%}
+<lot-type>ИЖС</lot-type>
+{% else %}
+<lot-type>садоводство</lot-type>
+{% endif %}
+<floors-total>{{ doma.h_etagnost }}</floors-total>
+<rooms>{{ doma.h_komnat }}</rooms>
+
+<lot-area>
+    <value>{{ doma.h_ploshad_uch }}</value>
+    <unit>cотка</unit>
+</lot-area>
+
+{% for i in doma.idd_gal.all %}
+   {% if i.npict.url %}
+    <image>
+      http://77.222.63.187{{ i.npict.url }}
+    </image>
+   {% endif %}
+{% endfor %}
+
+        </offer>
+
+    {% endfor %}
+{% endif %}
+</realty-feed>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+    <offers>
+         {% for post in tppost %}
+        <offer>
+            <id>{{ post.pk }}</id>
+
+            <part>жилая</part>
+
+            <object-type>квартира</object-type>
+
+            <description><![CDATA[{{ post.prim }} {{ tdm }}]]></description>
+
+            <created-at>{{ post.datep|date:"Y-m-d" }} 00:00:00</created-at>
+
+            <updated-at>{{ tdate|date:"Y-m-d"  }} {{ tdate|date:"h:m:s" }}</updated-at>
+
+            <images>
+
+
+{% for i in post.idd_gal.all %}
+    {% if i.npict.url %}
+                {% if forloop.counter == 1 %}
+                 <image primary="1"><![CDATA[http://77.222.63.187{{ i.npict.url }}]]></image>
+                {% else %}
+                 <image primary="0"><![CDATA[http://77.222.63.187{{ i.npict.url }}]]></image>
+                {% endif %}
+    {% endif %}
+{% endfor %}
+
+            </images>
+            <bargain>
+
+                <type>продажа</type>
+                {%  if post.kadastr  %}
+                <mortgage>да</mortgage>
+                {% else %}
+                <mortgage>нет</mortgage>
+                {% endif %}
+                <price>
+
+                    <value>{{ post.cena_agenstv  }}</value>
+
+                    <unit>total</unit>
+
+                    <currency>RUR</currency>
+
+                </price>
+
+            </bargain>
+            <seller>
+
+                <phone>8{{ post.author.userprofile1.tel }}</phone>
+
+                <extension></extension>
+
+                <name><![CDATA[{{  post.author.first_name }} {{ post.author.last_name }}]]></name>
+
+                <email><![CDATA[{{ post.author.email }}]]></email>
+
+            </seller>
+
+            <location>
+
+                <country>Россия</country>
+
+                <state>Краснодарский край</state>
+
+                <town>Сочи</town>
+
+                <town-region>{{ post.raion }}</town-region>
+
+                <street>{{ post.adress }}</street>
+
+                <house>
+
+                    <number>{{ post.dom_numb }}</number>
+
+                </house>
+
+            </location>
+            <floor>
+
+                <total>{{ post.etagnost }}</total>
+
+                <current>{{ post.etag }}</current>
+
+            </floor>
+
+            <area>
+
+                <total>{{ post.ploshad }}</total>
+
+            </area>
+            <house-info>
+
+                <elevator>{{ post.lift }}</elevator>
+
+                <security>{{ post.security }}</security>
+                {%  if post.parking == 'Есть' %}
+                <parking>да</parking>
+                {%  else %}
+                <parking>нет</parking>
+                {% endif %}
+
+            </house-info>
+
+            <object-info>
+
+                <rooms>
+
+                    <total>{{ post.komnat }}</total>
+
+                </rooms>
+            </object-info>
+        </offer>
+         {% endfor %}
+{% if tdom %}
+    {% for doma in tdom %}
+        <offer>
+            <id>{{ doma.pk }}</id>
+
+            <part>жилая</part>
+
+            <object-type>Дом</object-type>
+
+            <description><![CDATA[{{ doma.prim }} {{ tdm }}]]></description>
+
+            <created-at>{{ doma.datep|date:"Y-m-d" }} 00:00:00</created-at>
+
+            <updated-at>{{ tdate|date:"Y-m-d"  }} {{ tdate|date:"h:m:s" }}</updated-at>
+
+            <images>
+
+
+{% for i in post.idd_gal.all %}
+    {% if i.npict.url %}
+                {% if forloop.counter == 1 %}
+                 <image primary="1"><![CDATA[http://77.222.63.187{{ i.npict.url }}]]></image>
+                {% else %}
+                 <image primary="0"><![CDATA[http://77.222.63.187{{ i.npict.url }}]]></image>
+                {% endif %}
+    {% endif %}
+{% endfor %}
+
+            </images>
+            <bargain>
+
+                <type>продажа</type>
+
+                <price>
+
+                    <value>{{ doma.cena_agenstv  }}</value>
+
+                    <unit>total</unit>
+
+                    <currency>RUR</currency>
+
+                </price>
+
+            </bargain>
+            <seller>
+
+                <phone>8{{ doma.author.userprofile1.tel }}</phone>
+
+                <extension></extension>
+
+                <name><![CDATA[{{  doma.author.first_name }} {{ doma.author.last_name }}]]></name>
+
+                <email><![CDATA[{{ doma.author.email }}]]></email>
+
+            </seller>
+
+            <location>
+
+                <country>Россия</country>
+
+                <state>Краснодарский край</state>
+
+                <town>Сочи</town>
+
+                <town-region>{{ doma.raion }}</town-region>
+
+
+            </location>
+            <floor>
+
+                <total>{{ doma.h_etagnost  }}</total>
+
+                <current>{{ doma.h_etagnost  }}</current>
+
+            </floor>
+            <area>
+
+                <living>{{ doma.ploshad }}</living>
+
+                <plot>{{ doma.h_ploshad_uch }}</plot>
+
+            </area>
+        </offer>
+    {% endfor %}
+{% endif %}
+
+
+    </offers>
+
+</root>

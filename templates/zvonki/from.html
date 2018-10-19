@@ -1,0 +1,41 @@
+{% extends 'crm/main.html' %}
+
+{% block content %}
+
+{% load material_form %}
+
+    <form method="post" class="post-form" xmlns="http://www.w3.org/1999/html">
+                    {% csrf_token %}
+                         {% for form in tform %}
+    <div class="row">
+         <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+
+    <div class="row">
+      <div class="col s2"><strong>Тел. клиента:</strong>{{ form.tel }}</div>
+      <div class="col s2"><strong>Имя клиента:</strong>{{ form.client_name }}</div>
+      <div class="col s2"><strong>Что ищет:</strong>{{ form.subj }}</div>
+      <div class="col s2"><strong>Цена:</strong>{{ form.cena }}</div>
+      <div class="col s2"><strong>Статус:</strong>{{ form.status_zvonka }}</div>
+
+      <div class="col s2" id="sub"><strong>Когда перезвонить:</strong>{{ form.prezvonit }}</div>
+        <div class="row">
+            <div class="col s10"><strong>Коментарий:</strong>{{ form.coment }}</div>
+            <div class="col s2"><button type="submit" name="_submit" class="btn">Сохранить</button></div>
+        </div>
+    </div>
+            </div>
+
+            </div>
+         </div>
+     </div>
+                        {% endfor %}
+
+</form>
+
+
+
+
+
+{% endblock %}

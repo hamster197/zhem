@@ -1,0 +1,32 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+
+{% load material_form %}
+    <div class="row">
+         <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <form method="post" class="post-form">
+                    {% csrf_token %}
+                        {% form form=tpotchformall layout=form.layout%}{% endform %}
+                        <button type="submit" name="_submit" class="btn">{{ tsave }}</button>
+                    {% if tgroup == 'Администрация' or tgroup == 'Администрация Адлер'  %}
+                       <a href="{% url 'crm:sdelka_sriv' idd=tid %}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Срыв сделки</a>
+                    {% if tRasrPr == 'No_rasr' %}
+                        <a href="{% url 'crm:sdelka_rasr' idd=tid %}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Расрочка</a>
+                     {% endif %}
+                       <a href="{% url 'crm:sdelka_del' idd=tid %}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Удалить отчет</a>
+                    {% endif %}
+                </div>
+            </div>
+
+
+
+         </div>
+     </div>
+
+</form>
+
+
+
+{% endblock %}

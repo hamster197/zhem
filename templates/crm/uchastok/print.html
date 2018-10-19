@@ -1,0 +1,113 @@
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+        <link href="/static/material/imgs/favicon.png" rel="shortcut icon">
+        <title>CRM | Агенство недвижимости</title>
+
+
+
+<link href="/static/material/fonts/material-design-icons/material-icons.css"  rel="stylesheet">
+
+<link href="/static/material/css/materialize.admin.min.css" rel="stylesheet">
+
+<link href="/static/admin/css/icons.css" rel="stylesheet" type="text/css" />
+
+
+
+        <meta name="robots" content="NONE,NOARCHIVE" />
+
+        <script src="/static/material/js/jquery.js"></script>
+        <script>
+            // Use same django for material and django admin
+            var django = django || {};
+            django.jQuery = jQuery.noConflict(true);
+            window.jQuery = window.$ = django.jQuery
+        </script>
+        <script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
+        <script type="text/javascript">window.__admin_utc_offset__ = "10800";</script>
+        <script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+
+<table style="width: 100%;" align="center">
+<tbody>
+<tr>
+    <td><h4>АН Жемчужина </h4></td>
+<td><h6>8 800 234-80-80</h6><h7>Звонок бесплатный</h7></td>
+<td><h6>8 (862) 234-80-80</h6><h7>Офис в Сочи</h7></td>
+<td><h6>8 (862) 234-11-00</h6><h7>Офис в Адлере</h7></td>
+</tr>
+</tbody>
+</table>
+
+
+      <div class="container">
+           <div class="row">
+                <div class="col s12">
+        <div class="card">
+        <table class="bordered">
+        <thead>
+          <tr>
+              <td>ID обьекта: </td>
+              <td><strong> {{tp_uch.pk  }}</strong></td>
+          </tr>
+          <tr>
+            <td>Район: </td>
+            <td><strong> {{tp_uch.raion  }}</strong></td>
+          </tr>
+       <tr>
+            <td>Газ: </td>
+            <td><strong>{{tp_uch.gaz}}</strong></td>
+          </tr>
+                 <tr>
+            <td>Назначение земли: </td>
+            <td><strong>{{ tp_uch.nazn_zemli  }}</strong></td>
+          </tr>
+          <tr>
+            <td>Документы:</td>
+            <td><strong> {{ tp_uch.documenti }}</strong></td>
+          </tr>
+          <tr>
+            <td>Цена: </td>
+            <td><strong>{{ tp_uch.cena_agenstv }} руб.</strong></td>
+          </tr>
+        </tbody>
+        </table>
+        </div>
+                </div>
+
+                </div>
+            </div>
+
+      </div>
+
+
+
+        <footer>
+
+      <h4> <p class="flow-text"><p style="text-align: center;">С нами сбываются мечты!</h4>
+
+
+        </footer>
+
+
+
+
+
+<script src="/static/material/js/materialize.admin.min.js"></script>
+
+
+
+
+
+
+
+    </body>
+</html>

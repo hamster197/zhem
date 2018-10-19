@@ -1,0 +1,50 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+{% load i18n staticfiles %}
+{% load material_form %}
+    <div class="row">
+         <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>
+                Выберите не менее 5 картинок<strong> (Нажав кнопку ctr можно выбрать сразу несколько файлов!)</strong>
+            </p>
+            <input type="file" name="myfiles" multiple>
+            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+        </form>
+                </div>
+            </div>
+             <div class="card">
+                <div class="card-content">
+                    <div class="card-content">
+
+        <table class="bordered">
+   {% if post.idd_gal.all %}
+
+    {% for i in post.idd_gal.all %}
+        <tbody>
+          <tr>
+            <td> ID: {{ i.pk }}  </td>
+            <td><a href="{{MEDIA_ROOT}}{{ i.npict.url }}"><img src="{{MEDIA_ROOT}}{{ i.npict.url }}"  height="232"></a>  </td>
+            <td><a href="{% url 'crm:my_flatpub'  %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Закончить редактирование</button></a></td>
+            <td><a href="{% url 'crm:FlatPhotodel' idd=post.pk sidd=i.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Удалить</button></a></td>
+          </tr>
+
+        </tbody>
+
+
+    {% endfor %}
+    {% endif%}
+
+                </div>
+            </div>
+         </div>
+     </div>
+
+
+
+
+
+{% endblock %}

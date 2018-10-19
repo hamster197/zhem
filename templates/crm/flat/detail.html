@@ -1,0 +1,386 @@
+{% extends 'crm/main.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+
+                    <nav>
+                        <div class="nav-wrapper">
+                            <a href="" class="brand-logo">Автор:
+                                {{ tpflat.author.first_name }}
+                                {{ tpflat.author.last_name }}
+                                {{ tpflat.author.userprofile1.tel }}</a>
+                        </div>
+                    </nav>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="tabs">
+                                <li class="tab col s2">
+                                    <a class="active" href="#test1">Главное</a>
+                                </li>
+                                <li class="tab col s2">
+                                    <a href="#test2">Описание</a>
+                                </li>
+                                <li class="tab col s2">
+                                    <a href="#test3">Примечание</a>
+                                </li>
+                                <li class="tab col s2">
+                                    <a href="#test5">Фото</a>
+                                </li>
+                                {% ifequal request.user tpflat.author %}
+                                <li class="tab col s3">
+                                    <a href="#test4">Данные клиента</a>
+                                </li>
+                                {% endifequal %}
+
+                            </ul>
+                        </div>
+                        <tbody>
+                            <div id="test1" class="col s12">
+                                <table class="bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Дата публикации:
+                                            </td>
+                                            <td>
+                                                <strong>
+                                                    {{tpflat.datep  }}
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Район:
+                                            </td>
+                                            <td>
+                                                <strong>
+                                                    {{tpflat.raion  }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Этап сдачи:
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <strong>{{tpflat.etap_sdachi}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Статус жилья:</td>
+                                            <td>
+                                                <strong>{{tpflat.status_gilya}}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Класс жилья:
+                                            </td>
+                                            <td>
+                                                <strong>{{tpflat.klass_gilya  }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Кредит:</td>
+                                            <td>
+                                                <strong>
+                                                    {{ tpflat.kredit }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Цена агенства:
+                                            </td>
+                                            <td>
+                                                <div class="card-panel blue darken-1">
+                                                    <strong>{{ tpflat.cena_agenstv }}
+                                                        руб.</strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div id="test2" class="col s12">
+                                    <table class="bordered">
+                                        <thead>
+                                            <tr>
+                                                <td>Ремонт:</td>
+                                                <td>
+                                                    <strong>
+                                                        {{tpflat.remont  }}</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Газ:
+                                                </td>
+                                                <td>
+                                                    <strong>{{tpflat.gaz}}</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Кол-во комнат:
+                                                </td>
+                                                <td>
+                                                    <strong>{{tpflat.komnat}}</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Площадь:
+                                                </td>
+                                                <td>
+                                                    <strong>{{tpflat.ploshad  }}</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Этаж:
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        {{ tpflat.etag }}</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Вид из окон:
+                                                </td>
+                                                <td>
+                                                    <strong>{{tpflat.vid_is_okon  }}</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Сан узел:
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        {{ tpflat.san_usel }}</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Паркинг:
+                                                </td>
+                                                <td>
+                                                    <strong>{{tpflat.parking}}</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Цена агенства:
+                                                </td>
+                                                <td>
+                                                    <div class="card-panel blue darken-1">
+                                                        <strong>{{ tpflat.cena_agenstv }}
+                                                            руб.</strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div id="test3" class="col s12">
+                                        <table class="bordered">
+                                            <thead>
+                                                <tr>
+                                                    <td>Наличие охраны:
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{tpflat.security}}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Мусоропровод:
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{tpflat.rubbish_chute}}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Лифт:
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{tpflat.lift}}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Тип балкона:
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{tpflat.balcony}}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Примечание:
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{tpflat.prim}}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td>Цена агенства:
+                                                    </td>
+                                                    <td>
+                                                        <div class="card-panel blue darken-1">
+                                                            <strong>{{ tpflat.cena_agenstv }}
+                                                                руб.</strong>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div id="test5" class="col s12">
+                                            {% for i in tpflat.idd_gal.all %}
+                                                <div style="float:left; margin-right:10px; margin-top:10px;">
+                                                    <img
+                                                        class="materialboxed"
+                                                        rel="gallery"
+                                                        height="250"
+                                                        src="http://77.222.63.187{{ i.npict.url }}"></div>
+                                            {% endfor %}
+                                        </div>
+
+                                        {% ifequal request.user tpflat.author %}
+                                        <div id="test4" class="col s12">
+                                            <table class="bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td>ФИО собственника:
+                                                        </td>
+                                                        <td>
+                                                            <strong>{{tpflat.client_name }}</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Телефон собственника:
+                                                        </td>
+                                                        <td>
+                                                            <strong>{{tpflat.client_tel}}</strong</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Адрес:
+                                                            </td>
+                                                            <td>
+                                                                <strong>{{tpflat.adress}}
+                                                                    д.{{ tpflat.dom_numb }}, кв.{{ tpflat.kvart_numb }}</strong</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Цена собственника:
+                                                                </td>
+                                                                <td>
+                                                                    <strong>{{tpflat.cena_sobstv}}
+                                                                        руб.</strong>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Цена агенства:
+                                                                </td>
+                                                                <td>
+                                                                    <div class="card-panel blue darken-1">
+                                                                        <strong>{{ tpflat.cena_agenstv }}
+                                                                            руб.</strong>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    {% endifequal %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% comment %}
+                        <!-- {% load el_pagination_tags %} {% paginate tp_my_kl %} <ul class="collection
+                        with-header"> <li class="collection-header"><h4>Мои клиенты:</h4></li> {% for
+                        my_kl in tp_my_kl %} <li class="collection-item"><div>{{ my_kl.date_sozd }} {{
+                        my_kl.client_fio }} Бюджет от {{ my_kl.budg_ot }}<a href="{% url
+                        'crm:client_detail' idd=my_kl.pk %}" class="secondary-content"><i
+                        class="material-icons">send</i></a></div></li> {% endfor %} {% get_pages %} <ul
+                        class="pagination"> {% for page in pages %} <li> <a href="{{ page.path }}"
+                        rel="page" class="endless_page_link">{{ page.number }}</a> </li> {% endfor %}
+                        </ul></div> </ul> <ul class="collection with-header"> <li
+                        class="collection-header"><h4>Клиенты отдела:</h4></li> {% load
+                        el_pagination_tags %} {% paginate tp_otd_kl %} {% for otd_kl in tp_otd_kl %}
+                        <li><a href=""></a></li> <li class="collection-item"><div>{{ otd_kl.date_sozd }}
+                        {{ otd_kl.client_fio }} Бюджет от {{ otd_kl.budg_ot }} <a href="{% url
+                        'crm:client_detail' idd=otd_kl.pk %}" class="secondary-content"><i
+                        class="material-icons">send</i></a></div></li> {% endfor %} {% get_pages %} <ul
+                        class="pagination"> {% for page in pages %} <li> <a href="{{ page.path }}"
+                        rel="page" class="endless_page_link">{{ page.number }}</a> </li> {% endfor %}
+                        </ul> </div> </ul> <ul class="collection with-header"> <li
+                        class="collection-header"><h4>Клиенты агенства:</h4></li> {% load
+                        el_pagination_tags %} {% paginate tp_all_kl %} {% for all_kl in tp_all_kl %}
+                        <li><a href=""></a></li> <li class="collection-item"><div>{{ all_kl.date_sozd }}
+                        {{ all_kl.client_fio }} Бюджет от {{ all_kl.budg_ot }} <a href="{% url
+                        'crm:client_detail' idd=all_kl.pk %}" class="secondary-content"><i
+                        class="material-icons">send</i></a></div></li> {% endfor %} {% get_pages %} <ul
+                        class="pagination"> {% for page in pages %} <li> <a href="{{ page.path }}"
+                        rel="page" class="endless_page_link">{{ page.number }}</a> </li> {% endfor %}
+                        </ul> </div> </ul> -->{% endcomment %}
+                        {% ifequal request.user tpflat.author %}
+                        <div class="fixed-action-btn horizontal">
+                            <a
+                                href="{% url 'crm:flat_edit' idd=tpflat.id %} "
+                                class="btn-floating btn-large red">
+                                <i class="large material-icons">access_time</i>
+                            </a>
+                            <ul>
+                                {% if tpflat.vestum_pub == 'Нет' %}
+                                    <li>
+                                        <a
+                                            href="{% url 'crm:Vs_pub' idd=tpflat.id %} "
+                                            class="btn-floating red"
+                                            title="Опубликовать на Vestum">
+                                            <i class="material-icons">V+</i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if tpflat.vestum_pub == 'Да1' %}
+                                    <li>
+                                        <a
+                                            href="{% url 'crm:flat_vs_upb' idd=tpflat.id %} "
+                                            class="btn-floating red"
+                                            title="Снять с публикации Vestum">
+                                            <i class="material-icons">V-</i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <a
+                                        href="{% url 'crm:flat_edit' idd=tpflat.id %} "
+                                        class="btn-floating blue"
+                                        title="Редактировать">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                </li>
+
+                                {% if request.user.groups.get.name == 'seo' or request.user.groups.get.name == 'Администрация' %}
+                                    <li>
+                                        <a
+                                            href="{% url 'crm:form_flatpub' idd=tpflat.id %} "
+                                            class="btn-floating blue"
+                                            title="Публиковать на сайте">
+                                            <i class="material-icons">adb</i>
+                                        </a>
+                                    </li>
+                                {% endif %}{% comment %}
+                                <!-- <li><a href="{% url 'crm:my_flatunpub' %}" class="btn-floating yellow
+                                darken-1"title = "Личные"><i class="material-icons">account_box</i></a></li>
+                                <li><a <a href="{% url 'crm:my_flatpub' %}" class="btn-floating green" title =
+                                "В агенстве"><i class="material-icons">announcement</i></a></li> <li><a href="{%
+                                url 'crm:flat_print' idd=tpflat.pk %}" class="btn-floating indigo darken-4"
+                                title = "Распечатать" target="_blank"><i
+                                class="material-icons">local_printshop</i></a></li> </ul> -->{% endcomment %}{% endifequal %}
+                                {% if request.user.groups.get.name == 'seo' or request.user.groups.get.name == 'Администрация' %}
+                                    <a
+                                        href="{% url 'crm:form_flatpub' idd=tpflat.id %} "
+                                        class="btn-floating blue"
+                                        title="Публиковать на сайте">
+                                        <i class="material-icons">adb</i>
+                                    </a>
+                                {% endif %}
+
+                            </div>
+
+                        {% endblock %}

@@ -1,0 +1,208 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+    <div class="row">
+        <div class="card">
+                  <table class="bordered">
+                     <tbody>
+                          <tr>
+                            <td>Название объекта:</td>
+                            <td><strong>{{ tsdelka.nazv_nov }}</strong></td></td>
+                          </tr>
+                          <tr>
+                            <td>Дата создания отчета:</td>
+                            <td><strong>{{ tsdelka.date_sozd }}</strong></td></td>
+                          </tr>
+                           <tr>
+                            <td>Дата закрытия сделки:</td>
+                            <td><strong>{{ tsdelka.date_zakr }}</strong></td></td>
+                          </tr>
+                           <tr>
+                           <tr>
+                           <tr>
+                            <td>ФИО клиента:</td>
+                            <td><strong>{{ tsdelka.fio_kl }}</strong></td>
+                          </tr>
+                          <tr>
+                            <td>Телефон клиента:</td>
+                              <td><strong>{{ tsdelka.tel_kl }}</strong></td>
+                          </tr>
+                          <tr>
+                            <td>Канал привлечения клиента:</td>
+                            <td><strong>{{ tsdelka.ot_kuda_kl }}<strong</td>
+                          </tr>
+                           <tr>
+                            <td>Название объекта:</td>
+                            <td><strong>{{ tsdelka.nazv_nov }}</strong></td></td>
+                          </tr>
+                           <tr>
+                           <tr>
+                            <td>Площадь:</td>
+                            <td><strong>{{ tsdelka.ploshad }}</strong></td></td>
+                          </tr>
+                           <tr>
+                            <td>Ипотека:</td>
+                            <td><strong>{{ tsdelka.ipoteka }}</strong></td></td>
+                          </tr>
+                           <tr>
+                            <td>Расрочка:</td>
+                            <td><strong>{{ tsdelka.rasrochka }}</strong></td></td>
+                           </tr>
+                           <tr>
+                            <td>Стоимость обьекта:</td>
+                            <td><strong>{{ tsdelka.stoimost }}</strong></td></td>
+                           </tr>
+                           <tr>
+                            <td>Коммисия::</td>
+                            <td><strong>{{ tsdelka.komisia }}</strong></td></td>
+                           </tr>
+
+                      {%  if tsdelka.vneseno_komisii > 0 %}
+                          <tr>
+                            <td>Внесенная сумма:</td>
+                            <td>{{ tsdelka.vneseno_komisii_date }} /<strong> {{ tsdelka.vneseno_komisii }} руб.</strong></td></td>
+                          </tr>
+                       {% endif %}
+                     {%  if tsdelka.vneseno_komisii2 > 0 %}
+                          <tr>
+                            <td>Внесенная сумма:</td>
+                            <td>{{ tsdelka.vneseno_komisii_date2 }} /<strong> {{ tsdelka.vneseno_komisii2 }} руб.</strong></td></td>
+                          </tr>
+                      {% endif %}
+                     {%  if tsdelka.vneseno_komisii3 > 0 %}
+                          <tr>
+                            <td>Внесенная сумма:</td>
+                            <td>{{ tsdelka.vneseno_komisii_date3 }} /<strong> {{ tsdelka.vneseno_komisii3 }} руб.</strong></td></td>
+                          </tr>
+                      {% endif %}
+                     {%  if tsdelka.vneseno_komisii4 > 0 %}
+                          <tr>
+                            <td>Внесенная сумма:</td>
+                            <td>{{ tsdelka.vneseno_komisii_date4 }} /<strong> {{ tsdelka.vneseno_komisii4 }} руб.</strong></td></td>
+                     {%  if tsdelka.vneseno_komisii5 > 0 %}
+                          <tr>
+                            <td>Внесенная сумма:</td>
+                            <td>{{ tsdelka.vneseno_komisii_date5 }} /<strong> {{ tsdelka.vneseno_komisii5 }} руб.</strong></td></td>
+                          </tr>
+                      {% endif %}
+                          </tr>
+                      {% endif %}
+                     {%  ifequal tsdelka.rasrochka 'Да' %}
+                           <tr>
+                            <td>Остаток:</td>
+                            <td><strong>{{ tost }}</strong></td></td>
+                           </tr>
+                     {% endifequal %}
+                          </tr>
+                           <tr>
+                            <td>Примечание:</td>
+                            <td><strong>{{ tsdelka.prim }}</strong></td></td>
+                          </tr>
+                          <!--
+                          <td>Автор отчета:</td>
+                            <td><strong>{{ tsdelka.rielt.first_name }} {{ tsdelka.rielt.last_name }}</strong></td></td>
+                          </tr>-->
+                           <tr>
+                            <td><strong>Риелторы в сделке:</strong></td>
+                            <td><strong> </strong></td></td>
+                          </tr>
+                            {% if tn11 %}
+                            <td>Риелтор 1:</td>
+                            <td><strong>{{ tn11 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc1}}% ({{ tpn11 }} руб.)</td></td>
+                          </tr>
+                          {% endif %}
+                           </td>
+
+                          </tr>
+                            {% if tn22 %}
+                            <td>Риелтор 2:</td>
+                            <td><strong>{{ tn22 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc2}}% ({{ tpn22 }} руб.) </strong></td></td>
+                          </tr>
+                          {% endif %}
+
+                          {% if tn33 %}
+                            <td>Риелтор 3:</td>
+                            <td><strong>{{ tn33 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc3}}% ({{ tpn33 }} руб.) </strong></td></td>
+                          </tr>
+                          {% endif %}
+
+                           {% if tn44 %}
+                            <td>Риелтор 4:</td>
+                            <td><strong>{{ tn44 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc4}}% ({{ tpn44 }} руб.) </strong></td></td>
+                          </tr>
+                          {% endif %}
+
+                          {% if tn55 %}
+                            <td>Риелтор 5:</td>
+                            <td><strong>{{ tn55 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc5}}% ({{ tpn55 }} руб.) %</strong></td></td>
+                          </tr>
+                          {% endif %}
+
+                           {% if tn66 %}
+                            <td>Риелтор 6:</td>
+                            <td><strong>{{ tn66 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc6}}% ({{ tpn66 }} руб.) </strong></td></td>
+                          </tr>
+                          {% endif %}
+
+                          {% if tn77 %}
+                            <td>Риелтор 7:</td>
+                            <td><strong>{{ tn77 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc7}} % ({{ tpn77 }} руб.)</strong></td></td>
+                          </tr>
+                          {% endif %}
+
+                          {% if tn88 %}
+                            <td>Риелтор 8:</td>
+                            <td><strong>{{ tn88 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc8}}% ({{ tpn88 }} руб.) </strong></td></td>
+                          </tr>
+                          {% endif %}
+
+                          {% if tn99 %}
+                            <td>Риелтор 9:</td>
+                            <td><strong>{{ tn99 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc9}}% ({{ tpn99 }} руб.)</strong></td></td>
+                          </tr>
+
+                          {% if tn10 %}
+                            <td>Риелтор 10:</td>
+                            <td><strong>{{ tn10 }}  </strong></td></td>
+                          </tr>
+                            <td>Проценты:</td>
+                            <td><strong>{{ tsdelka.rielt_proc10}}% ({{ tpn10 }} руб.)</strong></td></td>
+                          </tr>
+                          {% endif %}
+                          {% endif %}
+
+                           </td>
+                           <tr>
+                           <tr>
+                           <tr>
+                      </tbody>
+                   </table>
+        </div>
+    </div>
+{% endblock %}

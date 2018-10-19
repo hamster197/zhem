@@ -1,0 +1,80 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+    <div class="row">
+      <div class="col s9">
+          <div class="card">
+                <div class="card-content">
+
+ {% load material_form %}
+
+        <table class="bordered">
+        <thead>
+          <tr>
+              <th>ФИО</th>
+              <th data-label>Район</th>
+              <th data-label>Что ищет</th>
+              <th data-label>Бюджет от:</th>
+              <th>Бюджет до:</th>
+              <th></th>
+          </tr>
+        </thead>
+{% if tpvclients %}
+{% load el_pagination_tags %}
+{% paginate tpvclients %}
+ <tbody>
+    {% for vclients in tpvclients %}
+
+          <tr>
+      <td data-label><strong> {{ vclients.client_fio }}</strong> </a></td>
+      <td data-label>{{ vclients.raion }}</td>
+      <td data-label>{{ vclients.category }}</td>
+      <td data-label>{{ vclients.budg_ot }}</td>
+      <td data-label>{{ vclients.budg_do }}</td>
+      <td data-label><a href="{% url 'crm:client_detail' idd=vclients.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Подробнее</button></a> </td>
+
+
+          </tr>
+
+
+    {% endfor %}
+
+      </tbody>
+      </table>
+
+{% get_pages %}
+    <ul class="pagination">
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.path }}" rel="page" class="endless_page_link">{{ page.number }}</a>
+            </li>
+        {% endfor %}
+   </ul>
+
+{% else %}
+  </tbody></br></br></br>
+   <strong>У Вас пока нет обьектов</strong>
+{% endif %}
+                        </tbody>
+      </table>
+
+
+                </div>
+          </div>
+      </div>
+
+
+
+    <div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">access_time</i>
+    </a>
+    <ul>
+      <li><a href="{% url 'crm:own_clienws' %}" class="btn-floating red" title = "Личные"><i class="material-icons">accessibility</i></a></li>
+      <li><a href="{% url 'crm:otd_clienws' %}" class="btn-floating yellow darken-1"title = "В отделе"><i class="material-icons">account_box</i></a></li>
+      <li><a <a href="{% url 'crm:all_clienws' %}"  class="btn-floating green" title = "В агенстве"><i class="material-icons">announcement</i></a></li>
+
+    </ul>
+  </div>
+
+
+{% endblock %}

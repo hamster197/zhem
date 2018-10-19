@@ -1,0 +1,144 @@
+{% extends 'crm/main.html' %}
+
+{% block content %}
+
+    <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s2"><a class="active" href="#test1">1 отдел <span class="new badge blue" data-badge-caption="">{{ tOtd1_cn }}</span></a></li>
+        <li class="tab col s2"><a href="#test2">2 отдел <span class="new badge blue" data-badge-caption="">{{ tOtd2_cn }}</span></a></li>
+        <li class="tab col s2"><a href="#test3">3 отдел <span class="new badge blue" data-badge-caption="">{{ tOtd3_cn }}</span></a></li>
+        <li class="tab col s2"><a href="#test4">4 отдел <span class="new badge blue" data-badge-caption="">{{ tOtd4_cn }}</span></a></li>
+        <li class="tab col s2"><a href="#test5">Адлер <span class="new badge blue" data-badge-caption="">{{ tOtdAdl_cn }}</span></a></li>
+        <li> <span class="new badge" data-badge-caption="">Вестум {{ tvs }}/Кадастр {{ tegr }}</span></li>
+      </ul>
+    </div>
+    <div id="test1" class="col s10">
+      <table class="bordered">
+        <thead>
+          <tr>
+              <th><strong>Ф.И.О.</strong></th>
+              <th><strong>Кол-во обьектов в CRM(Yandex,DomClick)</strong></th>
+              <th><strong>Кол-во обьектов в CRM(за неделю)</strong></th>
+              <th><strong>Кол-во обьектов в Vestum</strong></th>
+          </tr>
+        {%   if tNach_otd == 'Yes' %}
+        </thead>
+        <tbody>
+        {% for otd in tOtd1 %}
+          <tr>
+            <td>{{ otd.auth_ful_name }} </td>
+            <td>{{ otd.crm_calc }}/( C № кадастра:{{otd.crm_calc_kadastr }} )</td>
+            <td>{{ otd.crm_calc_week }}</td>
+            <td>{{ otd.cian_calc }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+
+
+    <div id="test2" class="col s10">
+              <table class="bordered">
+        <thead>
+          <tr>
+              <th><strong>Ф.И.О.</strong></th>
+              <th><strong>Кол-во обьектов в CRM(Yandex,DomClick)</strong></th>
+              <th><strong>Кол-во обьектов в CRM(за неделю)</strong></th>
+              <th><strong>Кол-во обьектов в Vestum</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for otd in tOtd2 %}
+          <tr>
+            <td>{{ otd.auth_ful_name }}</td>
+            <td>{{ otd.crm_calc }}/( C № кадастра:{{otd.crm_calc_kadastr }} )</td>
+           <td>{{ otd.crm_calc_week }}</td>
+            <td>{{ otd.cian_calc }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+
+    </div>
+
+
+    <div id="test3" class="col s10">
+          <table class="bordered">
+        <thead>
+          <tr>
+              <th><strong>Ф.И.О.</strong></th>
+              <th><strong>Кол-во обьектов в CRM(Yandex,DomClick)</strong></th>
+              <th><strong>Кол-во обьектов в CRM(за неделю)</strong></th>
+              <th><strong>Кол-во обьектов в Vestum</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for otd in tOtd3 %}
+          <tr>
+            <td>{{ otd.auth_ful_name }}</td>
+            <td>{{ otd.crm_calc }}/( C № кадастра:{{otd.crm_calc_kadastr }} )</td>
+            <td>{{ otd.crm_calc_week }}</td>
+            <td>{{ otd.cian_calc }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+    <div id="test4" class="col s10">
+              <table class="bordered">
+        <thead>
+          <tr>
+              <th><strong>Ф.И.О.</strong></th>
+              <th><strong>Кол-во обьектов в CRM(Yandex,DomClick)</strong></th>
+              <th><strong>Кол-во обьектов в CRM(за неделю)</strong></th>
+              <th><strong>Кол-во обьектов в Vestum</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for otd in tOtd4 %}
+          <tr>
+            <td>{{ otd.auth_ful_name }}</td>
+            <td>{{ otd.crm_calc }}/( C № кадастра:{{otd.crm_calc_kadastr }} )</td>
+            <td>{{ otd.crm_calc_week }}</td>
+            <td>{{ otd.cian_calc }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+
+    <div id="test5" class="col s10">
+              <table class="bordered">
+        <thead>
+          <tr>
+              <th><strong>Ф.И.О.</strong></th>
+              <th><strong>Кол-во обьектов в CRM(Yandex,DomClick)</strong></th>
+               <th><strong>Кол-во обьектов в CRM(за неделю)</strong></th>
+              <th><strong>Кол-во обьектов в Vestum</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for AdlOtdel in tAdlOtdel   %}
+          <tr>
+            <td>{{  AdlOtdel.auth_ful_name }}</td>
+            <td>{{  AdlOtdel.crm_calc }}/( C № кадастра:{{AdlOtdel.crm_calc_kadastr }} )</td>
+            <td>{{ AdlOtdel.crm_calc_week }}</td>
+            <td>{{ AdlOtdel.cian_calc }}</td>
+          </tr>
+        {% endfor %}
+           {% endif %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROOT>
+<ITEMS>
+    {% for post in tpost %}
+        {% if post.type == 'flat' %}
+    <ITEM>
+    <application_id>1</application_id>
+    <id>{{  671|add:post.pk }}</id>
+    <la59t_zoo_application_name>Жемчужина АН</la59t_zoo_application_name>
+    <created_by>{{ post.author.userprofile1.joomla_usr_id }}</created_by>
+    <type>flats</type>
+    <name>{{ post.nazv }}</name>
+    <alias>{{ post.pk }}-{{ post.allias }}</alias>
+    <created>{{ post.date_sozd }}</created>
+    <publish_up>{{ post.date_sozd }}</publish_up>
+    <publish_down>0000-00-00 00:00:00</publish_down>
+    <priority>0</priority>
+    <hits>3</hits>
+    <state>0</state>
+    <access>12</access>
+    <la59t_users_email>{{ post.author.email }}</la59t_users_email>
+    <created_by_alias/>
+    <searchable>1</searchable>
+<elements>{
+	&quot;56de6cc6-e3d7-419f-b27c-bb5733daaf85&quot;: {
+		&quot;file&quot;: &quot;{% for i in post.idd_gal.all|slice:":1" %}images/uploads{{ i.npict.url }}{% endfor %}&quot;,
+		&quot;title&quot;: &quot;&quot;,
+		&quot;link&quot;: &quot;&quot;,
+		&quot;target&quot;: &quot;0&quot;,
+		&quot;rel&quot;: &quot;&quot;,
+		&quot;lightbox_image&quot;: &quot;&quot;,
+		&quot;spotlight_effect&quot;: &quot;&quot;,
+		&quot;caption&quot;: &quot;&quot;,
+		&quot;width&quot;: 175,
+		&quot;height&quot;: 110
+	},
+	&quot;f2d2e613-413a-4a35-ad7e-87d35abe1ffc&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;\u0410\u041d \u00ab\u0416\u0435\u043c\u0447\u0443\u0436\u0438\u043d\u0430\u00bb(\u0421\u043e\u0447\u0438), 8 (800) 234-8080&quot;
+		}
+	},
+	&quot;24f0b658-771b-4e2f-ac7c-76b23f9f1fd9&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;&lt;p style=\&quot;font-size:1.5em;font-weight: 700;line-height: 2em;\&quot;&gt;&lt;i class=\&quot;fa fa-phone-square fa-2\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt; &lt;a href=\&quot;tel:+ 88002348080\&quot;&gt; 8 800 234-80-80&lt;\/a&gt;&lt;\/p&gt; &quot;
+		}
+	},
+	&quot;13bda389-6a00-426e-b8e6-3171e75118e5&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;&lt;script src=\&quot;\/\/yastatic.net\/es5-shims\/0.0.2\/es5-shims.min.js\&quot;&gt;&lt;\/script&gt; &lt;script src=\&quot;\/\/yastatic.net\/share2\/share.js\&quot;&gt;&lt;\/script&gt; &lt;div class=\&quot;ya-share2\&quot; data-services=\&quot;vkontakte,facebook,odnoklassniki,gplus,twitter,lj,viber,whatsapp\&quot;&gt;&lt;\/div&gt;&quot;
+		}
+	},
+	&quot;b17a01a7-a051-43e7-8694-46187700957b&quot;: {
+		&quot;0&quot;: {
+    {% if post.komnat == 'Студия' %}
+            &quot;list-0&quot;: &quot;\u0421\u0442\u0443\u0434\u0438\u044f&quot;
+    {% endif %}
+    {% if post.komnat == 'Однокомнатная' %}
+            &quot;list-0&quot;: &quot;\u041e\u0434\u043d\u043e\u043a\u043e\u043c\u043d\u0430\u0442\u043d\u0430\u044f&quot;
+    {% endif %}
+    {% if post.komnat == 'Двухкомнатная' %}
+            &quot;list-0&quot;: &quot;\u0414\u0432\u0443\u0445\u043a\u043e\u043c\u043d\u0430\u0442\u043d\u0430\u044f&quot;
+    {% endif %}
+    {% if post.komnat == 'Трехкомнатная' %}
+            &quot;list-0&quot;: &quot;\u0422\u0440\u0435\u0445\u043a\u043e\u043c\u043d\u0430\u0442\u043d\u0430\u044f&quot;
+    {% endif %}
+    {% if post.komnat == 'Многокомнатная' %}
+            &quot;list-0&quot;: &quot;\u041c\u043d\u043e\u0433\u043e\u043a\u043e\u043c\u043d\u0430\u0442\u043d\u0430\u044f&quot;
+    {% endif %}
+		}
+	},
+	&quot;4a378c7c-aca7-45dd-baed-72be8a77b8db&quot;: {
+		&quot;0&quot;: {
+    {% if post.parking == 'Есть' or post.parking == 'Подземный' %}
+			&quot;list-0&quot;: &quot;\u0415\u0441\u0442\u044c&quot;
+    {% else %}
+            &quot;list-0&quot;: &quot;\u041d\u0435\u0442&quot;
+    {% endif %}
+		}
+	},
+	&quot;848b83d5-e1d7-4df0-bfbc-23865e52fa64&quot;: {
+		&quot;0&quot;: {
+    {%  if post.remont == 'Черновой' %}
+            &quot;list-0&quot;: &quot;\u0427\u0435\u0440\u043d\u043e\u0432\u043e\u0439&quot;
+    {% endif %}
+    {%  if post.remont == 'Чистовой' %}
+            &quot;list-0&quot;: &quot;\u0427\u0438\u0441\u0442\u043e\u0432\u043e\u0439&quot;
+    {% endif %}
+    {%  if post.remont == 'Жилой' %}
+            &quot;list-0&quot;: &quot;\u0416\u0438\u043b\u043e\u0439&quot;
+    {% endif %}
+    {%  if post.remont == 'Новый' %}
+            &quot;list-0&quot;: &quot;\u0416\u0438\u043b\u043e\u0439&quot;
+    {% endif %}
+    {%  if post.remont == 'Дизайнерский' %}
+            &quot;list-0&quot;: &quot;\u0416\u0438\u043b\u043e\u0439&quot;
+    {% endif %}
+		}
+	},
+	&quot;ff380bc1-d8cc-4b88-90e1-b3d0003df2ea&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;&lt;p&gt;&lt;span style=\&quot;font-size:1.5em;font-weight: 700;\&quot;&gt;8 800 234-80-80&lt;\/span&gt;&lt;\/p&gt;&quot;
+		}
+	},
+	&quot;24265cf4-31ec-4229-a9e5-761477ff93dc&quot;: {
+
+	},
+	&quot;709cbd14-5289-4e1c-9530-797a4ff52d61&quot;: {
+		&quot;value&quot;: &quot;{{ post.author.email }}&quot;,
+		&quot;text&quot;: &quot;&quot;,
+		&quot;subject&quot;: &quot;&quot;,
+		&quot;body&quot;: &quot;&quot;
+	},
+	&quot;6596f918-f57a-4c3f-9674-f68a4c341444&quot;: {
+
+	},
+	&quot;291ec18c-6cf9-4cac-a86d-74398d223162&quot;: {
+
+	},
+	"d60d8477-2f9a-4d9e-be2b-c2c342d5cc5d": {
+		"0": {
+			"title": "",
+			"link": "",
+			"rel": "",
+			"target": "0",
+			"file": "images/uploads{% for i in post.idd_gal.all|slice:":1" %}{{ i.npict.url }}{% endfor %}"
+		}
+	},
+	&quot;5666d1d7-9643-4633-a4ec-b310deec4f97&quot;: {
+		&quot;option&quot;: {
+			&quot;0&quot;: &quot;otis&quot;
+		},
+		&quot;select&quot;: &quot;1&quot;
+	},
+	&quot;734bd4b7-7b58-4464-b925-61036a9672fd&quot;: {
+		&quot;option&quot;: {
+    {% if post.lift == 'да'  %}
+			&quot;0&quot;: &quot;ozelenenie&quot;
+    {% else %}
+			&quot;0&quot;: &quot;detskaya-ploshhadka&quot;
+
+    {% endif %}
+		}
+	},
+	&quot;dfc10cff-54a8-414a-96ba-b21e17d940ed&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;3&quot;
+		}
+	},
+	&quot;c2a7f8d2-b6f8-4541-967f-40f5a58a7b1f&quot;: {
+		&quot;variations&quot;: {
+			&quot;0&quot;: {
+				&quot;_value&quot;: {
+					&quot;value&quot;: &quot;{{  post.cena_agenstv }}&quot;
+				}
+			}
+		},
+		&quot;selected&quot;: {
+
+		},
+		&quot;values&quot;: {
+			&quot;0&quot;: {
+
+			}
+		},
+		&quot;default_variant&quot;: &quot;0&quot;
+	},
+	"0a48d660-244a-43ef-a9b8-3ebc4adcae48": {  {% for i in post.idd_gal.all %}
+ "{{ forloop.counter0 }}": {
+			"title": "",
+			"link": "",
+			"rel": "",
+			"target": "0",
+			"file": "images/uploads{{ i.npict.url }}"
+		}{% if not forloop.last %},{% endif %} {% endfor %}
+	},
+	&quot;7d9b0f42-ee7c-449d-8a75-f41e82cd9708&quot;: {
+		&quot;0&quot;: {
+			&quot;list-0&quot;: &quot;{{ post.etag }}&quot;
+		}
+	},
+	&quot;c63ba21f-a00f-4c90-9aec-ce9799d71a7e&quot;: {
+		&quot;0&quot;: {
+			&quot;list-0&quot;: &quot;{{ post.etagnost }}&quot;
+		}
+	},
+	&quot;207e132c-b66b-4964-afad-e4010646e8e0&quot;: {
+		&quot;0&quot;: {
+			&quot;list-0&quot;: &quot;\u0421\u0434\u0430\u043d&quot;
+		}
+	},
+
+	&quot;cb940ac6-6157-4a6a-8a30-5970ad65c56a&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;{{ post.ploshad }}&quot;
+		}
+	},
+
+	&quot;c1431e0c-fcef-4bdd-ac42-5c0a3990c7d0&quot;: {
+		&quot;0&quot;: {
+{% if post.raion == '(А) Блиново(+Вес)' or post.raion == '(А) Гол. дали' or post.raion == '(А) Кур.гор(+Чкал)' or post.raion == '(А) Мирный' or post.raion == '(А) Молдовка' or post.raion == '(А) Центр' or post.raion == '(А) Чай совхоз' %}
+			&quot;list-0&quot;: &quot;\u0410\u0434\u043b\u0435\u0440&quot;
+{% else %}
+            &quot;list-0&quot;: &quot;{{ post.raion }}&quot;
+{% endif %}
+		}
+	},
+	&quot;4113e890-395b-41e3-a4b3-880e4fd58171&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot; {{ post.prim }} &quot;
+		}
+	},
+	&quot;15c50fae-d4ed-49e8-89a8-d97aae6c260d&quot;: {
+		&quot;url&quot;: &quot;&quot;,
+		&quot;poster_image&quot;: &quot;&quot;,
+		&quot;width&quot;: &quot;850&quot;,
+		&quot;height&quot;: &quot;500&quot;,
+		&quot;autoplay&quot;: &quot;0&quot;
+	},
+	&quot;ce0cc0be-9776-4a73-bb43-9f751414831f&quot;: {
+		&quot;bookmarks_enabled&quot;: &quot;1&quot;
+	},
+	&quot;80060fd7-9633-4b06-8c33-d2c6e2b67d9d&quot;: {
+
+	},
+	&quot;c6c65d6e-af84-429d-91b3-830f7a5c3e4a&quot;: {
+
+	},
+	&quot;5fb38f27-ad1c-4840-986e-4841f0757db6&quot;: {
+
+	},
+	&quot;1385e364-73af-49df-91c0-5d71796f98e4&quot;: {
+		&quot;votes&quot;: 0,
+		&quot;value&quot;: 0
+	},
+	&quot;40303b08-d13d-42b7-aeb0-f2cea9d9c91c&quot;: {
+		&quot;value&quot;: &quot;1&quot;
+	},
+	&quot;dc592618-eb5d-46c4-9a7e-fa794e2dca16&quot;: {
+		&quot;value&quot;: &quot;1&quot;
+	}
+}</elements>
+<params>
+{ "metadata.title": "", "metadata.description": "", "metadata.keywords": "", "metadata.robots": "", "metadata.author": "", "template.add_js": "1", "config.enable_comments": "1", "config.primary_category": "1" }
+</params>
+    <la59t_zoo_category_item>
+    <CHID_ITEM>
+    {% if post.komnat == 'Студия' %}
+        <alias>odnokomnatnye</alias>
+    {% endif %}
+    {% if post.komnat == 'Однокомнатная' %}
+        <alias>odnokomnatnye</alias>
+    {% endif %}
+    {% if post.komnat == 'Двухкомнатная' %}
+        <alias>dvuhkomnatnye</alias>
+    {% endif %}
+    {% if post.komnat == 'Трехкомнатная' %}
+        <alias>trehkomnatnye</alias>
+    {% endif %}
+    {% if post.komnat == 'Многокомнатная' %}
+        <alias>elitnye-2</alias>
+    {% endif %}
+    </CHID_ITEM>
+    <CHID_ITEM>
+        <alias>kvartiry</alias>
+    </CHID_ITEM>
+    </la59t_zoo_category_item>
+    </ITEM>
+    {% endif %}
+    {% if post.type == 'house' %}
+    <ITEM>
+    <application_id>1</application_id>
+    <id>{{  671|add:post.pk }}</id>
+    <la59t_zoo_application_name>Жемчужина АН</la59t_zoo_application_name>
+    <created_by>{{ post.author.userprofile1.joomla_usr_id }}</created_by>
+    <type>houses</type>
+    <name>{{ post.nazv }}</name>
+    <alias>{{ post.pk }}-{{ post.allias }}</alias>
+    <created>{{ post.date_sozd }}</created>
+    <publish_up>{{ post.date_sozd }}</publish_up>
+    <publish_down>0000-00-00 00:00:00</publish_down>
+    <priority>0</priority>
+    <hits>3</hits>
+    <state>0</state>
+    <access>12</access>
+    <la59t_users_email>{{ post.author.email }}</la59t_users_email>
+    <created_by_alias/>
+    <searchable>1</searchable>
+   <elements>{
+	&quot;3edf31f6-d629-4cb3-aaa7-ed3a1ed621ea&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;&lt;p style=\&quot;font-size:1.5em;font-weight: 700;line-height: 2em;\&quot;&gt;&lt;i class=\&quot;fa fa-phone-square fa-2\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt; 8 800 234-80-80 (\u0437\u0432\u043e\u043d\u0438\u0442\u0435 \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e)&lt;\/p&gt;&quot;
+		}
+	},
+    &quot;87fd3f55-7cb8-4762-a0da-07eaad4a3223&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;&lt;script src=\&quot;\/\/yastatic.net\/es5-shims\/0.0.2\/es5-shims.min.js\&quot;&gt;&lt;\/script&gt; &lt;script src=\&quot;\/\/yastatic.net\/share2\/share.js\&quot;&gt;&lt;\/script&gt; &lt;div class=\&quot;ya-share2\&quot; data-services=\&quot;vkontakte,facebook,odnoklassniki,gplus,twitter,lj,viber,whatsapp\&quot;&gt;&lt;\/div&gt;&quot;
+		}
+	},
+	&quot;d62fe8d8-5249-4920-8ce1-70beceea9ebb&quot;: {
+		&quot;0&quot;: {
+			&quot;list-0&quot;: &quot;{{ post.h_vid_prava }}&quot;
+		}
+	},
+	&quot;d38281fe-f286-4024-8e92-17bf688b71e9&quot;: {
+		&quot;0&quot;: {
+			&quot;list-0&quot;: &quot;{{ post.h_vid_is_okon }}&quot;
+		}
+	},
+	&quot;75a9d842-20f6-4420-a477-bd06042f478b&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;8,6&quot;
+		}
+	},
+	&quot;e4861e13-30c4-45cf-8dd8-ece3ebaf6bc7&quot;: {
+		&quot;0&quot;: {
+			&quot;list-0&quot;: &quot;{{ post.h_isp_uch }}&quot;
+		}
+	},
+	&quot;10f8df37-ace3-4007-a96f-d429e4acdfac&quot;: {
+		&quot;0&quot;: {
+			&quot;value&quot;: &quot;&lt;h1&gt;8 800 234-80-80&quot;
+		}
+	},
+	&quot;16da9ea0-3803-43a1-92f0-d5869e27f158&quot;: {
+
+	},
+	&quot;c3c625a3-1d89-4bd8-b2a9-31c770f60532&quot;: {
+		&quot;value&quot;: &quot;{{ post.author.email }}&quot;,
+		&quot;text&quot;: &quot;&quot;,
+		&quot;subject&quot;: &quot;&quot;,
+		&quot;body&quot;: &quot;&quot;
+	},
+	&quot;4e0246f6-c8d8-4657-b1ce-4399096df6a4&quot;: {
+
+	},
+	&quot;0fa3066f-3e9b-4583-857e-82c3152e3439&quot;: {
+
+	},
+	&quot;d4bd309b-f883-44c9-9f6e-d43d21292d17&quot;: {
+		"0": {
+			"title": "",
+			"link": "",
+			"rel": "",
+			"target": "0",
+			"file": "images/uploads{% for i in post.idd_gal.all|slice:":1" %}{{ i.npict.url }}{% endfor %}"
+		}
+	},
+	"54b2e8cb-a6f3-4824-9766-e87d8f71b960": {
+		"option": {
+			"0": "est",
+			"1": "net",
+			"2": "otis",
+			"3": "parkovka",
+			"4": "ostanovka",
+			"5": "shkola",
+			"6": "shkola"
+		},
+   {%  if post.h_infr == 'Озеленение' %}"select": "0"{% endif %}
+   {%  if post.h_infr == 'Детская площадка' %}"select": "1"{% endif %}
+   {%  if post.h_infr == 'Зона отдыха' %}"select": "2"{% endif %}
+   {%  if post.h_infr == 'Парковка' %}"select": "3"{% endif %}
+   {%  if post.h_infr == 'Остановка' %}"select": "4"{% endif %}
+   {%  if post.h_infr == 'Школа' %}"select": "5"{% endif %}
+   {%  if post.h_infr == 'Больница' %}"select": "6"{% endif %}
+	},
+	"42054e23-23aa-4eeb-811c-6a0b9eafe421": {
+		"0": {
+			"value": "{{ post.h_komnat }}"
+		}
+	},
+   	"8f753986-f76c-4bb4-b76a-1d7dc44ccb7f": {
+		"variations": {
+			"0": {
+				"_value": {
+					"value": "{{ post.cena_agenstv }}"
+				}
+			}
+		},
+		"selected": {
+
+		},
+		"values": {
+			"0": {
+
+			}
+		},
+		"default_variant": "0"
+	},
+	"7124164f-9411-4a5f-b1b8-9823b3149612": {  {% for i in post.idd_gal.all %}
+ "{{ forloop.counter0 }}": {
+			"title": "",
+			"link": "",
+			"rel": "",
+			"target": "0",
+			"file": "images/uploads{{ i.npict.url }}"
+		}{% if not forloop.last %},{% endif %} {% endfor %}
+	},
+   	"9089ebc4-896b-42e2-86ab-b3ccd86b7e8e": {
+		"0": {
+			"list-0": "{{ post.h_etagnost }}"
+		}
+	},
+	"96abe01a-1ca9-4c7a-9d08-ff4d4528e79b": {
+		"0": {
+			"value": "{{ post.ploshad }}"
+		}
+	},
+	"6799ecfc-8d9d-4a3a-8773-85997219e4ca": {
+		"0": {
+			"value": "{{ post.h_rast_more }}"
+		}
+	},
+   	&quot;32e03b1c-e4b8-4316-88ff-75dbf0e598f3&quot;: {
+		&quot;0&quot;: {
+{% if post.raion == '(А) Блиново(+Вес)' or post.raion == '(А) Гол. дали' or post.raion == '(А) Кур.гор(+Чкал)' or post.raion == '(А) Мирный' or post.raion == '(А) Молдовка' or post.raion == '(А) Центр' or post.raion == '(А) Чай совхоз' %}
+			&quot;list-0&quot;: &quot;\u0410\u0434\u043b\u0435\u0440&quot;
+{% else %}
+            &quot;list-0&quot;: &quot;{{ post.raion }}&quot;
+{% endif %}
+		}
+	},
+    "d6046fda-67a5-415f-9e43-d3fe5f8bcbdb": {
+       "0": {
+           "value": "{{ post.prim }}"
+       }
+    },
+   	"96abe01a-1ca9-4c7a-9d08-ff4d4528e79b": {
+		"0": {
+			"value": "{{ post.ploshad }}"
+		}
+	},
+    "53daf52c-d05b-468c-af6a-594e5b0e7df7": {
+		"0": {
+            "votes": "1",
+			"value": "5.0000"
+		}
+	},
+	"b8a5f733-97b6-4c7e-8766-a5ac1a29e554": {
+		"value": "1"
+	}
+}</elements>
+    <params>
+    { "metadata.title": "", "metadata.description": "", "metadata.keywords": "", "metadata.robots": "", "metadata.author": "", "template.add_js": "1", "config.enable_comments": "1", "config.primary_category": "1" }
+    </params>
+    <la59t_zoo_category_item>
+    <CHID_ITEM>
+    <alias>komfort-klass</alias>
+    </CHID_ITEM>
+    <CHID_ITEM>
+    <alias>doma</alias>
+    </CHID_ITEM>
+    </la59t_zoo_category_item>
+    </ITEM>
+    {% endif %}
+    {%  endfor %}
+</ITEMS>
+</ROOT>

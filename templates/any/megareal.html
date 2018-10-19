@@ -1,0 +1,41 @@
+<realty-feed xmlns="http://webmaster.yandex.ru/schemas/feed/realty/2010-06">
+ <generation-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</generation-date>
+ {% for post in tppost %}
+ <offer internal-id="{{ post.pk }}">
+    <type>Продажа</type>
+    <category>квартира</category>
+    <property-type>Жилая</property-type>
+ <creation-date>{{ post.date_sozd|date:"Y-m-d" }}T01:11:30+03:00</creation-date>
+ <last-update-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</last-update-date>
+ <location>
+    <country>Россия</country>
+    <region>Краснодарский край</region>
+    <locality-name>Сочи</locality-name>
+    <address>{{ post.street }}</address>
+</location>
+<sales-agent>
+    <phone>{{ post.author.userprofile1.tel }}</phone>
+    <name>{{  post.author.first_name }} {{ post.author.last_name }}</name>
+    <email>{{ post.author.email }}</email>
+</sales-agent>
+<price>
+    <value>{{ post.prais }}</value>
+    <currency>RUR</currency>
+</price>
+    <deal-status>прямая продажа</deal-status>
+    <description>{{ post.note }}</description>
+{% for i in post.idd_gal.all %}
+    <image>
+      http://35.195.61.28{{ i.npict.url }}
+    </image>
+{% endfor %}
+<area>
+    <value>{{ post.plosgad }}</value>
+    <unit>кв.м</unit>
+</area>
+        <rooms>{{ post.komnat }}</rooms>
+    <floor>{{ post.etag }}</floor>
+    <floors-total>{{ post.etagnost }}</floors-total>
+ </offer>
+ {% endfor %}
+</realty-feed>

@@ -1,0 +1,221 @@
+<realty-feed xmlns="http://webmaster.yandex.ru/schemas/feed/realty/2010-06">
+ <generation-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</generation-date>
+{% if tdom %}
+    {% for doma in tdom %}
+    <offer internal-id="{{ doma.pk }}">
+    <type>Продажа</type>
+    <property-type>Жилая</property-type>
+    <category>дом</category>
+ <creation-date>{{ doma.datep|date:"Y-m-d" }}T01:11:30+03:00</creation-date>
+ <last-update-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</last-update-date>
+ <location>
+    <country>Россия</country>
+    <region>Краснодарский край</region>
+    <locality-name>Сочи</locality-name>
+        <sub-locality-name>
+            {% if doma.raion == 'Ахун' %}Большой Ахун{% endif %}
+            {% if doma.raion == 'Виноградная' %}Центр{% endif %}
+            {% if doma.raion == 'Дагомыс' %}Лазаревский район, пос. Дагомыс{% endif %}
+            {% if doma.raion == 'Донская' %}Донская{% endif %}
+            {% if doma.raion == 'Донская(Пасечная)' %}Донская{% endif %}
+            {% if doma.raion == 'Донская(Тимерязева)' %}Донская{% endif %}
+            {% if doma.raion == 'Красная поляна' %}Красная Поляна пос.{% endif %}
+            {% if doma.raion == 'Кудепста' %}Кудепста пос.{% endif %}
+            {% if doma.raion == 'Мамайский перевал' %}Мамайка{% endif %}
+            {% if doma.raion == 'Мацеста' %}Верхняя Мацеста{% endif %}
+            {% if doma.raion == 'Н.Сочи' %}Новый Сочи{% endif %}
+            {% if doma.raion == 'Объезная' %}Малая Объездная{% endif %}
+            {% if doma.raion == 'Пластунская' %}Ареда{% endif %}
+            {% if doma.raion == 'Раздольное' %}Раздольное село{% endif %}
+            {% if doma.raion == 'Транспортная' %}Хостинский район{% endif %}
+            {% if doma.raion == '(А) Блиново' %}Блиново{% endif %}
+            {% if doma.raion == '(А) Гол. дали' %}Голубые Дали{% endif %}
+            {% if doma.raion == '(А) Кур.гор(+Чкал)' %}Курортный городок{% endif %}
+            {% if doma.raion == '(А) Мирный' %}Мирный{% endif %}
+            {% if doma.raion == '(А) Молдовка' %}Молдовка село{% endif %}
+            {% if doma.raion == '(А) Центр' %}Центр{% endif %}
+            {% if doma.raion == '(А) Чай совхоз' %}Адлер-центр{% endif %}
+            {% if doma.raion == '(А) Веселое' %}Веселое село{% endif %}
+            {% if doma.raion == '(А) Верхнеимеретинская Бухта' %}Верхнеимеретинская Бухта{% endif %}
+            {% if doma.raion != 'Ахун' and doma.raion != 'Виноградная' and doma.raion != 'Дагомыс' and doma.raion != 'Донская' and doma.raion != 'Донская(Пасечная)'  and doma.raion != 'Донская(Тимерязева)' and doma.raion != 'Красная поляна' and doma.raion != 'Кудепста' and doma.raion != 'Мамайский перевал' and doma.raion != 'Мацеста' and doma.raion != 'Н.Сочи'  and doma.raion != 'Объезная'  and doma.raion != 'Раздольное'  and doma.raion != '(А) Блиново(+Вес)'  and doma.raion != '(А) Гол. дали' and doma.raion != '(А) Кур.гор(+Чкал)' and doma.raion != '(А) Мирный'  and doma.raion != '(А) Молдовка'  and doma.raion != '(А) Центр' and doma.raion != 'Транспортная' and doma.raion != '(А) Чай совхоз' and doma.raion != 'Пластунская' and doma.raion != '(А) Веселое' and doma.raion != '(А) Верхнеимеретинская Бухта' %}
+             {{ doma.raion }}
+            {% endif %}
+        </sub-locality-name>
+    <address>{{ doma.adress }}</address>
+</location>
+<sales-agent>
+    <phone>{{ doma.author.userprofile1.tel }}</phone>
+    <name>{{  doma.author.first_name }} {{ doma.author.last_name }}</name>
+    <email>{{ doma.author.email }}</email>
+</sales-agent>
+<price>
+  <value>{{ doma.cena_agenstv }}</value>
+  <currency>RUR</currency>
+</price>
+<description>{{ doma.prim }}  {{ tdm }}</description>
+<area>
+  <value>{{ doma.ploshad }}</value>
+  <unit>кв. м</unit>
+</area>
+<lot-area>
+  <value>{{ doma.h_ploshad_uch }}</value>
+  <unit>кв. м</unit>
+</lot-area>
+{%  if doma.h_tip_doma_choises == 'Монолитный' %}
+    <building-type>монолит</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Блочный' %}
+    <building-type>блочный</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Каркасно-монолитный' %}
+    <building-type>кирпично-монолитный</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Кирпичный' %}
+    <building-type>кирпичный</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Деревянный' %}
+    <building-type>деревянный</building-type>
+{% endif %}
+{%  if doma.h_tip_doma_choises == 'Панельный' %}
+    <building-type>панельный</building-type>
+{% endif %}
+{%  if doma.h_vid_prava  == 'Поселений (ИЖС)'%}
+<lot-type>ИЖС</lot-type>
+{% else %}
+<lot-type>садоводство</lot-type>
+{% endif %}
+<floors-total>{{ doma.h_etagnost }}</floors-total>
+<rooms>{{ doma.h_komnat }}</rooms>
+
+<lot-area>
+    <value>{{ doma.h_ploshad_uch }}</value>
+    <unit>cотка</unit>
+</lot-area>
+
+{% for i in doma.idd_gal.all %}
+   {% if i.npict.url %}
+    <image>
+      http://77.222.63.187{{ i.npict.url }}
+    </image>
+   {% endif %}
+{% endfor %}
+
+        </offer>
+
+    {% endfor %}
+{% endif %}
+
+ {% for post in tppost %}
+ <offer internal-id="{{ post.pk }}">
+    <type>Продажа</type>
+    <category>квартира</category>
+    <property-type>Жилая</property-type>
+ <creation-date>{{ post.datep|date:"Y-m-d" }}T01:11:30+03:00</creation-date>
+ <last-update-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</last-update-date>
+ <location>
+    <country>Россия</country>
+    <region>Краснодарский край</region>
+    <locality-name>Сочи</locality-name>
+        <sub-locality-name>
+            {% if post.raion == 'Ахун' %}Большой Ахун{% endif %}
+            {% if post.raion == 'Виноградная' %}Центр{% endif %}
+            {% if post.raion == 'Дагомыс' %}Лазаревский район, пос. Дагомыс{% endif %}
+            {% if post.raion == 'Донская' %}Донская{% endif %}
+            {% if post.raion == 'Донская(Пасечная)' %}Донская{% endif %}
+            {% if post.raion == 'Донская(Тимерязева)' %}Донская{% endif %}
+            {% if post.raion == 'Красная поляна' %}Красная Поляна пос.{% endif %}
+            {% if post.raion == 'Кудепста' %}Кудепста пос.{% endif %}
+            {% if post.raion == 'Мамайский перевал' %}Мамайка{% endif %}
+            {% if post.raion == 'Мацеста' %}Верхняя Мацеста{% endif %}
+            {% if post.raion == 'Н.Сочи' %}Новый Сочи{% endif %}
+            {% if post.raion == 'Объезная' %}Малая Объездная{% endif %}
+            {% if post.raion == 'Пластунская' %}Ареда{% endif %}
+            {% if post.raion == 'Раздольное' %}Раздольное село{% endif %}
+            {% if post.raion == 'Транспортная' %}Хостинский район{% endif %}
+            {% if post.raion == '(А) Блиново' %}Блиново{% endif %}
+            {% if post.raion == '(А) Гол. дали' %}Голубые Дали{% endif %}
+            {% if post.raion == '(А) Кур.гор(+Чкал)' %}Курортный городок{% endif %}
+            {% if post.raion == '(А) Мирный' %}Мирный{% endif %}
+            {% if post.raion == '(А) Молдовка' %}Молдовка село{% endif %}
+            {% if post.raion == '(А) Центр' %}Центр{% endif %}
+            {% if post.raion == '(А) Чай совхоз' %}Адлер-центр{% endif %}
+            {% if post.raion == '(А) Веселое' %}Веселое село{% endif %}
+            {% if post.raion == '(А) Верхнеимеретинская Бухта' %}Верхнеимеретинская Бухта{% endif %}
+            {% if post.raion != 'Ахун' and post.raion != 'Виноградная' and post.raion != 'Дагомыс' and post.raion != 'Донская' and post.raion != 'Донская(Пасечная)'  and post.raion != 'Донская(Тимерязева)' and post.raion != 'Красная поляна' and post.raion != 'Кудепста' and post.raion != 'Мамайский перевал' and post.raion != 'Мацеста' and post.raion != 'Н.Сочи'  and post.raion != 'Объезная'  and post.raion != 'Раздольное'  and post.raion != '(А) Блиново(+Вес)'  and post.raion != '(А) Гол. дали' and post.raion != '(А) Кур.гор(+Чкал)' and post.raion != '(А) Мирный'  and post.raion != '(А) Молдовка'  and post.raion != '(А) Центр' and post.raion != 'Транспортная' and post.raion != '(А) Чай совхоз' and post.raion != 'Пластунская' and post.raion != '(А) Веселое' and post.raion != '(А) Верхнеимеретинская Бухта' %}
+             {{ post.raion }}
+            {% endif %}
+        </sub-locality-name>
+    <address>{{ post.adress }}, {{ post.dom_numb }}</address>
+</location>
+<sales-agent>
+    <phone>{{ post.author.userprofile1.tel }}</phone>
+    <name>{{  post.author.first_name }} {{ post.author.last_name }}</name>
+    <email>{{  post.author.email }}</email>
+</sales-agent>
+<price>
+    <value>{{ post.cena_agenstv }}</value>
+    <currency>RUR</currency>
+</price>
+    <deal-status>прямая продажа</deal-status>
+    <description>{{ post.prim }} {{ tdm }}
+</description>
+{% for i in post.idd_gal.all %}
+    <image>
+      http://77.222.63.187{{ i.npict.url }}
+    </image>
+{% endfor %}
+<area>
+    <value>{{ post.ploshad }}</value>
+    <unit>кв.м</unit>
+</area>
+<living-space>
+   <value>{{ post.ploshad }}</value>
+   <unit>кв.м</unit>
+</living-space>
+<gas-supply>
+    {% if post.gaz == 'Есть' %}
+        да
+    {% else %}
+        нет
+    {% endif %}
+</gas-supply>
+<bathroom-unit>
+    {%  if post.san_usel == 'Совмещенный' %}
+        совмещенный
+    {% endif %}
+    {%  if post.san_usel == 'Раздельный' %}
+        раздельный
+    {% endif %}
+</bathroom-unit>
+<renovation>
+    {% if post.remont == 'Черновой' %}черновая отделка{% endif %}
+    {% if post.remont == 'Чистовой' %}с отделкой{% endif %}
+    {% if post.remont == 'Дизайнерский' %}дизайнерский{% endif %}
+    {% if post.remont == 'Жилой' %}евро{% endif %}
+    {% if post.remont == 'Новый' %}хороший{% endif %}
+</renovation>
+<security>{{ post.security }}</security>
+<rubbish-chute>{{ post.rubbish_chute }}</rubbish-chute>
+<lift>{{ post.lift }}</lift>
+<balcony>{{ post.balcony }}</balcony>
+    {% if post.komnat == 'Студия' %}
+        <rooms>1</rooms>
+    {% endif %}
+    {% if post.komnat == 'Однокомнатная' %}
+        <rooms>1</rooms>
+    {% endif %}
+    {% if post.komnat == 'Двухкомнатная' %}
+        <rooms>2</rooms>
+    {% endif %}
+    {% if post.komnat == 'Трехкомнатная' %}
+        <rooms>3</rooms>
+    {% endif %}
+    {% if post.komnat == 'Многокомнатная' %}
+        <rooms>4</rooms>
+    {% endif %}
+    <floor>{{ post.etag }}</floor>{%  if post.nov_nazv %}
+    <building-name>{{ post.nov_nazv }}</building-name>{%  endif %}
+    <floors-total>{{ post.etagnost }}</floors-total>
+ </offer>
+ {% endfor %}
+</realty-feed>

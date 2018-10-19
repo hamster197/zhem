@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="ru-ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link href="/static/material/imgs/favicon.png" rel="shortcut icon">
+        <title>Войти </title>
+        
+        
+
+
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+<link href="/static/material/fonts/material-design-icons/material-icons.css"  rel="stylesheet">
+<link href="/static/material/css/materialize.admin.min.css" rel="stylesheet">
+<link href="/static/admin/css/icons.css" rel="stylesheet" type="text/css" />
+ <script src="/static/material/js/jquery.js"></script>
+<script src="/static/material/js/materialize.admin.min.js"></script>
+
+
+
+        
+        <meta name="robots" content="NONE,NOARCHIVE">
+        
+        <script src="/static/material/js/jquery.js"></script>
+        <script>
+            // Use same django for material and django admin
+            var django = django || {};
+            django.jQuery = jQuery.noConflict(true);
+            window.jQuery = window.$ = django.jQuery
+        </script>
+        <script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
+        <script type="text/javascript">window.__admin_utc_offset__ = "10800";</script>
+        
+        
+        
+        
+        
+    </head>
+
+
+<div class="registration" style="background:url(/static/material/imgs/background.svg)">
+    <div class="sidebar z-depth-3">
+        <h4>Войти</h4>
+    {% load material_form %}
+ <form method="post" class="post-form">
+  {% csrf_token %}
+
+  {% form form=tpform %}{% endform %}
+    <button type="submit" name="_submit" class="btn">Войти</button>
+</form>
+    </div>
+    
+    
+    <div class="logo">
+        <i class="logo__icon material-icons">account_circle</i>
+    </div>
+    
+</div>
+
+
+
+        
+
+
+
+
+
+        
+
+        
+        
+        
+    
+
+<div class="hiddendiv common"></div></body></html>

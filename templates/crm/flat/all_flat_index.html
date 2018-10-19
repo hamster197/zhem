@@ -1,0 +1,110 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+    <div class="row">
+      <div class="col s9">
+          <div class="card">
+                <div class="card-content">
+
+ {% load material_form %}
+        <table class="bordered">
+        <thead>
+          <tr>
+              <th>Дата создания</th>
+              <th>ID</th>
+              <th>Цена</th>
+              <th>Район</th>
+              <th>Улица</th>
+              <th></th>
+              {% ifequal request.user.userprofile1.ya "Да" %}<th>Vestum</th>{% endifequal%}
+          </tr>
+        </thead>
+{% if tpflatlist %}
+{% load el_pagination_tags %}
+{% paginate tpflatlist %}
+    {% for flatlist in tpflatlist %}
+        <tbody>
+          <tr>
+          {%  if request.user.groups.get.name == 'Офис-менеджер' %}
+            <td> <a href="{% url 'crm:new_kadastr' idd=flatlist.pk %}">{{ flatlist.date_sozd }}</a> </td>
+          {% else %}
+              <td> {{ flatlist.date_sozd }} </td>
+          {% endif %}
+            <td>{{ flatlist.pk }}</td>
+            <td> {{ flatlist.cena_agenstv }} </td>
+            <td> {{ flatlist.raion }}</td>
+          <td>{{ flatlist.adress }}</td>
+
+          <td>
+
+           {%  ifequal request.user flatlist.author %}
+              {%  ifequal flatlist.text_err True %} Текст; {% endifequal %}
+              {%  ifequal flatlist.kv_err True %} №кв/кадстр; {% endifequal %}
+              {%  ifequal flatlist.dom_err True %} № Дома; {% endifequal %}
+              {%  ifequal flatlist.pict_err True %} Карт; {% endifequal %}
+          {% endifequal %}
+          </td>
+          <td>
+             {% ifequal request.user flatlist.author%}
+                 {% if flatlist.vestum_pub == 'Да' %}<i class="material-icons" >V+</i>{% endif %}
+                 {% if flatlist.kadastr != '' %}<i class="material-icons" >K+</i>{% endif %}
+             {% endifequal %}
+          </td>
+
+        {% ifequal request.user.userprofile1.ya "Да" %}
+          {% ifequal request.user flatlist.author%}
+            <td> {{ flatlist.building_name }}</td>
+          {% endifequal %}
+        {% endifequal%}
+            <td><a href="{% url 'crm:flat_detail' idd=flatlist.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Подробнее</button></a></td>
+
+          </tr>
+
+        </tbody>
+
+
+    {% endfor %}
+     </table>
+    {% show_pages %}
+
+
+{% else %}
+  </tbody></br></br></br>
+   <strong>У Вас пока нет обьектов</strong>
+{% endif %}
+                        </tbody>
+      </table>
+
+
+                </div>
+          </div>
+      </div>
+      <div class="col s3">
+          <div class="card">
+                <div class="card-content">
+                    <form method="post" class="post-form">
+
+                        {% csrf_token %}
+                        {% form form=tpaFlatSearch %} {% endform %}
+                        <button type="submit" name="_submit" class="btn">Найти</button>
+                    </form>
+                </div>
+          </div>
+      </div>
+
+    </div>
+
+<!--
+    <div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">access_time</i>
+    </a>
+
+    <ul>
+      <li><a href="{% url 'crm:my_flatunpub' %}" class="btn-floating yellow darken-1"title = "Личные"><i class="material-icons">account_box</i></a></li>
+      <li><a <a href="{% url 'crm:my_flatpub' %}"  class="btn-floating green" title = "В агенстве"><i class="material-icons">announcement</i></a></li>
+-->
+    </ul>
+  </div>
+
+
+{% endblock %}

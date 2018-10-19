@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html lang="ru-ru">
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+        <link href="/static/material/imgs/favicon.png" rel="shortcut icon">
+        <title>CRM | Агенство недвижимости</title>
+
+        {% load staticfiles %}
+
+        <!-- Add jQuery library -->
+        <script
+            type="text/javascript"
+            src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+            integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+            crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        {{ form.media }}
+        <!-- Add fancyBox -->
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="{% static 'crm/css/jquery.fancybox.css' %}"
+            type="text/css"
+            media="screen"/>
+        <!-- Compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'crm/css/style.css' %}">
+
+        <link
+            href="/static/material/fonts/material-design-icons/material-icons.css"
+            rel="stylesheet">
+
+        <link href="/static/material/css/materialize.admin.min.css" rel="stylesheet">
+
+        <link href="/static/admin/css/icons.css" rel="stylesheet" type="text/css"/>
+
+        <meta name="robots" content="NONE,NOARCHIVE"/>
+
+        <script src="/static/material/js/jquery.js"></script>
+        <script>
+            // Use same django for material and django admin
+            var django = django || {};
+            django.jQuery = jQuery.noConflict(true);
+            window.jQuery = window.$ = django.jQuery
+        </script>
+        <script type="text/javascript">
+            window.__admin_media_prefix__ = "/static/admin/";
+        </script>
+        <script type="text/javascript">
+            window.__admin_utc_offset__ = "10800";
+        </script>
+        <script type="text/javascript" src="/admin/jsi18n/"></script>
+        <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+        <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+        <script
+            type="text/javascript"
+            src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+        <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+        <script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+        <script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+        <script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+    </head>
+
+    <body class="">
+
+        <header>
+
+            <ul id="slide-out" class="side-nav fixed">
+
+                <li>
+                    <div class="userView">
+                        <img class="background" src="/static/material/imgs/sidenav.svg">
+
+                        <a href="#"><img class="circle" src="/static/material/imgs/user.png"></a>
+
+                        <a href="#">
+                            <span class="white-text name">
+                                {% if user.is_authenticated %}
+                                    {{ user.last_name }}
+                                {% endif %}</span></a>
+                        <a href="#">
+                            <span class="white-text email">
+                                {% if user.is_authenticated %}{{ user.first_name }}
+                                    (Vestum:
+                                    {{ tvestum_count }}
+                                    )
+                                {% endif %}</span></a>
+                    </div>
+                </li>
+
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a class="collapsible-header">
+                            <i class="material-icons">create_new_folder</i>Подать обьявление</a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li class="">
+
+                                    <ul class="collapsible collapsible-accordion">
+                                        <li>
+                                            <a class="collapsible-header">
+                                                <i class="material-icons">business</i>Квартиру</a>
+                                            <div class="collapsible-body">
+                                                <ul>
+                                                    <li class="">
+                                                        <a href="{% url 'crm:newvigr' %}">
+                                                            --- Циан вторичка</a>
+                                                        <a href="{% url 'crm:newNovvigr' %}">
+                                                            --- Циан новостройка</a>
+                                                        <a class="nav-header">Только реальные обьекты в:</a>
+                                                        <a href="{% url 'crm:new_flat' %}">
+                                                            --- ЦРМ, yandex, DomClik
+                                                        </a>
+
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+
+                                        </ul>
+                                        <ul class="collapsible collapsible-accordion">
+                                            <li>
+                                                <a class="collapsible-header">
+                                                    <i class="material-icons">account_balance</i>Дом</a>
+                                                <div class="collapsible-body">
+                                                    <ul>
+
+                                                        <li class="">
+                                                            <a href="{% url 'crm:new_dom_post' %}">
+                                                                --- ЦРМ</a>
+                                                            <a href="#">
+                                                                --- ЦИАН (В разработке)</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+
+                                            </ul>
+                                            <ul class="collapsible collapsible-accordion">
+                                                <li>
+                                                    <a class="collapsible-header">
+                                                        <i class="material-icons">apps</i>Участок</a>
+                                                    <div class="collapsible-body">
+                                                        <ul>
+
+                                                            <li class="">
+                                                                <a href="{% url 'crm:new_uch_post' %}">
+                                                                    --- ЦРМ</a>
+                                                                <a href="#">
+                                                                    --- ЦИАН (В разработке)</a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </li>
+
+                                                </ul>
+
+                                        </ul>
+                                </ul>
+
+                                <ul class="collapsible collapsible-accordion">
+                                    <li>
+                                        <a class="collapsible-header">
+                                            <i class="material-icons">arrow_downward</i>Мои выгруженные объекты</a>
+                                        <div class="collapsible-body">
+                                            <ul>
+
+                                                <li class="">
+                                                    <a href="{% url 'crm:my_flatunpub'%}">
+                                                        <i class="material-icons">business</i>Квартиры</a>
+                                                    <a href="{%  url 'crm:upb_dom_view' %}">
+                                                        <i class="material-icons">account_balance</i>Дома</a>
+                                                    <a href="{%  url 'crm:unpub_uc_index' %}">
+                                                        <i class="material-icons">apps</i>Участки</a>
+                                                    <a href="{% url 'crm:all_vs_pub' %}">
+                                                        <i class="material-icons">V+</i>в Вестум</a>
+                                                    <a href="{% url 'crm:cianindex' %}">
+                                                        <i class="material-icons">camera</i>в ЦИАН</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+
+                                    <ul class="collapsible collapsible-accordion">
+                                        <li>
+                                            <a class="collapsible-header">
+                                                <i class="material-icons">attach_file</i>Все объекты в ЦРМ</a>
+                                            <div class="collapsible-body">
+                                                <ul>
+
+                                                    <li class="">
+                                                        <a href="{%  url 'crm:my_flatpub' %}">
+                                                            <i class="material-icons">business</i>Квартиры</a>
+                                                        <a href="{%  url 'crm:excl_flatpub' %}">
+                                                            <i class="material-icons">developer_mode</i>Квартиры(Эксклюзив)</a>
+                                                        <a href="{%  url 'crm:pub_dom_view' %}">
+                                                            <i class="material-icons">account_balance</i>Дома</a>
+                                                        <a href="{%  url 'crm:pub_uc_index' %}">
+                                                            <i class="material-icons">apps</i>Участки</a>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+
+                                        </ul>
+                                    <li >
+                                        <a class="collapsible-header" href="{% url 'zvn:index'%}">
+                                            <i class="material-icons">phone_in_talk</i>Ежедневник</a>
+                                    </li>
+
+                                    {% if request.user.groups.get.name == 'seo' or request.user.groups.get.name == 'Администрация' %}
+                                        <ul class="collapsible collapsible-accordion">
+                                            <li>
+                                                <a class="collapsible-header">
+                                                    <i class="material-icons">http</i>SEO</a>
+                                                <div class="collapsible-body">
+                                                    <ul>
+
+                                                        <li class="">
+                                                            <a href="{% url 'crm:seo_flat_pub'%}">
+                                                                <i class="material-icons">business</i>Квартиры на сайте</a>
+                                                            <a href="{% url 'crm:seo_flat_unpub'%}">
+                                                                <i class="material-icons">business</i>Квартиры не на сайте</a>
+                                                            <a href="{% url 'crm:dm_index'%}">
+                                                                <i class="material-icons">business</i>Текст для Домклик</a>
+
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+
+                                            </ul>
+                                        {% endif %}
+
+                                        <ul class="collapsible collapsible-accordion">
+                                            <li>
+                                                <a class="collapsible-header">
+                                                    <i class="material-icons">contacts</i>Клиенты для сработки</a>
+                                                <div class="collapsible-body">
+                                                    <ul>
+
+                                                        <li class="">
+                                                            <a href="{% url 'crm:NewZayav' %}">Внести клиента</a>
+                                                            {% if request.user.groups.get.name == 'Офис-менеджер' %}
+                                                                <a href="{% url 'crm:NewZayavNov' %}">Внести новостройку</a>
+                                                                <a href="{% url 'crm:NewZayavLich' %}">Заявка на риелтора</a>
+                                                            {% endif %}
+                                                            <a href="{% url 'crm:indexZayavka' %}">Выбрать клиента</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+
+                                            </ul>
+                                            <ul>
+
+                                                <li class="no-padding">
+                                                    <a class="collapsible-header" href="{% url 'crm:otch_new_all'%}">
+                                                        <i class="material-icons">euro_symbol</i>Cоздать отчет по сделке</a>
+                                                </li>
+                                                {% comment %} {% if request.user.groups.get.name == 'Администрация' or request.user.groups.get.name == 'Администрация Адлер' %}{% endcomment %}
+                                                    <li class="no-padding">
+                                                        <a class="collapsible-header" href="{% url 'crm:otch_all_reelt'%}">
+                                                            <i class="material-icons">credit_card</i>Мои сделки</a>
+                                                    </li>
+                                                {% comment %} {% endif %}{% endcomment %}
+                                                <li class="no-padding">
+                                                    <a class="collapsible-header" href="{% url 'crm:sdelka_reit'%}">
+                                                        <i class="material-icons">assessment</i>Рейтинг</a>
+                                                </li>
+
+                                                <ul class="collapsible collapsible-accordion">
+                                                    <li>
+                                                        <a class="collapsible-header">
+                                                            <i class="material-icons">cached</i>Статистика</a>
+                                                        <div class="collapsible-body">
+                                                            <ul>
+
+                                                                <li class="">
+                                                                    <a href="{% url 'crm:crm_obj_index' %}">Тек.неделя</a>
+                                                                    <a href="{% url 'crm:crm_obj_past_index' %}">Пр.неделя</a>
+                                                                </li>
+
+                                                            </ul>
+                                                        </li>
+
+                                                    </ul>
+                                                    <ul>
+
+                                                        <li class="no-padding">
+                                                            <a class="collapsible-header" href="{% url 'crm:DmCahestvoOtch'%}">
+                                                                <i class="material-icons">add_alert</i>Качество обьявлений</a>
+                                                        </li>
+                                                        {% if request.user.username == 'homka' %}
+                                                            <li class="no-padding">
+                                                                <a class="collapsible-header" href="{% url 'crm:myadm'%}">
+                                                                    <i class="material-icons">add_to_queue</i>Администрирование</a>
+                                                            </li>
+                                                        {% endif %}
+                                                        {% if request.user.groups.get.name == 'Администрация' %}
+                                                            <li class="no-padding">
+                                                                <a class="collapsible-header" href="{% url 'crm:DashBoard'%}">
+                                                                    <i class="material-icons">burst_mode</i>DashBoard</a>
+                                                            </li>
+                                                        {% endif %}
+                                                        <ul></header>
+                                                        <main>
+
+                                                            <nav class="topbar">
+                                                                <div class="nav-wrapper">
+                                                                    <a href="#" data-activates="slide-out" class="button-collapse">
+                                                                        <i class="material-icons">menu</i>
+                                                                    </a>
+                                                                    <div class="brand-logo">
+
+                                                                        <a href="/" class="page-title">{{ tn1 }}</a>
+
+                                                                    </div>
+                                                                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                                                                        <li>
+                                                                            <a href="{% url 'crm:indexZayavka' %}">
+                                                                                <span class="new badge" data-badge-caption="Поступивших заявок">{{ Ntn3 }}</span></a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="{% url 'crm:my_flatunpub' %}">{{ Nt_my_ya_obj }}
+                                                                                обьектов в CRM; Внес.за нед.
+                                                                                {{ Ntcrm_obj_week_count }}</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="{% url 'ch_login' %}">Изменить пароль</a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="{% url "crm:logout" %}" data-turbolinks="false">
+                                                                                <i class="material-icons right">exit_to_app</i>Выйти</a>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            </nav>
+
+                                                            <nav class="breadcrumbs">
+                                                                <div class="nav-wrapper">
+
+                                                                    <a href="#">
+                                                                        <strong>{{ tn2 }}</strong>
+                                                                    </a>
+
+                                                                </div>
+                                                            </nav>
+
+                                                            <div class="content">
+
+                                                                {% if user.is_authenticated %}
+                                                                    {% block content %}{% endblock %}
+                                                                {% else %}
+                                                                    {% block content1 %}{% endblock %}
+                                                                {% endif %}
+
+                                                            </div>
+
+                                                        </main>
+                                                        <footer></footer>
+
+                                                        <script src="/static/material/js/materialize.admin.min.js"></script>
+
+                                                    </body>
+                                                </html>

@@ -1,0 +1,269 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+
+{% load material_form %}
+    <div class="row">
+         <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#test1">Открытые <span class="new badge blue" data-badge-caption="">{{ tn3 }}</span></a></li>
+        <li class="tab col s3"><a href="#test2">В работе<span class="new badge blue" data-badge-caption="">{{ tn4 }}</span></a></li>
+        <li class="tab col s3" ><a href="#test3">Срыв<span class="new badge blue" data-badge-caption="">{{ tn5 }}</span></a></li>
+        <li class="tab col s3"><a href="#test4">Сделка<span class="new badge blue" data-badge-caption="">{{ tn6 }}</span></a></li>
+      </ul>
+    </div>
+
+
+    <div id="test1" class="col s12">
+        <table class="striped">
+        <thead>
+          <tr>
+              <th><strong>Дата создания:</th>
+              <th><strong>Описание:</th>
+              <th><strong>Тип заявки:</th>
+              <th></th>
+          </tr>
+        </thead>
+        {% if topen_zayavki %}
+            {% for open_zayavki in topen_zayavki %}
+        <tbody>
+          <tr>
+           {% if open_zayavki.kanal == "Домклик" %}
+            <td>{{  open_zayavki.date_sozd  }} </td>
+               <td><blockquote><strong>Ипотека (Домклик Сбербанк)</strong><br>{{ open_zayavki.prim }}</br></td>
+            <td>{{ open_zayavki.kred_manager }}</td>
+           {%  if tbutn_pr == 'Yes' or tbutn_pr == 'no' %}
+            <td><a href="{% url 'crm:VzyatZayav' idd=open_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Взять заявку</button></a></td</td>
+          {% else %}
+           <td>Нет доступа!</br>Внесенно меньше 5 заявок за 10 дней!</td>
+          {% endif %}
+        {% endif %}
+        {% if open_zayavki.kanal == "Заявка с сайта новостройка" %}
+            <td>{{  open_zayavki.date_sozd  }} </td>
+            <td><blockquote><strong>Заявка с сайта Новостройка</strong></br>{{ open_zayavki.nazv_novostr }}</td>
+            <td> {{ open_zayavki.prim }}</td>
+          {%  if tbutn_pr == 'Yes' or tbutn_pr == 'no'  %}
+            <td><a href="{% url 'crm:VzyatZayav' idd=open_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Взять заявку</button></a></td</td>
+          {% else %}
+           <td>Нет доступа!</br>Внесенно меньше 5 заявок за 10 дней!</td>
+            {% endif %}
+        {% endif %}
+        {% if open_zayavki.kanal == "Заявка с сайта" %}
+            <td>{{  open_zayavki.date_sozd  }} </td>
+            <td><blockquote><strong>Заявка с сайта</strong><br>{{ open_zayavki.prim }}</br></blockquote></td>
+            <td>{{ open_zayavki.raion }}; {{ open_zayavki.komnat }}; {{ open_zayavki.budget }} руб.</td>
+  {%  if tbutn_pr == 'Yes' or tbutn_pr == 'no'  %}
+            <td><a href="{% url 'crm:VzyatZayav' idd=open_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Взять заявку</button></a></td</td>
+          {% else %}
+           <td>Нет доступа!</br>Внесенно меньше 5 заявок за 10 дней!</td>
+            {% endif %}
+        {% endif %}
+
+        {% if open_zayavki.kanal == "Заявка с Вестум" %}
+            <td>{{  open_zayavki.date_sozd  }} </td>
+            <td><blockquote><strong>Заявка с сайта</strong><br>{{ open_zayavki.prim }}</br></blockquote></td>
+            <td>{{ open_zayavki.raion }}; {{ open_zayavki.komnat }}; {{ open_zayavki.budget }} руб.</td>
+  {%  if tbutn_pr == 'Yes' or tbutn_pr == 'no'  %}
+            <td><a href="{% url 'crm:VzyatZayav' idd=open_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Взять заявку</button></a></td</td>
+          {% else %}
+           <td>Нет доступа!</br>Внесенно меньше 5 заявок за 10 дней!</td>
+            {% endif %}
+        {% endif %}
+
+        {% if open_zayavki.kanal == "Тел. звонок" %}
+            <td>{{  open_zayavki.date_sozd  }} </td>
+            <td><blockquote><strong>Тел. звонок</strong><br>{{ open_zayavki.prim }}</br></blockquote></td>
+            <td>{{ open_zayavki.raion }}; {{ open_zayavki.komnat }}; {{ open_zayavki.budget }} руб.</td>
+
+ {%  if tbutn_pr == 'Yes' or tbutn_pr == 'no'  %}
+            <td><a href="{% url 'crm:VzyatZayav' idd=open_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Взять заявку</button></a></td</td>
+        {% else %}
+           <td>Нет доступа!</br>Внесенно меньше 5 заявок за 10 дней!</td>
+          {% endif %}
+        {% endif %}
+          </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+      </table>
+
+
+
+    </div>
+
+
+
+    <div id="test2" class="col s12">
+       <table class="striped">
+        <thead>
+          <tr>
+              {% if tgroup == 'Администрация'  or tgroup == 'Юристы'   or tgroup == 'Офис-менеджер'%}
+              <th><strong>Дата создания:</th>
+              <th><strong>Взята в работу:</th>
+              <th><strong>Риелтор:</th>
+              <th><strong>Описание:</th>
+              {% else %}
+             <th><strong>Взята в работу:</th>
+              <th><strong>ФИО клиента:</th>
+              <th><strong>Тел клиента:</th>
+              <th><strong>Описание:</th>
+              {% endif %}
+          </tr>
+        </thead>
+        {% if tvzyati_zayavki %}
+            {% for vzyati_zayavki in tvzyati_zayavki %}
+        <tbody>
+          <tr>
+           {% if tgroup == 'Администрация'  or tgroup == 'Юристы'  or tgroup == 'Офис-менеджер' %}
+            <td>{% if vzyati_zayavki.kanal == 'Домклик' %}<span class="new badge blue" data-badge-caption="">Домкл</span>
+                {% endif %}
+                {{ vzyati_zayavki.date_sozd }}</td>
+            <td>{{ vzyati_zayavki.date_vzyatia }}</td>
+            <td>{{ vzyati_zayavki.reelt_v_rabote.first_name }} {{ vzyati_zayavki.reelt_v_rabote.last_name }}</td>
+
+            <td>
+
+        {% if vzyati_zayavki.kanal == "Домклик" %}
+            {{ vzyati_zayavki.fio }}
+        {% endif %}
+        {% if vzyati_zayavki.kanal == "Заявка с сайта новостройка" %}
+            {{ vzyati_zayavki.nazv_novostr }}
+        {% endif %}
+        {% if vzyati_zayavki.kanal == "Заявка с сайта" %}
+            {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }}; {{ vzyati_zayavki.budget }} руб.
+        {% endif %}
+        {% if vzyati_zayavki.kanal == "Тел. звонок" %}
+            {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }}; {{ vzyati_zayavki.budget }} руб.
+        {% endif %}
+            </td>
+
+
+            <td><a href="{% url 'crm:SdelkaSriv' idd=vzyati_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Срыв</button></a></td</td>
+            <td><a href="{% url 'crm:SdelkaZayav' idd=vzyati_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Сделка</button></a></td</td>
+          {% else %}
+           <td>{{ vzyati_zayavki.date_vzyatia }}</td>
+            <td>{{ vzyati_zayavki.fio }} </td>
+            <td>{{ vzyati_zayavki.tel_kl }}</td>
+
+
+            <td>
+        {% if vzyati_zayavki.kanal == "Домклик" %}
+            {{ vzyati_zayavki.kred_manager }} </br> {{ vzyati_zayavki.fio }}}
+        {% endif %}
+        {% if vzyati_zayavki.kanal == "Заявка с сайта новостройка" %}
+            {{ vzyati_zayavki.nazv_novostr }}
+        {% endif %}
+        {% if vzyati_zayavki.kanal == "Заявка с сайта" %}
+            {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }}; {{ vzyati_zayavki.budget }} руб.
+        {% endif %}
+        {% if vzyati_zayavki.kanal == "Тел. звонок" %}
+            {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }}; {{ vzyati_zayavki.budget }} руб.
+        {% endif %}
+
+            </td>
+            <td><a href="{% url 'crm:SdelkaSriv' idd=vzyati_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Срыв</button></a></td</td>
+            <td><a href="{% url 'crm:SdelkaZayav' idd=vzyati_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Сделка</button></a></td</td>
+          {% endif %}
+
+          </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+      </table>
+
+    </div>
+
+
+
+
+    <div id="test3" class="col s12">
+              <table class="striped">
+        <thead>
+          <tr>
+              <th><strong>Дата взятия в работу:</th>
+              <th><strong>Дата закр.:</th>
+              <th><strong>Риелт.:</th>
+              <th><strong>Сумма:</th>
+              <th><strong>Площадь:</th>
+              <th><strong>Комнат:</th>
+              <th><strong>Причина закрытия:</th>
+              <th><strong>Примечание:</th>
+
+          </tr>
+        </thead>
+        {% if tsriv_zayavki %}
+            {% for sriv_zayavki in tsriv_zayavki %}
+        <tbody>
+          <tr>
+            <td>{{ sriv_zayavki.date_vzyatia }}</td>
+            <td>{{ sriv_zayavki.date_zakr }}</td>
+            <td>{{ sriv_zayavki.reelt_v_rabote.first_name }} {{ sriv_zayavki.reelt_v_rabote.last_name }}</td>
+            <td>{{ sriv_zayavki.odobreno_deneg }}</td>
+            <td>{{ sriv_zayavki.ploshad }}</td>
+            <td>{{ sriv_zayavki.komnat }}</td>
+            <td>{{ sriv_zayavki.pricina_otkaza }}</td>
+            <td>{{ sriv_zayavki.prim }}</td>
+          </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+      </table>
+
+    </div>
+
+
+
+
+    <div id="test4" class="col s12">
+               <table class="striped">
+        <thead>
+          <tr>
+              <th><strong>Дата взятия в работу :</th>
+              <th><strong>Дата закр. :</th>
+              <th><strong>Риелт. :</th>
+              <th><strong>Сумма:</th>
+              <th><strong>Площадь:</th>
+
+
+          </tr>
+        </thead>
+        {% if tsriv_zayavki %}
+            {% for sriv_zayavki in tsriv_zayavki %}
+        <tbody>
+          <tr>
+            <td>{{ sriv_zayavki.date_vzyatia }}</td>
+            <td>{{ sriv_zayavki.date_zakr }}</td>
+            <td>{{ sriv_zayavki.reelt_v_rabote.first_name }} {{ sriv_zayavki.reelt_v_rabote.last_name }}</td>
+            <td>{{ sriv_zayavki.odobreno_deneg }}</td>
+            <td>{{ sriv_zayavki.ploshad }}</td>
+
+          </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+  </div>
+
+
+                </div>
+            </div>
+         </div>
+     </div>
+
+</form>
+
+
+
+
+
+
+{% endblock %}

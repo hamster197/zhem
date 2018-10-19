@@ -1,0 +1,64 @@
+<feed>
+  <feed_version>211</feed_version>
+    {% for post in tppost %}
+  <object>
+    <Category>flatSale</Category>
+    <ExternalId>{{ post.pk }}</ExternalId>
+    <RoomType>both</RoomType>
+    <Description>{{ post.prim }}</Description>
+    <Address>Сочи, {{ post.adress }}</Address>
+    <FlatRoomsCount>
+        {% if post.komnat == 'Студия' or post.komnat == 'Однокомнатная' %} 1 {% endif %}
+        {% if post.komnat == 'Двухкомнатная'  %} 2 {% endif %}
+        {% if post.komnat == 'Трехкомнатная'  %} 3 {% endif %}
+        {% if post.komnat == 'Многокомнатная'  %} 4 {% endif %}
+    </FlatRoomsCount>
+        <Phones>
+      <PhoneSchema>
+        <CountryCode>+7</CountryCode>
+        <Number>{{ post.author.userprofile1.tel  }}</Number>
+      </PhoneSchema>
+      <PhoneSchema>
+        <CountryCode>+7</CountryCode>
+        <Number>{{ post.author.userprofile1.tel  }}</Number>
+      </PhoneSchema>
+    </Phones>
+    <TotalArea>{{ post.ploshad }}</TotalArea>
+    <FloorNumber>{{ post.etag }}</FloorNumber>
+    <SubAgent>
+      <Email>{{ post.author.email }}</Email>
+      <Phone>+7{{ post.author.userprofile1.tel  }}</Phone>
+      <FirstName>{{  post.author.first_name }}</FirstName>
+      <LastName>{{ post.author.last_name }}</LastName>
+    </SubAgent>
+    <Photos>
+	{% for i in post.idd_gal.all %}
+      <PhotoSchema>
+        <FullUrl>http://77.222.63.187{{ i.npict.url }}</FullUrl>
+      </PhotoSchema>
+        {% endfor %}
+    </Photos>
+     <BalconiesCount>
+         {%  if post.balcons == "Да" %}
+            1
+         {% else %}
+            0
+         {% endif %}
+     </BalconiesCount>
+    <Building>
+        <FloorsCount>{{ post.etagnost }}</FloorsCount>
+        <PassengerLiftsCount>
+         {%  if post.lift == "Да" %}
+            1
+         {% else %}
+            0
+         {% endif %}
+        </PassengerLiftsCount>
+    </Building>
+    <BargainTerms>
+      <Price>{{ post.cena_agenstv  }}</Price>
+      <Currency>rur </Currency>
+    </BargainTerms>
+  </object>
+{% endfor %}
+</feed>

@@ -1,0 +1,91 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+    <div class="row">
+      <div class="col s9">
+          <div class="card">
+                <div class="card-content">
+
+ {% load material_form %}
+
+        <table class="bordered">
+        <thead>
+          <tr>
+              <th>Дата создания</th>
+              <th>ID</th>
+              <th>Цена</th>
+              <th>Район</th>
+              <th></th>
+          </tr>
+        </thead>
+{% if tp_uch %}
+        <tbody>
+          <tr>
+{% load el_pagination_tags %}
+{% paginate tp_uch %}
+    {% for uc in tp_uch %}
+        <tbody>
+          <tr>
+            <td>{{ uc.date_sozd }}</td>
+            <td><strong> {{ uc.pk }}</strong></td>
+            <td><strong> {{ uc.cena_agenstv }}</strong></td>
+            <td><strong> {{ uc.raion }}</strong></td>
+            <th><a href="{% url 'crm:uc_detail' idd=uc.pk %}"><button type="submit" class="waves-effect waves-light btn"></span> Подробнее</button></a></th>
+          </tr>
+
+
+
+    {% endfor %}
+
+            </tbody>
+      </table>
+
+{% get_pages %}
+    <ul class="pagination">
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.path }}" rel="page" class="endless_page_link">{{ page.number }}</a>
+            </li>
+        {% endfor %}
+   </ul>
+
+{% else %}
+  </tbody></br></br></br>
+   <strong>У Вас пока нет обьектов</strong>
+{% endif %}
+                        </tbody>
+      </table>
+
+
+                </div>
+          </div>
+      </div>
+      <div class="col s3">
+          <div class="card">
+                <div class="card-content">
+                    <form method="post" class="post-form">
+
+                        {% csrf_token %}
+                        {% form form=tpform %} {% endform %}
+                        <button type="submit" name="_submit" class="btn">Найти</button>
+                    </form>
+                </div>
+          </div>
+      </div>
+
+    </div>
+
+
+    <div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">access_time</i>
+    </a>
+    <ul>
+      <li><a href="{% url 'crm:unpub_uc_index' %}" class="btn-floating yellow darken-1"title = "Личные"><i class="material-icons">account_box</i></a></li>
+      <li><a <a href="{% url 'crm:pub_uc_index' %}"  class="btn-floating green" title = "В агенстве"><i class="material-icons">announcement</i></a></li>
+
+
+    </ul>
+  </div>
+
+
+{% endblock %}

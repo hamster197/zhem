@@ -1,0 +1,25 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+
+{% load material_form %}
+    <div class="row">
+         <div class="col s12">
+            <div class="card">
+                <div class="card-content">{{ tadr }}
+                    <form method="post" class="post-form">
+                    {% csrf_token %}
+                        {% form form=tpflatpostform layout=form.layout%}{% endform %}{{ tdate }}
+                        <button type="submit" name="_submit" class="btn">Сохранить</button>
+                </div>{% for pict in tpict %}<li> {{ pict.npict }}</li> {% endfor %}
+            </div>
+         </div>
+     </div>
+
+</form>
+
+
+
+
+
+
+{% endblock %}

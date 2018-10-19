@@ -1,0 +1,38 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+
+    <div class="row">
+         <div class="col s12"><div class="card"><div class="card-content">
+
+                <div class="panel-heading"><strong>{{ tpnewsdetail.nazv }}.</strong>  </br>
+                    <blockquote><p style="text-align: justify;">{{ tpnewsdetail.text }} </blockquote><strong>
+                    </br>Автор: {{ tpnewsdetail.autor.first_name }}  {{ tpnewsdetail.autor.last_name }};</strong>  Дата публикации: {{ tpnewsdetail.datep }}</div></div>
+
+            </div>
+       </div>
+      </div>
+
+
+
+
+
+
+
+        <div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">access_time</i>
+    </a>
+    <ul>
+      <li><a href="{% url 'crm:news_newpost' %}" class="btn-floating red" title = "Подать новость"><i class="material-icons">add_circle_outline</i></a></li>
+      <li><a href="{% url 'crm:news_edit' idd=tpnewsdetail.id %}" class="btn-floating yellow darken-1"title = "Редактировать новость"><i class="material-icons">create</i></a></li>
+      <li><a <a href="{% url 'crm:news_index' %}"  class="btn-floating green" title = "На главную"><i class="material-icons">publish</i></a></li>
+
+    </ul>
+  </div>
+
+    </body>
+
+
+
+
+{% endblock %}

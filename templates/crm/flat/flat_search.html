@@ -1,0 +1,29 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+
+
+    {# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<form method="post" class="post-form">
+  {% csrf_token %}
+  {% bootstrap_form tpform %}
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">{% bootstrap_icon "floppy-saved" %} Сохранить</button>
+
+  {% endbuttons %}
+</form>
+
+
+
+
+
+
+{% endblock %}
