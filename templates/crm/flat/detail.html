@@ -318,6 +318,8 @@
                         class="pagination"> {% for page in pages %} <li> <a href="{{ page.path }}"
                         rel="page" class="endless_page_link">{{ page.number }}</a> </li> {% endfor %}
                         </ul> </div> </ul> -->{% endcomment %}
+
+
                         {% ifequal request.user tpflat.author %}
                         <div class="fixed-action-btn horizontal">
                             <a
@@ -325,7 +327,7 @@
                                 class="btn-floating btn-large red">
                                 <i class="large material-icons">access_time</i>
                             </a>
-                            <ul>
+                            <ul>{% comment %}
                                 {% if tpflat.vestum_pub == 'Нет' %}
                                     <li>
                                         <a
@@ -345,7 +347,7 @@
                                             <i class="material-icons">V-</i>
                                         </a>
                                     </li>
-                                {% endif %}
+                                {% endif %}{% endcomment %}
                                 <li>
                                     <a
                                         href="{% url 'crm:flat_edit' idd=tpflat.id %} "
