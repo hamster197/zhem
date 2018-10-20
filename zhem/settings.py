@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'el_pagination',
     'multiselectfield',
     'datetimepicker',
+    'reset_migrations',
 ]
 
 MIDDLEWARE = [
