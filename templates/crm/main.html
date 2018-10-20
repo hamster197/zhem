@@ -141,13 +141,17 @@
                                             <div class="collapsible-body">
                                                 <ul>
                                                     <li class="">
+                                                        {% comment %}
                                                         <a href="{% url 'crm:newvigr' %}">
                                                             --- Циан вторичка</a>
                                                         <a href="{% url 'crm:newNovvigr' %}">
-                                                            --- Циан новостройка</a>
+                                                            --- Циан новостройка</a>{% endcomment %}
                                                         <a class="nav-header">Только реальные обьекты в:</a>
                                                         <a href="{% url 'crm:new_flat' %}">
                                                             --- ЦРМ, yandex, DomClik
+                                                        </a>
+                                                                                                                <a href="#">
+                                                            --- Аппортаменты
                                                         </a>
 
                                                     </li>
@@ -166,8 +170,9 @@
                                                         <li class="">
                                                             <a href="{% url 'crm:new_dom_post' %}">
                                                                 --- ЦРМ</a>
+                                                            {% comment %}
                                                             <a href="#">
-                                                                --- ЦИАН (В разработке)</a>
+                                                                --- ЦИАН (В разработке)</a>{% endcomment %}
                                                         </li>
 
                                                     </ul>
@@ -184,8 +189,10 @@
                                                             <li class="">
                                                                 <a href="{% url 'crm:new_uch_post' %}">
                                                                     --- ЦРМ</a>
+                                                                {% comment %}
                                                                 <a href="#">
                                                                     --- ЦИАН (В разработке)</a>
+                                                                {% endcomment %}
                                                             </li>
 
                                                         </ul>
@@ -210,10 +217,12 @@
                                                         <i class="material-icons">account_balance</i>Дома</a>
                                                     <a href="{%  url 'crm:unpub_uc_index' %}">
                                                         <i class="material-icons">apps</i>Участки</a>
+                                                    {% comment %}
                                                     <a href="{% url 'crm:all_vs_pub' %}">
                                                         <i class="material-icons">V+</i>в Вестум</a>
                                                     <a href="{% url 'crm:cianindex' %}">
                                                         <i class="material-icons">camera</i>в ЦИАН</a>
+                                                    {% endcomment %}
                                                 </li>
 
                                             </ul>
