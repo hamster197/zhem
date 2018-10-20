@@ -45,6 +45,28 @@ class flatform(forms.ModelForm):
                 raise ValidationError('Не выбран район!' , code='invalid')
         return cleaned_data
 
+class flatform_appart(forms.ModelForm):
+    class Meta:
+        model=flat_obj
+        fields=('exclusiv','client_name','client_tel','adress','raion','dom_numb','kvart_numb','kvart_numb','etap_sdachi','klass_gilya',
+                'remont','gaz','komnat','ploshad','etag','etagnost','vid_is_okon','san_usel','parking','kadastr','cena_sobstv','cena_agenstv',
+                'security','rubbish_chute','lift','balcony', 'prim','domclick_pub')
+        #fields=('client_name','client_tel','status_obj','adress','raion','etap_sdachi','status_gilya','klass_gilya','remont','gaz','komnat','ploshad','etag','etagnost','vid_is_okon','san_usel','parking','kadastr','cena_sobstv','cena_agenstv','prim')
+    def clean(self):
+        cleaned_data = super(flatform_appart, self).clean()
+        if str(cleaned_data['etag'])=='0' or str(cleaned_data['etagnost'])=='0':
+                raise ValidationError('Этаж или Этажность равны 0!' , code='invalid')
+        if int(cleaned_data['etag'])>int(cleaned_data['etagnost']):
+                raise ValidationError('Этаж больше этажности' , code='invalid')
+        if str(cleaned_data['kvart_numb'])=='' and str(cleaned_data['kadastr'])=='':
+                raise ValidationError('введите №кв или кадастр' , code='invalid')
+        if len(str(cleaned_data['prim'])) < 300:
+                raise ValidationError('меньше 300 символов в описании' , code='invalid')
+        if  str(cleaned_data['raion'])=='Выбор района':
+                raise ValidationError('Не выбран район!' , code='invalid')
+        return cleaned_data
+
+
 class resep_flatform(forms.ModelForm):
     class Meta:
         model=flat_obj

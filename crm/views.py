@@ -17,7 +17,7 @@ from .forms import loginform, newsform, flatform, flat_search_form, newclientfor
     vigruzkaForm, vigruzkaGaleryForm, vigGalForm, flat_pict_form, vigruzkaNovostroikaForm, yandex_flatform, \
     yandex_flateditform, all_otchet_filtr_form, otchet_all_form1, Urist_new_zayavka_Form, sriv_zayavka_form, \
     nov_new_zayv_form, all_zayav_form, reelt_lich_new_zayv_form, search_by_moth_form, seo_pub_form, kadastr_form, \
-    adm_form, DmTextForm, vestum_count_form, vestum_poryadok_form, vestum_pub_form, resep_flatform
+    adm_form, DmTextForm, vestum_count_form, vestum_poryadok_form, vestum_pub_form, resep_flatform, flatform_appart
 from .models import news, flat_obj, flat_obj_gal, clients, uchastok, otchet_nov, feed, feed_gallery, zayavka, \
     stat_obj_crm, reyting_po_sdelkam, reyt_sdelka_otd, cachestvoDomCl, UserProfile1, domclickText, TmpCianCount, \
     vestum_poryadok_feed
@@ -254,6 +254,52 @@ def flat_postForm(request):
                 form = resep_flatform()
             else:
                 form = flatform()
+    return render(request, 'crm/flat/flatedit.html', {'tpflatpostform': form,'tn1':n1,'tn2':n2,'tn3':n3})
+
+@login_required
+def flat_apparts_postForm(request):
+    n1='Квартиры'
+    n2='подача на Cайт, RegionalRealty, ДомКлик, Росриэлт, Yandex'
+    n3 = zayavka.objects.filter(status='Свободен').count()
+    if request.POST:
+        if request.user.userprofile1.ya == 'Да':
+            form=flatform_appart(request.POST)
+        else:
+            if request.user.groups.get().name =='Офис-менеджер':
+                form = resep_flatform(request.POST)
+               #form = flatform(request.POST)
+            else:
+                form = flatform_appart(request.POST)
+        if form.is_valid():
+            #cena=form.cleaned_data['cena_sobstv']
+            flat_obj=form.save(commit=False)
+            flat_obj.author=request.user
+            if request.user.groups.get().name == 'Офис-менеджер':
+                flat_obj.domclick = 'Нет'
+                flat_obj.ploshad = 0
+                flat_obj.date_vigr_sait = timezone.datetime.now()
+                flat_obj.cena_sobstv = 0
+            else:
+                flat_obj.domclick='Да'
+            flat_obj.text_err ='False'
+            flat_obj.dom_err = 'False'
+            flat_obj.kv_err = 'False'
+            flat_obj.date_sozd = timezone.datetime.now()
+            flat_obj.date_vigr_sait = timezone.datetime.now()
+            flat_obj.apparts_pr = 'Да'
+            flat_obj.status_gilya ='Нежилое помещение'
+            flat_obj.type = 'flat'
+            flat_obj.save()
+            return redirect('crm:newFlatgal', idd=flat_obj.pk)
+
+    else:
+        if request.user.userprofile1.ya == 'Да':
+            form = flatform_appart()
+        else:
+            if request.user.groups.get().name =='Офис-менеджер':
+                form = resep_flatform()
+            else:
+                form = flatform_appart()
     return render(request, 'crm/flat/flatedit.html', {'tpflatpostform': form,'tn1':n1,'tn2':n2,'tn3':n3})
 
 @login_required

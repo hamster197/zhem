@@ -36,6 +36,7 @@ urlpatterns = [
 
     #flats
     url(r'^flats/newflat/$', views.flat_postForm, name='new_flat'),
+    url(r'^flats/newflat_appart/$', views.flat_apparts_postForm, name='flat_apparts_postForm'),#new flat(only for appartaments)
     url(r'^flats/myflats_pub/$', views.my_flatview_pub, name='my_flatpub'), ## All Flats
     url(r'^flats/excl_flats_pub/$', views.excl_flatview_pub, name='excl_flatpub'), ## Exclusive Flats
     url(r'^flats/allflats_pub/$', views.all_flatview_pub, name='all_flatpub'),
