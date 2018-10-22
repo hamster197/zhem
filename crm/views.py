@@ -258,7 +258,7 @@ def flat_postForm(request):
 
 @login_required
 def flat_apparts_postForm(request):
-    n1='Квартиры'
+    n1='Аппартаменты'
     n2='подача на Cайт, RegionalRealty, ДомКлик, Росриэлт, Yandex'
     n3 = zayavka.objects.filter(status='Свободен').count()
     if request.POST:
@@ -286,7 +286,7 @@ def flat_apparts_postForm(request):
             flat_obj.kv_err = 'False'
             flat_obj.date_sozd = timezone.datetime.now()
             flat_obj.date_vigr_sait = timezone.datetime.now()
-            #flat_obj.apparts_pr = 'Да'
+            flat_obj.appart_pr = 'Да'
             flat_obj.status_gilya ='Нежилое помещение'
             flat_obj.type = 'flat'
             flat_obj.save()

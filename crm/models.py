@@ -176,7 +176,7 @@ class flat_obj(models.Model):
     kadastr = models.CharField(max_length=30, blank=True, verbose_name='Кадастровый номер', help_text='Необязательно к заполнению', validators=[MinLengthValidator(15)])
     kadastr_pr = models.CharField(max_length=3,default='Нет')
     domclick_choises = (('Да','Да'),('Нет','Нет'))
-    #apparts_pr = models.CharField(verbose_name='Пр.апартаментов', choices=domclick_choises,default='Нет', max_length=3)
+    appart_pr = models.CharField(verbose_name='Пр.апартаментов', choices=domclick_choises,default='Нет', max_length=3)
     domclick = models.CharField(max_length=3,verbose_name='Yandex', default='Нет',choices=domclick_choises)
     domclick_pub = models.CharField(max_length=3, verbose_name='Опубликовать на Домклик', default='Да',choices=domclick_choises)
     ##################################################################################################
