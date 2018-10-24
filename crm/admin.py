@@ -12,8 +12,8 @@ class flatfields(admin.ModelAdmin):
                     'kadastr','domclick','appart_pr')
     list_filter = ['type','vestum_pub','komnat','author']
     search_fields = ['pk']
-    fields = ['ploshad','type','nov_nazv','kadastr','raion','cena_agenstv','adress','remont','komnat','dom_numb','kvart_numb','etag',
-              'etagnost','author','client_name','client_tel','prim','exclusiv','domclick','domclick_pub','vestum_pub']
+    fields = ['kadastr','raion','cena_agenstv','adress','dom_numb','kvart_numb','etag',
+              'etagnost','author','client_name','client_tel','prim','domclick','domclick_pub']
     #ordering = ('adress','dom_numb',)
 
 class flatgalfields(admin.ModelAdmin):
