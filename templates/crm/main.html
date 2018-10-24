@@ -140,8 +140,9 @@
                                                 <i class="material-icons">business</i>Квартиру</a>
                                             <div class="collapsible-body">
                                                 <ul>
-                                                    <li class="">
+
                                                         {% comment %}
+                                                        <li class="">
                                                         <a href="{% url 'crm:newvigr' %}">
                                                             --- Циан вторичка</a>
                                                         <a href="{% url 'crm:newNovvigr' %}">
@@ -149,12 +150,12 @@
                                                         {% comment %}
                                                         <a class="nav-header">Только реальные обьекты в:</a>
                                                         {% endcomment %}
-                                                        <a href="{% url 'crm:new_flat' %}">
+                                                        <li><a href="{% url 'crm:new_flat' %}">
                                                             --- ЦРМ (DomClik)
-                                                        </a>
-                                                                                                                <a href="{% url 'crm:flat_apparts_postForm' %}">
+                                                </a></li>
+                                                        <li><a href="{% url 'crm:flat_apparts_postForm' %}">
                                                             --- Аппортаменты
-                                                        </a>
+                                                        </a></li>
 
                                                     </li>
 
