@@ -1142,14 +1142,28 @@ def mu_unpob_doma_view(request):
     if request.POST:
         form=flat_search_form(request.POST)
         if form.is_valid():
-            minp=form.cleaned_data['min_ploshad']
-            maxp=form.cleaned_data['max_ploshad']
-            minc=form.cleaned_data['min_prais']
-            maxc=form.cleaned_data['max_prais']
-            raion_d=form.cleaned_data['raion_search']
-            doms=flat_obj.objects.filter(raion=raion_d, ploshad__gte=int(minp), ploshad__lte=int(maxp),
-                                     type='house',cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
-            return render(request, 'crm/doma/index_dom.html', {'tpdoms': doms, 'tpform': form })
+            minp=form.cleaned_data['search_minp']
+            maxp=form.cleaned_data['search_maxp']
+            minc=form.cleaned_data['search_minc']
+            maxc=form.cleaned_data['search_maxc']
+            raion_d=form.cleaned_data['search_raion']
+            if raion_d =='Любой':
+                doms=flat_obj.objects.filter(status_obj='Опубликован',type='house',
+                                       h_ploshad_uch__gte=int(minp),
+                                       h_ploshad_uch__lte=int(maxp),author_id=request.user.id,
+                                       cena_agenstv__gte=int(minc),
+                                       cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
+                return render(request,'crm/doma/index_dom.html',{'tpform':form,'tpdoms':doms,'tn1':n1,'tn2':n2})
+            else:
+                doms=flat_obj.objects.filter(status_obj='Опубликован',type='house', raion=raion_d,
+                                       h_ploshad_uch__gte=int(minp),
+                                       h_ploshad_uch__lte=int(maxp),author_id=request.user.id,
+                                       cena_agenstv__gte=int(minc),
+                                       cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
+                return render(request,'crm/doma/index_dom.html',{'tpform':form,'tpdoms':doms,'tn1':n1,'tn2':n2})
+            #doms=flat_obj.objects.filter(raion=raion_d, ploshad__gte=int(minp), ploshad__lte=int(maxp),
+            #                         type='house',cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
+            #return render(request, 'crm/doma/index_dom.html', {'tpdoms': doms, 'tpform': form })
     else:
         form=flat_search_form()
         doms=flat_obj.objects.filter(author=request.user, type='house').order_by('-date_sozd')
@@ -1165,19 +1179,29 @@ def mu_unpob_doma_view(request):
 @login_required
 def mu_pob_doma_view(request):
     n1='Дома'
-    n2='опубликованные'
+    n2='опубликованные1'
     if request.POST:
         form = flat_search_form(request.POST)
         if form.is_valid():
-            minp=form.cleaned_data['min_ploshad']
-            maxp=form.cleaned_data['max_ploshad']
-            minc = form.cleaned_data['min_prais']
-            maxc = form.cleaned_data['max_prais']
-            raion_d = form.cleaned_data['raion_search']
-            doms = flat_obj.objects.filter(type='house', raion=raion_d,
-                                       ploshad__gte=int(minp), ploshad__lte=int(maxp),
-                                       cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
-            return render(request, 'crm/doma/index_dom.html', {'tpdoms': doms, 'tpform': form})
+            minp=form.cleaned_data['search_minp']
+            maxp=form.cleaned_data['search_maxp']
+            minc=form.cleaned_data['search_minc']
+            maxc=form.cleaned_data['search_maxc']
+            raion_d=form.cleaned_data['search_raion']
+            if raion_d =='Любой':
+                doms=flat_obj.objects.filter(status_obj='Опубликован',type='house',
+                                       h_ploshad_uch__gte=int(minp),
+                                       h_ploshad_uch__lte=int(maxp),
+                                       cena_agenstv__gte=int(minc),
+                                       cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
+                return render(request,'crm/doma/index_dom.html',{'tpform':form,'tpdoms':doms,'tn1':n1,'tn2':n2})
+            else:
+                doms=flat_obj.objects.filter(status_obj='Опубликован',type='house', raion=raion_d,
+                                       h_ploshad_uch__gte=int(minp),
+                                       h_ploshad_uch__lte=int(maxp),
+                                       cena_agenstv__gte=int(minc),
+                                       cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
+                return render(request,'crm/doma/index_dom.html',{'tpform':form,'tpdoms':doms,'tn1':n1,'tn2':n2})
     else:
         form = flat_search_form()
         doms = flat_obj.objects.filter(type='house').order_by('-date_sozd')
@@ -1283,13 +1307,15 @@ def unpup_uchastki(request):
             if raion_d =='Любой':
                 uc=flat_obj.objects.filter(status_obj='Опубликован',type='uchastok',
                                        h_ploshad_uch__gte=int(minp),
-                                       h_ploshad_uch__lte=int(maxp),  cena_agenstv__gte=int(minc),
+                                       h_ploshad_uch__lte=int(maxp),author_id=request.user.id,
+                                       cena_agenstv__gte=int(minc),
                                        cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
                 return render(request,'crm/uchastok/index.html',{'tpform':form,'tp_uch':uc,'tn1':n1,'tn2':n2})
             else:
                 uc=flat_obj.objects.filter(status_obj='Опубликован',type='uchastok', raion=raion_d,
                                        h_ploshad_uch__gte=int(minp),
-                                       h_ploshad_uch__lte=int(maxp),  cena_agenstv__gte=int(minc),
+                                       h_ploshad_uch__lte=int(maxp),author_id=request.user.id,
+                                       cena_agenstv__gte=int(minc),
                                        cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
                 return render(request,'crm/uchastok/index.html',{'tpform':form,'tp_uch':uc,'tn1':n1,'tn2':n2})
     else:
