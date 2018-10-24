@@ -1211,10 +1211,15 @@ def new_uc_view(request):
     if request.POST:
         form=uc_new_post(request.POST)
         if form.is_valid():
-            uchastok = form.save(commit=False)
-            uchastok.author = request.user
-            uchastok.save()
-            return redirect('crm:uc_detail', idd=uchastok.pk)
+            flat_obj = form.save(commit=False)
+            flat_obj.date_sozd = timezone.datetime.now()
+            flat_obj.date_vigr_sait = timezone.datetime.now()
+            flat_obj.ploshad = 0
+            flat_obj.author = request.user
+            flat_obj.type = 'uchastok'
+            flat_obj.save()
+            #return redirect('crm:uc_detail', idd=flat_obj.pk)
+            return redirect('crm:newFlatgal', idd=flat_obj.pk)
     else:
         form=uc_new_post()
     return render(request,'crm/uchastok/new_uch.html',{'tpform':form,'tn1':n1,'tn2':n2})
@@ -1222,13 +1227,14 @@ def new_uc_view(request):
 def ucheditview(request,idd):
     n1='Участки'
     n2='редакция'
-    form=  get_object_or_404(uchastok, pk = idd)
+    form =  get_object_or_404(flat_obj, pk = idd)
     id_uch=idd
     if request.POST:
         form = uc_edit_form(request.POST, instance=form)
         if form.is_valid():
             form.save()
-            return redirect('crm:uc_detail', idd=id_uch)
+            #return redirect('crm:uc_detail', idd=id_uch)
+            return redirect('crm:newFlatgal', idd=idd)
     else:
         form=uc_edit_form(instance=form)
     return render(request,'crm/uchastok/new_uch.html',{'tpform':form,'tn1':n1,'tn2':n2})
@@ -1240,17 +1246,26 @@ def pup_uchastki(request):
     if request.POST:
         form=flat_search_form(request.POST)
         if form.is_valid():
-            minp=form.cleaned_data['min_ploshad']
-            maxp=form.cleaned_data['max_ploshad']
-            minc=form.cleaned_data['min_prais']
-            maxc=form.cleaned_data['max_prais']
-            raion_d=form.cleaned_data['raion_search']
-            uc=uchastok.objects.filter(status_obj='Опубликован',raion=raion_d, ploshad__gte=int(minp), ploshad__lte=int(maxp),
-                                       cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
-            return render(request,'crm/uchastok/index.html',{'tpform':form,'tp_uch':uc})
+            minp=form.cleaned_data['search_minp']
+            maxp=form.cleaned_data['search_maxp']
+            minc=form.cleaned_data['search_minc']
+            maxc=form.cleaned_data['search_maxc']
+            raion_d=form.cleaned_data['search_raion']
+            if raion_d =='Любой':
+                uc=flat_obj.objects.filter(status_obj='Опубликован',type='uchastok',
+                                       h_ploshad_uch__gte=int(minp),
+                                       h_ploshad_uch__lte=int(maxp),  cena_agenstv__gte=int(minc),
+                                       cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
+                return render(request,'crm/uchastok/index.html',{'tpform':form,'tp_uch':uc,'tn1':n1,'tn2':n2})
+            else:
+                uc=flat_obj.objects.filter(status_obj='Опубликован',type='uchastok', raion=raion_d,
+                                       h_ploshad_uch__gte=int(minp),
+                                       h_ploshad_uch__lte=int(maxp),  cena_agenstv__gte=int(minc),
+                                       cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
+                return render(request,'crm/uchastok/index.html',{'tpform':form,'tp_uch':uc,'tn1':n1,'tn2':n2})
     else:
         form = flat_search_form()
-        uc = uchastok.objects.filter(status_obj='Опубликован').order_by('-date_sozd')
+        uc = flat_obj.objects.filter(status_obj='Опубликован',type='uchastok').order_by('-date_sozd')
         return render(request,'crm/uchastok/index.html',{'tpform':form,'tp_uch':uc,'tn1':n1,'tn2':n2})
 
 @login_required
@@ -1260,14 +1275,26 @@ def unpup_uchastki(request):
     if request.POST:
         form=flat_search_form(request.POST)
         if form.is_valid():
-            minc=form.cleaned_data['min_prais']
-            maxc=form.cleaned_data['max_prais']
-            raion_d=form.cleaned_data['raion_search']
-            uc=uchastok.objects.filter(status_obj='Опубликован',raion=raion_d, cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
-            return render(request,'crm/uchastok/index.html',{'tpform':form,'tp_uch':uc})
+            minp=form.cleaned_data['search_minp']
+            maxp=form.cleaned_data['search_maxp']
+            minc=form.cleaned_data['search_minc']
+            maxc=form.cleaned_data['search_maxc']
+            raion_d=form.cleaned_data['search_raion']
+            if raion_d =='Любой':
+                uc=flat_obj.objects.filter(status_obj='Опубликован',type='uchastok',
+                                       h_ploshad_uch__gte=int(minp),
+                                       h_ploshad_uch__lte=int(maxp),  cena_agenstv__gte=int(minc),
+                                       cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
+                return render(request,'crm/uchastok/index.html',{'tpform':form,'tp_uch':uc,'tn1':n1,'tn2':n2})
+            else:
+                uc=flat_obj.objects.filter(status_obj='Опубликован',type='uchastok', raion=raion_d,
+                                       h_ploshad_uch__gte=int(minp),
+                                       h_ploshad_uch__lte=int(maxp),  cena_agenstv__gte=int(minc),
+                                       cena_agenstv__lte=int(maxc)).order_by('-date_sozd')
+                return render(request,'crm/uchastok/index.html',{'tpform':form,'tp_uch':uc,'tn1':n1,'tn2':n2})
     else:
         form = flat_search_form()
-        uc=uchastok.objects.filter(author=request.user, status_obj='Не опубликован').order_by('-date_sozd')
+        uc=flat_obj.objects.filter(author=request.user, type='uchastok').order_by('-date_sozd')
         return render(request,'crm/uchastok/index.html',{'tp_uch':uc, 'tpform':form,'tn1':n1,'tn2':n2})
 
 @login_required
@@ -1275,7 +1302,7 @@ def uch_detail_view(request, idd):
     n1='Участки'
     n2='подробно'
     auser = request.user.groups.get().name
-    uc=get_object_or_404(uchastok, pk=idd)
+    uc=get_object_or_404(flat_obj, pk=idd)
     my_kl=clients.objects.filter(auth=request.user, category='Участки',raion__contains=uc.raion,st_pub__contains='Только у себя',budg_do__gte=uc.cena_agenstv, ).order_by('-date_sozd')
     otd_kl = clients.objects.filter(category='Участки', raion__contains=uc.raion, st_pub__contains='Видно в отделе',budg_do__gte=uc.cena_agenstv, ).order_by('-date_sozd')
     all_kl = clients.objects.filter(category='Участки', raion__contains=uc.raion, st_pub__contains='Видно всем', budg_do__gte=uc.cena_agenstv, ).order_by('-date_sozd')

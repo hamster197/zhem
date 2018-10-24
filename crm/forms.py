@@ -165,7 +165,7 @@ class yandex_flateditform(forms.ModelForm):
                 raise ValidationError('Нет номера дома' , code='invalid')
         return cleaned_data
 
-raion_choises = (('Ахун', 'Ахун'),('Бытха', 'Бытха'),('Виноградная', 'Виноградная'),('Дагомыс', 'Дагомыс'),('Донская', 'Донская'),('Донская(Пасечная)', 'Донская(Пасечная)'),
+raion_choises = (('Ареда','Ареда'),('Ахун', 'Ахун'),('Бытха', 'Бытха'),('Виноградная', 'Виноградная'),('Дагомыс', 'Дагомыс'),('Донская', 'Донская'),('Донская(Пасечная)', 'Донская(Пасечная)'),
         ('Донская(Тимерязева)', 'Донская(Тимерязева)'), ('Завокзальный', 'Завокзальный'),('Заречный', 'Заречный'), ('Клубничная', 'Клубничная'),('КСМ', 'КСМ'),
         ('Красная поляна', 'Красная поляна'),('Кудепста', 'Кудепста'), ('Макаренко', 'Макаренко'),('Мамайка', 'Мамайка'),
         ('Мамайский перевал', 'Мамайский перевал'),('Мацеста', 'Мацеста'),('Н.Сочи', 'Н.Сочи'),('Объезная', 'Объезная'),
@@ -226,7 +226,7 @@ class client_edit_form(forms.ModelForm):
 class doma_new_post(forms.ModelForm):
     class Meta:
         model=flat_obj
-        fields=('nazv','client_name','client_tel','raion','adress','dom_numb','ploshad','cena_sobstv',
+        fields=('client_name','client_tel','raion','adress','dom_numb','ploshad','cena_sobstv',
                     'cena_agenstv','prim','h_vid_prava','h_vid_is_okon','h_isp_uch','h_infr','h_etagnost','h_komnat',
                     'h_tip_doma','h_ploshad_uch','h_rast_more',)
 
@@ -259,16 +259,39 @@ class doma_edit_form(forms.ModelForm):
 
 class uc_new_post(forms.ModelForm):
     class Meta:
-        model=uchastok
-        fields=('client_fio', 'tel','status_obj','adress', 'raion', 'comunications', 'gaz','nazn_zemli', 'documenti','ploshad',
-                'cena_sobstv', 'cena_agenstv', 'prim',)
-
+        model=flat_obj
+        fields=('client_name','client_tel','raion','adress','dom_numb','kadastr','h_infr','vid_razr','relef',
+                    'vid_prava','vid_prava','vid','pereferiya','h_rast_more','h_ploshad_uch',
+                    'cena_sobstv','cena_agenstv','prim',)
+    def clean(self):
+        cleaned_data = super(uc_new_post, self).clean()
+        if len(str(cleaned_data['prim'])) < 300:
+            raise ValidationError('меньше 300 символов в описании', code='invalid')
+        if str(cleaned_data['raion']) == 'Выбор района':
+            raise ValidationError('Не выбран район!', code='invalid')
+        if int(cleaned_data['h_rast_more']) < int(100):
+            raise ValidationError('Расстояние до моря!', code='invalid')
+        if int(cleaned_data['h_ploshad_uch']) == 0:
+            raise ValidationError('Площадь участка!', code='invalid')
+        return cleaned_data
 
 class uc_edit_form(forms.ModelForm):
     class Meta:
-        model=uchastok
-        fields=('status_obj', 'raion', 'comunications', 'gaz','nazn_zemli', 'documenti','ploshad',
-                'cena_sobstv', 'cena_agenstv', 'prim',)
+        model=flat_obj
+        fields=('raion','adress','dom_numb','kadastr','h_infr','vid_razr','relef',
+                    'vid_prava','vid_prava','vid','pereferiya','h_rast_more','h_ploshad_uch',
+                    'cena_sobstv','cena_agenstv','prim')
+        def clean(self):
+            cleaned_data = super(uc_new_post, self).clean()
+            if len(str(cleaned_data['prim'])) < 300:
+                raise ValidationError('меньше 300 символов в описании', code='invalid')
+            if str(cleaned_data['raion']) == 'Выбор района':
+                raise ValidationError('Не выбран район!', code='invalid')
+            if int(cleaned_data['h_rast_more']) < int(100):
+                raise ValidationError('Расстояние до моря!', code='invalid')
+            if int(cleaned_data['h_ploshad_uch']) == 0:
+                raise ValidationError('Площадь участка!', code='invalid')
+            return cleaned_data
 ########
 #otchet
 #########

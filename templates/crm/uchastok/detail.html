@@ -17,7 +17,8 @@
     <div class="col s12">
       <ul class="tabs">
         <li class="tab col s3"><a class="active" href="#test1">Главное</a></li>
-        <li class="tab col s3"><a href="#test2">Примечание</a></li>
+        <li class="tab col s3"><a href="#test2">Примечание </a></li>
+        <li class="tab col s4"><a href="#test4">Фото </a></li>
           {%  ifequal request.user tp_uch.author %}<li class="tab col s3"><a href="#test3">Данные клиента</a></li>{% endifequal %}
 
       </ul>
@@ -36,19 +37,24 @@
           </tr>
        <tr>
             <td>Площадь: </td>
-            <td><strong>{{tp_uch.ploshad}}</strong></td>
+            <td><strong>{{tp_uch.h_ploshad_uch}}</strong></td>
           </tr>
           <tr>
-            <td>Газ: </td>
-            <td><strong>{{tp_uch.gaz}}</strong></td>
+            <td>Растояние до моря: </td>
+            <td><strong>{{tp_uch.h_rast_more}}</strong></td>
           </tr>
                  <tr>
-            <td>Назначение земли: </td>
-            <td><strong>{{ tp_uch.nazn_zemli  }}</strong></td>
+            <td>Вид разрешения: </td>
+            <td><strong>{{ tp_uch.vid_razr  }}</strong></td>
           </tr>
           <tr>
-            <td>Документы:</td>
-            <td><strong> {{ tp_uch.documenti }}</strong></td>
+            <td>Вид рельефа:</td>
+            <td><strong> {{ tp_uch.relef }}</strong></td>
+          </tr>
+          <tr>
+          <tr>
+            <td>Вид права:</td>
+            <td><strong> {{ tp_uch.vid_prava }}</strong></td>
           </tr>
           <tr>
             <td>Цена агенства: </td>
@@ -63,6 +69,14 @@
              <table class="bordered">
         <thead>
           <tr>
+              <td>Вид: </td>
+              <td><strong>{{tp_uch.vid}}</strong></td>
+          </tr>
+          <tr>
+              <td>Переферия: </td>
+              <td><strong>{{tp_uch.pereferiya}}</strong></td>
+          </tr>
+          <tr>
               <td>Примечание: </td>
               <td><strong>{{tp_uch.prim}}</strong></td>
           </tr>
@@ -73,6 +87,11 @@
 
         </tbody>
       </table>
+    </div>
+     <div id="test4" class="col s12">
+        {% for i in tp_uch.idd_gal.all %}
+            <div style="float:left; margin-right:10px; margin-top:10px;"> <img class="materialboxed" rel="gallery" height="250" src="http://77.222.63.187{{ i.npict.url }}"></div>
+        {% endfor %}
     </div>
 
 
@@ -173,7 +192,7 @@
 </div>
 
     </ul>
-
+ -->
 
   <div class="fixed-action-btn horizontal">
     <a class="btn-floating btn-large red">
@@ -181,13 +200,9 @@
     </a>
     <ul>
       {% ifequal request.user tp_uch.author %} <li><a href="{% url 'crm:uc_edit' idd=tp_uch.id %} " class="btn-floating blue" title = "Редактировать"><i class="material-icons">edit</i></a></li>{% endifequal %}
-      <li><a href="{% url 'crm:unpub_uc_index' %}" class="btn-floating yellow darken-1"title = "Личные"><i class="material-icons">account_box</i></a></li>
-      <li><a <a href="{% url 'crm:pub_uc_index' %}"  class="btn-floating green" title = "В агенстве"><i class="material-icons">announcement</i></a></li>
-        <li><a href="{% url 'crm:uc_print' idd=tp_uch.pk %}" class="btn-floating indigo darken-4" title = "Распечатать" target="_blank"><i class="material-icons">local_printshop</i></a></li>
-
     </ul>
 
 
   </div>
- -->
+
 {% endblock %}
