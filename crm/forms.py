@@ -271,8 +271,8 @@ class uc_new_post(forms.ModelForm):
             raise ValidationError('Не выбран район!', code='invalid')
         if int(cleaned_data['h_rast_more']) < int(100):
             raise ValidationError('Расстояние до моря!', code='invalid')
-        if int(cleaned_data['h_ploshad_uch']) == 0:
-            raise ValidationError('Площадь участка!', code='invalid')
+        #if int(cleaned_data['h_ploshad_uch']) == 0:
+        #    raise ValidationError('Площадь участка!', code='invalid')
         return cleaned_data
 
 class uc_edit_form(forms.ModelForm):
