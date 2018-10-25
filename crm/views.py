@@ -258,7 +258,7 @@ def flat_postForm(request):
 
 @login_required
 def flat_apparts_postForm(request):
-    n1='Аппартаменты'
+    n1='Апартаменты'
     n2='подача на Cайт, RegionalRealty, ДомКлик, Росриэлт, Yandex'
     n3 = zayavka.objects.filter(status='Свободен').count()
     if request.POST:
@@ -1179,7 +1179,7 @@ def mu_unpob_doma_view(request):
 @login_required
 def mu_pob_doma_view(request):
     n1='Дома'
-    n2='опубликованные1'
+    n2='опубликованные'
     if request.POST:
         form = flat_search_form(request.POST)
         if form.is_valid():
@@ -2641,7 +2641,7 @@ def stat_count_crm_obj(request):
         if i.is_active:
             date = datetime.now() - timedelta(days=10)
             #cian_count = feed.objects.filter(author_id=i.id, pub='Да', date_sozd__gte=date).order_by('-date_sozd').count()
-            cian_count = flat_obj.objects.filter(author_id=i.id, vestum_pub='Да' ).order_by(
+            cian_count = flat_obj.objects.filter(author_id=i.id, status_gilya='Нежилое помещение', date_sozd__gte=d11, date_sozd__lt=d1 ).order_by(
                 '-date_sozd').count()
             countss =flat_obj.objects.filter(author_id=i.id).count()
             countss_kadastr = flat_obj.objects.filter(author_id=i.id).exclude(kadastr='').count()
@@ -2707,7 +2707,7 @@ def stat_count_crm_obj_past(request):
         if i.is_active:
             date = datetime.now() - timedelta(days=10)
             #cian_count = feed.objects.filter(author_id=i.id, pub='Да', date_sozd__gte=date).order_by('-date_sozd').count()
-            cian_count = flat_obj.objects.filter(author_id=i.id, vestum_pub='Да', ).order_by(
+            cian_count = flat_obj.objects.filter(author_id=i.id, status_gilya='Нежилое помещение', date_sozd__gte=d11, date_sozd__lt=d1 ).order_by(
                 '-date_sozd').count()
             countss =flat_obj.objects.filter(author_id=i.id).count()
             countss_kadastr = flat_obj.objects.filter(author_id=i.id).exclude(kadastr='').count()
