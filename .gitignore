@@ -1,4 +1,6 @@
 *.pyc
+crm/migrations/*.py
+
 *~
 __pycache__
 myvenv
