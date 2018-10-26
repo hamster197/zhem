@@ -318,9 +318,10 @@ def my_flatview_edit(request,idd):
             flat = flateditform(request.POST, instance=post)
         if flat.is_valid():
             flat.save()
-            return redirect('crm:newFlatgal', idd = post.pk)
+            return redirect('crm:newFlatgal', idd=post.pk)
         else:
-            return redirect('crm:flat_edit', idd=post.pk)
+            return render(request,'crm/flat/flatedit.html', {'tpflatpostform': flat})
+            #return redirect('crm:flat_edit', idd=post.pk)
     else:
         if request.user.userprofile1.ya == 'Да':
             flat=yandex_flateditform(instance=post)
@@ -2668,7 +2669,7 @@ def stat_count_crm_obj(request):
     AdlOtdel_cn1 = stat_obj_crm.objects.filter(auth_group='Офис в Адлере').aggregate(Sum('crm_calc'))
     AdlOtdel_cn = str(AdlOtdel_cn1.get('crm_calc__sum'))
 
-    vestum = flat_obj.objects.filter(vestum_pub='Да').count()
+    vestum = flat_obj.objects.filter(status_gilya='Нежилое помещение').exclude(kadastr='').count()
     egr = flat_obj.objects.all().exclude(kadastr='').count()
     all1 = stat_obj_crm.objects.all().aggregate(Sum('crm_calc'))
     all = str(all1.get('crm_calc__sum'))
