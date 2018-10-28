@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 #handler500='zhem.views.v404_view'
 #handler404='mysite.views.my_custom_page_not_found_view'
 urlpatterns = [
+    url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^admin/', admin.site.urls),
     #url(r'^admin', admin.site.urls),
     url(r'^$', views.login_view, name='login'),
