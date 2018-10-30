@@ -103,9 +103,6 @@
     <region>Краснодарский край</region>
     <locality-name>Сочи</locality-name>
         <address>{{ doma.adress }} {{ doma.dom_numb }}</address>
-    {% if post.kvart_numb  %}
-        <apartment>{{  doma.kvart_numb }}</apartment>
-    {% endif %}
 </location>
 <sales-agent>
     <phone>{{ doma.author.userprofile1.tel }}</phone>
@@ -113,7 +110,7 @@
     <email>{{ doma.author.email }}</email>
 </sales-agent>
 <price>
-    <value>{{ doma.cena_agenstv|add:"-10000"  }}</value>
+    <value>{{ doma.cena_agenstv  }}</value>
   <currency>RUR</currency>
 </price>
 <description>{{ doma.prim }}  {{ tdm }}</description>
