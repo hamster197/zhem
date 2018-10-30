@@ -608,7 +608,7 @@ def all_flatviewSeo_pub(request):
 @login_required
 def all_flatviewSeo_unpub(request):
     n1='Квартиры'
-    n2='Неопубликованные на сайте'
+    n2='Неопубликованные на сайте1'
     n3 = zayavka.objects.filter(status='Свободен').count()
     d11 =timezone.datetime.now().date()-timedelta(days=timezone.datetime.now().weekday())
     crm_obj_week_count = flat_obj.objects.filter(author_id=request.user.id, date_sozd__gte=d11).count()
@@ -674,7 +674,7 @@ def seo_flat_pub(request, idd):
             #post.adress_utf = post.adress.encode('unicode-escape')
             #a = form.save(commit=False)
             post.allias = pytils.translit.slugify(post.nazv)#(u"тест и еще раз тест")
-            #post.date_vigr_sait = timezone.datetime.now()
+            post.date_vigr_sait = timezone.datetime.now()
             post.save()
             aFlatSearch=flat_search_form()
             flatlist=flat_obj.objects.filter(status_obj='Опубликован').exclude(nazv='').order_by('-pk')
