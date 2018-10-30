@@ -108,11 +108,19 @@
             </house-info>
 
             <object-info>
-
                 <rooms>
-
-                    <total>{{ post.komnat }}</total>
-
+                    {% if post.komnat == 'Студия' or post.komnat == 'Однокомнатная' %}
+                    <total>1</total>
+                    {% endif %}
+                    {% if post.komnat == 'Двухкомнатная'  %}
+                    <total>2</total>
+                    {% endif %}
+                    {% if post.komnat == 'Трехкомнатная'  %}
+                    <total>3</total>
+                    {% endif %}
+                    {% if post.komnat == 'Многокомнатная'  %}
+                    <total>4</total>
+                    {% endif %}
                 </rooms>
             </object-info>
         </offer>
@@ -124,7 +132,7 @@
 
             <part>жилая</part>
 
-            <object-type>Дом</object-type>
+            <object-type>дом</object-type>
 
             <description><![CDATA[{{ doma.prim }} {{ tdm }}]]></description>
 
