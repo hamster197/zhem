@@ -10,7 +10,7 @@ from zvonki.models import zvonok
 class flatfields(admin.ModelAdmin):
     list_display = ('pk','author','type','date_sozd','cena_agenstv','adress','dom_numb','kvart_numb',
                     'kadastr','domclick','appart_pr')
-    list_filter = ['type','vestum_pub','komnat','author']
+    list_filter = ['type','domclick_pub','komnat','author']
     search_fields = ['pk']
     fields = ['type','kadastr','raion','cena_agenstv','adress','dom_numb','kvart_numb','etag',
               'etagnost','author','client_name','client_tel','prim','domclick','domclick_pub']
