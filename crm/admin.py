@@ -6,14 +6,17 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from zvonki.models import zvonok
 
+class flatgaladm(admin.StackedInline):
+    model = flat_obj_gal
 
 class flatfields(admin.ModelAdmin):
+    inlines = [flatgaladm]
     list_display = ('pk','author','type','date_sozd','cena_agenstv','adress','dom_numb','kvart_numb',
                     'kadastr','domclick','appart_pr')
     list_filter = ['type','domclick_pub','komnat','author']
     search_fields = ['pk']
     fields = ['type','kadastr','raion','cena_agenstv','adress','dom_numb','kvart_numb','etag',
-              'etagnost','author','client_name','client_tel','prim','domclick','domclick_pub']
+              'etagnost','author','client_name','client_tel','prim','domclick','domclick_pub', 'remont']
     #ordering = ('adress','dom_numb',)
 
 class flatgalfields(admin.ModelAdmin):
