@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import news, UserProfile1, flat_obj, flat_obj_gal, clients, uchastok, otchet_nov, feed, feed_gallery, \
     zayavka, stat_obj_crm, reyting_po_sdelkam, reyt_sdelka_otd, cachestvoDomCl, domclickText, TmpCianCount, \
     vestum_poryadok_feed
@@ -81,7 +82,7 @@ admin.site.register(news)
 admin.site.register(flat_obj, flatfields, )
 admin.site.register(flat_obj_gal, flatgalfields)
 admin.site.register(uchastok, uchfields)
-admin.site.register(otchet_nov, sdelka_nov)
+#admin.site.register(otchet_nov, sdelka_nov)
 admin.site.register(zayavka, zayavkaFields)
 admin.site.register(feed, feedfelds)
 admin.site.register(feed_gallery, feedgalfelds)
@@ -93,7 +94,6 @@ admin.site.register(domclickText, textFields)
 admin.site.register(TmpCianCount, CianFields)
 admin.site.register(zvonok,ZvonokFields)
 admin.site.register( vestum_poryadok_feed,VestimPorydok)
-
 
 class UserInline(admin.StackedInline):
     model = UserProfile1
