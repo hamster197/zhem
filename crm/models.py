@@ -211,7 +211,7 @@ class flat_obj(models.Model):
                           ('Кирпичный','Кирпичный'),('Деревянный','Деревянный'),('Панельный','Панельный'))
     h_tip_doma = models.CharField(max_length=25, verbose_name='Тип дома', choices= h_tip_doma_choises,default='n/a')
 
-    h_ploshad_uch = models.DecimalField(default='0', decimal_places=1, max_digits=8, verbose_name='Площадь участка')
+    h_ploshad_uch = models.DecimalField(default='0', decimal_places=1, max_digits=8, verbose_name='Площадь участка(метры)')
     h_rast_more = models.IntegerField(verbose_name='Растояние до моря:', default=0)
 
     ##################################################################################################
@@ -224,7 +224,7 @@ class flat_obj(models.Model):
     vid_razr_ch = (('Поселений (ИЖС)','Поселений (ИЖС)'),('Земля промназначения','Земля промназначения'),
                    ('Садовое некоммерческое товарищество','Садовое некоммерческое товарищество'),('ДНП','ДНП')
                    , ('Дачное хозяйство', 'Дачное хозяйство'),('ЛПХ','ЛПХ'))
-    vid_razr = models.CharField(verbose_name='Вид разрешения:',max_length=25,default='--',choices=vid_razr_ch)
+    vid_razr = models.CharField(verbose_name='Вид разрешеного использования:',max_length=25,default='--',choices=vid_razr_ch)
     relef_ch =(('Ровный','Ровный'),('Уклон','Уклон'))
     relef = models.CharField(verbose_name='Вид рельефа:',max_length=25,default='--',choices=relef_ch)
     vid_prava_ch = (('Собственность','Собственность'),('Аренда (49лет)','Аренда (49лет)'))
