@@ -278,8 +278,8 @@ class uc_new_post(forms.ModelForm):
 class uc_edit_form(forms.ModelForm):
     class Meta:
         model=flat_obj
-        fields=('raion','adress','dom_numb','kadastr','h_infr','vid_razr','relef',
-                    'vid_prava','vid_prava','vid','pereferiya','h_rast_more','h_ploshad_uch',
+        fields=('raion','adress','kadastr','h_infr','vid_razr','relef',
+                    'vid_prava','vid_prava','vid','pereferiya','h_ploshad_uch',
                     'cena_sobstv','cena_agenstv','prim')
         def clean(self):
             cleaned_data = super(uc_new_post, self).clean()
@@ -287,8 +287,8 @@ class uc_edit_form(forms.ModelForm):
                 raise ValidationError('меньше 300 символов в описании', code='invalid')
             if str(cleaned_data['raion']) == 'Выбор района':
                 raise ValidationError('Не выбран район!', code='invalid')
-            if int(cleaned_data['h_rast_more']) < int(100):
-                raise ValidationError('Расстояние до моря!', code='invalid')
+            #if int(cleaned_data['h_rast_more']) < int(100):
+            #    raise ValidationError('Расстояние до моря!', code='invalid')
             if int(cleaned_data['h_ploshad_uch']) == 0:
                 raise ValidationError('Площадь участка!', code='invalid')
             return cleaned_data
