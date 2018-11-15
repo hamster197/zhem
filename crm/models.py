@@ -98,7 +98,7 @@ class flat_obj(models.Model):
     adress_utf = models.CharField(max_length=270, verbose_name='Улица UTF:', help_text='например: Гагарина', default='')
     dom_numb = models.CharField(max_length=37, verbose_name='Номер дома:', help_text='например: 36 или 11/2 или 16к (Буква обязательно маленкая!)', default='')
 
-    ploshad=models.IntegerField(verbose_name='Площадь')
+    ploshad=models.IntegerField(verbose_name='Площадь(метры)')
 
     cena_sobstv=models.IntegerField('Цена собственника',validators=[MinValueValidator(300000)])
     cena_agenstv = models.IntegerField('Цена агентства',validators=[MinValueValidator(300000)])
@@ -230,8 +230,8 @@ class flat_obj(models.Model):
     vid_prava = models.CharField(verbose_name='Вид права:',max_length=25,default='--',choices=vid_prava_ch)
     vid_ch = (('На море','На море'),('На горы','На горы'),('На море и горы','На море и горы'))
     vid = models.CharField(verbose_name='Вид',max_length=25, default='--',choices=vid_ch)
-    pereferiya_ch = (('Электричество','Электричество'),('Газ','Газ'),('Канализация','Канализация'))
-    pereferiya = MultiSelectField(verbose_name='Переферия:',max_length=125,choices=pereferiya_ch,default='--')
+    pereferiya_ch = (('Электричество','Электричество'),('Вода','Вода'),('Газ','Газ'),('Канализация','Канализация'))
+    pereferiya = MultiSelectField(verbose_name='Коммуникации:',max_length=125,choices=pereferiya_ch,default='--')
     ##################################################################################################
     #       End of For Uchastki
     ##################################################################################################
