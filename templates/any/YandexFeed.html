@@ -194,7 +194,13 @@
 </lot-area>
 {% if uchastoc.vid_razr_ch == 'Поселений (ИЖС)' %}<lot-type>ИЖС</lot-type>
 {% else %}<lot-type>садоводство</lot-type>{% endif %}
-
+{% for i in uchastoc.idd_gal.all %}
+   {% if i.npict.url %}
+    <image>
+      http://77.222.63.187{{ i.npict.url }}
+    </image>
+   {% endif %}
+{% endfor %}
    </offer>
     {% endfor %}
 {% endif %}
