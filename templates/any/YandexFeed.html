@@ -168,15 +168,15 @@
   <offer internal-id="{{ uchastoc.pk }}">
     <type>Продажа</type>
     <property-type>Жилая</property-type>
-    <category>участок</category>
+    <category>участок</category>{%  if uchastoc.kadastr %}
+    <cadastral-number>{{ uchastoc.kadastr }}</cadastral-number>{% endif %}
  <creation-date>{{ uchastoc.datep|date:"Y-m-d" }}T01:11:30+03:00</creation-date>
  <last-update-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</last-update-date>
  <location>
     <country>Россия</country>
     <region>Краснодарский край</region>
     <locality-name>Сочи</locality-name>
-    <address>{{ uchastoc.adress }} {{ uchastoc.uc_dom_nunb }}</address>{%  if uchastoc.kadastr %}
-    <cadastral-number>{{ uchastoc.kadastr }}</cadastral-number>{% endif %}
+    <address>{{ uchastoc.adress }} {{ uchastoc.uc_dom_nunb }}</address>
 </location>
 <sales-agent>
     <phone>{{ uchastoc.author.userprofile1.tel }}</phone>
