@@ -953,7 +953,7 @@ def vestumFeedViewHouses(request):
 
 #forYandex
 def YandexFeedview(request):
-    post = flat_obj.objects.filter(domclick='Да', type='flat').order_by('-datep')[:2]
+    post = flat_obj.objects.filter(domclick='Да', type='flat').order_by('-datep')
     doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')
     uchastoc = flat_obj.objects.filter(domclick='Да', type='uchastok').order_by('-datep')
     gal = flat_obj_gal.objects.all()
@@ -965,8 +965,8 @@ def YandexFeedview(request):
     # end of ручной ввод текста сео
     # auto ввод текста сео
     date1 = timezone.now().day
-    #dm = get_object_or_404(domclickText, day = int(date1))
-    dm = '21312321'
+    dm = get_object_or_404(domclickText, day = int(date1))
+    #dm = '21312321'
     # end of autoручной ввод текста сео
     return render(request,'any/YandexFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date,
                                                  'tdom':doma, 'tdm':dm, 'tuchastoc':uchastoc }, content_type="text/xml")
