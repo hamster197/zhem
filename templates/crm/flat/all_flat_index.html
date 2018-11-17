@@ -15,7 +15,7 @@
               <th>Район</th>
               <th>Улица</th>
               <th></th>
-              {% ifequal request.user.userprofile1.ya "Да" %}<th>Ошибки</th>{% endifequal%}
+              {% ifequal request.user.userprofile1.ya "Да" %}<th>Статус</th>{% endifequal%}
           </tr>
         </thead>
 {% if tpflatlist %}
@@ -47,6 +47,7 @@
              {% ifequal request.user flatlist.author%}
                 {% comment %} {% if flatlist.vestum_pub == 'Да' %}<i class="material-icons" >V+</i>{% endif %}{% endcomment %}
                  {% if flatlist.kadastr != '' %}<i class="material-icons" >K+</i>{% endif %}
+                 {% if flatlist.domclick_pub == 'Да' and flatlist.kadastr != '' %}<i class="material-icons" >Дм+</i>{% endif %}
              {% endifequal %}
           </td>
 
