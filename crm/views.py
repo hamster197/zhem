@@ -953,7 +953,7 @@ def vestumFeedViewHouses(request):
 
 #forYandex
 def YandexFeedview(request):
-    post = flat_obj.objects.filter(domclick='Да', type='flat').order_by('-datep')
+    post = flat_obj.objects.filter(domclick='Да', type='flat').order_by('-datep')#[:2]
     doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')
     uchastoc = flat_obj.objects.filter(domclick='Да', type='uchastok').order_by('-datep')
     gal = flat_obj_gal.objects.all()
