@@ -162,4 +162,39 @@
 
     {% endfor %}
 {% endif %}
+
+{%  if tuchastoc %}213
+    {% for uchastoc in tuchastoc %}
+  <offer internal-id="{{ uchastoc.pk }}">
+    <type>Продажа</type>
+    <property-type>Жилая</property-type>
+    <category>участок</category>
+ <creation-date>{{ uchastoc.datep|date:"Y-m-d" }}T01:11:30+03:00</creation-date>
+ <last-update-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</last-update-date>
+ <location>
+    <country>Россия</country>
+    <region>Краснодарский край</region>
+    <locality-name>Сочи</locality-name>
+    <address>{{ uchastoc.adress }} {{ uchastoc.uc_dom_nunb }}</address>
+{%  if uchastoc.kadastr %}<cadastral-number>{{ uchastoc.kadastr }}</cadastral-number>{% endif %}
+</location>
+<sales-agent>
+    <phone>{{ uchastoc.author.userprofile1.tel }}</phone>
+    <name>{{  uchastoc.author.first_name }} {{ doma.author.last_name }}</name>
+    <email>{{ uchastoc.author.email }}</email>
+</sales-agent>
+<price>
+    <value>{{ uchastoc.cena_agenstv|add:"-50000"  }}</value>
+  <currency>RUR</currency>
+</price>
+<description>{{ uchastoc.prim }}  {{ tdm }}</description>
+<lot-area>
+  <value>{{ uchastoc.h_ploshad_uch }}</value>
+  <unit>кв. м</unit>
+</lot-area>
+{% if uchastoc.vid_razr_ch == 'Поселений (ИЖС)' %}<lot-type>ИЖС</lot-type>
+{% else %}<lot-type>садоводство</lot-type>{% endif %}
+   </offer>
+    {% endfor %}
+{% endif %}
 </realty-feed>

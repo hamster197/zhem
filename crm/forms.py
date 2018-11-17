@@ -260,7 +260,7 @@ class doma_edit_form(forms.ModelForm):
 class uc_new_post(forms.ModelForm):
     class Meta:
         model=flat_obj
-        fields=('client_name','client_tel','raion','adress','kadastr','h_infr','vid_razr','relef',
+        fields=('client_name','client_tel','raion','adress','uc_dom_nunb','kadastr','h_infr','vid_razr','relef',
                     'vid_prava','vid_prava','vid','pereferiya','h_ploshad_uch',
                     'cena_sobstv','cena_agenstv','prim',)
     def clean(self):

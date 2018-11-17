@@ -953,8 +953,9 @@ def vestumFeedViewHouses(request):
 
 #forYandex
 def YandexFeedview(request):
-    post = flat_obj.objects.filter(domclick='Да', type='flat').order_by('-datep')
+    post = flat_obj.objects.filter(domclick='Да', type='flat').order_by('-datep')[:2]
     doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')
+    uchastoc = flat_obj.objects.filter(domclick='Да', type='uchastok').order_by('-datep')
     gal = flat_obj_gal.objects.all()
     #post = flat_obj.objects.filter(author.userprofile1.tel='' ).order_by('-datep')
     #post = flat_obj.objects.order_by('-datep')
@@ -964,12 +965,13 @@ def YandexFeedview(request):
     # end of ручной ввод текста сео
     # auto ввод текста сео
     date1 = timezone.now().day
-    dm = get_object_or_404(domclickText, day = int(date1))
-    #dm = '21312321'
+    #dm = get_object_or_404(domclickText, day = int(date1))
+    dm = '21312321'
     # end of autoручной ввод текста сео
-    return render(request,'any/YandexFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date, 'tdom':doma, 'tdm':dm }, content_type="text/xml")
+    return render(request,'any/YandexFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date,
+                                                 'tdom':doma, 'tdm':dm, 'tuchastoc':uchastoc }, content_type="text/xml")
 
-#forYandex
+#for Mail ru & ula
 def MailRuFeedview(request):
     post = flat_obj.objects.filter( type='flat').order_by('-pk')
     doma = flat_obj.objects.filter( type='house').order_by('-pk')
@@ -1243,6 +1245,7 @@ def new_uc_view(request):
             flat_obj.ploshad = 0
             flat_obj.author = request.user
             flat_obj.type = 'uchastok'
+            flat_obj.domclick = 'Да'
             flat_obj.save()
             #return redirect('crm:uc_detail', idd=flat_obj.pk)
             return redirect('crm:newFlatgal', idd=flat_obj.pk)
