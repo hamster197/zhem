@@ -23,6 +23,9 @@
     <value>{{ post.cena_agenstv|add:"-50000"  }}</value>
     <currency>RUR</currency>
 </price>
+ {%  if post.domclick_pub == 'Да' %}
+    <mortgage>true</mortgage>
+ {% endif %}
     <deal-status>прямая продажа</deal-status>
     <description>{{ post.prim }} {{ tdm }}
 </description>
