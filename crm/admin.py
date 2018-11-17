@@ -12,7 +12,7 @@ class flatgaladm(admin.StackedInline):
 
 class flatfields(admin.ModelAdmin):
     inlines = [flatgaladm]
-    list_display = ('pk','author','type','date_sozd','cena_agenstv','adress','dom_numb','kvart_numb',
+    list_display = ('pk','author','type','date_sozd','cena_agenstv','adress','kvart_numb',
                     'kadastr','domclick','domclick_pub')
     list_filter = ['type','domclick_pub','domclick','komnat','author']
     search_fields = ['pk']
