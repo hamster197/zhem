@@ -1404,33 +1404,73 @@ def new_otchet_view_All(request):
             s1=''
             if otchet_nov.reelt1:
                 name = get_object_or_404(User, username = otchet_nov.reelt1)
-                s1 =s1+str(name.first_name)+' '+str(name.last_name)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
+                s1 =s1+adl_pr+str(name.first_name)+' '+str(name.last_name)+' '
             if otchet_nov.reelt2:
                 name = get_object_or_404(User, username = otchet_nov.reelt2)
-                s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
+                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
             if otchet_nov.reelt3:
                 name = get_object_or_404(User, username = otchet_nov.reelt3)
-                s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
+                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
             if otchet_nov.reelt4:
                 name = get_object_or_404(User, username = otchet_nov.reelt4)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
                 s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
             if otchet_nov.reelt5:
                 name = get_object_or_404(User, username = otchet_nov.reelt5)
-                s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
+                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
             if otchet_nov.reelt6:
                 name = get_object_or_404(User, username = otchet_nov.reelt6)
-                s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
+                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
             if otchet_nov.reelt7:
                 name = get_object_or_404(User, username = otchet_nov.reelt7)
-                s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
+                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
             if otchet_nov.reelt8:
                 name = get_object_or_404(User, username = otchet_nov.reelt8)
-                s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
+                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
             if otchet_nov.reelt9:
                 name = get_object_or_404(User, username = otchet_nov.reelt9)
-                s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
+                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
             if otchet_nov.reelt10:
                 name = get_object_or_404(User, username = otchet_nov.reelt10)
+                if str(name.groups.get().name).__contains__('Адлер'):
+                    adl_pr = '(Aдл)'
+                else:
+                    adl_pr = ''
                 s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
 
             if otchet_nov.reelt1:
