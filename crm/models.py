@@ -354,7 +354,7 @@ class otchet_nov(models.Model):
     fio_kl = models.CharField(max_length=50, verbose_name='ФИО клиента:')
     tel_kl = PhoneNumberField(verbose_name='тел.Клиента:', help_text='(+79881234567)')
 
-    ot_kuda_choises = (('Другое' , 'Другое'),('Avito','Avito'),('Vestum','Vestum'),('Cian','Cian'),('Сайт компании','Сайт компании'),#('Avito Turbo','Avito Turbo'),
+    ot_kuda_choises = (('Другое' , 'Другое'),('Avito','Avito'),('Юла','Юла'),('Сайт компании','Сайт компании'),#('Avito Turbo','Avito Turbo'),('Vestum','Vestum'),('Cian','Cian'),
                        ('По рекомендации','По рекомендации'),('Домклик(Сбер)','Домклик(Сбер)'),('Yandex Недвижимость','Yandex Недвижимость'))
     ot_kuda_kl = models.CharField(max_length=20, verbose_name='Канал привлечения клиента:', choices=ot_kuda_choises)
 

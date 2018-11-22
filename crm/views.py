@@ -1682,12 +1682,14 @@ def reeelt_otchet_all_view(request):
                                               ot_kuda_kl='Vestum').count())
         Cian = str(Cian +(otchet_nov.objects.filter(sdelka_zakrita='Нет',  ot_kuda_kl='Vestum').count()))
 ######################################################################################################################
-        sait =otchet_nov.objects.filter(date_zakr__gte=ds,date_zakr__lte=de,  sdelka_zakrita='Да', ot_kuda_kl='Сайт компании').count()
+        ## Сменил сайт компании на Юла
+        sait =otchet_nov.objects.filter(date_zakr__gte=ds,date_zakr__lte=de,  sdelka_zakrita='Да',
+                                        ot_kuda_kl='Юла').count()
         sait = sait +(otchet_nov.objects.filter(date_sozd__gte=ds, date_sozd__lte=de, sdelka_zakrita='Рассрочка',
-                                              ot_kuda_kl='Сайт компании').count())
+                                              ot_kuda_kl='Юла').count())
         sait = sait+(otchet_nov.objects.filter(date_zakr__gte=ds, date_zakr__lte=de, sdelka_zakrita='Срыв',
-                                              ot_kuda_kl='Сайт компании').count())
-        sait = str(sait +(otchet_nov.objects.filter(sdelka_zakrita='Нет',  ot_kuda_kl='Сайт компании').count()))
+                                              ot_kuda_kl='Юла').count())
+        sait = str(sait +(otchet_nov.objects.filter(sdelka_zakrita='Нет',  ot_kuda_kl='Юла').count()))
 ######################################################################################################################
         rec =otchet_nov.objects.filter(date_zakr__gte=ds,date_zakr__lte=de, sdelka_zakrita='Да', ot_kuda_kl='По рекомендации').count()
         rec = rec +(otchet_nov.objects.filter(date_sozd__gte=ds, date_sozd__lte=de, sdelka_zakrita='Рассрочка',
