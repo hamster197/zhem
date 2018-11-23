@@ -19,7 +19,7 @@
         </thead>
 {% if tpdoms %}
 {% load el_pagination_tags %}
-{% paginate tpdoms %}
+{% lazy_paginate tpdoms %}
     {% for doms in tpdoms %}
         <tbody>
           <tr>

@@ -20,7 +20,7 @@
         </thead>
 {% if tpflatlist %}
 {% load el_pagination_tags %}
-{% paginate tpflatlist %}
+{% lazy_paginate tpflatlist %}
     {% for flatlist in tpflatlist %}
         <tbody>
           <tr>
@@ -65,8 +65,14 @@
 
     {% endfor %}
      </table>
-    {% show_pages %}
-    {% get_pages %}
+{% get_pages %}
+    <ul class="pagination">
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.path }}" rel="page" class="endless_page_link">{{ page.number }}</a>
+            </li>
+        {% endfor %}
+   </ul>
 
 {% else %}
   </tbody></br></br></br>

@@ -21,7 +21,7 @@
         <tbody>
           <tr>
 {% load el_pagination_tags %}
-{% paginate tp_uch %}
+{% lazy_paginate tp_uch %}
     {% for uc in tp_uch %}
         <tbody>
           <tr>
