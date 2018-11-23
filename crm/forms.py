@@ -27,7 +27,7 @@ class newsform(forms.ModelForm):
 class flatform(forms.ModelForm):
     class Meta:
         model=flat_obj
-        fields=('exclusiv','client_name','client_tel','adress','raion','dom_numb','kvart_numb','kvart_numb','etap_sdachi','status_gilya','klass_gilya',
+        fields=('exclusiv','client_name','client_tel','adress','raion','dom_numb','kvart_numb','etap_sdachi','status_gilya','klass_gilya',
                 'remont','gaz','komnat','ploshad','etag','etagnost','vid_is_okon','san_usel','parking','kadastr','cena_sobstv','cena_agenstv',
                 'security','rubbish_chute','lift','balcony', 'prim','domclick_pub')
         #fields=('client_name','client_tel','status_obj','adress','raion','etap_sdachi','status_gilya','klass_gilya','remont','gaz','komnat','ploshad','etag','etagnost','vid_is_okon','san_usel','parking','kadastr','cena_sobstv','cena_agenstv','prim')
@@ -48,7 +48,7 @@ class flatform(forms.ModelForm):
 class flatform_appart(forms.ModelForm):
     class Meta:
         model=flat_obj
-        fields=('exclusiv','client_name','client_tel','adress','raion','dom_numb','kvart_numb','kvart_numb','etap_sdachi','klass_gilya',
+        fields=('exclusiv','client_name','client_tel','adress','raion','dom_numb','kvart_numb','etap_sdachi','klass_gilya',
                 'remont','gaz','komnat','ploshad','etag','etagnost','vid_is_okon','san_usel','parking','kadastr','cena_sobstv','cena_agenstv',
                 'security','rubbish_chute','lift','balcony', 'prim','domclick_pub')
         #fields=('client_name','client_tel','status_obj','adress','raion','etap_sdachi','status_gilya','klass_gilya','remont','gaz','komnat','ploshad','etag','etagnost','vid_is_okon','san_usel','parking','kadastr','cena_sobstv','cena_agenstv','prim')
@@ -226,7 +226,7 @@ class client_edit_form(forms.ModelForm):
 class doma_new_post(forms.ModelForm):
     class Meta:
         model=flat_obj
-        fields=('client_name','client_tel','raion','adress','dom_numb','ploshad','cena_sobstv',
+        fields=('client_name','client_tel','raion','adress','dom_numb','kadastr','ploshad','cena_sobstv',
                     'cena_agenstv','prim','h_vid_prava','h_vid_is_okon','h_isp_uch','h_infr','h_etagnost','h_komnat',
                     'h_tip_doma','h_ploshad_uch','h_rast_more',)
 
@@ -242,7 +242,7 @@ class doma_new_post(forms.ModelForm):
 class doma_edit_form(forms.ModelForm):
      class Meta:
         model = flat_obj
-        fields = ('nazv','raion','adress','dom_numb','ploshad','cena_sobstv',
+        fields = ('nazv','raion','adress','dom_numb','kadastr','ploshad','cena_sobstv',
                     'cena_agenstv','prim','h_vid_prava','h_vid_is_okon','h_isp_uch','h_infr','h_etagnost','h_komnat',
                     'h_tip_doma','h_ploshad_uch','h_rast_more',)
      def clean(self):
