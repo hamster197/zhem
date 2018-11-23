@@ -474,8 +474,8 @@ class feed(models.Model):
     pub_choises = (('Да','Да'),('Нет','Нет'))
     pub = models.CharField(verbose_name='Публикация:', choices = pub_choises, default = 'Да',max_length=3)
     class Meta:
-        verbose_name='Выгрузка'
-        verbose_name_plural = 'Выгрузки'
+        verbose_name='Выгрузка (ЦИАН)'
+        verbose_name_plural = 'Выгрузки (ЦИАН) '
     def __str__(self):
         return self.nazv
 
@@ -486,8 +486,8 @@ class feed_gallery(models.Model):
     #pict = models.ImageField(verbose_name='Картинка', upload_to='image/%Y/%m/%d')
     npict = ResizedImageField(verbose_name='Фото объекта', upload_to='image/%Y/%m/%d/cian', quality=15)
     class Meta:
-        verbose_name = 'Выгрузки галерея'
-        verbose_name_plural = 'Выгрузки галерея'
+        verbose_name = 'Выгрузки галерея (ЦИАН)'
+        verbose_name_plural = 'Выгрузки галерея (ЦИАН)'
 #    def delete(self, *args, **kwargs):
 #        # Note this is a simple example. it only handles delete(),
 #        # and not replacing images in .save()
@@ -623,13 +623,13 @@ class TmpCianCount(models.Model):
     adler = models.IntegerField(verbose_name='Адлер')
     sochi = models.IntegerField(verbose_name='Сочи')
     class Meta:
-        verbose_name = 'Циан'
-        verbose_name_plural = 'Циан'
+        verbose_name = 'Порядок выдачи обьявлений в Циан(Сочи/Адлер)'
+        verbose_name_plural = 'Порядок выдачи обьявлений в Циан(Сочи/Адлер)'
 
 class vestum_poryadok_feed(models.Model):
     choise = (('ПоВозрастанию','ПоВозрастанию'),('ПоУбыванию','ПоУбыванию'))
     date = models.DateField(auto_now=True, verbose_name='Дата изменения')
     poryadok = models.CharField(verbose_name='Порядок выдачи в фиде Vestum', max_length=25,choices=choise)
     class Meta:
-        verbose_name = 'Порядок выдачи обьявлений в Циан'
-        verbose_name_plural = 'Порядок выдачи обьявлений в Циан'
+        verbose_name = 'Порядок выдачи обьявлений в Vestum'
+        verbose_name_plural = 'Порядок выдачи обьявлений в Vestum'

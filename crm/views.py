@@ -4591,7 +4591,7 @@ def my_admi_view(request):
     #pars_param = parsed1['data'][0]['metrics'][0]
     pars= parsed1
     n1='CRM' #+ ' pars with params='#+ str(pars_param)
-    #n2='администрирование'+' pars='+str(pars)
+    n2='администрирование'#+' pars='+str(pars)
     n2='pars='+str(pars)
     del1='1'
 ############################################################

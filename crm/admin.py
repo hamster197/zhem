@@ -77,11 +77,11 @@ class ZvonokFields(admin.ModelAdmin):
 class VestimPorydok(admin.ModelAdmin):
     list_display = ('date','poryadok',)
 
-admin.site.register(clients, clientfields)
-admin.site.register(news)
+#admin.site.register(clients, clientfields)
+#admin.site.register(news)
 admin.site.register(flat_obj, flatfields, )
-admin.site.register(flat_obj_gal, flatgalfields)
-admin.site.register(uchastok, uchfields)
+#admin.site.register(flat_obj_gal, flatgalfields)
+#admin.site.register(uchastok, uchfields)
 admin.site.register(otchet_nov, sdelka_nov)
 admin.site.register(zayavka, zayavkaFields)
 admin.site.register(feed, feedfelds)
@@ -93,7 +93,7 @@ admin.site.register(cachestvoDomCl, cashDomClickFields)
 admin.site.register(domclickText, textFields)
 admin.site.register(TmpCianCount, CianFields)
 admin.site.register(zvonok,ZvonokFields)
-admin.site.register( vestum_poryadok_feed,VestimPorydok)
+#admin.site.register(vestum_poryadok_feed,VestimPorydok)
 
 class UserInline(admin.StackedInline):
     model = UserProfile1
