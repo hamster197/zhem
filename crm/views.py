@@ -951,8 +951,28 @@ def vestumFeedViewHouses(request):
     doma = flat_obj.objects.filter(type = 'house').order_by('-pk')
     return render(request,'any/vestumHouses.html', {'tdate':date,'tdom':doma}, content_type="text/xml")
 
-#forYandex
+#old Yandex for all(feiks)
 def YandexFeedview(request):
+    post = flat_obj.objects.filter(domclick='Да', type='flat').order_by('-datep')#[:2]
+    doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')
+    uchastoc = flat_obj.objects.filter(domclick='Да', type='uchastok').order_by('-datep')
+    gal = flat_obj_gal.objects.all()
+    #post = flat_obj.objects.filter(author.userprofile1.tel='' ).order_by('-datep')
+    #post = flat_obj.objects.order_by('-datep')
+    #ручной ввод текста сео
+    date = datetime.now()
+    #dm = domclickText.objects.all().order_by('-dates')[0]
+    # end of ручной ввод текста сео
+    # auto ввод текста сео
+    date1 = timezone.now().day
+    dm = get_object_or_404(domclickText, day = int(date1))
+    #dm = '21312321'
+    # end of autoручной ввод текста сео
+    return render(request,'any/YandexFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date,
+                                                 'tdom':doma, 'tdm':dm, 'tuchastoc':uchastoc }, content_type="text/xml")
+
+## New Yandex for all(with out feiks)
+def NewYandexFeedview(request):
     post = flat_obj.objects.filter(domclick='Да', type='flat').order_by('-datep')#[:2]
     doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')
     uchastoc = flat_obj.objects.filter(domclick='Да', type='uchastok').order_by('-datep')
@@ -4714,6 +4734,8 @@ def DashBoardView(request):
     ########################
     dmAllCount = flat_obj.objects.filter(kadastr='', type='flat').count()
     dmCadastrCount = flat_obj.objects.filter(type='flat')#.exclude(kadastr='').count()
+    dmCadastrCount = flat_obj.objects.filter(type='flat')
+    dmCount = flat_obj.objects.filter(type='flat', domclick_pub='Да').count()
     dmCadastrCount = dmCadastrCount.exclude(kadastr='').count()
     dmaAll = dmCadastrCount+dmAllCount
     ########################
@@ -4882,7 +4904,7 @@ def DashBoardView(request):
                                                      'tc': c1, 'y': y11, 'tc2': c2, 'y2': y12, 'tc3': c3, 'y3': y13,
                                                      'tc4': c4, 'y4': y14, 'tdmall':dmAllCount, 'tdmcadastr':dmCadastrCount,
                                                      'tcianAll':cianAll,'tdmAll':dmaAll, 'trOtd':rOtd, 'tsOtd':sOtd,'taOtd':aOtd,
-                                                     'tssochi':s_sochi, 'tsadler':s_adler,
+                                                     'tssochi':s_sochi, 'tsadler':s_adler, 'tdmCount':dmCount,
                                                      'tdsum1':s_sochi_m1, 'tdsum2':s_sochi_m2, 'tdsum3':s_sochi_m3,
                                                      'tdsum4': s_sochi_m4, 'tdsum5':s_sochi_m5, 'tdsum6':s_sochi_m6,
                                                      'tdm1':dm1,'tdm2': dm2,'tdm3':dm3,'tdm4':dm4,'tdm5':dm5,'tdm6':dm6,
