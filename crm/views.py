@@ -973,7 +973,7 @@ def YandexFeedview(request):
 
 ## New Yandex for all(with out feiks)
 def NewYandexFeedview(request):
-    post = flat_obj.objects.filter(Q(domclick='Да') | Q(domclick='Да'), type='flat').order_by('-datep')#[:2]
+    post = flat_obj.objects.filter(Q(domclick='Да') | Q(domclick='Да'), type='flat').order_by('-datep')[:150]
     doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')
     uchastoc = flat_obj.objects.filter(domclick='Да', type='uchastok').order_by('-datep')
     gal = flat_obj_gal.objects.all()
