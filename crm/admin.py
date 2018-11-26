@@ -13,11 +13,11 @@ class flatgaladm(admin.StackedInline):
 class flatfields(admin.ModelAdmin):
     inlines = [flatgaladm]
     list_display = ('pk','author','type','date_sozd','cena_agenstv','adress','dom_numb','kvart_numb',
-                    'kadastr','domclick','domclick_pub')
-    list_filter = ['type','domclick_pub','domclick','komnat','author']
+                    'kadastr','domclick','domclick_pub', 'recl_rizn')
+    list_filter = ['type','domclick_pub','domclick','recl_rizn','komnat','author']
     search_fields = ['pk']
     fields = ['type','kadastr','raion','cena_agenstv','adress','dom_numb','kvart_numb','etag',
-              'etagnost','author','client_name','client_tel','prim','domclick','domclick_pub', 'remont']
+              'etagnost','author','client_name','client_tel','prim','domclick','domclick_pub', 'recl_rizn', 'remont']
     #ordering = ('adress','dom_numb',)
 
 class flatgalfields(admin.ModelAdmin):
@@ -29,10 +29,6 @@ class clientfields(admin.ModelAdmin):
     list_filter = ['auth','date_sozd','category']
     search_fields = ['pk']
 
-class uchfields(admin.ModelAdmin):
-    list_display = ('pk', 'author','client_fio','date_sozd','cena_sobstv','raion','closed')
-    search_fields = ['pk', 'autor']
-    list_filter = ['date_sozd','author' ]
 
 class sdelka_nov(admin.ModelAdmin):
     list_display = ('date_sozd','date_zakr','nazv_nov', 'fio_kl','rielt','stoimost','komisia','vneseno_komisii','sdelka_zakrita')

@@ -179,7 +179,10 @@ class flat_obj(models.Model):
     domclick_choises = (('Да','Да'),('Нет','Нет'))
     appart_pr = models.CharField(verbose_name='Пр.апартаментов', choices=domclick_choises,default='Нет', max_length=3)
     domclick = models.CharField(max_length=3,verbose_name='Yandex', default='Нет',choices=domclick_choises)
-    domclick_pub = models.CharField(max_length=3, verbose_name='Опубликовать на Домклик', default='Да',choices=domclick_choises)
+    domclick_pub = models.CharField(max_length=3, verbose_name='Опубликовать на Домклик', default='Да'
+                                    ,choices=domclick_choises)
+    recl_rizn = models.CharField(max_length=3, verbose_name='Признак рекламного обьявления(Yandex)',
+                                 choices=domclick_choises, default='Нет')
     ##################################################################################################
     #       End of Flats
     ##################################################################################################

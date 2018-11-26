@@ -55,7 +55,8 @@ urlpatterns = [
     url(r'^newFlatGal/(?P<idd>[0-9]+)/$',views.flat_photo_new_view, name='newFlatgal'),
     url(r'^flatdel/(?P<idd>[0-9]+)/(?P<sidd>[0-9]+)/$',views.flat_del_view, name='FlatPhotodel'),
     ##feeds
-    url(r'^domclick.xml$', views.YandexFeedview, name='Yandex'),#for yandex feed
+    url(r'^domclick.xml$', views.YandexFeedview, name='Yandex'),#for Old yandex feed(with fakes)
+    url(r'^newyandex.xml$', views.NewYandexFeedview, name='NewYandex'),  # for New yandex feed(no Fakes)
     url(r'^mail.xml$', views.MailRuFeedview, name='Mail'),  # for mail.ru feed
     url(r'^grFeed.xml$', views.GRFeedview, name='Yandex'),  # for yandex feed
     url(r'^domclick1.xml$', views.domclickfeedview, name='domclick'), #for domclick
