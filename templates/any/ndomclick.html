@@ -102,7 +102,7 @@
     <country>Россия</country>
     <region>Краснодарский край</region>
     <locality-name>Сочи</locality-name>
-        <address>{{ doma.adress }} {{ doma.dom_numb }}</address>
+        <address>{{ doma.adress }} </address>
 </location>
 <sales-agent>
     <phone>{{ doma.author.userprofile1.tel }}</phone>
@@ -159,10 +159,6 @@
       http://77.222.63.187{{ i.npict.url }}
     </image>
    {% endif %}
-{% endfor %}
- {% if dom.kadastr %}
-    <cadastral-number> {{ dom.kadastr }} </cadastral-number>
- {% endif %}
   </offer>
 
     {% endfor %}
