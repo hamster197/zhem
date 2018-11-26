@@ -885,7 +885,7 @@ def MegaRealfeedview(request):
 #fordomclic
 def domclickfeedview(request):
     count = flat_obj.objects.all().exclude(kadastr='').count()#*0.1)*2
-    post = flat_obj.objects.filter(domclick_pub='Да',type = 'flat').exclude(kadastr='')#.order_by('-kadastr','-datep')[:count]
+    post = flat_obj.objects.filter(domclick_pub='Да',type = 'flat')#.exclude(kadastr='')#.order_by('-kadastr','-datep')[:count]
     doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')
     gal = flat_obj_gal.objects.all()
     #post = flat_obj.objects.filter(domclick_pub='Да').order_by('-datep')
