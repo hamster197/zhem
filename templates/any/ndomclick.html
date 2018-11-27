@@ -1,7 +1,11 @@
 <realty-feed xmlns="http://webmaster.yandex.ru/schemas/feed/realty/2010-06">
  <generation-date>{{ tdate|date:"Y-m-d"  }}T{{ tdate|date:"h:m:s" }}+03:00</generation-date>
  {% for post in tppost %}
+{% if post.new_pk %}
+<offer internal-id="{{ post.new_pk }}">
+{% else %}
  <offer internal-id="{{ post.pk }}">
+{% endif %}
     <type>Продажа</type>
     <category>квартира</category>
     <property-type>Жилая</property-type>

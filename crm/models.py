@@ -65,6 +65,7 @@ class flat_obj(models.Model):
     ##################################################################################################
     #       Start of For All
     ##################################################################################################
+    new_pk = models.CharField(max_length=55, verbose_name='New Pk for DomClick', blank=True)
     nazv = models.CharField(max_length=250, default='', verbose_name='Название обьекта', blank=True)
     allias = models.CharField(max_length=250, default='', verbose_name='Алиас')
     client_name=models.CharField('Имя собственника',max_length=50)
