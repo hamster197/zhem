@@ -32,7 +32,7 @@ class clientfields(admin.ModelAdmin):
 
 class sdelka_nov(admin.ModelAdmin):
     list_display = ('date_sozd','date_zakr','nazv_nov', 'fio_kl','rielt','stoimost','komisia','vneseno_komisii','sdelka_zakrita')
-    list_filter = ['ot_kuda_kl', 'date_sozd', 'rielt',]
+    list_filter = ['ot_kuda_kl', 'date_sozd', 'sdelka_zakrita', 'rielt',]
 
 class feedfelds(admin.ModelAdmin):
     list_display = ('pk','date_sozd','nazv','author','prais')

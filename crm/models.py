@@ -355,8 +355,8 @@ class otchet_nov(models.Model):
     date_sozd = models.DateField(verbose_name='Дата создания сделки:')
     date_zakr = models.DateField(verbose_name='Дата закрытия сделки:')
     nazv_nov = models.CharField(max_length=140, verbose_name='Название объекта:')
-    fio_kl = models.CharField(max_length=50, verbose_name='ФИО клиента:')
-    tel_kl = PhoneNumberField(verbose_name='тел.Клиента:', help_text='(+79881234567)')
+    fio_kl = models.CharField(max_length=50, verbose_name='ФИО клиента(Покупатель):')
+    tel_kl = PhoneNumberField(verbose_name='тел.Клиента(Покупатель):', help_text='(+79881234567)')
 
     ot_kuda_choises = (('Другое' , 'Другое'),('Avito','Avito'),('Юла','Юла'),('Сайт компании','Сайт компании'),#('Avito Turbo','Avito Turbo'),('Vestum','Vestum'),('Cian','Cian'),
                        ('По рекомендации','По рекомендации'),('Домклик(Сбер)','Домклик(Сбер)'),('Yandex Недвижимость','Yandex Недвижимость'))
@@ -385,7 +385,8 @@ class otchet_nov(models.Model):
     prim = models.CharField(max_length=1050, verbose_name='Примечание', default=' ', blank=True)
 
     o_choises = (('',''),('1 Отдел','1 Отдел'),('2 Отдел','2 Отдел'),('3 Отдел','3 Отдел'),('4 Отдел','4 Отдел'),('5 Отдел','5 Отдел'),('6 Отдел','6 Отдел'),('Офис в Адлере','Офис в Адлере'))
-    a_choises = [(c.username, c.last_name+ ' '+c.first_name ) for c in User.objects.all().order_by('last_name')]
+
+    a_choises = [(c.username, c.last_name+ ' '+c.first_name ) for c in User.objects.filter(is_active=True).order_by('last_name')]
 
     reelt1 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №1',blank=True, help_text='Обязательно к заполнению!')
     otd_reelt1 = models.CharField(max_length=25, verbose_name='Отдел:',default='')#,choices=o_choises,default='')

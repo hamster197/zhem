@@ -1585,8 +1585,8 @@ def new_otchet_view_All(request):
             if otchet_nov.reelt10:
                 name = get_object_or_404(User, username = otchet_nov.reelt10)
                 ss = ss+'</br>'+str(name.first_name)+' '+str(name.last_name)+' '+str(otchet_nov.rielt_proc10)+'%'
-            send_mail(fiok+'(Отчет об открытой сделке)', ss, 'zhem-otchet@mail.ru', #['hamster197@mail.ru'], fail_silently=False, html_message=ss)
-                      ['otchet-zhem@mail.ru'], fail_silently=False, html_message=ss)
+            send_mail(fiok+'(Отчет об открытой сделке)', ss, 'zhem-otchet@mail.ru', ['hamster197@mail.ru'], fail_silently=False, html_message=ss)
+                      #['otchet-zhem@mail.ru'], fail_silently=False, html_message=ss)
             if request.user.groups.get().name=='Офис в Адлере' or request.user.groups.get().name=='Администрация Адлер':
                 send_mail(fiok + '(Отчет об открытой сделке Адлер)', ss, 'zhem-otchet@mail.ru',
                           ['2376361@zhem-realty.ru'], fail_silently=False, html_message=ss)
@@ -2909,7 +2909,7 @@ def reyting_po_sdelkam_view(request):
 #################################################
                         sdelki_count = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Да',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), #sdelka_zakrita__contains='Да',
                                                                  date_zakr__lte=date_end, date_zakr__gte=date_start).count()
 #################################################
 ##### Kol _subj_Cian                            ###
@@ -2928,7 +2928,7 @@ def reyting_po_sdelkam_view(request):
 #################################################
                         sdelki_sum = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Да',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Да1',
                                                                date_zakr__lte= date_end, date_zakr__gte=date_start)
 
                         r_sum=0
