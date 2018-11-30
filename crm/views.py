@@ -1585,8 +1585,8 @@ def new_otchet_view_All(request):
             if otchet_nov.reelt10:
                 name = get_object_or_404(User, username = otchet_nov.reelt10)
                 ss = ss+'</br>'+str(name.first_name)+' '+str(name.last_name)+' '+str(otchet_nov.rielt_proc10)+'%'
-            send_mail(fiok+'(Отчет об открытой сделке)', ss, 'zhem-otchet@mail.ru', ['hamster197@mail.ru'], fail_silently=False, html_message=ss)
-                      #['otchet-zhem@mail.ru'], fail_silently=False, html_message=ss)
+            send_mail(fiok+'(Отчет об открытой сделке)', ss, 'zhem-otchet@mail.ru', #['hamster197@mail.ru'], fail_silently=False, html_message=ss)
+                      ['otchet-zhem@mail.ru'], fail_silently=False, html_message=ss)
             if request.user.groups.get().name=='Офис в Адлере' or request.user.groups.get().name=='Администрация Адлер':
                 send_mail(fiok + '(Отчет об открытой сделке Адлер)', ss, 'zhem-otchet@mail.ru',
                           ['2376361@zhem-realty.ru'], fail_silently=False, html_message=ss)
