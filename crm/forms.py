@@ -299,7 +299,8 @@ class uc_edit_form(forms.ModelForm):
 class otchet_all_form(forms.ModelForm):
     class Meta:
         model = otchet_nov
-        fields = ('nazv_nov','fio_kl','tel_kl','ot_kuda_kl','date_zakr','ploshad','stoimost','komisia','ipoteka',
+        fields = ('nazv_nov','fio_kl','tel_kl','fio_pr','tel_pr','tel_posr','name_posr','name_agency',
+                  'ot_kuda_kl','date_zakr','ploshad','stoimost','komisia','ipoteka',
                   'rasrochka','prim', 'reelt1', 'rielt_proc1', 'reelt2', 'rielt_proc2',
                   'reelt3', 'rielt_proc3', 'reelt4', 'rielt_proc4', 'reelt5', 'rielt_proc5',
                   'reelt6', 'rielt_proc6', 'reelt7', 'rielt_proc7',
@@ -309,6 +310,11 @@ class otchet_all_form(forms.ModelForm):
         cleaned_data = super(otchet_all_form, self).clean()
         proc = int(cleaned_data['rielt_proc1'])+int(cleaned_data['rielt_proc2'])+int(cleaned_data['rielt_proc3'])+int(cleaned_data['rielt_proc4'])\
                 +int(cleaned_data['rielt_proc5'])+int(cleaned_data['rielt_proc6'])+int(cleaned_data['rielt_proc7'])+int(cleaned_data['rielt_proc8'])+int(cleaned_data['rielt_proc9'])+int(cleaned_data['rielt_proc10'])
+
+        if int(cleaned_data['stoimost'])==0:
+            raise ValidationError('Введите стоимость', code='invalid')
+        if int(cleaned_data['komisia'])==0:
+            raise ValidationError('Введите коммисию', code='invalid')
         if int(proc) != 100:
            raise ValidationError('Общая сумма процентов <> 100% и составляет= '+str(proc)+'%', code='invalid')
         if int(cleaned_data['stoimost'])<=int(cleaned_data['komisia']):

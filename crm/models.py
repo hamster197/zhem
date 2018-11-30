@@ -1,4 +1,5 @@
-from datetime import timezone
+from datetime import timezone, datetime
+#import datetime
 from django_resized import ResizedImageField
 
 #from autoslug import AutoSlugField
@@ -353,10 +354,18 @@ class uchastok(models.Model):
 class otchet_nov(models.Model):
     #date_sozd = models.DateField(verbose_name='Дата сделки:', auto_now=True)
     date_sozd = models.DateField(verbose_name='Дата создания сделки:')
-    date_zakr = models.DateField(verbose_name='Дата закрытия сделки:')
+    date_zakr = models.DateField(verbose_name='Дата закрытия сделки:')#, default= datetime.datetime.today().date())
     nazv_nov = models.CharField(max_length=140, verbose_name='Название объекта:')
+
     fio_kl = models.CharField(max_length=50, verbose_name='ФИО клиента(Покупатель):')
     tel_kl = PhoneNumberField(verbose_name='тел.Клиента(Покупатель):', help_text='(+79881234567)')
+    fio_pr = models.CharField(max_length=50, verbose_name='ФИО клиента(Продавца):', blank=False, default='')
+    tel_pr = PhoneNumberField(verbose_name='тел.Клиента(Продавца):',blank=False, default='')
+    tel_posr = PhoneNumberField(verbose_name='Тел.посредника', help_text='(+79881234567), если есть',blank=True, default='')
+    name_posr = models.CharField(max_length=50, verbose_name='ФИО Посрединка(ч.риелт или др аг.):',
+                                 help_text=' если есть',blank=True, default='')
+    name_agency = models.CharField(max_length=50, verbose_name='Название агенства:',
+                                   help_text='если есть',blank=True,  default='')
 
     ot_kuda_choises = (('Другое' , 'Другое'),('Avito','Avito'),('Юла','Юла'),('Сайт компании','Сайт компании'),#('Avito Turbo','Avito Turbo'),('Vestum','Vestum'),('Cian','Cian'),
                        ('По рекомендации','По рекомендации'),('Домклик(Сбер)','Домклик(Сбер)'),('Yandex Недвижимость','Yandex Недвижимость'))
@@ -366,8 +375,10 @@ class otchet_nov(models.Model):
     rielt_proc = models.IntegerField(verbose_name='Проценты риелтора-инициатора сделки:',default=100, validators=[MaxValueValidator(100)], blank=True)
 
     ploshad = models.DecimalField(verbose_name='Площадь:', decimal_places=2, max_digits=4,validators=[MinValueValidator(5)], help_text='min 5')
-    stoimost = models.IntegerField(verbose_name='Стоимость объекта:', validators=[MinValueValidator(300000)], help_text='min 300 000')
-    komisia =  models.IntegerField(verbose_name='Комисия:', validators=[MinValueValidator(1000)], help_text='min 1 000')
+    stoimost = models.IntegerField(verbose_name='Стоимость объекта:', validators=[MinValueValidator(300000)],
+                                   help_text='min 300 000', default=0)
+    komisia =  models.IntegerField(verbose_name='Комисия:', validators=[MinValueValidator(1000)], help_text='min 1 000',
+                                   default=0)
     vneseno_komisii = models.IntegerField(verbose_name='Внесенно комисии 1:', default = '0')
     vneseno_komisii_date = models.DateField(verbose_name='Дата внесения комисии 1:', blank=True, null=True)
     vneseno_komisii2 = models.IntegerField(verbose_name='Внесенно комисии 2:', default = 0)

@@ -19,13 +19,37 @@
                            <tr>
                            <tr>
                            <tr>
-                            <td>ФИО клиента:</td>
+                            <td>ФИО клиента(Покупатель):</td>
                             <td><strong>{{ tsdelka.fio_kl }}</strong></td>
                           </tr>
                           <tr>
-                            <td>Телефон клиента:</td>
+                            <td>Телефон клиента(Покупатель):</td>
                               <td><strong>{{ tsdelka.tel_kl }}</strong></td>
                           </tr>
+                                                     <tr>
+                            <td>ФИО клиента(Продавца):</td>
+                            <td><strong>{{ tsdelka.fio_pr }}</strong></td>
+                          </tr>
+                          <tr>
+                            <td>Телефон клиента(Продавца):</td>
+                              <td><strong>{{ tsdelka.tel_pr }}</strong></td>
+                          </tr>
+{% if tsdelka.tel_posr %}
+                          <tr>
+                            <td>Тел.посредника:</td>
+                              <td><strong>{{ tsdelka.tel_posr }}</strong></td>
+                          </tr>
+                                                     <tr>
+                            <td>ФИО Посрединка:</td>
+                            <td><strong>{{ tsdelka.name_posr }}</strong></td>
+                          </tr>
+                          <tr>
+{% if tsdelka.name_agency %}
+                            <td>Название агенства:</td>
+                              <td><strong>{{ tsdelka.name_agency }}</strong></td>
+                          </tr>
+{% endif %}
+{% endif %}
                           <tr>
                             <td>Канал привлечения клиента:</td>
                             <td><strong>{{ tsdelka.ot_kuda_kl }}<strong</td>
