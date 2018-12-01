@@ -2909,7 +2909,7 @@ def reyting_po_sdelkam_view(request):
 #################################################
                         sdelki_count = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), #sdelka_zakrita__contains='Да',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Да',
                                                                  date_zakr__lte=date_end, date_zakr__gte=date_start).count()
 #################################################
 ##### Kol _subj_Cian                            ###
@@ -2928,13 +2928,13 @@ def reyting_po_sdelkam_view(request):
 #################################################
                         sdelki_sum = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Да1',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Да',
                                                                date_zakr__lte= date_end, date_zakr__gte=date_start)
 
                         r_sum=0
                         rasr_sum1 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date__lte= date_end,
                                                              vneseno_komisii_date__gte=date_start)
                         if rasr_sum1:
@@ -2943,7 +2943,7 @@ def reyting_po_sdelkam_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date__lte=date_end,
                                 vneseno_komisii_date__gte=date_start).aggregate(Sum("vneseno_komisii"))
                             if rasr_sum1.get('vneseno_komisii__sum'):
@@ -2955,7 +2955,7 @@ def reyting_po_sdelkam_view(request):
 
                         rasr_sum2 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date2__lte= date_end,
                                                              vneseno_komisii_date2__gte=date_start)
                         if rasr_sum2:
@@ -2964,7 +2964,7 @@ def reyting_po_sdelkam_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date2__lte=date_end,
                                 vneseno_komisii_date2__gte=date_start
                                 ).aggregate(Sum("vneseno_komisii2"))
@@ -2976,7 +2976,7 @@ def reyting_po_sdelkam_view(request):
 
                         rasr_sum3 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date3__lte= date_end,
                                                              vneseno_komisii_date3__gte=date_start)
                         if rasr_sum3:
@@ -2985,7 +2985,7 @@ def reyting_po_sdelkam_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date3__lte=date_end,
                                 vneseno_komisii_date3__gte=date_start).aggregate(Sum("vneseno_komisii3"))
                             if rasr_sum3.get('vneseno_komisii3__sum'):
@@ -2995,7 +2995,7 @@ def reyting_po_sdelkam_view(request):
 
                         rasr_sum4 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date4__lte= date_end,
                                                             vneseno_komisii_date4__gte=date_start)
                         if rasr_sum4:
@@ -3004,7 +3004,7 @@ def reyting_po_sdelkam_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date4__lte=date_end,
                                 vneseno_komisii_date4__gte=date_start).aggregate(Sum("vneseno_komisii4"))
                             if rasr_sum4.get('vneseno_komisii4__sum'):
@@ -3014,7 +3014,7 @@ def reyting_po_sdelkam_view(request):
 
                         rasr_sum5 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date5__lte= date_end,
                                                              vneseno_komisii_date5__gte=date_start)
                         if rasr_sum5:
@@ -3023,7 +3023,7 @@ def reyting_po_sdelkam_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date5__lte=date_end,
                                 vneseno_komisii_date5__gte=date_start).aggregate(Sum("vneseno_komisii5"))
                             if rasr_sum5.get('vneseno_komisii5__sum'):
@@ -3193,7 +3193,7 @@ def reyting_po_sdelkam_mSearch_view(request):
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                 reelt7=user.username)
                             | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                            sdelka_zakrita='Да',
+                            sdelka_zakrita__contains='Да',
                             date_zakr__lte=date_end, date_zakr__gte=date_start).count()
                         #################################################
                         ##### Kol _subj_Cian                            ###
@@ -3219,7 +3219,7 @@ def reyting_po_sdelkam_mSearch_view(request):
                         r_sum=0
                         rasr_sum1 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date__lte= date_end,
                                                              vneseno_komisii_date__gte=date_start)
                         if rasr_sum1:
@@ -3228,7 +3228,7 @@ def reyting_po_sdelkam_mSearch_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date__lte=date_end,
                                 vneseno_komisii_date__gte=date_start).aggregate(Sum("vneseno_komisii"))
                             if rasr_sum1.get('vneseno_komisii__sum'):
@@ -3240,7 +3240,7 @@ def reyting_po_sdelkam_mSearch_view(request):
 
                         rasr_sum2 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date2__lte= date_end,
                                                              vneseno_komisii_date2__gte=date_start)
                         if rasr_sum2:
@@ -3249,7 +3249,7 @@ def reyting_po_sdelkam_mSearch_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date2__lte=date_end,
                                 vneseno_komisii_date2__gte=date_start
                                 ).aggregate(Sum("vneseno_komisii2"))
@@ -3261,7 +3261,7 @@ def reyting_po_sdelkam_mSearch_view(request):
 
                         rasr_sum3 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date3__lte= date_end,
                                                              vneseno_komisii_date3__gte=date_start)
                         if rasr_sum3:
@@ -3270,7 +3270,7 @@ def reyting_po_sdelkam_mSearch_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date3__lte=date_end,
                                 vneseno_komisii_date3__gte=date_start).aggregate(Sum("vneseno_komisii3"))
                             if rasr_sum3.get('vneseno_komisii3__sum'):
@@ -3280,7 +3280,7 @@ def reyting_po_sdelkam_mSearch_view(request):
 
                         rasr_sum4 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date4__lte= date_end,
                                                             vneseno_komisii_date4__gte=date_start)
                         if rasr_sum4:
@@ -3289,7 +3289,7 @@ def reyting_po_sdelkam_mSearch_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date4__lte=date_end,
                                 vneseno_komisii_date4__gte=date_start).aggregate(Sum("vneseno_komisii4"))
                             if rasr_sum4.get('vneseno_komisii4__sum'):
@@ -3299,7 +3299,7 @@ def reyting_po_sdelkam_mSearch_view(request):
 
                         rasr_sum5 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date5__lte= date_end,
                                                              vneseno_komisii_date5__gte=date_start)
                         if rasr_sum5:
@@ -3308,7 +3308,7 @@ def reyting_po_sdelkam_mSearch_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date5__lte=date_end,
                                 vneseno_komisii_date5__gte=date_start).aggregate(Sum("vneseno_komisii5"))
                             if rasr_sum5.get('vneseno_komisii5__sum'):
@@ -3479,7 +3479,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                 reelt7=user.username)
                             | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                            sdelka_zakrita='Да',
+                            sdelka_zakrita__contains='Да',
                             date_zakr__lte=date_end, date_zakr__gte=date_start).count()
                         #################################################
                         ##### Kol _subj_Cian                            ###
@@ -3505,7 +3505,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
                         r_sum=0
                         rasr_sum1 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date__lte= date_end,
                                                              vneseno_komisii_date__gte=date_start)
                         if rasr_sum1:
@@ -3514,7 +3514,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date__lte=date_end,
                                 vneseno_komisii_date__gte=date_start).aggregate(Sum("vneseno_komisii"))
                             if rasr_sum1.get('vneseno_komisii__sum'):
@@ -3526,7 +3526,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
 
                         rasr_sum2 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date2__lte= date_end,
                                                              vneseno_komisii_date2__gte=date_start)
                         if rasr_sum2:
@@ -3535,7 +3535,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date2__lte=date_end,
                                 vneseno_komisii_date2__gte=date_start
                                 ).aggregate(Sum("vneseno_komisii2"))
@@ -3547,7 +3547,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
 
                         rasr_sum3 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date3__lte= date_end,
                                                              vneseno_komisii_date3__gte=date_start)
                         if rasr_sum3:
@@ -3556,7 +3556,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date3__lte=date_end,
                                 vneseno_komisii_date3__gte=date_start).aggregate(Sum("vneseno_komisii3"))
                             if rasr_sum3.get('vneseno_komisii3__sum'):
@@ -3566,7 +3566,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
 
                         rasr_sum4 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date4__lte= date_end,
                                                             vneseno_komisii_date4__gte=date_start)
                         if rasr_sum4:
@@ -3575,7 +3575,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date4__lte=date_end,
                                 vneseno_komisii_date4__gte=date_start).aggregate(Sum("vneseno_komisii4"))
                             if rasr_sum4.get('vneseno_komisii4__sum'):
@@ -3585,7 +3585,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
 
                         rasr_sum5 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date5__lte= date_end,
                                                              vneseno_komisii_date5__gte=date_start)
                         if rasr_sum5:
@@ -3594,7 +3594,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date5__lte=date_end,
                                 vneseno_komisii_date5__gte=date_start).aggregate(Sum("vneseno_komisii5"))
                             if rasr_sum5.get('vneseno_komisii5__sum'):
@@ -3765,7 +3765,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                 reelt7=user.username)
                             | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                            sdelka_zakrita='Да',
+                            sdelka_zakrita__contains='Да',
                             date_zakr__lte=date_end, date_zakr__gte=date_start).count()
                         #################################################
                         ##### Kol _subj_Cian                            ###
@@ -3791,7 +3791,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
                         r_sum=0
                         rasr_sum1 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date__lte= date_end,
                                                              vneseno_komisii_date__gte=date_start)
                         if rasr_sum1:
@@ -3800,7 +3800,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date__lte=date_end,
                                 vneseno_komisii_date__gte=date_start).aggregate(Sum("vneseno_komisii"))
                             if rasr_sum1.get('vneseno_komisii__sum'):
@@ -3812,7 +3812,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
 
                         rasr_sum2 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date2__lte= date_end,
                                                              vneseno_komisii_date2__gte=date_start)
                         if rasr_sum2:
@@ -3821,7 +3821,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date2__lte=date_end,
                                 vneseno_komisii_date2__gte=date_start
                                 ).aggregate(Sum("vneseno_komisii2"))
@@ -3833,7 +3833,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
 
                         rasr_sum3 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date3__lte= date_end,
                                                              vneseno_komisii_date3__gte=date_start)
                         if rasr_sum3:
@@ -3842,7 +3842,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date3__lte=date_end,
                                 vneseno_komisii_date3__gte=date_start).aggregate(Sum("vneseno_komisii3"))
                             if rasr_sum3.get('vneseno_komisii3__sum'):
@@ -3852,7 +3852,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
 
                         rasr_sum4 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date4__lte= date_end,
                                                             vneseno_komisii_date4__gte=date_start)
                         if rasr_sum4:
@@ -3861,7 +3861,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date4__lte=date_end,
                                 vneseno_komisii_date4__gte=date_start).aggregate(Sum("vneseno_komisii4"))
                             if rasr_sum4.get('vneseno_komisii4__sum'):
@@ -3871,7 +3871,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
 
                         rasr_sum5 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date5__lte= date_end,
                                                              vneseno_komisii_date5__gte=date_start)
                         if rasr_sum5:
@@ -3880,7 +3880,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date5__lte=date_end,
                                 vneseno_komisii_date5__gte=date_start).aggregate(Sum("vneseno_komisii5"))
                             if rasr_sum5.get('vneseno_komisii5__sum'):
@@ -4051,7 +4051,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                 reelt7=user.username)
                             | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                            sdelka_zakrita='Да',
+                            sdelka_zakrita__contains='Да',
                             date_zakr__lte=date_end, date_zakr__gte=date_start).count()
                         #################################################
                         ##### Kol _subj_Cian                            ###
@@ -4077,7 +4077,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
                         r_sum=0
                         rasr_sum1 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date__lte= date_end,
                                                              vneseno_komisii_date__gte=date_start)
                         if rasr_sum1:
@@ -4086,7 +4086,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date__lte=date_end,
                                 vneseno_komisii_date__gte=date_start).aggregate(Sum("vneseno_komisii"))
                             if rasr_sum1.get('vneseno_komisii__sum'):
@@ -4098,7 +4098,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
 
                         rasr_sum2 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date2__lte= date_end,
                                                              vneseno_komisii_date2__gte=date_start)
                         if rasr_sum2:
@@ -4107,7 +4107,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date2__lte=date_end,
                                 vneseno_komisii_date2__gte=date_start
                                 ).aggregate(Sum("vneseno_komisii2"))
@@ -4119,7 +4119,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
 
                         rasr_sum3 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date3__lte= date_end,
                                                              vneseno_komisii_date3__gte=date_start)
                         if rasr_sum3:
@@ -4128,7 +4128,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date3__lte=date_end,
                                 vneseno_komisii_date3__gte=date_start).aggregate(Sum("vneseno_komisii3"))
                             if rasr_sum3.get('vneseno_komisii3__sum'):
@@ -4138,7 +4138,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
 
                         rasr_sum4 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date4__lte= date_end,
                                                             vneseno_komisii_date4__gte=date_start)
                         if rasr_sum4:
@@ -4147,7 +4147,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date4__lte=date_end,
                                 vneseno_komisii_date4__gte=date_start).aggregate(Sum("vneseno_komisii4"))
                             if rasr_sum4.get('vneseno_komisii4__sum'):
@@ -4157,7 +4157,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
 
                         rasr_sum5 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date5__lte= date_end,
                                                              vneseno_komisii_date5__gte=date_start)
                         if rasr_sum5:
@@ -4166,7 +4166,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date5__lte=date_end,
                                 vneseno_komisii_date5__gte=date_start).aggregate(Sum("vneseno_komisii5"))
                             if rasr_sum5.get('vneseno_komisii5__sum'):
@@ -4339,7 +4339,7 @@ def reyting_po_sdelkam_tek_god(request):
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                 reelt7=user.username)
                             | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                            sdelka_zakrita='Да',
+                            sdelka_zakrita__contains='Да',
                             date_zakr__lte=date_end, date_zakr__gte=date_start).count()
                         #################################################
                         ##### Kol _subj_Cian                            ###
@@ -4365,7 +4365,7 @@ def reyting_po_sdelkam_tek_god(request):
                         r_sum=0
                         rasr_sum1 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date__lte= date_end,
                                                              vneseno_komisii_date__gte=date_start)
                         if rasr_sum1:
@@ -4374,7 +4374,7 @@ def reyting_po_sdelkam_tek_god(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date__lte=date_end,
                                 vneseno_komisii_date__gte=date_start).aggregate(Sum("vneseno_komisii"))
                             if rasr_sum1.get('vneseno_komisii__sum'):
@@ -4386,7 +4386,7 @@ def reyting_po_sdelkam_tek_god(request):
 
                         rasr_sum2 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date2__lte= date_end,
                                                              vneseno_komisii_date2__gte=date_start)
                         if rasr_sum2:
@@ -4395,7 +4395,7 @@ def reyting_po_sdelkam_tek_god(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date2__lte=date_end,
                                 vneseno_komisii_date2__gte=date_start
                                 ).aggregate(Sum("vneseno_komisii2"))
@@ -4407,7 +4407,7 @@ def reyting_po_sdelkam_tek_god(request):
 
                         rasr_sum3 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date3__lte= date_end,
                                                              vneseno_komisii_date3__gte=date_start)
                         if rasr_sum3:
@@ -4416,7 +4416,7 @@ def reyting_po_sdelkam_tek_god(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date3__lte=date_end,
                                 vneseno_komisii_date3__gte=date_start).aggregate(Sum("vneseno_komisii3"))
                             if rasr_sum3.get('vneseno_komisii3__sum'):
@@ -4426,7 +4426,7 @@ def reyting_po_sdelkam_tek_god(request):
 
                         rasr_sum4 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date4__lte= date_end,
                                                             vneseno_komisii_date4__gte=date_start)
                         if rasr_sum4:
@@ -4435,7 +4435,7 @@ def reyting_po_sdelkam_tek_god(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date4__lte=date_end,
                                 vneseno_komisii_date4__gte=date_start).aggregate(Sum("vneseno_komisii4"))
                             if rasr_sum4.get('vneseno_komisii4__sum'):
@@ -4445,7 +4445,7 @@ def reyting_po_sdelkam_tek_god(request):
 
                         rasr_sum5 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date5__lte= date_end,
                                                              vneseno_komisii_date5__gte=date_start)
                         if rasr_sum5:
@@ -4454,7 +4454,7 @@ def reyting_po_sdelkam_tek_god(request):
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
                                 | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita='Рассрочка',
+                                sdelka_zakrita__contains='Рассрочка',
                                 vneseno_komisii_date5__lte=date_end,
                                 vneseno_komisii_date5__gte=date_start).aggregate(Sum("vneseno_komisii5"))
                             if rasr_sum5.get('vneseno_komisii5__sum'):
