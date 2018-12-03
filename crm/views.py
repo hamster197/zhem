@@ -887,6 +887,7 @@ def domclickfeedview(request):
     count = flat_obj.objects.all().exclude(kadastr='').count()#*0.1)*2
     post = flat_obj.objects.filter(domclick_pub='Да',type = 'flat')#[:10]#.exclude(kadastr='')#.order_by('-kadastr','-datep')[:count]
     doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')
+    uchastoc = flat_obj.objects.filter(domclick='Да', type='uchastok').order_by('-datep')
     gal = flat_obj_gal.objects.all()
     #post = flat_obj.objects.filter(domclick_pub='Да').order_by('-datep')
     #post = flat_obj.objects.order_by('-datep')
@@ -900,7 +901,8 @@ def domclickfeedview(request):
     dm = get_object_or_404(domclickText, day = int(date1))
     #dm = ''
     # end of autoручной ввод текста сео
-    return render(request,'any/ndomclick.html',{'tppost': post, 'tpgal':gal, 'tdate':date, 'tcount':count, 'tdom':doma, 'tdm':dm }, content_type="text/xml")
+    return render(request,'any/ndomclick.html',{'tppost': post, 'tpgal':gal, 'tdate':date, 'tcount':count, 'tdom':doma,
+                                                 'tuchastoc':uchastoc,'tdm':dm }, content_type="text/xml")
 
 #for Vestum
 def vestumfeedview(request):
@@ -2368,7 +2370,10 @@ def otchet_edit_view(request, idd):
 
 def sdelka_zakritie_view(request, idd):
     sdelka = get_object_or_404(otchet_nov, pk = idd)
-    sdelka.sdelka_zakrita='Да'
+    if sdelka.sdelka_zakrita =='Рассрочка':
+        sdelka.sdelka_zakrita = 'Да-Рассрочка'
+    else:
+        sdelka.sdelka_zakrita='Да'
     sdelka.date_zakr = timezone.localdate()
     sdelka.save()
     return redirect('crm:otch_all_reelt')
