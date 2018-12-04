@@ -309,7 +309,8 @@ class otchet_all_form(forms.ModelForm):
     def clean(self):
         cleaned_data = super(otchet_all_form, self).clean()
         proc = int(cleaned_data['rielt_proc1'])+int(cleaned_data['rielt_proc2'])+int(cleaned_data['rielt_proc3'])+int(cleaned_data['rielt_proc4'])\
-                +int(cleaned_data['rielt_proc5'])+int(cleaned_data['rielt_proc6'])+int(cleaned_data['rielt_proc7'])+int(cleaned_data['rielt_proc8'])+int(cleaned_data['rielt_proc9'])+int(cleaned_data['rielt_proc10'])
+                +int(cleaned_data['rielt_proc5'])+int(cleaned_data['rielt_proc6'])+int(cleaned_data['rielt_proc7'])\
+               +int(cleaned_data['rielt_proc8'])+int(cleaned_data['rielt_proc9'])+int(cleaned_data['rielt_proc10'])
 
         if int(cleaned_data['stoimost'])==0:
             raise ValidationError('Введите стоимость', code='invalid')
@@ -319,7 +320,6 @@ class otchet_all_form(forms.ModelForm):
            raise ValidationError('Общая сумма процентов <> 100% и составляет= '+str(proc)+'%', code='invalid')
         if int(cleaned_data['stoimost'])<=int(cleaned_data['komisia']):
                 raise ValidationError('Коммисия больше или равна стоимости квартиры' , code='invalid')
-        #if cleaned_data['old_date']=='Нет':
 
         if not timezone.now().date() <= cleaned_data['date_zakr']:
            raise ValidationError('Дата закрытия меньше даты создания сделки', code='invalid')
@@ -336,6 +336,9 @@ class otchet_all_form1(forms.ModelForm):#edit for administraciya
                   'reelt3', 'rielt_proc3', 'reelt4', 'rielt_proc4', 'reelt5', 'rielt_proc5', 'reelt6',
                   'rielt_proc6', 'reelt7', 'rielt_proc7',
                   'reelt8', 'rielt_proc8', 'reelt9', 'rielt_proc9', 'reelt10', 'rielt_proc10',)
+
+
+
 
 
 

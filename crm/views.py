@@ -2352,6 +2352,9 @@ def otchet_edit_view(request, idd):
             #    otchet.vneseno_komisii_date3 = datetime.now()
             #if otchet.vneseno_komisii3:
             #    otchet.vneseno_komisii_date3 = datetime.now()
+            if otchet.sdelka_zakrita=='Рассрочка':
+                if otchet.komisia==otchet.vneseno_komisii+otchet.vneseno_komisii2+otchet.vneseno_komisii3+otchet.vneseno_komisii4+otchet.vneseno_komisii5:
+                    otchet.sdelka_zakrita = 'Да-Рассрочка'
             otchet.save()
             otchet=form.save(commit=False)
             otchet.save()
