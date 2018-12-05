@@ -3062,7 +3062,7 @@ def reyting_po_sdelkam_view(request):
                                 sum =  sum+((i.komisia/2)*i.rielt_proc9/100)*2
                             if i.reelt10 ==  user.username:
                                 sum =  sum+((i.komisia/2)*i.rielt_proc10/100)*2
-                            #sum=sum+int(r_sum)
+                            sum=sum+int(r_sum)
                             r_sum=0
                         s = reyting_po_sdelkam(auth_nic=user.username, auth_group=user.groups.get(), auth_ful_name=name, sdelok_calc=sdelki_count,
                                                sdelok_sum= sum, cian_count=cian_counts, crm_count=crm_counts)
@@ -3326,7 +3326,7 @@ def reyting_po_sdelkam_mSearch_view(request):
                                 r_sum = r_sum
 
                         sum=0
-                        sum = sum + int(r_sum)
+                        #sum = sum + int(r_sum)
                         for i in sdelki_sum:
                             if i.reelt1 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc1 / 100) * 2
@@ -3348,7 +3348,8 @@ def reyting_po_sdelkam_mSearch_view(request):
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc9 / 100) * 2
                             if i.reelt10 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc10 / 100) * 2
-
+                            sum=sum+int(r_sum)
+                            r_sum=0
                         s = reyting_po_sdelkam(auth_nic=user.username, auth_group=user.groups.get(), auth_ful_name=name,
                                                sdelok_calc=sdelki_count,
                                                sdelok_sum=sum, cian_count=cian_counts, crm_count=crm_counts)
@@ -3612,7 +3613,7 @@ def reyting_po_sdelkam_2Kvartal_view(request):
                                 r_sum = r_sum
 
                         sum=0
-                        sum = sum + int(r_sum)
+                        #sum = sum + int(r_sum)
                         for i in sdelki_sum:
                             if i.reelt1 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc1 / 100) * 2
@@ -3634,10 +3635,13 @@ def reyting_po_sdelkam_2Kvartal_view(request):
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc9 / 100) * 2
                             if i.reelt10 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc10 / 100) * 2
+                            sum=sum+int(r_sum)
+                            r_sum=0
 
                         s = reyting_po_sdelkam(auth_nic=user.username, auth_group=user.groups.get(), auth_ful_name=name,
                                                sdelok_calc=sdelki_count,
                                                sdelok_sum=sum, cian_count=cian_counts, crm_count=crm_counts)
+
                         s.save()
     nach_pr = request.user.userprofile1.nach_otd
     ##########################
@@ -3898,7 +3902,7 @@ def reyting_po_sdelkam_3Kvartal_view(request):
                                 r_sum = r_sum
 
                         sum=0
-                        sum = sum + int(r_sum)
+                        #sum = sum + int(r_sum)
                         for i in sdelki_sum:
                             if i.reelt1 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc1 / 100) * 2
@@ -3920,6 +3924,8 @@ def reyting_po_sdelkam_3Kvartal_view(request):
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc9 / 100) * 2
                             if i.reelt10 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc10 / 100) * 2
+                            sum=sum+int(r_sum)
+                            r_sum=0
 
                         s = reyting_po_sdelkam(auth_nic=user.username, auth_group=user.groups.get(), auth_ful_name=name,
                                                sdelok_calc=sdelki_count,
@@ -4184,7 +4190,7 @@ def reyting_po_sdelkam_4Kvartal_view(request):
                                 r_sum = r_sum
 
                         sum=0
-                        sum = sum + int(r_sum)
+                        #sum = sum + int(r_sum)
                         for i in sdelki_sum:
                             if i.reelt1 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc1 / 100) * 2
@@ -4206,6 +4212,8 @@ def reyting_po_sdelkam_4Kvartal_view(request):
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc9 / 100) * 2
                             if i.reelt10 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc10 / 100) * 2
+                            sum=sum+int(r_sum)
+                            r_sum=0
 
                         s = reyting_po_sdelkam(auth_nic=user.username, auth_group=user.groups.get(), auth_ful_name=name,
                                                sdelok_calc=sdelki_count,
@@ -4472,7 +4480,7 @@ def reyting_po_sdelkam_tek_god(request):
                                 r_sum = r_sum
 
                         sum=0
-                        sum = sum + int(r_sum)
+                        #sum = sum + int(r_sum)
                         for i in sdelki_sum:
                             if i.reelt1 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc1 / 100) * 2
@@ -4494,6 +4502,8 @@ def reyting_po_sdelkam_tek_god(request):
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc9 / 100) * 2
                             if i.reelt10 == user.username:
                                 sum = sum + ((i.komisia / 2) * i.rielt_proc10 / 100) * 2
+                            sum=sum+int(r_sum)
+                            r_sum=0
 
                         s = reyting_po_sdelkam(auth_nic=user.username, auth_group=user.groups.get(), auth_ful_name=name,
                                                sdelok_calc=sdelki_count,
