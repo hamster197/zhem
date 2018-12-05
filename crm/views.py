@@ -886,8 +886,8 @@ def MegaRealfeedview(request):
 def domclickfeedview(request):
     count = flat_obj.objects.all().exclude(kadastr='').count()#*0.1)*2
     post = flat_obj.objects.filter(domclick_pub='Да',type = 'flat')#[:10]#.exclude(kadastr='')#.order_by('-kadastr','-datep')[:count]
-    doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')
-    uchastoc = flat_obj.objects.filter(domclick='Да', type='uchastok').order_by('-datep')
+    doma = flat_obj.objects.filter(domclick_pub='Да', type='house').order_by('-datep')
+    uchastoc = flat_obj.objects.filter(domclick_pub='Да', type='uchastok').order_by('-datep')
     gal = flat_obj_gal.objects.all()
     #post = flat_obj.objects.filter(domclick_pub='Да').order_by('-datep')
     #post = flat_obj.objects.order_by('-datep')
@@ -902,7 +902,7 @@ def domclickfeedview(request):
     #dm = ''
     # end of autoручной ввод текста сео
     return render(request,'any/ndomclick.html',{'tppost': post, 'tpgal':gal, 'tdate':date, 'tcount':count, 'tdom':doma,
-                                                 'tuchastoc':uchastoc,'tdm':dm }, content_type="text/xml")
+                                                 'tuchastoc':uchastoc,'tdm':dm, }, content_type="text/xml")
 
 #for Vestum
 def vestumfeedview(request):
