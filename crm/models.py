@@ -183,6 +183,7 @@ class flat_obj(models.Model):
     domclick = models.CharField(max_length=3,verbose_name='Yandex', default='Нет',choices=domclick_choises)
     domclick_pub = models.CharField(max_length=3, verbose_name='Опубликовать на Домклик', default='Да'
                                     ,choices=domclick_choises)
+    ya_verifed_pr = models.CharField(max_length=3, verbose_name='Признак проверки для Yandex', choices=domclick_choises, default='Нет')
     recl_rizn = models.CharField(max_length=3, verbose_name='Признак рекламного обьявления(Yandex)',
                                  choices=domclick_choises, default='Нет')
     ##################################################################################################
