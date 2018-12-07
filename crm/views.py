@@ -991,7 +991,7 @@ def NewYandexFeedview(request):
     dm = get_object_or_404(domclickText, day = int(date1))
     #dm = '21312321'
     # end of autoручной ввод текста сео
-    return render(request,'any/YandexFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date,
+    return render(request,'any/nYandexFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date,
                                                  'tdom':doma, 'tdm':dm, 'tuchastoc':uchastoc }, content_type="text/xml")
 
 #for Mail ru & ula
