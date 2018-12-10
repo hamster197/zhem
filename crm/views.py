@@ -215,7 +215,7 @@ def news_postform(request):
 @login_required
 def flat_postForm(request):
     n1='Квартиры'
-    n2='подача на Cайт, RegionalRealty, ДомКлик, Росриэлт, Yandex'
+    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail'
     n3 = zayavka.objects.filter(status='Свободен').count()
     if request.POST:
         if request.user.userprofile1.ya == 'Да':
@@ -259,7 +259,7 @@ def flat_postForm(request):
 @login_required
 def flat_apparts_postForm(request):
     n1='Апартаменты'
-    n2='подача на Cайт, RegionalRealty, ДомКлик, Росриэлт, Yandex'
+    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail'
     n3 = zayavka.objects.filter(status='Свободен').count()
     if request.POST:
         if request.user.userprofile1.ya == 'Да':
@@ -1127,7 +1127,7 @@ def cliend_detail_view(request, idd):
 @login_required
 def new_dom_view(request):
     n1='Дома'
-    n2='подача подача на Cайт, RegionalRealty, и Yandex недвижимость'
+    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail'
     if request.POST:
         form = doma_new_post(request.POST)
         if form.is_valid():
@@ -1258,7 +1258,7 @@ def dom_print_view(request, idd):
 @login_required()
 def new_uc_view(request):
     n1='Участки'
-    n2='подача'
+    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail'
     if request.POST:
         form=uc_new_post(request.POST)
         if form.is_valid():
@@ -3102,6 +3102,8 @@ def reyting_po_sdelkam_view(request):
             if i.name=='Офис в Адлере':
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 ASsum = reyting_po_sdelkam.objects.filter(auth_group='Администрация Адлер').aggregate(Sum('sdelok_sum'))
                 Alsum = str(ASsum.get('sdelok_sum__sum'))
                 if str(Alsum) == 'None':
@@ -3399,6 +3401,8 @@ def reyting_po_sdelkam_mSearch_view(request):
             if i.name == 'Офис в Адлере':
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 ASsum = reyting_po_sdelkam.objects.filter(auth_group='Администрация Адлер').aggregate(Sum('sdelok_sum'))
                 Alsum = str(ASsum.get('sdelok_sum__sum'))
                 if str(Alsum) == 'None':
@@ -3688,6 +3692,8 @@ def reyting_po_sdelkam_2Kvartal_view(request):
             if i.name == 'Офис в Адлере':
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 ASsum = reyting_po_sdelkam.objects.filter(auth_group='Администрация Адлер').aggregate(Sum('sdelok_sum'))
                 Alsum = str(ASsum.get('sdelok_sum__sum'))
                 if str(Alsum) == 'None':
@@ -3976,6 +3982,8 @@ def reyting_po_sdelkam_3Kvartal_view(request):
             if i.name == 'Офис в Адлере':
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 ASsum = reyting_po_sdelkam.objects.filter(auth_group='Администрация Адлер').aggregate(Sum('sdelok_sum'))
                 Alsum = str(ASsum.get('sdelok_sum__sum'))
                 if str(Alsum) == 'None':
@@ -4264,6 +4272,8 @@ def reyting_po_sdelkam_4Kvartal_view(request):
             if i.name == 'Офис в Адлере':
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 ASsum = reyting_po_sdelkam.objects.filter(auth_group='Администрация Адлер').aggregate(Sum('sdelok_sum'))
                 Alsum = str(ASsum.get('sdelok_sum__sum'))
                 if str(Alsum) == 'None':
