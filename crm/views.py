@@ -2462,6 +2462,7 @@ def newVigGalView(request, idd):
     n3 = zayavka.objects.filter(status='Свободен').count()
     d11 =timezone.datetime.now().date()-timedelta(days=timezone.datetime.now().weekday())
     crm_obj_week_count = flat_obj.objects.filter(author_id=request.user.id, date_sozd__gte=d11).count()
+    sp = get_object_or_404(feed, pk=idd)
     if request.POST:
         form = vigruzkaGaleryForm(request.POST, request.FILES)
         if form.is_valid():
@@ -4564,6 +4565,8 @@ def reyting_po_sdelkam_tek_god(request):
             if i.name == 'Офис в Адлере':
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 ASsum = reyting_po_sdelkam.objects.filter(auth_group='Администрация Адлер').aggregate(Sum('sdelok_sum'))
                 Alsum = str(ASsum.get('sdelok_sum__sum'))
                 if str(Alsum) == 'None':
@@ -4914,15 +4917,25 @@ def DashBoardView(request):
     studia_count = flat_obj.objects.filter(type = 'flat', komnat ='Студия').count()
     OneRoom_count = flat_obj.objects.filter(type = 'flat', komnat='Однокомнатная').count()
     OneRoom_Sum = flat_obj.objects.filter(type = 'flat', komnat='Однокомнатная').aggregate(Sum("cena_agenstv"))
-    OneRoomSrCena = int(str(OneRoom_Sum.get('cena_agenstv__sum'))) // OneRoom_count
+    if str(OneRoom_Sum.get('cena_agenstv__sum')) != 'None':
+        OneRoomSrCena = int(str(OneRoom_Sum.get('cena_agenstv__sum'))) // OneRoom_count
+    else:
+        OneRoomSrCena = 0
+    t = str(OneRoom_Sum.get('cena_agenstv__sum'))
 
     TwoRoom_count  = flat_obj.objects.filter(type = 'flat', komnat ='Двухкомнатная').count()
-    TwoRoom_Sum = flat_obj.objects.filter(type = 'flat', komnat='Двухкомнатная').aggregate(Sum("cena_agenstv"))
-    TwoRoomSrCena = int(str(OneRoom_Sum.get('cena_agenstv__sum'))) // TwoRoom_count
+    TwoRoom_Sum = flat_obj.objects.filter(type='flat', komnat='Двухкомнатная').aggregate(Sum("cena_agenstv"))
+    if str(TwoRoom_Sum .get('cena_agenstv__sum')) != 'None':
+        TwoRoomSrCena = int(str(TwoRoom_Sum .get('cena_agenstv__sum'))) // TwoRoom_count
+    else:
+        TwoRoomSrCena=0
 
     TreeRoom_count  = flat_obj.objects.filter(type = 'flat', komnat='Трехкомнатная').count()
     TreeRoom_Sum = flat_obj.objects.filter(type = 'flat', komnat='Трехкомнатная').aggregate(Sum("cena_agenstv"))
-    TreeRoomSrCena = int(str(OneRoom_Sum.get('cena_agenstv__sum'))) // TreeRoom_count
+    if str(TreeRoom_Sum.get('cena_agenstv__sum')) != 'None':
+        TreeRoomSrCena = int(str(TreeRoom_Sum.get('cena_agenstv__sum'))) // TreeRoom_count
+    else:
+        TreeRoomSrCena=0
 
     ManyRoom_count  = flat_obj.objects.filter(type = 'flat', komnat='Многокомнатная').count()
     Houses_count = flat_obj.objects.filter(type = 'house').count()
