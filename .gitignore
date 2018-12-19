@@ -5,7 +5,7 @@ crm/migrations/*.py
 __pycache__
 myvenv
 db.sqlite3
-/static
+/static/*.*
 /zhem/settings.py
 .DS_Store
 .idea
