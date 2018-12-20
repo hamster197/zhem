@@ -5,8 +5,7 @@
     <offers>
          {% for post in tppost %}
         <offer>
-            <id>{{ post.pk }}</id>
-
+            <id>{{ post.pk|cut:" " }}</id>
             <part>жилая</part>
 
             <object-type>квартира</object-type>
@@ -41,7 +40,7 @@
                 {% endif %}
                 <price>
 
-                    <value>{{ post.cena_agenstv  }}</value>
+                    <value>{{ post.cena_agenstv|cut:" "  }}</value>
 
                     <unit>total</unit>
 
