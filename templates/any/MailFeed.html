@@ -127,7 +127,7 @@
 {% if tdom %}
     {% for doma in tdom %}
         <offer>
-            <id>{{ doma.pk }}</id>
+            <id>{{ doma.pk|cut:" "  }}</id>
 
             <part>жилая</part>
 
@@ -142,7 +142,7 @@
             <images>
 
 
-{% for i in post.idd_gal.all %}
+{% for i in doma.idd_gal.all %}
     {% if i.npict.url %}
                 {% if forloop.counter == 1 %}
                  <image primary="1"><![CDATA[http://77.222.63.187{{ i.npict.url }}]]></image>
@@ -159,7 +159,7 @@
 
                 <price>
 
-                    <value>{{ doma.cena_agenstv  }}</value>
+                    <value>{{ doma.cena_agenstv|cut:" "   }}</value>
 
                     <unit>total</unit>
 
