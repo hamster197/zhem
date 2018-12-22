@@ -977,7 +977,7 @@ def YandexFeedview(request):
 def NewYandexFeedview(request):
     post = flat_obj.objects.filter(domclick='Да1', domclick_pub='Да', type='flat').order_by('-pk')[:20]
     #post = flat_obj.objects.filter(ya_verifed_pr='Да', type='flat').order_by('-pk')
-    doma = flat_obj.objects.filter(domclick='Да', type='house').order_by('-datep')[:20]
+    doma = flat_obj.objects.filter(domclick='Да', type='house', author_id='163').order_by('-datep')[:20]
     uchastoc = flat_obj.objects.filter(domclick='Да1', type='uchastok').order_by('-datep')
     gal = flat_obj_gal.objects.all()
     #post = flat_obj.objects.filter(author.userprofile1.tel='' ).order_by('-datep')
@@ -996,7 +996,7 @@ def NewYandexFeedview(request):
 
 #for Mail ru & ula
 def MailRuFeedview(request):
-    post = flat_obj.objects.filter( type='flat').order_by('-pk')
+    post = flat_obj.objects.filter( type='flat1').order_by('-pk')
     doma = flat_obj.objects.filter( type='house').order_by('-pk')
     gal = flat_obj_gal.objects.all()
     #post = flat_obj.objects.filter(author.userprofile1.tel='' ).order_by('-datep')
