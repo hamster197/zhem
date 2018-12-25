@@ -1739,6 +1739,15 @@ def reeelt_otchet_all_view(request):
                                               ot_kuda_kl='Yandex Недвижимость').count())
         Yandex = str(Yandex +(otchet_nov.objects.filter(sdelka_zakrita='Нет',  ot_kuda_kl='Yandex Недвижимость').count()))
 ######################################################################################################################
+        all_tel = otchet_nov.objects.filter(date_zakr__gte=ds, date_zakr__lte=de, sdelka_zakrita='Да',
+                                           ot_kuda_kl='Звонок с общего телефона').count()
+        all_tel = all_tel + (otchet_nov.objects.filter(date_sozd__gte=ds, date_sozd__lte=de, sdelka_zakrita='Рассрочка',
+                                                     ot_kuda_kl='Звонок с общего телефона').count())
+        all_tel = all_tel + (otchet_nov.objects.filter(date_zakr__gte=ds, date_zakr__lte=de, sdelka_zakrita='Срыв',
+                                                     ot_kuda_kl='Звонок с общего телефона').count())
+        all_tel = str(
+            all_tel + (otchet_nov.objects.filter(sdelka_zakrita='Нет', ot_kuda_kl='Звонок с общего телефона').count()))
+######################################################################################################################
         sum =otchet_nov.objects.filter(date_zakr__gte=ds,date_zakr__lte=de, sdelka_zakrita='Да').aggregate(Sum("komisia"))
         sum_rasr1 = otchet_nov.objects.filter(Q(sdelka_zakrita='Рассрочка') | Q(sdelka_zakrita='Да-Рассрочка'),
                                               vneseno_komisii_date__gte=ds, vneseno_komisii_date__lte=de,
@@ -1931,11 +1940,17 @@ def reeelt_otchet_all_view(request):
              +s_sochi+'/Адлер: '+s_adler+')'
         group = request.user.groups.get().name
 
-        return render(request,'any/reel_otchet_all.html', {'tn1':n1, 'tn2':n2, 'tn3':n3, 'tOpOtchet':open_otchet,'tClOtchet':closet_otchet, 'trazn':razn_otch, 'tavito':Avito,
-                                                           'tAvitoTurbo':AvitoTurbo, 'tCian':Cian,'tsait':sait,'trec':rec, 'tpform':form, 'tgroup':group, 'tyandex':Yandex,
-                                                           'tdomclick':domclick, 'tdate':date, 'tSRotchet':sriv_otchet, 'tRasrOtchet':rasr_otchet,
-                                                           'topen_otchet_sum':open_otchet_sum,'tcloset_otchet_sum':closet_otchet_sum,'tsriv_otchet_sum':sriv_otchet_sum,
-                                                           'trasr_otchet_sum':rasr_otchet_sum,'tde':date,'t_my_ya_obj':my_ya_obj})
+        return render(request,'any/reel_otchet_all.html', {'tn1':n1, 'tn2':n2, 'tn3':n3, 'tOpOtchet':open_otchet,
+                                                           'tClOtchet':closet_otchet, 'trazn':razn_otch, 'tavito':Avito,
+                                                           'tAvitoTurbo':AvitoTurbo, 'tCian':Cian,'tsait':sait,
+                                                           'trec':rec, 'tpform':form, 'tgroup':group, 'tyandex':Yandex,
+                                                           'tdomclick':domclick, 'tdate':date, 'tSRotchet':sriv_otchet,
+                                                           'tall_tel':all_tel,'tRasrOtchet':rasr_otchet,
+                                                           'topen_otchet_sum':open_otchet_sum,
+                                                           'tcloset_otchet_sum':closet_otchet_sum,
+                                                           'tsriv_otchet_sum':sriv_otchet_sum,
+                                                           'trasr_otchet_sum':rasr_otchet_sum,
+                                                           'tde':date,'t_my_ya_obj':my_ya_obj})
     #if request.user.groups.get().name =='Администрация Адлер':
     #if request.user.UserProfile1.nach_otd == 'Да':
     if request.user.userprofile1.nach_otd == 'Да':

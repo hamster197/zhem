@@ -369,8 +369,9 @@ class otchet_nov(models.Model):
                                    help_text='если есть',blank=True,  default='')
 
     ot_kuda_choises = (('Другое' , 'Другое'),('Avito','Avito'),('Юла','Юла'),('Сайт компании','Сайт компании'),#('Avito Turbo','Avito Turbo'),('Vestum','Vestum'),('Cian','Cian'),
-                       ('По рекомендации','По рекомендации'),('Домклик(Сбер)','Домклик(Сбер)'),('Yandex Недвижимость','Yandex Недвижимость'))
-    ot_kuda_kl = models.CharField(max_length=20, verbose_name='Канал привлечения клиента:', choices=ot_kuda_choises)
+                       ('По рекомендации','По рекомендации'),('Домклик(Сбер)','Домклик(Сбер)')
+                       ,('Yandex Недвижимость','Yandex Недвижимость'),('Звонок с общего телефона','Звонок с общего телефона'))
+    ot_kuda_kl = models.CharField(max_length=30, verbose_name='Канал привлечения клиента:', choices=ot_kuda_choises)
 
     rielt = models.ForeignKey('auth.User', verbose_name='Риелтор:', on_delete=models.CASCADE)
     rielt_proc = models.IntegerField(verbose_name='Проценты риелтора-инициатора сделки:',default=100, validators=[MaxValueValidator(100)], blank=True)
