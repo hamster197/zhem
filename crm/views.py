@@ -996,7 +996,7 @@ def NewYandexFeedview(request):
 
 #for Mail ru & ula
 def MailRuFeedview(request):
-    post = flat_obj.objects.filter( type='flat1').order_by('-pk')
+    post = flat_obj.objects.filter( type='flat').order_by('-pk')
     doma = flat_obj.objects.filter( type='house').order_by('-pk')
     gal = flat_obj_gal.objects.all()
     #post = flat_obj.objects.filter(author.userprofile1.tel='' ).order_by('-datep')
