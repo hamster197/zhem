@@ -26,7 +26,7 @@
     <email>strygina_irina@mail.ru</email>
 </sales-agent>
 <price>
-    <value>{{ post.cena_agenstv|add:"-10000"  }}</value>
+    <value>{{ post.cena_agenstv  }}</value>
     <currency>RUR</currency>
 </price>
     <deal-status>прямая продажа</deal-status>
@@ -191,7 +191,7 @@
     <email>{{ uchastoc.author.email }}</email>
 </sales-agent>
 <price>
-    <value>{{ uchastoc.cena_agenstv|add:"-10000"  }}</value>
+    <value>{{ uchastoc.cena_agenstv  }}</value>
   <currency>RUR</currency>
 </price>
 <description>{{ uchastoc.prim }}  {{ tdm }}</description>
