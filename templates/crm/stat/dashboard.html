@@ -1,6 +1,10 @@
 {% extends 'crm/main.html' %}
 
 {% block content %}
+<script src="/static/material/code/highcharts.js"></script>
+<script src="/static/material/code/modules/funnel.js"></script>
+<script src="/static/material/code/modules/exporting.js"></script>
+<script src="/static/material/code/modules/export-data.js"></script>
 {% if request.user.groups.all.0.name == 'Администрация' %}
 <script>
 ##########################################################################
@@ -53,32 +57,61 @@
             <div class="row">
     <div class="col s12 ">
       <div class="card ">
-        <div class="card-content">
+        <div class="card-content" id="container1" style="width:100%; height:288px;>
           <span class="card-title">Однокомнатные: {{ tOneCrs }} руб.</span>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Студии',      {{ tstcount }}],
-          ['Однокомнатные',     {{ tonecount }}],
-          ['Двухкомнатные',      {{ ttwo_count }}],
-          ['Трехкомнатные',      {{ ttreecount }}],
-          ['Многокомнатные',     {{ tmanycount }}],
-          ['Дома',      {{ thouse_count }}],
-
-        ]);
-
-        var options = {
-          title: 'Двухкомнатные: {{ tTwoCrs }} руб. Трехкомнатные {{ tTreCrs }} руб.',
-          pieHole: 0.14,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
+    <script>
+    Highcharts.chart('container1', {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: 0,
+    plotShadow: false
+  },
+  title: {
+    text: '',
+    align: 'center',
+    verticalAlign: 'middle',
+    y: 40
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  },
+  plotOptions: {
+    pie: {
+      dataLabels: {
+        enabled: true,
+        distance: -50,
+        style: {
+          fontWeight: 'bold',
+          color: 'white'
+        }
+      },
+      startAngle: -90,
+      endAngle: 90,
+      center: ['50%', '75%'],
+      size: '110%'
+    }
+  },
+  series: [{
+    type: 'pie',
+    name: '',
+    innerSize: '50%',
+    data: [
+      ['Студии', {{ tstcount | safe }} ],
+      ['Однокомнатные', {{ tonecount | safe }} ],
+      ['Двухкомнатные', {{ ttwo_count | safe }} ],
+      ['Трехкомнатные', {{ ttreecount | safe }} ],
+      ['Многокомнатные', {{ tmanycount | safe }} ],
+      ['Дома', {{ thouse_count | safe }} ],
+      {
+        name: 'Other',
+        y: 0,
+        dataLabels: {
+          enabled: false
+        }
       }
+    ]
+  }]
+});
     </script>
   </head>
   <body>
@@ -97,30 +130,50 @@
       <div class="col s4">  <div class="row">
     <div class="col s12">
       <div class="card ">
-        <div class="card-content">
+        <div class="card-content" id="container" style="width:100%; height:288px;>
           <span class="card-title">Домклик</span>
- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['С кадастром ',     {{ tdmcadastr }}],
-          ['Без кадастра',    {{ tdmall  }}]
-        ]);
-
-        var options = {
-          title: 'Квартир в ЦРМ {{ tdmAll }}/Квартир в Домклик {{ tdmCount }}'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
+    <script>
+Highcharts.chart('container', {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie'
+  },
+  title: {
+    text: 'Квартир в ЦРМ {{ tdmAll }}/Квартир в Домклик {{ tdmCount }}'
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+        style: {
+          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+        }
       }
-    </script>
+    }
+  },
+  series: [{
+    name: 'Квартир',
+    colorByPoint: true,
+    data: [{
+      name: 'С кадастром',
+      y: {{ tdmcadastr|safe }},
+      sliced: true,
+      selected: true
+    }, {
+      name: 'Без кадастра',
+      y: {{ tdmall|safe  }}
+    }]
+  }]
+});
+		</script>
   </head>
   <body>
     <div id="piechart" style="width: 100%; height: 200px;"></div>
@@ -333,7 +386,8 @@
     </div>
   </div>
 
-    <div class="col s12"></div>
+
+
     </div>
 {% endif %}
 
