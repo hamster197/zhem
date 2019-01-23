@@ -4791,14 +4791,18 @@ def DashBoardView(request):
     parsed2 = json.loads(d2.text)
     parsed3 = json.loads(d3.text)
     parsed4 = json.loads(d4.text)
-    if parsed1['data']:
-        c1 = parsed1['data'][0]['metrics'][0]
-    #if c1 == 'ym:s:visits':
-    else:
-        c1 = 0
-    c2 = parsed2['data'][0]['metrics'][0]
-    c3 = parsed3['data'][0]['metrics'][0]
-    c4 = parsed4['data'][0]['metrics'][0]
+    #if parsed1['data']:
+    #    c1 = parsed1['data'][0]['metrics'][0]
+    ###if c1 == 'ym:s:visits':
+    #else:
+    #    c1 = 0
+    #c2 = parsed2['data'][0]['metrics'][0]
+    #c3 = parsed3['data'][0]['metrics'][0]
+    #c4 = parsed4['data'][0]['metrics'][0]
+    c1 = 40
+    c2 = 30
+    c3 = 20
+    c4 = 10
     ########################
     ## End for yandex
     ########################
