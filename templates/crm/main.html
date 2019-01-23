@@ -289,11 +289,12 @@
                                         <ul class="collapsible collapsible-accordion">
                                             <li>
                                                 <a class="collapsible-header">
-                                                    <i class="material-icons">contacts</i>Клиенты для сработки</a>
+                                                    <i class="material-icons">contacts</i>Клиенты</a>
                                                 <div class="collapsible-body">
                                                     <ul>
-
+                                                            {% comment %}
                                                         <li class="">
+
                                                             <a href="{% url 'crm:NewZayav' %}">Внести клиента</a>
                                                             {% if request.user.groups.get.name == 'Офис-менеджер' %}
                                                                 <a href="{% url 'crm:NewZayavNov' %}">Внести новостройку</a>
@@ -301,6 +302,17 @@
                                                             {% endif %}
                                                             <a href="{% url 'crm:indexZayavka' %}">Выбрать клиента</a>
                                                         </li>
+                                                        {% endcomment %}
+                                    <li class="sidebar-item">
+                                    {% if request.user.groups.get.name == 'Администрация' %}
+                                        <a href="{% url 'voronka_ap:voronka_main_adm'%}">
+                                            <i class="material-icons">card_travel</i>Воронка продаж</a>
+                                    {% endif %}
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{% url 'voronka_ap:voronka_index'%}">
+                                        <i class="material-icons">add_shopping_cart</i>Мои клиенты</a>
+                                </li>
 
                                                     </ul>
                                                 </li>

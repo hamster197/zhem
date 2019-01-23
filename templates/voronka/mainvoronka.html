@@ -1,0 +1,218 @@
+{% extends 'crm/main.html' %}
+{% load material_form %}
+{% block content %}
+<script src="/static/material/code/highcharts.js"></script>
+<script src="/static/material/code/modules/funnel.js"></script>
+
+<style>.btn, .btn-large, .btn-small, .btn-flat {
+    height: unset;}
+text.highcharts-credits {
+    display: none;
+}
+svg.highcharts-root {
+    font-family: 'Montserrat', sans-serif !important;
+}	
+	</style>
+<div class="row">
+    <div class="col-lg-8">
+	<div class="card">
+      <div class="card-body">
+      <form method="post" class="post-form">
+        {% csrf_token %}
+    <div class="row">
+      <div class="col-lg-4">{{ tdateform.stdate }}</div>
+      <div class="col-lg-4">{{ tdateform.enddate }}</div>
+      <div class="col-lg-4"><div class="right-align"><button type="submit" name="otv_post" class="btn btn-block btn-lg btn-primary">Поиск</button></div>
+      </div>
+      </div>
+	</div>
+	</div>
+	  
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body ">
+          <span class="font-medium">{{ sdate|date:"d F Y" }} - {{ edate|date:"d F Y" }}</span>
+          <p>
+		  <table class="table">
+		  <tbody>
+		  <tr>
+		  <td> Общее кол-во заявок:</td>
+		  <td> <b>{{ tall_zayav_count }}</b>/{{ tall_zayav_sum }} Р.</td>
+		  </tr>
+		  <tr>
+		  <td> Заявок в работе:</td>
+		  <td> <b>{{ twork_zayav_count }}</b>/{{ twork_zayav_sum }} Р.</td>
+		  </tr>
+		  <tr>
+		  <td> Заявок закрыто:</td>
+		  <td> <b>{{ tsdelka_zayav_count }}</b>/{{ tsdelka_zayav_sum }} Р.</td>
+		  </tr>
+		  </tbody>		  
+		  </table>
+		  </p>
+        </div>
+
+      </div>
+    </div>
+ 
+
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+      <div class="card ">
+        <div class="card-content ">
+		<div id="container" style="max-width: 500px; height: 470px; margin: 0 auto;"></div>
+
+
+
+		<script type="text/javascript">
+
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'funnel'
+    },
+    title: {
+        text: 'Воронка продаж (по статусам)'
+    },
+    plotOptions: {
+        series: {
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b> ({point.y:,.0f})',
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                softConnector: true
+            },
+            center: ['40%', '50%'],
+            neckWidth: '1%',
+            neckHeight: '1%',
+            width: '60%'
+        }
+    },
+    legend: {
+        enabled: true
+    },
+series: [{
+        name: 'Заявки',
+        data: [
+            {% for voronka_tmp in tvoronka_tmp %}
+            ['{{ voronka_tmp.status_nazv }}', {{ voronka_tmp.voronka_counts }}],
+            {% endfor %}
+        ]
+    }]
+});
+		</script>
+
+        </div>
+
+      </div>
+    </div>
+
+      <div class="col-lg-6">
+      <div class="card ">
+        <div class="card-content ">
+		<div id="container1" style="height: 200px; max-width: 300px; margin: 0 auto;"></div>
+ 		<script type="text/javascript">
+
+// Build the chart
+Highcharts.chart('container1', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Каналы поступления заявок'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.y} шт.</b>'
+    },
+    plotOptions: {
+        pie: {
+allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.y} ',
+            },
+            showInLegend: false
+        }
+    },
+    series: [{
+        name: 'Заявок',
+        colorByPoint: true,
+        data: [{% for voronka_kanal in tvoronka_kanal %}
+            ['{{ voronka_kanal.kanal }}', {{ voronka_kanal.voronka_counts }}],
+            {% endfor %}
+        ]
+    }]
+});
+		</script>
+        </div>
+
+      </div>
+	  
+	    <div class="card ">
+        <div class="card-content ">
+		  <div id="container2" style="height: 200px; max-width: 300px; margin: 0 auto;"></div>
+ 		<script type="text/javascript">
+
+// Build the chart
+Highcharts.chart('container2', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Заявки по филиалам'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.y} шт.</b>'
+    },
+    plotOptions: {
+        pie: {
+allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.y} ',
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Заявок',
+        colorByPoint: true,
+        data: [{
+            name: 'Сочи',
+            y: {{ tsochi_zayav }},
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Адлер',
+            y: {{ tadler_zayav  }}
+        }]
+    }]
+});
+		</script>
+
+        </div>
+
+
+      </div>
+      </div>
+	  
+	        <div class="col-lg-4">
+
+      </div>
+
+</div>
+    
+
+{% endblock %}

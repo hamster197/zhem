@@ -1,0 +1,20 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+{% load material_form %}
+<div class="row">
+<div class="col-lg-12">
+<div class="card">
+<div class="card-body">
+    <div class="row">
+      <div class="col s12"><blockquote>
+        <form method="post" class="post-form">
+        {% csrf_token %}
+            {% form form=tform layout=form.layout%}{% endform %}
+        <div class="right-align"><button type="submit" name="otv_post" class="btn">Сохранить</button></div>
+      </blockquote></div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

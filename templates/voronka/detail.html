@@ -1,0 +1,25 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+{% load material_form %}
+{%  if  tpost.rielt.username == request.user.username or request.user.groups.all.0.name == 'Администрация' or request.user.userprofile1.nach_otd == 'Да' %}
+<body>
+        <div class="form-group">
+          <form method="post" class="post-form" id="login-form">
+                {% csrf_token %}
+                {% form form=tst_form layout=form.layout %}
+                {% endform %}
+                <button type="submit" name="status_post" class="btn" >Изменить статус</button>
+
+        </div>
+
+        <div class="form-group1">
+          <form  method="post" class="post-form" id="login-form1" >
+                {% csrf_token %}
+                {% form form=tsur_form layout=form.layout%}
+                {% endform %}
+          <button type="submit" name="otv_post" class="btn">Изменить отвественного</button>
+        </div>
+</body>
+{% endif %}
+{% endblock %}
+

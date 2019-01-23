@@ -6,6 +6,8 @@ from .models import news, UserProfile1, flat_obj, flat_obj_gal, clients, uchasto
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from zvonki.models import zvonok
+from voronka.models import zayavka_vr, status_klienta, status_klienta_all, kanal_pr1, comment, zayavka_subj, zadachi,\
+    zadachi_spr
 
 class flatgaladm(admin.StackedInline):
     model = flat_obj_gal
@@ -73,6 +75,32 @@ class ZvonokFields(admin.ModelAdmin):
 class VestimPorydok(admin.ModelAdmin):
     list_display = ('date','poryadok',)
 
+class stInline(admin.TabularInline):
+    #model = zayavka_vr.stat_zayv_spr.through
+    model = status_klienta_all#.through
+
+class voronka_fields(admin.ModelAdmin):
+    inlines = [stInline]
+    list_display = ('pk','rielt','otdel','kanal','tek_status','tek_status_date','budget','date_sozd')
+
+class status_kl_fields(admin.ModelAdmin):
+    list_display = ('pk','status_id','status_nazv','voronka_counts',)
+
+class status_kl_all_fields(admin.ModelAdmin):
+    list_display = ('date_sozd','status','auth','otdel')
+
+class comment_fields(admin.ModelAdmin):
+    list_display = ('date_sozd','comment',)
+
+class zadachi_fields(admin.ModelAdmin):
+    list_display = ('zadacha_date','zadacha')
+
+class zadachi_spr_fields(admin.ModelAdmin):
+    list_display = ('zadacha',)
+
+class kanal_pr_fields(admin.ModelAdmin):
+    list_display = ('pk','kanal','voronka_counts')
+
 #admin.site.register(clients, clientfields)
 #admin.site.register(news)
 admin.site.register(flat_obj, flatfields, )
@@ -80,16 +108,24 @@ admin.site.register(flat_obj, flatfields, )
 #admin.site.register(uchastok, uchfields)
 admin.site.register(otchet_nov, sdelka_nov)
 admin.site.register(zayavka, zayavkaFields)
-admin.site.register(feed, feedfelds)
-admin.site.register(feed_gallery, feedgalfelds)
+#admin.site.register(feed, feedfelds)
+#admin.site.register(feed_gallery, feedgalfelds)
 admin.site.register(stat_obj_crm, statistika_fields)
 admin.site.register(reyting_po_sdelkam, reytingFields)
 admin.site.register(reyt_sdelka_otd, OtdReytFields)
-admin.site.register(cachestvoDomCl, cashDomClickFields)
+#admin.site.register(cachestvoDomCl, cashDomClickFields)
 admin.site.register(domclickText, textFields)
 admin.site.register(TmpCianCount, CianFields)
-admin.site.register(zvonok,ZvonokFields)
+#admin.site.register(zvonok,ZvonokFields)
 #admin.site.register(vestum_poryadok_feed,VestimPorydok)
+admin.site.register(zayavka_vr,voronka_fields)
+admin.site.register(status_klienta, status_kl_fields)
+admin.site.register(status_klienta_all, status_kl_all_fields)
+admin.site.register(kanal_pr1, kanal_pr_fields)
+admin.site.register(comment, comment_fields)
+admin.site.register(zayavka_subj)#, zadachi_spr_fields)
+admin.site.register(zadachi, zadachi_fields)
+admin.site.register(zadachi_spr, zadachi_spr_fields)
 
 class UserInline(admin.StackedInline):
     model = UserProfile1

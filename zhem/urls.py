@@ -31,7 +31,8 @@ urlpatterns = [
     url(r'^accounts/login/$', views.login_view, name='login'),
     url(r'^ch_pass$', views.ch_pass_view, name='ch_login'),
     url(r'^', include('crm.urls')),
-    url(r'^zvonki/', include('zvonki.urls'))
+    url(r'^zvonki/', include('zvonki.urls')),
+    url(r'^voronka/', include('voronka.urls')),
 
 ]+  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
