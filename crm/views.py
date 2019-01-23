@@ -2924,7 +2924,7 @@ def reyting_po_sdelkam_view(request):
     #SearchMonthForm = search_by_moth_form()
     reyting_po_sdelkam.objects.all().delete()
     for user in User.objects.all():
-        if user.is_active:
+        if user.is_active and user.userprofile1.tech_zap == 'Нет':
             if (not user.groups.get().name=='Администрация'):
                 if (not user.groups.get().name == 'Юристы'):
                     if not user.groups.get().name == 'Офис-менеджер':
@@ -3216,7 +3216,7 @@ def reyting_po_sdelkam_mSearch_view(request, year_pr):
         SearchMonthForm = search_by_moth_form()
     reyting_po_sdelkam.objects.all().delete()
     for user in User.objects.all():
-        if user.is_active:
+        if user.is_active and user.userprofile1.tech_zap == 'Нет':
             if (not user.groups.get().name == 'Администрация'):
                 if (not user.groups.get().name == 'Юристы'):
                     if not user.groups.get().name == 'Офис-менеджер':
@@ -3510,7 +3510,7 @@ def reyting_po_sdelkam_2Kvartal_view(request, year_pr):
         SearchMonthForm = search_by_moth_form()
     reyting_po_sdelkam.objects.all().delete()
     for user in User.objects.all():
-        if user.is_active:
+        if user.is_active and user.userprofile1.tech_zap == 'Нет':
             if (not user.groups.get().name == 'Администрация'):
                 if (not user.groups.get().name == 'Юристы'):
                     if not user.groups.get().name == 'Офис-менеджер':
@@ -3806,7 +3806,7 @@ def reyting_po_sdelkam_3Kvartal_view(request, year_pr):
         SearchMonthForm = search_by_moth_form()
     reyting_po_sdelkam.objects.all().delete()
     for user in User.objects.all():
-        if user.is_active:
+        if user.is_active and user.userprofile1.tech_zap == 'Нет':
             if (not user.groups.get().name == 'Администрация'):
                 if (not user.groups.get().name == 'Юристы'):
                     if not user.groups.get().name == 'Офис-менеджер':
@@ -4101,7 +4101,7 @@ def reyting_po_sdelkam_4Kvartal_view(request, year_pr):
         SearchMonthForm = search_by_moth_form()
     reyting_po_sdelkam.objects.all().delete()
     for user in User.objects.all():
-        if user.is_active:
+        if user.is_active and user.userprofile1.tech_zap == 'Нет':
             if (not user.groups.get().name == 'Администрация'):
                 if (not user.groups.get().name == 'Юристы'):
                     if not user.groups.get().name == 'Офис-менеджер':
