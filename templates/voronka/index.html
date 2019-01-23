@@ -17,6 +17,7 @@
             {% csrf_token %}
             {% form form=totssearch layout=form.layout%}{% endform %}
           <div class="right-align"><button type="submit" name="otd_search" class="btn">Поиск по отделам</button></div>
+        </form>
             </p>
         </div>
       </div>
@@ -36,6 +37,7 @@
             {% csrf_token %}
             {% form form=trieltsearch layout=form.layout%}{% endform %}
           <div class="right-align"><button type="submit" name="rielt_search" class="btn">Поиск по риелторам</button></div>
+            </form>
           </p>
         </div>
       </div>

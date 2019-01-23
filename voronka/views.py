@@ -208,12 +208,12 @@ def VoronkaDetailView(request, idd):
         usr_form = ChangeRieltForm1(request.POST)
         if usr_form.is_valid():
             n2=request.POST#'1321'
-            #usrid = usr_form.cleaned_data['rielt']
-            #post.rielt_id = usrid
-            #post.otdel = post.rielt.groups.get().name
-            #post.save()
+            usrid = usr_form.cleaned_data['rielt1']
+            post.rielt_id = usrid
+            post.otdel = post.rielt.groups.get().name
+            post.save()
             #n2 = request.POST
-            #return redirect('voronka_ap:voronka_detail', idd=idd)
+            return redirect('voronka_ap:voronka_detail', idd=idd)
     else:
         usr_form = ChangeRieltForm1()
 

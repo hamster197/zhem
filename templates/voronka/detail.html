@@ -1,25 +1,150 @@
 {% extends 'crm/main.html' %}
 {% block content %}
 {% load material_form %}
-{%  if  tpost.rielt.username == request.user.username or request.user.groups.all.0.name == 'Администрация' or request.user.userprofile1.nach_otd == 'Да' %}
-<body>
-        <div class="form-group">
-          <form method="post" class="post-form" id="login-form">
+    {%  if  tpost.rielt.username == request.user.username or request.user.groups.all.0.name == 'Администрация' or request.user.userprofile1.nach_otd == 'Да' %}
+    <div class="row">
+
+<div class="col s6">
+  <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title"><blockquote>Изменить статус:</blockquote></span>
+          <p>
+                <form method="post" class="post-form">
                 {% csrf_token %}
-                {% form form=tst_form layout=form.layout %}
+                {% form form=tst_form layout=form.layout%}
                 {% endform %}
-                <button type="submit" name="status_post" class="btn" >Изменить статус</button>
-
+                <div class="right-align"><button type="submit" name="status_post" class="btn" >Изменить статус</button></div>
+                </form>
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <div class="form-group1">
-          <form  method="post" class="post-form" id="login-form1" >
+<div class="col s6">
+  <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title"><blockquote>Новый ответсвенный:</blockquote></span>
+          <p>
+                <form  method="post" class="post-form">
                 {% csrf_token %}
                 {% form form=tsur_form layout=form.layout%}
                 {% endform %}
-          <button type="submit" name="otv_post" class="btn">Изменить отвественного</button>
+                <div class="right-align"><button type="submit" name="otv_post" class="btn">Изменить отвественного</button></div>
+                </form>
+          </p>
         </div>
-</body>
-{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div></div>
+
+<div class="row">
+ <div class="col s3">
+  <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title"><blockquote>Информация:</blockquote></span>
+          <p class="flow-text">
+            <li>Дата создания:<strong> {{ tpost.date_sozd }} </strong></li>
+            <li>Дата взятия в работу:<strong> {{ tpost.date_vzatia }} </strong></li>
+            {% if tpost.date_zakr %}
+            <li>Дата закрытия:<strong> {{ tpost.date_zakr }} </strong></li>
+            {% endif %}
+            <li>Текущий статус: <strong>{{ tpost.tek_status }}</strong></li>
+            <li>Отв.лицо: <strong>{{ tpost.rielt.first_name }} {{ tpost.rielt.last_name }} </strong></li>
+            <li>Oтдел: <strong>{{ tpost.otdel }} </strong></li>
+            <li>Канал: <strong>{{ tpost.kanal.kanal }} </strong></li>
+            <li>Что ищет: <strong>{{ tpost.estate }}</strong></li>
+            <li>Бюджет: <strong>{{ tpost.budget }} руб.</strong></li>
+            <li>ФИО Клиента:<strong> {{ tpost.fio }} </strong>
+            <li>Тел.:<strong> {{ tpost.tel }} </strong></li>
+            {% if tpost.tel_dop %}
+                <li>Тел(доп).:<strong> {{ tpost.tel_dop }} </strong></li>
+            {% endif %}
+            {% if tpost.email %}
+                <li>Email.:<strong> {{ tpost.email }} </strong></li>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col s3">
+  <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title"><blockquote>Задачи:</blockquote></span>
+          <p>
+              {% for c in  tpost.zadacha_id.all %}
+                    <li><strong> {{ c.zadacha_date }} в {{ c.zadacha_time }}</strong> {{ c.zadacha }}</li>
+              {% endfor %}
+                <form method="post" class="post-form">
+                    {% csrf_token %}
+                    {% form form=tzad_form layout=tzad_form.layout %}{% endform %}
+                <button type="submit" name="zadacha_post" class="btn">Добавить задачу</button>
+                </form>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col s3">
+  <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title"><blockquote>Комментарии:</blockquote></span>
+          <p>
+            {% for c in  tpost.kom_id.all %}
+                <li><strong>{{ c.date_sozd }}</strong> {{ c.comment }}</li>
+            {% endfor %}
+            </br>
+                <form method="post" class="post-form">
+                {% csrf_token %}
+                {% form form=tcom_form layout=form.layout%}{% endform %}
+            <button type="submit" name="comment_post" class="btn">Добавить коментарий</button>
+                </form>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col s3">
+  <div class="row">
+    <div class="col s12 ">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title"><blockquote>История статусов:</blockquote></span>
+          <p>
+            {% for i in  tpost.idd_st.all %}
+                <li><strong>{{ i.date_sozd}}</strong> {{ i.status}} </li>
+            {% endfor %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+    {% endif %}
+
 {% endblock %}
+
 
