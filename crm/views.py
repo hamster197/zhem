@@ -2923,6 +2923,7 @@ def reyting_po_sdelkam_view(request):
 
     #SearchMonthForm = search_by_moth_form()
     reyting_po_sdelkam.objects.all().delete()
+    sum=0
     for user in User.objects.all():
         if user.is_active and user.userprofile1.tech_zap == 'Нет':
             if (not user.groups.get().name=='Администрация'):
@@ -2951,10 +2952,7 @@ def reyting_po_sdelkam_view(request):
 #################################################
 ##### Summa Sdelok                            ###
 #################################################
-                        sdelki_sum = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
-                            | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Да',
-                                                               date_zakr__lte= date_end, date_zakr__gte=date_start)
+
 
                         r_sum=0
                         rasr_sum1 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
@@ -2983,6 +2981,7 @@ def reyting_po_sdelkam_view(request):
                             | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date2__lte= date_end,
                                                              vneseno_komisii_date2__gte=date_start)
+
                         if rasr_sum2:
                             rasr_sum2 = otchet_nov.objects.filter(
                                 Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
@@ -3056,9 +3055,19 @@ def reyting_po_sdelkam_view(request):
                             else:
                                 r_sum = r_sum
 
-                        sum=0
+                        sdelki_sum = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
+                            | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita='Да',
+                                                               date_zakr__lte= date_end, date_zakr__gte=date_start)
+                        #sum=0
+                        s = reyting_po_sdelkam(auth_nic=user.username, auth_group=user.groups.get(), auth_ful_name=name,
+                                               sdelok_calc=sdelki_count,sdelok_sum=r_sum, cian_count=cian_counts,
+                                               crm_count=crm_counts)
+                        s.save()
+                        n2 = r_sum
                         #sum = sum + int(r_sum)
                         for i in sdelki_sum:
+                            #sum = 0
                             if i.reelt1 ==  user.username:
                                 sum = sum+((i.komisia/2)*i.rielt_proc1/100)*2
                             if i.reelt2 ==  user.username:
@@ -3079,11 +3088,16 @@ def reyting_po_sdelkam_view(request):
                                 sum =  sum+((i.komisia/2)*i.rielt_proc9/100)*2
                             if i.reelt10 ==  user.username:
                                 sum =  sum+((i.komisia/2)*i.rielt_proc10/100)*2
-                            sum=sum+int(r_sum)
-                            r_sum=0
-                        s = reyting_po_sdelkam(auth_nic=user.username, auth_group=user.groups.get(), auth_ful_name=name, sdelok_calc=sdelki_count,
-                                               sdelok_sum= sum, cian_count=cian_counts, crm_count=crm_counts)
-                        s.save()
+                            #sum=sum+int(r_sum)
+                            ssum=get_object_or_404(reyting_po_sdelkam, auth_nic=user.username)
+                            ssum.sdelok_sum=ssum.sdelok_sum+sum
+                            ssum.save()
+                            sum=0
+                        #s = reyting_po_sdelkam(auth_nic=user.username, auth_group=user.groups.get(), auth_ful_name=name,
+                        #                       sdelok_calc=sdelki_count, cian_count=cian_counts,#sdelok_sum=sum,
+                        #                       crm_count=crm_counts)
+                        #s.save()
+                            n2=sum
     nach_pr = request.user.userprofile1.nach_otd
  ##########################
  # all For Sochi
