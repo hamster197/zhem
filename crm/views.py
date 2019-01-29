@@ -2925,7 +2925,15 @@ def reyting_po_sdelkam_view(request):
     reyting_po_sdelkam.objects.all().delete()
     sum=0
     for user in User.objects.all():
-        if user.is_active and user.userprofile1.tech_zap == 'Нет':
+
+        sdelki_count = otchet_nov.objects.filter(
+            Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
+            | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
+            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
+            sdelka_zakrita__contains='Да',
+            date_zakr__lte=date_end, date_zakr__gte=date_start).count()
+
+        if (user.is_active and user.userprofile1.tech_zap == 'Нет')or(sdelki_count>0):
             if (not user.groups.get().name=='Администрация'):
                 if (not user.groups.get().name == 'Юристы'):
                     if not user.groups.get().name == 'Офис-менеджер':
