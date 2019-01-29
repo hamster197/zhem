@@ -1963,11 +1963,15 @@ def reeelt_otchet_all_view(request):
             | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),date_zakr__gte=ds, sdelka_zakrita='Нет' ).order_by('-pk')
         closet_otchet = otchet_nov.objects.filter(Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
             | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(otd_reelt7__contains=grp)
-            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),date_zakr__gte=ds,date_zakr__lte=de, sdelka_zakrita='Да').order_by('-pk')
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp)
+                                                  | Q(sdelka_zakrita='Да') | Q(sdelka_zakrita='Да-Рассрочка'),
+                                                  date_zakr__gte=ds,date_zakr__lte=de).order_by('-pk')
         sriv_otchet = otchet_nov.objects.filter(Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
             | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(otd_reelt7__contains=grp)
-            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),sdelka_zakrita='Срыв', date_zakr__gte=ds, date_zakr__lte=de).order_by('-pk')
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),sdelka_zakrita='Срыв',
+                                                date_zakr__gte=ds, date_zakr__lte=de).order_by('-pk')
         rasr_otchet = otchet_nov.objects.filter(Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
+
             | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(otd_reelt7__contains=grp)
             | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp), sdelka_zakrita='Рассрочка').order_by('-pk')
 
@@ -1976,7 +1980,8 @@ def reeelt_otchet_all_view(request):
             | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),date_zakr__gte=ds, sdelka_zakrita='Нет').order_by('-pk').count()
         closet_otchet_sum = otchet_nov.objects.filter(Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
             | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(otd_reelt7__contains=grp)
-            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),date_zakr__gte=ds,date_zakr__lte=de, sdelka_zakrita='Да').order_by('-pk').count()
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp) | Q(sdelka_zakrita='Да') | Q(sdelka_zakrita='Да-Рассрочка'),
+                                                      date_zakr__gte=ds,date_zakr__lte=de).order_by('-pk').count()
         sriv_otchet_sum = otchet_nov.objects.filter(Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
             | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(otd_reelt7__contains=grp)
             | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),sdelka_zakrita='Срыв', date_zakr__gte=ds, date_zakr__lte=de).order_by('-pk').count()
