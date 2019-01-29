@@ -1962,7 +1962,8 @@ def reeelt_otchet_all_view(request):
             | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(otd_reelt7__contains=grp)
             | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),date_zakr__gte=ds, sdelka_zakrita='Нет' ).order_by('-pk')
 
-        closet_otchet = otchet_nov.objects.filter(Q(sdelka_zakrita='Да') | Q(sdelka_zakrita='Да-Рассрочка'),Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
+        closet_otchet = otchet_nov.objects.filter(Q(sdelka_zakrita='Да') | Q(sdelka_zakrita='Да-Рассрочка'),
+            Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
             | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(otd_reelt7__contains=grp)
             | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),
                                                   date_zakr__gte=ds, date_zakr__lte=de).order_by('-pk')
@@ -1986,7 +1987,8 @@ def reeelt_otchet_all_view(request):
                                                       date_zakr__gte=ds,date_zakr__lte=de).order_by('-pk').count()
         sriv_otchet_sum = otchet_nov.objects.filter(Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
             | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(otd_reelt7__contains=grp)
-            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),sdelka_zakrita='Срыв', date_zakr__gte=ds, date_zakr__lte=de).order_by('-pk').count()
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),
+                                                    sdelka_zakrita='Срыв', date_zakr__gte=ds, date_zakr__lte=de).order_by('-pk').count()
         rasr_otchet_sum = otchet_nov.objects.filter(Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
             | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(otd_reelt7__contains=grp)
             | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),sdelka_zakrita='Рассрочка').order_by('-pk').count()
@@ -2033,10 +2035,87 @@ def reeelt_otchet_all_view(request):
             | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),date_zakr__gte=ds, date_zakr__lte=de,
                                              sdelka_zakrita = 'Да').aggregate(Sum("komisia"))
 
+        #if sum_adler.get('komisia__sum'):
+        #    s_adler=str(sum_adler.get('komisia__sum')*45/100)
+        #else:
+        #    s_adler='0'
+        sum_adler = otchet_nov.objects.filter(
+            Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
+            | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(
+                otd_reelt7__contains=grp)
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),
+            date_zakr__gte=ds, date_zakr__lte=de,
+            sdelka_zakrita='Да').aggregate(Sum("komisia"))
+        sum_adler_rasr1 = otchet_nov.objects.filter(
+            Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
+            | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(
+                otd_reelt7__contains=grp)
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),
+            Q(sdelka_zakrita='Рассрочка') | Q(sdelka_zakrita='Да-Рассрочка'),
+            vneseno_komisii_date__gte=ds, vneseno_komisii_date__lte=de,
+            ).aggregate(Sum("vneseno_komisii"))
+        sum_adler_rasr2 = otchet_nov.objects.filter(
+            Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
+            | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(
+                otd_reelt7__contains=grp)
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),
+            Q(sdelka_zakrita='Рассрочка') | Q(sdelka_zakrita='Да-Рассрочка'),
+            vneseno_komisii_date2__gte=ds, vneseno_komisii_date2__lte=de,
+            ).aggregate(Sum("vneseno_komisii2"))
+        sum_adler_rasr3 = otchet_nov.objects.filter(
+            Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
+            | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(
+                otd_reelt7__contains=grp)
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),
+            Q(sdelka_zakrita='Рассрочка') | Q(sdelka_zakrita='Да-Рассрочка'),
+            vneseno_komisii_date3__gte=ds, vneseno_komisii_date3__lte=de,
+            ).aggregate(Sum("vneseno_komisii3"))
+        sum_adler_rasr4 = otchet_nov.objects.filter(
+            Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
+            | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(
+                otd_reelt7__contains=grp)
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),
+            Q(sdelka_zakrita='Рассрочка') | Q(sdelka_zakrita='Да-Рассрочка')
+            , vneseno_komisii_date4__gte=ds, vneseno_komisii_date4__lte=de,
+            ).aggregate(Sum("vneseno_komisii4"))
+        sum_adler_rasr5 = otchet_nov.objects.filter(
+            Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
+            | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(
+                otd_reelt7__contains=grp)
+            | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp),
+            Q(sdelka_zakrita='Рассрочка') | Q(sdelka_zakrita='Да-Рассрочка')
+            , vneseno_komisii_date5__gte=ds, vneseno_komisii_date5__lte=de,
+            ).aggregate(Sum("vneseno_komisii5"))
+
         if sum_adler.get('komisia__sum'):
-            s_adler=str(sum_adler.get('komisia__sum')*45/100)
+            s_adler = str(sum_adler.get('komisia__sum') * 45 / 100)
         else:
-            s_adler='0'
+            s_adler = '0'
+
+        if sum_adler_rasr1.get('vneseno_komisii__sum'):
+            s_adler = str(float(s_adler) + float(sum_adler_rasr1.get('vneseno_komisii__sum') * 45 / 100))
+        else:
+            s_adler = s_adler
+
+        if sum_adler_rasr2.get('vneseno_komisii2__sum'):
+            s_adler = str(float(s_adler) + float(sum_adler_rasr2.get('vneseno_komisii2__sum') * 45 / 100))
+        else:
+            s_adler = s_adler
+
+        if sum_adler_rasr3.get('vneseno_komisii3__sum'):
+            s_adler = str(float(s_adler) + float(sum_adler_rasr3.get('vneseno_komisii3__sum') * 45 / 100))
+        else:
+            s_adler = s_adler
+
+        if sum_adler_rasr4.get('vneseno_komisii4__sum'):
+            s_adler = str(float(s_adler) + float(sum_adler_rasr4.get('vneseno_komisii4__sum') * 45 / 100))
+        else:
+            s_adler = s_adler
+
+        if sum_adler_rasr5.get('vneseno_komisii5__sum'):
+            s_adler = str(float(s_adler) + float(sum_adler_rasr1.get('vneseno_komisii5__sum') * 45 / 100))
+        else:
+            s_adler = s_adler
 
         n2 = n2 + '; c ' + str(ds1) + ' по ' + str(de1) + ' Кол-во сделок: ' + str(
             closet_otchet.count()) + ', Прибыль филиала: ' + s_adler
