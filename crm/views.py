@@ -3466,6 +3466,8 @@ def reyting_po_sdelkam_mSearch_view(request, year_pr):
             else:
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
     otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
@@ -4086,6 +4088,8 @@ def reyting_po_sdelkam_3Kvartal_view(request, year_pr):
             else:
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
     otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
@@ -4395,6 +4399,8 @@ def reyting_po_sdelkam_4Kvartal_view(request, year_pr):
             else:
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
     otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
@@ -4706,6 +4712,8 @@ def reyting_po_sdelkam_tek_god(request, year_pr):
             else:
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
+                if str(sum) == 'None':
+                    sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
     otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
