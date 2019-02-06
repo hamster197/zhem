@@ -3244,7 +3244,7 @@ def reyting_po_sdelkam_view(request):
                     sum = 0
                 s = reyt_sdelka_otd(otd = i.name, kommisia = sum)
                 s.save()
-    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
+    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')[:4]
     return render(request,'crm/stat/sdelkareyting.html',{'zero':zero_bal, 'udl':udl_bal, 'good':good_bal,'great':great_bal,
                 'Azero': Azero_bal, 'Audl': Audl_bal, 'Agood': Agood_bal, 'Agreat': Agreat_bal,
                 'tn1':n1, 'tn2':n2,'tn3':n3,'tcrm_obj_week_count':crm_obj_week_count,'tnach':nach_pr,
@@ -3571,7 +3571,7 @@ def reyting_po_sdelkam_mSearch_view(request, year_pr):
                     sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
-    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
+    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')[:4]
     return render(request, 'crm/stat/sdelkareyting.html',
                   {'zero': zero_bal, 'udl': udl_bal, 'good': good_bal, 'great': great_bal,
                    'Azero': Azero_bal, 'Audl': Audl_bal, 'Agood': Agood_bal, 'Agreat': Agreat_bal,
@@ -3889,7 +3889,7 @@ def reyting_po_sdelkam_2Kvartal_view(request, year_pr):
                     sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
-    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
+    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')[:4]
     return render(request, 'crm/stat/sdelkareyting.html',
                   {'zero': zero_bal, 'udl': udl_bal, 'good': good_bal, 'great': great_bal,
                    'Azero': Azero_bal, 'Audl': Audl_bal, 'Agood': Agood_bal, 'Agreat': Agreat_bal,
@@ -4207,7 +4207,7 @@ def reyting_po_sdelkam_3Kvartal_view(request, year_pr):
                     sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
-    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
+    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')[:4]
     return render(request, 'crm/stat/sdelkareyting.html',
                   {'zero': zero_bal, 'udl': udl_bal, 'good': good_bal, 'great': great_bal,
                    'Azero': Azero_bal, 'Audl': Audl_bal, 'Agood': Agood_bal, 'Agreat': Agreat_bal,
@@ -4525,7 +4525,7 @@ def reyting_po_sdelkam_4Kvartal_view(request, year_pr):
                     sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
-    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
+    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')[:4]
     return render(request, 'crm/stat/sdelkareyting.html',
                   {'zero': zero_bal, 'udl': udl_bal, 'good': good_bal, 'great': great_bal,
                    'Azero': Azero_bal, 'Audl': Audl_bal, 'Agood': Agood_bal, 'Agreat': Agreat_bal,
@@ -4845,7 +4845,7 @@ def reyting_po_sdelkam_tek_god(request, year_pr):
                     sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
-    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')
+    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')[:4]
     return render(request, 'crm/stat/sdelkareyting.html',
                   {'zero': zero_bal, 'udl': udl_bal, 'good': good_bal, 'great': great_bal,
                    'Azero': Azero_bal, 'Audl': Audl_bal, 'Agood': Agood_bal, 'Agreat': Agreat_bal,
@@ -5012,10 +5012,10 @@ def DashBoardView(request):
         'https://api-metrika.yandex.ru/stat/v1/data?&id=46923189&accuracy=full&date1=' + y13 + '&date2=' + y13 + '&metrics=ym:s:visits&oauth_token=' + atoken)
     d4 = requests.get(
         'https://api-metrika.yandex.ru/stat/v1/data?&id=46923189&accuracy=full&date1=' + y14 + '&date2=' + y14 + '&metrics=ym:s:visits&oauth_token=' + atoken)
-    parsed1 = json.loads(d1.text)
-    parsed2 = json.loads(d2.text)
-    parsed3 = json.loads(d3.text)
-    parsed4 = json.loads(d4.text)
+    #parsed1 = json.loads(d1.text)
+    #parsed2 = json.loads(d2.text)
+    #parsed3 = json.loads(d3.text)
+    #parsed4 = json.loads(d4.text)
     #if parsed1['data']:
     #    c1 = parsed1['data'][0]['metrics'][0]
     ###if c1 == 'ym:s:visits':
@@ -5113,7 +5113,7 @@ def DashBoardView(request):
     ########################
     ## Start for Reiting
     ########################
-    rOtd = reyt_sdelka_otd.objects.all().order_by('-kommisia')
+    rOtd = reyt_sdelka_otd.objects.all().order_by('-kommisia')[:4]
     sOtd = reyting_po_sdelkam.objects.all().exclude(auth_group='Офис в Адлере').exclude(
         auth_group='Администрация Адлер').order_by('-sdelok_sum')[:5]
     aOtd = reyting_po_sdelkam.objects.all().exclude(auth_group='1 Отдел').exclude(
