@@ -1595,7 +1595,7 @@ def new_otchet_view_All(request):
                           ['2376361@zhem-realty.ru'], fail_silently=False, html_message=ss)
             return redirect('crm:otch_all_reelt')
     else:
-        otchetFormAllF = otchet_all_form()
+        otchetFormAllF = otchet_all_form(initial={'reelt1':request.user})
 
 
     return render(request,'any/newotchet.html', {'tpotchformall':otchetFormAllF, 'tn1':n1, 'tn2':n2, 'tsave':save, 'tn3':n3,
