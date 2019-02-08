@@ -3,6 +3,22 @@
     <div class="row">
         <div class="card">
                   <table class="bordered">
+                        <div class="collection">
+                            {% if tsdelka.sdelka_zakrita == 'Нет' %}
+                                <a href="{% url 'crm:otch_all_reelt' tpr_tab='1' %}" >
+                            {% endif %}
+                            {% if tsdelka.sdelka_zakrita == 'Да' or tsdelka.sdelka_zakrita == 'Да-Рассрочка' %}
+                                <a href="{% url 'crm:otch_all_reelt' tpr_tab='2' %}" >
+                            {% endif %}
+                            {% if tsdelka.sdelka_zakrita == 'Срыв' %}
+                                <a href="{% url 'crm:otch_all_reelt' tpr_tab='3' %}" >
+                            {% endif %}
+                            {% if tsdelka.sdelka_zakrita == 'Рассрочка' %}
+                                <a href="{% url 'crm:otch_all_reelt' tpr_tab='4' %}" >
+                            {% endif %}
+                            <div  class="collapsible-header" %}><i class="material-icons">arrow_back</i>
+                                Вернуться к списку сделок<span class="new badge"></span></div>
+                        </div></a>
                      <tbody>
                           <tr>
                             <td>Название объекта:</td>
@@ -227,6 +243,23 @@
                            <tr>
                       </tbody>
                    </table>
-        </div>
+                    <div class="collection">
+                        <div class="collection">
+                            {% if tsdelka.sdelka_zakrita == 'Нет' %}
+                                <a href="{% url 'crm:otch_all_reelt' tpr_tab='1' %}" >
+                            {% endif %}
+                            {% if tsdelka.sdelka_zakrita == 'Да' or tsdelka.sdelka_zakrita == 'Да-Рассрочка' %}
+                                <a href="{% url 'crm:otch_all_reelt' tpr_tab='2' %}" >
+                            {% endif %}
+                            {% if tsdelka.sdelka_zakrita == 'Срыв' %}
+                                <a href="{% url 'crm:otch_all_reelt' tpr_tab='3' %}" >
+                            {% endif %}
+                            {% if tsdelka.sdelka_zakrita == 'Рассрочка' %}
+                                <a href="{% url 'crm:otch_all_reelt' tpr_tab='4' %}" >
+                            {% endif %}
+                            <div  class="collapsible-header" %}><i class="material-icons">arrow_back</i>
+                                Вернуться к списку сделок<span class="new badge"></span></div>
+                        </div></a>
+                        </div>
     </div>
 {% endblock %}

@@ -1603,7 +1603,7 @@ def new_otchet_view_All(request):
 
 
 @login_required
-def reeelt_otchet_all_view(request):
+def reeelt_otchet_all_view(request, tpr_tab):
     n1 ='Отчеты '
     #n2 =request.user.groups.get().name
     n3 = zayavka.objects.filter(status='Свободен').count()
@@ -1612,7 +1612,6 @@ def reeelt_otchet_all_view(request):
     crm_obj_week_count = flat_obj.objects.filter(author_id=request.user.id, date_sozd__gte=d11).count()
     n2 = 'Период'
     date = timezone.datetime.now()
-
     if request.POST:
         dform = all_otchet_filtr_form(request.POST)
         if dform.is_valid():
@@ -1950,7 +1949,7 @@ def reeelt_otchet_all_view(request):
                                                            'tcloset_otchet_sum':closet_otchet_sum,
                                                            'tsriv_otchet_sum':sriv_otchet_sum,
                                                            'trasr_otchet_sum':rasr_otchet_sum,
-                                                           'tde':date,'t_my_ya_obj':my_ya_obj})
+                                                           'tde':date,'t_my_ya_obj':my_ya_obj,'tpr_tab':tpr_tab})
     #if request.user.groups.get().name =='Администрация Адлер':
     #if request.user.UserProfile1.nach_otd == 'Да':
     if request.user.userprofile1.nach_otd == 'Да':
@@ -2124,7 +2123,8 @@ def reeelt_otchet_all_view(request):
                                                            'tAvitoTurbo':AvitoTurbo,'tgroup':group, 'tCian':Cian,'tsait':sait,'trec':rec, 'tpform':form,
                                                            'tyandex':Yandex, 'tdomclick':domclick, 'tRasrOtchet':rasr_otchet,
                                                            'topen_otchet_sum': open_otchet_sum,'tcloset_otchet_sum': closet_otchet_sum,
-                                                           'tsriv_otchet_sum': sriv_otchet_sum,'trasr_otchet_sum': rasr_otchet_sum,'tde':date,'t_my_ya_obj':my_ya_obj})
+                                                           'tsriv_otchet_sum': sriv_otchet_sum,'trasr_otchet_sum': rasr_otchet_sum,'tde':date,'t_my_ya_obj':my_ya_obj
+                                                           ,'tpr_tab':tpr_tab})
     else:
         open_otchet = otchet_nov.objects.filter(Q(reelt1=request.user) | Q(reelt2=request.user) | Q(reelt3=request.user)
             | Q(reelt4=request.user) | Q(reelt5=request.user) | Q(reelt6=request.user) | Q(reelt7=request.user)
@@ -2224,7 +2224,8 @@ def reeelt_otchet_all_view(request):
                                                            'tdomclick':domclick,
                                                            'tpform':form, 'tSRotchet':sriv_otchet,
                                                            'tRasrOtchet': rasr_otchet,'topen_otchet_sum':open_otchet_sum,'tcloset_otchet_sum':closet_otchet_sum,'tsriv_otchet_sum':sriv_otchet_sum,
-                                                           'trasr_otchet_sum':rasr_otchet_sum,'tde':date,'t_my_ya_obj':my_ya_obj,'tcrm_obj_week_count':crm_obj_week_count,})
+                                                           'trasr_otchet_sum':rasr_otchet_sum,'tde':date,'t_my_ya_obj':my_ya_obj,'tcrm_obj_week_count':crm_obj_week_count,
+                                                           'tpr_tab':tpr_tab})
 
 @login_required
 def reelt_sdelka_otchet_detail_view(request, idd):
@@ -2309,7 +2310,7 @@ def reelt_sdelka_otchet_detail_view(request, idd):
                                                             'tpn11':p11, 'tpn22':p22, 'tpn33':p33, 'tpn44':p44,
                                                             'tpn55':p55,'tpn66':p66,'tpn77':p77,'tpn11':p11,
                                                             'tpn88': p88,'tpn99':p99,'tpn10':p10,'t_my_ya_obj':my_ya_obj,
-                                                            'tcrm_obj_week_count':crm_obj_week_count,'tost':ostatok, })
+                                                            'tcrm_obj_week_count':crm_obj_week_count,'tost':ostatok})
 
 def temp_otch_view(request):
     for p in otchet_nov.objects.all():
@@ -2499,7 +2500,6 @@ def sdelka_rasroch_view(request, idd):
 def sdelka_delete_view(request, idd):
     sdelka = get_object_or_404(otchet_nov, pk = idd)
     sdelka.delete()
-    #sdelka.save()
     return redirect('crm:otch_all_reelt')
 
 

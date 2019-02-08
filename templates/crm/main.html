@@ -326,7 +326,7 @@
                                                 </li>
                                                 {% comment %} {% if request.user.groups.get.name == 'Администрация' or request.user.groups.get.name == 'Администрация Адлер' %}{% endcomment %}
                                                     <li class="no-padding">
-                                                        <a class="collapsible-header" href="{% url 'crm:otch_all_reelt'%}">
+                                                        <a class="collapsible-header" href="{% url 'crm:otch_all_reelt' tpr_tab='1' %}">
                                                             <i class="material-icons">credit_card</i>Мои сделки</a>
                                                     </li>
                                                 {% comment %} {% endif %}{% endcomment %}

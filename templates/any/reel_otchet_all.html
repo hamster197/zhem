@@ -45,11 +45,26 @@
 
     <div class="card-tabs">
       <ul class="tabs tabs-fixed-width">
-
+       {% if tpr_tab == '1' %}
         <li class="tab"><a class="active"  href="#test6">Открытые сделки <span class="new badge blue" data-badge-caption="">{{ topen_otchet_sum }}</span></a></li>
+       {% else %}
+        <li class="tab"><a   href="#test6">Открытые сделки <span class="new badge blue" data-badge-caption="">{{ topen_otchet_sum }}</span></a></li>
+       {% endif %}
+      {% if tpr_tab == '2' %}
+          <li class="tab"><a class="active" href="#test5">Закрытые сделки<span class="new badge blue" data-badge-caption="">{{ tcloset_otchet_sum }}</span></a></li>
+      {% else %}
           <li class="tab"><a href="#test5">Закрытые сделки<span class="new badge blue" data-badge-caption="">{{ tcloset_otchet_sum }}</span></a></li>
+      {% endif %}
+      {% if tpr_tab == '3' %}
+        <li class="tab"><a class="active" href="#test7">Срыв сделки<span class="new badge blue" data-badge-caption="">{{ tsriv_otchet_sum }}</span></a></li>
+      {% else %}
         <li class="tab"><a href="#test7">Срыв сделки<span class="new badge blue" data-badge-caption="">{{ tsriv_otchet_sum }}</span></a></li>
+      {% endif %}
+      {% if tpr_tab == '4' %}
+          <li class="tab"><a class="active" href="#test8">Рассрочка<span class="new badge blue" data-badge-caption="">{{ trasr_otchet_sum }}</span></a></li>
+      {% else %}
           <li class="tab"><a href="#test8">Рассрочка<span class="new badge blue" data-badge-caption="">{{ trasr_otchet_sum }}</span></a></li>
+      {% endif %}
       </ul>
     </div>
 

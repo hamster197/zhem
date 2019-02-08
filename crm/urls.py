@@ -95,7 +95,7 @@ urlpatterns = [
     #otchet
     url(r'^newotchet/$',views.new_otchet_view_All, name='otch_new_all'),
     url(r'^editotchet/(?P<idd>[0-9]+)/$', views.otchet_edit_view, name='otch_edit'),
-    url(r'^allochet/$',views.reeelt_otchet_all_view, name='otch_all_reelt'),
+    url(r'^allochet(?P<tpr_tab>[0-9]+)/$',views.reeelt_otchet_all_view, name='otch_all_reelt'),
     url(r'^sdelka/(?P<idd>[0-9]+)/$', views.reelt_sdelka_otchet_detail_view, name='otch_detail'),
     url(r'^sdelka/zakrit/(?P<idd>[0-9]+)/$',views.sdelka_zakritie_view, name='sdelka_zakr'),
     url(r'^sdelka/sriv/(?P<idd>[0-9]+)/$',views.sdelka_sriv_view, name='sdelka_sriv'),
