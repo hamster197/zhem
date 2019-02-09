@@ -1593,7 +1593,7 @@ def new_otchet_view_All(request):
             if request.user.groups.get().name=='Офис в Адлере' or request.user.groups.get().name=='Администрация Адлер':
                 send_mail(fiok + '(Отчет об открытой сделке Адлер)', ss, 'zhem-otchet@mail.ru',
                           ['2376361@zhem-realty.ru'], fail_silently=False, html_message=ss)
-            return redirect('crm:otch_all_reelt')
+            return redirect('crm:otch_all_reelt', tpr_tab='1')
     else:
         otchetFormAllF = otchet_all_form(initial={'reelt1':request.user})
 
@@ -2461,7 +2461,15 @@ def otchet_edit_view(request, idd):
             otchet.save()
             otchet=form.save(commit=False)
             otchet.save()
-            return redirect('crm:otch_all_reelt')
+            if otchet.sdelka_zakrita == 'Нет':
+                tpr_tab = '1'
+            if otchet.sdelka_zakrita == 'Да' or otchet.sdelka_zakrita == 'Да-Рассрочка':
+                tpr_tab = '2'
+            if otchet.sdelka_zakrita == 'Срыв':
+                tpr_tab = '3'
+            if otchet.sdelka_zakrita == 'Рассрочка':
+                tpr_tab = '4'
+            return redirect('crm:otch_all_reelt',tpr_tab=tpr_tab)
     else:
         n1 = 'Отчет по сделке'
         n2 = 'редакция'
@@ -2472,7 +2480,16 @@ def otchet_edit_view(request, idd):
             rasr_pr = 'rasr'
         else:
             rasr_pr = 'No_rasr'
-    return render(request, 'any/newotchet.html',{'tpotchformall':form,'tn11': n1, 'tn22': n2,  'tsave':save, 'tgroup':group, 'tid':id, 'tRasrPr':rasr_pr})
+    if otchet.sdelka_zakrita == 'Нет':
+        tpr_tab = '1'
+    if otchet.sdelka_zakrita == 'Да' or otchet.sdelka_zakrita == 'Да-Рассрочка':
+        tpr_tab = '2'
+    if otchet.sdelka_zakrita == 'Срыв':
+        tpr_tab = '3'
+    if otchet.sdelka_zakrita == 'Рассрочка':
+        tpr_tab = '4'
+    return render(request, 'any/newotchet.html',{'tpotchformall':form,'tn11': n1, 'tn22': n2,  'tsave':save,
+                                                 'tgroup':group, 'tid':id, 'tRasrPr':rasr_pr, 'tpr_tab':tpr_tab})
 
 def sdelka_zakritie_view(request, idd):
     sdelka = get_object_or_404(otchet_nov, pk = idd)
@@ -2482,20 +2499,44 @@ def sdelka_zakritie_view(request, idd):
         sdelka.sdelka_zakrita='Да'
     sdelka.date_zakr = timezone.localdate()
     sdelka.save()
-    return redirect('crm:otch_all_reelt')
+    if sdelka.sdelka_zakrita == 'Нет':
+        tpr_tab = '1'
+    if sdelka.sdelka_zakrita == 'Да' or sdelka.sdelka_zakrita == 'Да-Рассрочка':
+        tpr_tab = '2'
+    if sdelka.sdelka_zakrita == 'Срыв':
+        tpr_tab = '3'
+    if sdelka.sdelka_zakrita == 'Рассрочка':
+        tpr_tab = '4'
+    return redirect('crm:otch_all_reelt', tpr_tab=tpr_tab)
 
 def sdelka_sriv_view(request, idd):
     sdelka = get_object_or_404(otchet_nov, pk = idd)
     sdelka.sdelka_zakrita='Срыв'
     sdelka.date_zakr = timezone.datetime.now()
     sdelka.save()
-    return redirect('crm:otch_all_reelt')
+    if sdelka.sdelka_zakrita == 'Нет':
+        tpr_tab = '1'
+    if sdelka.sdelka_zakrita == 'Да' or sdelka.sdelka_zakrita == 'Да-Рассрочка':
+        tpr_tab = '2'
+    if sdelka.sdelka_zakrita == 'Срыв':
+        tpr_tab = '3'
+    if sdelka.sdelka_zakrita == 'Рассрочка':
+        tpr_tab = '4'
+    return redirect('crm:otch_all_reelt', tpr_tab=tpr_tab)
 
 def sdelka_rasroch_view(request, idd):
     sdelka = get_object_or_404(otchet_nov, pk = idd)
     sdelka.sdelka_zakrita='Рассрочка'
     sdelka.save()
-    return redirect('crm:otch_all_reelt')
+    if sdelka.sdelka_zakrita == 'Нет':
+        tpr_tab = '1'
+    if sdelka.sdelka_zakrita == 'Да' or sdelka.sdelka_zakrita == 'Да-Рассрочка':
+        tpr_tab = '2'
+    if sdelka.sdelka_zakrita == 'Срыв':
+        tpr_tab = '3'
+    if sdelka.sdelka_zakrita == 'Рассрочка':
+        tpr_tab = '4'
+    return redirect('crm:otch_all_reelt', tpr_tab=tpr_tab)
 
 def sdelka_delete_view(request, idd):
     sdelka = get_object_or_404(otchet_nov, pk = idd)
