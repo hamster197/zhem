@@ -1,11 +1,15 @@
+.gitignore
 *.pyc
 crm/migrations/*.py
+avito/migrations/*.py
+voronka/migrations/*.py
+image/*.*
 
 *~
 __pycache__
 myvenv
 db.sqlite3
-static/*.*
+/static
 zhem/settings.py
 .DS_Store
 .idea

@@ -10,7 +10,7 @@ from .models import news, flat_obj, flat_obj_gal, clients, uchastok, otchet_nov,
 
 
 class loginform(forms.Form):
-    username=forms.CharField(max_length=20, label='Имя пользователя1')
+    username=forms.CharField(max_length=20, label='Имя пользователя')
     passw=forms.CharField(max_length=10,widget=forms.PasswordInput, label='Пароль')
 
 class newsform(forms.ModelForm):

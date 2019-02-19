@@ -292,7 +292,6 @@
                                                     <i class="material-icons">contacts</i>Клиенты</a>
                                                 <div class="collapsible-body">
                                                     <ul>
-                                                            {% comment %}
                                                         <li class="">
 
                                                             <a href="{% url 'crm:NewZayav' %}">Внести клиента</a>
@@ -302,7 +301,7 @@
                                                             {% endif %}
                                                             <a href="{% url 'crm:indexZayavka' %}">Выбрать клиента</a>
                                                         </li>
-                                                        {% endcomment %}
+
                                     <li class="sidebar-item">
                                     {% if request.user.groups.get.name == 'Администрация' %}
                                         <a href="{% url 'voronka_ap:voronka_main_adm'%}">
