@@ -90,7 +90,8 @@
          {%  for closet_otchet in tClOtchet %}
 
           <tr>
-              <td><a href="{% url 'crm:otch_detail' idd=closet_otchet.pk %}">{{ closet_otchet.all_rielts }}</a></td>
+              <td><a href="{% url 'crm:otch_detail' idd=closet_otchet.pk %}">{{ closet_otchet.all_rielts }}</a>
+              {% if closet_otchet.sdelka_zakrita == "Да-Рассрочка" %}<span class="new badge red" data-badge-caption="">Рассрочка!</span>{% endif %}</td>
 
             <td>{{ closet_otchet.date_sozd }}</td>
             <td>{{ closet_otchet.date_zakr }}</td>
