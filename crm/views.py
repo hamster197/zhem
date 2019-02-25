@@ -2081,8 +2081,8 @@ def reeelt_otchet_all_view(request, tpr_tab):
                 s_sochi = s_sochi + ((rasr.vneseno_komisii5 * 45 / 100) * (rasr.rielt_proc10 / 100))
 
         s_sochi_m = s_sochi + s_adler
-        n2 = n2 +' c '+str(ds1)+' по '+str(de1)+';  ' +'     '+'     '+' Прибыль компании: '+ str(s_sochi_m)+';(Сочи: '\
-             +str(s_sochi)+'/Адлер: '+str(s_adler)+')'
+        n2 = n2 +' c '+str(ds1)+' по '+str(de1)+';  ' +'     '+'     '+' Прибыль компании: '+ str(round(s_sochi_m))+';(Сочи: '\
+             +str(round(s_sochi))+'/Адлер: '+str(round(s_adler))+')'
         group = request.user.groups.get().name
 
         return render(request,'any/reel_otchet_all.html', {'tn1':n1, 'tn2':n2, 'tn3':n3, 'tOpOtchet':open_otchet,
@@ -2359,7 +2359,7 @@ def reeelt_otchet_all_view(request, tpr_tab):
                 s_adler = s_adler +((rasr.vneseno_komisii5 * 45 / 100) * (rasr.rielt_proc10 / 100))
 
         n2 = n2 + '; c ' + str(ds1) + ' по ' + str(de1) + ' Кол-во сделок: ' + str(closet_otchet.count()) + \
-             ', Прибыль филиала: ' + str(s_adler)
+             ', Прибыль филиала: ' + str(round(s_adler))
         group = request.user.groups.get().name
         return render(request,'any/reel_otchet_all.html', {'tn1':n1, 'tn2':n2, 'tn3':n3, 'tOpOtchet':open_otchet,
                                                            'tClOtchet':closet_otchet, 'trazn':razn_otch, 'tavito':Avito,
@@ -3329,44 +3329,45 @@ def reyting_po_sdelkam_view(request):
 ##### Summa Sdelok                            ###
 #################################################
                         r_sum=0
-                        rasr_sum1 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
+                        rasr_sum11 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
                             | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
                                                              vneseno_komisii_date__lte= date_end,
                                                              vneseno_komisii_date__gte=date_start)
-                        rielt_count = 0
-                        for i in rasr_sum1:
-                            if i.reelt1:
-                                rielt_count = 1
-                            if i.reelt2:
-                                rielt_count = rielt_count + 1
-                            if i.reelt3:
-                                rielt_count = rielt_count + 1
-                            if i.reelt4:
-                                rielt_count = rielt_count + 1
-                            if i.reelt5:
-                                rielt_count = rielt_count + 1
-                            if i.reelt6:
-                                rielt_count = rielt_count + 1
-                            if i.reelt7:
-                                rielt_count = rielt_count + 1
-                            if i.reelt8:
-                                rielt_count = rielt_count + 1
-                            if i.reelt9:
-                                rielt_count = rielt_count + 1
-                            if i.reelt10:
-                                rielt_count = rielt_count + 1
-                        if rasr_sum1:
+                        # rielt_count = 0
+                        # for i in rasr_sum1:
+                        #     if i.reelt1:
+                        #         rielt_count = 1
+                        #     if i.reelt2:
+                        #         rielt_count = rielt_count + 1
+                        #     if i.reelt3:
+                        #         rielt_count = rielt_count + 1
+                        #     if i.reelt4:
+                        #         rielt_count = rielt_count + 1
+                        #     if i.reelt5:
+                        #         rielt_count = rielt_count + 1
+                        #     if i.reelt6:
+                        #         rielt_count = rielt_count + 1
+                        #     if i.reelt7:
+                        #         rielt_count = rielt_count + 1
+                        #     if i.reelt8:
+                        #         rielt_count = rielt_count + 1
+                        #     if i.reelt9:
+                        #         rielt_count = rielt_count + 1
+                        #     if i.reelt10:
+                        #         rielt_count = rielt_count + 1
+                        if rasr_sum11:
                             rasr_sum1 = otchet_nov.objects.filter(
                                 Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                                 | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(
                                     reelt7=user.username)
-                                | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
-                                sdelka_zakrita__contains='Рассрочка',
+                                | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username)
+                                ,(Q(sdelka_zakrita__contains='Рассрочка') | Q(sdelka_zakrita__contains='Да-Рассрочка')),
                                 vneseno_komisii_date__lte=date_end,
                                 vneseno_komisii_date__gte=date_start).aggregate(Sum("vneseno_komisii"))
                             if rasr_sum1.get('vneseno_komisii__sum'):
-                                r_sum = str(int(r_sum) + int(rasr_sum1.get('vneseno_komisii__sum')  / rielt_count))
+                                #r_sum = str(int(r_sum) + int(rasr_sum1.get('vneseno_komisii__sum')  / rielt_count))
+                                r_sum = int(rasr_sum1.get('vneseno_komisii__sum')) * (rasr_sum11.rielt_proc1/100)
                             else:
                                 r_sum = r_sum
                         else:
@@ -3374,7 +3375,8 @@ def reyting_po_sdelkam_view(request):
 
                         rasr_sum2 = otchet_nov.objects.filter(Q(reelt1=user.username) | Q(reelt2=user.username) | Q(reelt3=user.username)
                             | Q(reelt4=user.username) | Q(reelt5=user.username) | Q(reelt6=user.username) | Q(reelt7=user.username)
-                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username), sdelka_zakrita__contains='Рассрочка',
+                            | Q(reelt8=user.username) | Q(reelt9=user.username) | Q(reelt10=user.username),
+                            (Q(sdelka_zakrita__contains='Рассрочка') | Q(sdelka_zakrita__contains='Да-Рассрочка')),
                                                              vneseno_komisii_date2__lte= date_end,
                                                              vneseno_komisii_date2__gte=date_start)
                         rielt_count = 0
@@ -3550,56 +3552,66 @@ def reyting_po_sdelkam_view(request):
                         rielt_count = 0
                         sum=0
                         for i in sdelki_sum:
-                            if i.reelt1:
-                                rielt_count = 1
-                            if i.reelt2:
-                                rielt_count = rielt_count + 1
-                            if i.reelt3:
-                                rielt_count = rielt_count + 1
-                            if i.reelt4:
-                                rielt_count = rielt_count + 1
-                            if i.reelt5:
-                                rielt_count = rielt_count + 1
-                            if i.reelt6:
-                                rielt_count = rielt_count + 1
-                            if i.reelt7:
-                                rielt_count = rielt_count + 1
-                            if i.reelt8:
-                                rielt_count = rielt_count + 1
-                            if i.reelt9:
-                                rielt_count = rielt_count + 1
-                            if i.reelt10:
-                                rielt_count = rielt_count + 1
+                            # if i.reelt1:
+                            #     rielt_count = 1
+                            # if i.reelt2:
+                            #     rielt_count = rielt_count + 1
+                            # if i.reelt3:
+                            #     rielt_count = rielt_count + 1
+                            # if i.reelt4:
+                            #     rielt_count = rielt_count + 1
+                            # if i.reelt5:
+                            #     rielt_count = rielt_count + 1
+                            # if i.reelt6:
+                            #     rielt_count = rielt_count + 1
+                            # if i.reelt7:
+                            #     rielt_count = rielt_count + 1
+                            # if i.reelt8:
+                            #     rielt_count = rielt_count + 1
+                            # if i.reelt9:
+                            #     rielt_count = rielt_count + 1
+                            # if i.reelt10:
+                            #     rielt_count = rielt_count + 1
 
                             if i.reelt1 ==  user.username:
-                                sum = sum + (i.komisia/rielt_count)
+                                #sum = sum + (i.komisia/rielt_count)
                                 #sum = sum + ((i.komisia / 2) * i.rielt_proc1 / 100) * 2
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc1/100)
                             if i.reelt2 ==  user.username:
-                                sum = sum + (i.komisia / rielt_count)
+                                #sum = sum + (i.komisia / rielt_count)
                                 #sum = sum+((i.komisia/2)*i.rielt_proc2/100)*2
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc2 / 100)
                             if i.reelt3 ==  user.username:
-                                sum = sum + (i.komisia / rielt_count)
+                                #sum = sum + (i.komisia / rielt_count)
                                 #sum =  sum+((i.komisia/2)*i.rielt_proc3/100)*2
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc3 / 100)
                             if i.reelt4 ==  user.username:
-                                sum = sum + (i.komisia / rielt_count)
+                                #sum = sum + (i.komisia / rielt_count)
                                 #sum =  sum+((i.komisia/2)*i.rielt_proc4/100)*2
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc4 / 100)
                             if i.reelt5 ==  user.username:
-                                sum = sum + (i.komisia / rielt_count)
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc5 / 100)
+                                #sum = sum + (i.komisia / rielt_count)
                                 #sum =  sum+((i.komisia/2)*i.rielt_proc5/100)*2
                             if i.reelt6 ==  user.username:
-                                sum = sum + (i.komisia / rielt_count)
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc6 / 100)
+                                #sum = sum + (i.komisia / rielt_count)
                                 #sum =  sum+((i.komisia/2)*i.rielt_proc6/100)*2
                             if i.reelt7 ==  user.username:
-                                sum = sum + (i.komisia / rielt_count)
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc7 / 100)
+                                #sum = sum + (i.komisia / rielt_count)
                                 #sum =  sum+((i.komisia/2)*i.rielt_proc7/100)*2
                             if i.reelt8 ==  user.username:
-                                sum = sum + (i.komisia / rielt_count)
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc8 / 100)
+                                #sum = sum + (i.komisia / rielt_count)
                                 #sum =  sum+((i.komisia/2)*i.rielt_proc8/100)*2
                             if i.reelt9 ==  user.username:
-                                sum = sum + (i.komisia / rielt_count)
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc9 / 100)
+                                #sum = sum + (i.komisia / rielt_count)
                                 #sum =  sum+((i.komisia/2)*i.rielt_proc9/100)*2
                             if i.reelt10 ==  user.username:
-                                sum = sum + (i.komisia / rielt_count)
+                                sum = sum + (i.komisia * 45 / 100) * (i.rielt_proc10 / 100)
+                                #sum = sum + (i.komisia / rielt_count)
                                 #sum =  sum+((i.komisia/2)*i.rielt_proc10/100)*2
                             ssum=get_object_or_404(reyting_po_sdelkam, auth_nic=user.username)
                             ssum.sdelok_sum=ssum.sdelok_sum+sum
