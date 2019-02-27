@@ -4090,6 +4090,7 @@ def new_reyting_po_sdelkam(request, year_pr):
     ##########################
     # reiting in otdel for Golovin
     #########################
+    AlSum = 0
     reyt_sdelka_otd.objects.all().delete()
     for i in Group.objects.all():
         if i.name == 'Офис в Адлере' or i.name == '1 Отдел' or i.name == '2 Отдел' or i.name == '3 Отдел' or i.name == '4 Отдел':
@@ -4103,8 +4104,8 @@ def new_reyting_po_sdelkam(request, year_pr):
                 if str(Alsum) == 'None':
                     AlSum = 0
                 AllSum = int(sum) + int(Alsum)
-                #s = reyt_sdelka_otd(otd=i.name, kommisia=AlSum)
-                #s.save()
+                s = reyt_sdelka_otd(otd=i.name, kommisia=AllSum)
+                s.save()
             else:
                 Ssum = reyting_po_sdelkam.objects.filter(auth_group=i.name).aggregate(Sum('sdelok_sum'))
                 sum = str(Ssum.get('sdelok_sum__sum'))
@@ -4112,7 +4113,7 @@ def new_reyting_po_sdelkam(request, year_pr):
                     sum = 0
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
-    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')[:4]
+    otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')#[:4]
     form = search_by_moth_form()
     return render(request,'crm/stat/sdelkareyting.html', {'MForm': form, 'tn1':n1, 'tn2':n2, 'tnach':nach_pr,
                 'zero':zero_bal, 'udl':udl_bal, 'good':good_bal,'great':great_bal,
