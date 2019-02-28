@@ -328,14 +328,15 @@
                                                         <a class="collapsible-header" href="{% url 'crm:otch_all_reelt' tpr_tab='1' %}">
                                                             <i class="material-icons">credit_card</i>Мои сделки</a>
                                                     </li>
-                                                {% comment %} {% endif %}{% endcomment %}
+                                                {% comment %} {% endif %}
                                                 <li class="no-padding">
                                                     <a class="collapsible-header" href="{% url 'crm:sdelka_reit'%}">
                                                         <i class="material-icons">assessment</i>Рейтинг</a>
                                                 </li>
+                                                {% endcomment %}
                                                 <li class="no-padding">
                                                     <a class="collapsible-header" href="{% url 'crm:New_Sdelka_Reit' year_pr=0 %}">
-                                                        <i class="material-icons">assessment</i>New Рейтинг</a>
+                                                        <i class="material-icons">assessment</i>Рейтинг</a>
                                                 </li>
 
                                                 <ul class="collapsible collapsible-accordion">

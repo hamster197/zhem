@@ -5935,44 +5935,57 @@ def DashBoardView(request):
     ########################
     ## Start for All Pribil
     ########################
-    ds = fdate = str(timezone.datetime.now().year) + '-' + str(timezone.datetime.now().month) + '-' + '01'
-    de = str(timezone.datetime.now().year) + '-' + str(timezone.datetime.now().month) + '-' + str(
-        timezone.datetime.now().day)
-    open_otchet = otchet_nov.objects.filter(sdelka_zakrita='Нет').order_by('-date_sozd', '-pk')
-
-    #sum_adler = otchet_nov.objects.filter(date_zakr__gte=ds, date_zakr__lte=de, adler_pr='Адлер', \
-    #                                      sdelka_zakrita='Да').aggregate(Sum("komisia"))
-    sum_adler = otchet_nov.objects.filter(Q (otd_reelt1='Администрация Адлер') | Q (otd_reelt1='Офис в Адлере')
-                                          | Q (otd_reelt2='Офис в Адлере') | Q (otd_reelt2='Администрация Адлер')
-                                          | Q(otd_reelt3='Офис в Адлере') | Q(otd_reelt3='Администрация Адлер')
-                                          | Q(otd_reelt4='Офис в Адлере') | Q(otd_reelt4='Администрация Адлер')
-                                          | Q(otd_reelt5='Офис в Адлере') | Q(otd_reelt5='Администрация Адлер')
-                                          | Q(otd_reelt6='Офис в Адлере') | Q(otd_reelt6='Администрация Адлер')
-                                          | Q(otd_reelt7='Офис в Адлере') | Q(otd_reelt7='Администрация Адлер')
-                                          | Q(otd_reelt8='Офис в Адлере') | Q(otd_reelt8='Администрация Адлер')
-                                          | Q(otd_reelt9='Офис в Адлере') | Q(otd_reelt9='Администрация Адлер')
-                                          | Q (otd_reelt10='Офис в Адлере') | Q (otd_reelt10='Администрация Адлер'),
-                                          date_zakr__gte=ds, date_zakr__lte=de, sdelka_zakrita='Да',).aggregate(Sum("komisia"))
-
-    #sum_sochi = otchet_nov.objects.filter(date_zakr__gte=ds, date_zakr__lte=de, adler_pr='',
-    #                                      sdelka_zakrita='Да').aggregate(Sum("komisia"))
-    grp = 'Отдел'
-    sum_sochi = otchet_nov.objects.filter(
-        Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
-        | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(
-            otd_reelt7__contains=grp)
-        | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp), date_zakr__gte=ds,
-        date_zakr__lte=de,
-        sdelka_zakrita='Да').aggregate(Sum("komisia"))
-    if sum_sochi.get('komisia__sum'):
-        s_sochi = str(sum_sochi.get('komisia__sum') * 45 / 100)
-    else:
-        s_sochi = '0'
-
-    if sum_adler.get('komisia__sum'):
-        s_adler = str(sum_adler.get('komisia__sum') * 45 / 100)
-    else:
-        s_adler = '0'
+    # ds = fdate = str(timezone.datetime.now().year) + '-' + str(timezone.datetime.now().month) + '-' + '01'
+    # de = str(timezone.datetime.now().year) + '-' + str(timezone.datetime.now().month) + '-' + str(
+    #     timezone.datetime.now().day)
+    # open_otchet = otchet_nov.objects.filter(sdelka_zakrita='Нет').order_by('-date_sozd', '-pk')
+    #
+    # #sum_adler = otchet_nov.objects.filter(date_zakr__gte=ds, date_zakr__lte=de, adler_pr='Адлер', \
+    # #                                      sdelka_zakrita='Да').aggregate(Sum("komisia"))
+    # sum_adler = otchet_nov.objects.filter(Q (otd_reelt1='Администрация Адлер') | Q (otd_reelt1='Офис в Адлере')
+    #                                       | Q (otd_reelt2='Офис в Адлере') | Q (otd_reelt2='Администрация Адлер')
+    #                                       | Q(otd_reelt3='Офис в Адлере') | Q(otd_reelt3='Администрация Адлер')
+    #                                       | Q(otd_reelt4='Офис в Адлере') | Q(otd_reelt4='Администрация Адлер')
+    #                                       | Q(otd_reelt5='Офис в Адлере') | Q(otd_reelt5='Администрация Адлер')
+    #                                       | Q(otd_reelt6='Офис в Адлере') | Q(otd_reelt6='Администрация Адлер')
+    #                                       | Q(otd_reelt7='Офис в Адлере') | Q(otd_reelt7='Администрация Адлер')
+    #                                       | Q(otd_reelt8='Офис в Адлере') | Q(otd_reelt8='Администрация Адлер')
+    #                                       | Q(otd_reelt9='Офис в Адлере') | Q(otd_reelt9='Администрация Адлер')
+    #                                       | Q (otd_reelt10='Офис в Адлере') | Q (otd_reelt10='Администрация Адлер'),
+    #                                       date_zakr__gte=ds, date_zakr__lte=de, sdelka_zakrita='Да',).aggregate(Sum("komisia"))
+    #
+    # #sum_sochi = otchet_nov.objects.filter(date_zakr__gte=ds, date_zakr__lte=de, adler_pr='',
+    # #                                      sdelka_zakrita='Да').aggregate(Sum("komisia"))
+    # grp = 'Отдел'
+    # sum_sochi = otchet_nov.objects.filter(
+    #     Q(otd_reelt1__contains=grp) | Q(otd_reelt2__contains=grp) | Q(otd_reelt3__contains=grp)
+    #     | Q(otd_reelt4__contains=grp) | Q(otd_reelt5__contains=grp) | Q(otd_reelt6__contains=grp) | Q(
+    #         otd_reelt7__contains=grp)
+    #     | Q(otd_reelt8__contains=grp) | Q(otd_reelt9__contains=grp) | Q(otd_reelt10__contains=grp), date_zakr__gte=ds,
+    #     date_zakr__lte=de,
+    #     sdelka_zakrita='Да').aggregate(Sum("komisia"))
+    # if sum_sochi.get('komisia__sum'):
+    #     s_sochi = str(sum_sochi.get('komisia__sum') * 45 / 100)
+    # else:
+    #     s_sochi = '0'
+    #
+    # if sum_adler.get('komisia__sum'):
+    #     s_adler = str(sum_adler.get('komisia__sum') * 45 / 100)
+    # else:
+    #     s_adler = '0'
+    sum_sochi = reyt_sdelka_otd.objects.filter(otd__contains='Отдел').aggregate(Sum("kommisia"))
+    sum_adler = reyt_sdelka_otd.objects.filter(otd__contains='Адлер').aggregate(Sum("kommisia"))
+    s_sochi = sum_sochi.get('kommisia__sum')
+    s_adler = sum_adler.get('kommisia__sum')
+    #if sum_sochi.get('komisia__sum'):
+    #     s_sochi = str(sum_sochi.get('komisia__sum') * 45 / 100)
+    # else:
+    #     s_sochi = '70'
+    #
+    # if sum_adler.get('komisia__sum'):
+    #     s_adler = str(sum_adler.get('komisia__sum') * 45 / 100)
+    # else:
+    #     s_adler = '30'
     ########################
     ## End for All pribil
     ########################
