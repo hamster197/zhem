@@ -132,15 +132,7 @@ urlpatterns = [
     ### New SdelkaReitings
     url(r'^sdelkaReiting/(?P<year_pr>[0-9]+)/$', views.new_reyting_po_sdelkam,
         name='New_Sdelka_Reit'),
-    ### Old SdelkaReitings
-    url(r'^sdelkaReit/$', views.reyting_po_sdelkam_view, name='sdelka_reit'),
-    url(r'^sdelkarieltMonthSearch/$', views.reyting_po_sdelkam_mSearch_view, name='sdelkarieltMonthSearch'),
-    url(r'^sdelkarieltKvSearch/(?P<year_pr>[0-9]+)/$', views.reyting_po_sdelkam_mSearch_view, name='sdelkarieltKvSearch'),
-    url(r'^sdelkarielt2KvSearch/(?P<year_pr>[0-9]+)/$', views.reyting_po_sdelkam_2Kvartal_view, name='sdelkarielt2KvSearch'),
-    url(r'^sdelkarielt3KvSearch/(?P<year_pr>[0-9]+)/$', views.reyting_po_sdelkam_3Kvartal_view, name='sdelkarielt3KvSearch'),
-    url(r'^sdelkarielt4KvSearch/(?P<year_pr>[0-9]+)/$', views.reyting_po_sdelkam_4Kvartal_view, name='sdelkarielt4KvSearch'),
-    url(r'^sdelkarieltGodSearch/(?P<year_pr>[0-9]+)/$', views.reyting_po_sdelkam_tek_god, name='sdelkarieltGodSearch'),
-    ### End of Old SdelkaReitings
+
     #for homka admin
     url(r'^myadm/$', views.my_admi_view, name = 'myadm'),
 
