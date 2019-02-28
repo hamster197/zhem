@@ -2485,61 +2485,61 @@ def reelt_sdelka_otchet_detail_view(request, idd):
     ostatok=sdelka.komisia-sdelka.vneseno_komisii-sdelka.vneseno_komisii2-sdelka.vneseno_komisii3-sdelka.vneseno_komisii4-sdelka.vneseno_komisii5
     if sdelka.reelt1:
         n11 = User.objects.get(username__exact=sdelka.reelt1).first_name+' '+User.objects.get(username__exact=sdelka.reelt1).last_name
-        p11 = (sdelka.komisia/2)*sdelka.rielt_proc1/100
+        p11 = (sdelka.komisia)*sdelka.rielt_proc1/100
     else:
         n11 = ''
         p11 = ''
     if sdelka.reelt2:
         n22 = User.objects.get(username__exact=sdelka.reelt2).first_name+' '+User.objects.get(username__exact=sdelka.reelt2).last_name
-        p22 = (sdelka.komisia / 2) * sdelka.rielt_proc2 / 100
+        p22 = (sdelka.komisia) * sdelka.rielt_proc2 / 100
     else:
         n22 = ''
         p22 = ''
     if sdelka.reelt3:
         n33 = User.objects.get(username__exact=sdelka.reelt3).first_name+' '+User.objects.get(username__exact=sdelka.reelt3).last_name
-        p33 = (sdelka.komisia / 2) * sdelka.rielt_proc3 / 100
+        p33 = (sdelka.komisia) * sdelka.rielt_proc3 / 100
     else:
         n33 = ''
         p33 = ''
     if sdelka.reelt4:
         n44 = User.objects.get(username__exact=sdelka.reelt4).first_name+' '+User.objects.get(username__exact=sdelka.reelt4).last_name
-        p44 = (sdelka.komisia / 2) * sdelka.rielt_proc4 / 100
+        p44 = (sdelka.komisia) * sdelka.rielt_proc4 / 100
     else:
         n44 = ''
         p44 = ''
     if sdelka.reelt5:
         n55 = User.objects.get(username__exact=sdelka.reelt5).first_name+' '+User.objects.get(username__exact=sdelka.reelt5).last_name
-        p55 = (sdelka.komisia / 2) * sdelka.rielt_proc5 / 100
+        p55 = (sdelka.komisia) * sdelka.rielt_proc5 / 100
     else:
         n55 = ''
         p55 = ''
     if sdelka.reelt6:
         n66 = User.objects.get(username__exact=sdelka.reelt6).first_name+' '+User.objects.get(username__exact=sdelka.reelt6).last_name
-        p66 = (sdelka.komisia / 2) * sdelka.rielt_proc6 / 100
+        p66 = (sdelka.komisia) * sdelka.rielt_proc6 / 100
     else:
         n66 = ''
         p66 = ''
     if sdelka.reelt7:
         n77 = User.objects.get(username__exact=sdelka.reelt7).first_name+' '+User.objects.get(username__exact=sdelka.reelt7).last_name
-        p77 = (sdelka.komisia / 2) * sdelka.rielt_proc7 / 100
+        p77 = (sdelka.komisia) * sdelka.rielt_proc7 / 100
     else:
         n77 = ''
         p77 = ''
     if sdelka.reelt8:
         n88 = User.objects.get(username__exact=sdelka.reelt8).first_name+' '+User.objects.get(username__exact=sdelka.reelt8).last_name
-        p88 = (sdelka.komisia / 2) * sdelka.rielt_proc8 / 100
+        p88 = (sdelka.komisia) * sdelka.rielt_proc8 / 100
     else:
         n88 = ''
         p88 = ''
     if sdelka.reelt9:
         n99 = User.objects.get(username__exact=sdelka.reelt9).first_name+' '+User.objects.get(username__exact=sdelka.reelt9).last_name
-        p99 = (sdelka.komisia / 2) * sdelka.rielt_proc9 / 100
+        p99 = (sdelka.komisia) * sdelka.rielt_proc9 / 100
     else:
         n99 = ''
         p99 = ''
     if sdelka.reelt10:
         n10 = User.objects.get(username__exact=sdelka.reelt10).first_name+' '+User.objects.get(username__exact=sdelka.reelt10).last_name
-        p10 = (sdelka.komisia / 2) * sdelka.rielt_proc10 / 100
+        p10 = (sdelka.komisia) * sdelka.rielt_proc10 / 100
     else:
         n10 = ''
         p10 = ''
