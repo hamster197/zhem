@@ -5979,7 +5979,7 @@ def DashBoardView(request):
     ########################
     ## Start for Reiting
     ########################
-    rOtd = reyt_sdelka_otd.objects.all().order_by('-kommisia')[:4]
+    rOtd = reyt_sdelka_otd.objects.all().order_by('-kommisia')#[:4]
     sOtd = reyting_po_sdelkam.objects.all().exclude(auth_group='Офис в Адлере').exclude(
         auth_group='Администрация Адлер').order_by('-sdelok_sum')[:5]
     aOtd = reyting_po_sdelkam.objects.all().exclude(auth_group='1 Отдел').exclude(
