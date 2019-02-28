@@ -3847,25 +3847,25 @@ def new_reyting_po_sdelkam(request, year_pr):
 
                         for i in sdelki_sum:
                             if i.reelt1 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc1 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc1 / 100))
                             elif i.reelt2 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc2 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc2 / 100))
                             elif i.reelt3 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc3 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc3 / 100))
                             elif i.reelt4 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc3 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc3 / 100))
                             elif i.reelt5 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc3 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc3 / 100))
                             elif i.reelt6 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc3 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc3 / 100))
                             elif i.reelt7 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc3 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc3 / 100))
                             elif i.reelt8 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc3 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc3 / 100))
                             elif i.reelt9 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc3 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc3 / 100))
                             elif i.reelt10 == user.username:
-                                sum = sum + ((i.komisia * 0.45) * (i.rielt_proc3 / 100))
+                                sum = sum + (i.komisia * (i.rielt_proc3 / 100))
                             s = get_object_or_404(reyting_po_sdelkam, auth_nic=user.username)
                             s.sdelok_sum = s.sdelok_sum + sum
                             s.save()
@@ -3883,25 +3883,25 @@ def new_reyting_po_sdelkam(request, year_pr):
 
                         for r1 in rasr_sum1:
                             if r1.reelt1 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc1 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc1 / 100))
                             elif r1.reelt2 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc2 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc2 / 100))
                             elif r1.reelt3 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc3 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc3 / 100))
                             elif r1.reelt4 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc4 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc4 / 100))
                             elif r1.reelt5 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc5 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc5 / 100))
                             elif r1.reelt6 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc6 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc6 / 100))
                             elif r1.reelt7 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc7 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc7 / 100))
                             elif r1.reelt8 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc8 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc8 / 100))
                             elif r1.reelt9 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc9 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc9 / 100))
                             elif r1.reelt10 == user.username:
-                                sum = sum + ((r1.vneseno_komisii * 0.45) * (r1.rielt_proc10 / 100))
+                                sum = sum + (r1.vneseno_komisii * (r1.rielt_proc10 / 100))
 
                             s = get_object_or_404(reyting_po_sdelkam, auth_nic=user.username)
                             s.sdelok_sum = s.sdelok_sum + sum
@@ -3917,25 +3917,25 @@ def new_reyting_po_sdelkam(request, year_pr):
 
                         for r2 in rasr_sum2:
                             if r2.reelt1 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc1 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc1 / 100))
                             elif r2.reelt2 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc2 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc2 / 100))
                             elif r2.reelt3 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc3 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc3 / 100))
                             elif r2.reelt4 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc4 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc4 / 100))
                             elif r2.reelt5 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc5 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc5 / 100))
                             elif r2.reelt6 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc6 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc6 / 100))
                             elif r2.reelt7 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc7 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc7 / 100))
                             elif r2.reelt8 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc8 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc8 / 100))
                             elif r2.reelt9 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc9 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc9 / 100))
                             elif r2.reelt10 == user.username:
-                                sum = sum + ((r2.vneseno_komisii2 * 0.45) * (r2.rielt_proc10 / 100))
+                                sum = sum + (r2.vneseno_komisii2 * (r2.rielt_proc10 / 100))
 
                             s = get_object_or_404(reyting_po_sdelkam, auth_nic=user.username)
                             s.sdelok_sum = s.sdelok_sum + sum
@@ -3952,25 +3952,25 @@ def new_reyting_po_sdelkam(request, year_pr):
 
                         for r3 in rasr_sum3:
                             if r3.reelt1 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc1 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc1 / 100))
                             elif r3.reelt2 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc2 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc2 / 100))
                             elif r3.reelt3 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc3 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc3 / 100))
                             elif r3.reelt4 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc4 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc4 / 100))
                             elif r3.reelt5 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc5 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc5 / 100))
                             elif r3.reelt6 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc6 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc6 / 100))
                             elif r3.reelt7 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc7 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc7 / 100))
                             elif r3.reelt8 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc8 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc8 / 100))
                             elif r3.reelt9 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc9 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc9 / 100))
                             elif r3.reelt10 == user.username:
-                                sum = sum + ((r3.vneseno_komisii3 * 0.45) * (r3.rielt_proc10 / 100))
+                                sum = sum + (r3.vneseno_komisii3 * (r3.rielt_proc10 / 100))
 
                             s = get_object_or_404(reyting_po_sdelkam, auth_nic=user.username)
                             s.sdelok_sum = s.sdelok_sum + sum
@@ -3987,25 +3987,25 @@ def new_reyting_po_sdelkam(request, year_pr):
 
                         for r4 in rasr_sum4:
                             if r4.reelt1 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc1 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc1 / 100))
                             elif r4.reelt2 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc2 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc2 / 100))
                             elif r4.reelt3 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc3 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc3 / 100))
                             elif r4.reelt4 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc4 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc4 / 100))
                             elif r4.reelt5 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc5 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc5 / 100))
                             elif r4.reelt6 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc6 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc6 / 100))
                             elif r4.reelt7 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc7 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc7 / 100))
                             elif r4.reelt8 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc8 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc8 / 100))
                             elif r4.reelt9 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc9 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc9 / 100))
                             elif r4.reelt10 == user.username:
-                                sum = sum + ((r4.vneseno_komisii4 * 0.45) * (r4.rielt_proc10 / 100))
+                                sum = sum + (r4.vneseno_komisii4 * (r4.rielt_proc10 / 100))
 
                             s = get_object_or_404(reyting_po_sdelkam, auth_nic=user.username)
                             s.sdelok_sum = s.sdelok_sum + sum
@@ -4022,25 +4022,25 @@ def new_reyting_po_sdelkam(request, year_pr):
 
                         for r5 in rasr_sum5:
                             if r5.reelt1 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc1 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc1 / 100))
                             elif r5.reelt2 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc2 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc2 / 100))
                             elif r5.reelt3 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc3 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc3 / 100))
                             elif r5.reelt4 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc4 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc4 / 100))
                             elif r5.reelt5 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc5 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc5 / 100))
                             elif r5.reelt6 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc6 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc6 / 100))
                             elif r5.reelt7 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc7 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc7 / 100))
                             elif r5.reelt8 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc8 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc8 / 100))
                             elif r5.reelt9 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc9 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc9 / 100))
                             elif r5.reelt10 == user.username:
-                                sum = sum + ((r5.vneseno_komisii5 * 0.45) * (r5.rielt_proc10 / 100))
+                                sum = sum + (r5.vneseno_komisii5 * (r5.rielt_proc10 / 100))
 
                             s = get_object_or_404(reyting_po_sdelkam, auth_nic=user.username)
                             s.sdelok_sum = s.sdelok_sum + sum
