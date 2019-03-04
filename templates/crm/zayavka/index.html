@@ -63,7 +63,7 @@
             {% endif %}
         {% endif %}
 
-        {% if open_zayavki.kanal == "Заявка с Вестум" %}
+        {% if open_zayavki.kanal == "Личный" %}
             <td>{{  open_zayavki.date_sozd  }} </td>
             <td><blockquote><strong>Заявка с сайта</strong><br>{{ open_zayavki.prim }}</br></blockquote></td>
             <td>{{ open_zayavki.raion }}; {{ open_zayavki.komnat }}; {{ open_zayavki.budget }} руб.</td>
@@ -84,6 +84,7 @@
         {% else %}
            <td>Нет доступа!</br>Внесенно меньше 5 заявок за 10 дней!</td>
           {% endif %}
+        {% else %}
         {% endif %}
           </tr>
             {% endfor %}
