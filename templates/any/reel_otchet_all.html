@@ -1,5 +1,6 @@
 {% extends 'crm/main.html' %}
 {% block content %}
+
 <div class="row">
 
     <div class="col s12">
@@ -38,7 +39,7 @@
      <form method="post" class="post-form">
         {% csrf_token %}
     {% form form=tpform %}{% endform %}
-        <button type="submit"  name="_submit" class="btn">Поиск</button>
+        <button type="submit"  name="search" class="btn">Поиск</button>
 
 </form>
    </div>
@@ -235,8 +236,83 @@
           <tr>
             <td><a href="{% url 'crm:otch_detail' idd=rasr_otchet.pk %}">{{ rasr_otchet.all_rielts }}
         {% if tgroup == 'Администрация' or tgroup == 'Администрация Адлер' %}
-            <td><a href="{% url 'crm:otch_edit' idd=rasr_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Редактировать</button></a></td>
-          <td><a href="{% url 'crm:sdelka_zakr' idd=rasr_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Закрыть</button></a></td>
+          <td><a href="{% url 'crm:otch_edit' idd=rasr_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Редактировать</button></a></td>
+          {% comment %}
+            <td><a href="{% url 'crm:sdelka_zakr' idd=rasr_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Закрыть1</button></a></td>
+          {% endcomment %}
+            <td> <a class="waves-effect waves-light btn modal-trigger" href="#modal{{ rasr_otchet.pk }}">Закрыть</a></td>
+
+
+
+<div id="modal{{ rasr_otchet.pk }}" class="modal modal-fixed-footer">
+<div class="modal-content">
+{% load mathfilters %}
+
+
+
+ <h4>{{ rasr_otchet.all_rielts }}</h4>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card ">
+        <div class="card-content >
+          <span class="card-title">Название объекта: {{ rasr_otchet.nazv_nov }}</span>
+            <ul class="collection">
+            <li class="collection-item">Дата создания: {{ rasr_otchet.date_sozd }}</li>
+            <li class="collection-item">ФИО клиента(Покупатель): {{ rasr_otchet.fio_kl }}</li>
+            <li class="collection-item">Площадь: {{ rasr_otchet.ploshad }} м.</li>
+            <li class="collection-item">Стоимость обьекта: {{ rasr_otchet.stoimost }} руб.</li>
+            <li class="collection-item">Коммисия: {{ rasr_otchet.komisia }} руб.</li>
+            </ul>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card ">
+        <div class="card-content >
+          <span class="card-title">Внесено коммисии:</span>
+            <ul class="collection">
+            {%  if rasr_otchet.vneseno_komisii > 0 %}
+                <li class="collection-item">{{ rasr_otchet.vneseno_komisii_date }} /<strong> {{ rasr_otchet.vneseno_komisii }} руб.</strong></li>
+            {% endif %}
+            {%  if rasr_otchet.vneseno_komisii2 > 0 %}
+                <li class="collection-item">{{ rasr_otchet.vneseno_komisii_date2 }} /<strong> {{ rasr_otchet.vneseno_komisii2 }} руб.</strong></li>
+            {% endif %}
+            {%  if rasr_otchet.vneseno_komisii3 > 0 %}
+                <li class="collection-item">{{ rasr_otchet.vneseno_komisii_date3 }} /<strong> {{ rasr_otchet.vneseno_komisii3 }} руб.</strong></li>
+            {% endif %}
+            {%  if rasr_otchet.vneseno_komisii4 > 0 %}
+                <li class="collection-item">{{ rasr_otchet.vneseno_komisii_date4 }} /<strong> {{ rasr_otchet.vneseno_komisii4 }} руб.</strong></li>
+            {% endif %}
+            {%  if rasr_otchet.vneseno_komisii5 > 0 %}
+                <li class="collection-item">{{ rasr_otchet.vneseno_komisii_date5 }} /<strong> {{ rasr_otchet.vneseno_komisii5 }} руб.</strong></li>
+            {% endif %}
+            {%  if rasr_otchet.prim %}
+                <li class="collection-item">Примечание: {{ rasr_otchet.prim }} руб.</li>
+            {% endif %}
+            </ul>
+            <form method="post" class="post-form">
+                {% csrf_token %}
+                <label for="ostatok">Остаток: </label>
+                <input id="ostatok" type="text" name="name_field" value="
+{{ rasr_otchet.komisia|sub:rasr_otchet.vneseno_komisii|sub:rasr_otchet.vneseno_komisii2|sub:rasr_otchet.vneseno_komisii3|sub:rasr_otchet.vneseno_komisii4|sub:rasr_otchet.vneseno_komisii5      }}">
+                <input type="hidden" name="pk_otchet" value="{{ rasr_otchet.pk }}">
+                <button type="submit"  name="rasr_zakr" class="btn">Закрыть</button>
+            </form>
+        </div>
+    </div>
+  </div>
+<div>
+</div>
+</div>
+</div>
+
+
+
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+    </div>
+  </div>
         {% endif %}
             <td>{{ rasr_otchet.date_sozd }}</td>
             <td>{{ rasr_otchet.date_zakr }}</td>
@@ -250,10 +326,5 @@
       </table>
 
       </div>
-
-</div>
-
-
-
 
 {% endblock %}

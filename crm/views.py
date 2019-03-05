@@ -1612,7 +1612,8 @@ def reeelt_otchet_all_view(request, tpr_tab):
     crm_obj_week_count = flat_obj.objects.filter(author_id=request.user.id, date_sozd__gte=d11).count()
     n2 = 'Период'
     date = timezone.datetime.now()
-    if request.POST:
+    #if request.POST:
+    if 'search' in request.POST:
         dform = all_otchet_filtr_form(request.POST)
         if dform.is_valid():
             ##ds =dform.cleaned_data['st_date']
@@ -1661,6 +1662,34 @@ def reeelt_otchet_all_view(request, tpr_tab):
         ds1 = fdate = '1'+'-'+ str(timezone.datetime.now().month) + '-' + str(timezone.datetime.now().year)
         de1 = str(timezone.datetime.now().day)+'-'+str(timezone.datetime.now().month)+'-'+str(timezone.datetime.now().year)
         form = all_otchet_filtr_form()
+    if 'rasr_zakr' in request.POST:
+        req = request.POST
+        r_sum = str(req.__getitem__('name_field'))
+        r_sum = r_sum.replace('\xa0','')
+        r_pk = str(req.__getitem__('pk_otchet'))
+        r_pk = r_pk.replace('\xa0','')
+        r_otchet = get_object_or_404(otchet_nov, pk=r_pk)
+        if r_otchet.vneseno_komisii==0:
+            r_otchet.vneseno_komisii = r_sum
+            r_otchet.vneseno_komisii_date = timezone.datetime.now().date()
+            r_otchet.date_zakr = timezone.datetime.now().date()
+            r_otchet.sdelka_zakrita='Да-Рассрочка'
+            r_otchet.save()
+            return redirect('crm:otch_all_reelt', tpr_tab=2)
+        if r_otchet.vneseno_komisii2==0:
+            r_otchet.vneseno_komisii2 = r_sum
+            r_otchet.vneseno_komisii_date2 = timezone.datetime.now().date()
+            r_otchet.date_zakr = timezone.datetime.now().date()
+            r_otchet.sdelka_zakrita='Да-Рассрочка'
+            r_otchet.save()
+            return redirect('crm:otch_all_reelt', tpr_tab=2)
+        if r_otchet.vneseno_komisii3==0:
+            r_otchet.vneseno_komisii3 = r_sum
+            r_otchet.vneseno_komisii_date3 = timezone.datetime.now().date()
+            r_otchet.date_zakr = timezone.datetime.now().date()
+            r_otchet.sdelka_zakrita='Да-Рассрочка'
+            r_otchet.save()
+            return redirect('crmot:otch_all_reelt', tpr_tab = 2)
 
     if request.user.groups.get().name == 'Администрация':
         open_otchet = otchet_nov.objects.filter(sdelka_zakrita='Нет').order_by('-date_sozd','-pk')
@@ -3035,10 +3064,12 @@ def zaiyavka_Index_view(request):
     voskr = timezone.datetime.now().date() - timedelta(days=timezone.datetime.now().weekday()) - timedelta(
         days=7) + timedelta(days=6)
     crm_obj_week_count = flat_obj.objects.filter(author_id=request.user.id, date_sozd__gte=d11).count()
-    n3 = zayavka.objects.filter(status='Свободен').count()
     my_ya_obj = flat_obj.objects.filter(author=request.user).count()
     date = datetime.now() - timedelta(days=10)
+
+    n3 = zayavka.objects.filter(status='Свободен').count()
     open_zayavki = zayavka.objects.filter(status='Свободен').order_by('-date_sozd')
+
     group = request.user.groups.get().name
     if group == 'Администрация' or group =='Администрация Адлер' or group =='Офис-менеджер' or group == 'Юристы':
         n4 = zayavka.objects.filter(status='Взят в работу',).count()
