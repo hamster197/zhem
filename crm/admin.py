@@ -14,9 +14,9 @@ class flatgaladm(admin.StackedInline):
 
 class flatfields(admin.ModelAdmin):
     inlines = [flatgaladm]
-    list_display = ('pk','author','type','date_sozd','cena_agenstv','etagnost','adress','dom_numb','kvart_numb',
+    list_display = ( 'pk','author','type','date_sozd','cena_agenstv','etagnost','adress','dom_numb','kvart_numb',
                     'kadastr','ya_verifed_pr','domclick_pub', 'recl_rizn')
-    list_filter = ['type','domclick_pub','ya_verifed_pr','recl_rizn','komnat','author']
+    list_filter = ['raion','type','domclick_pub','ya_verifed_pr','recl_rizn','komnat','author']
     search_fields = ['pk']
     fields = ['new_pk','type','kadastr','raion','cena_agenstv','adress','dom_numb','kvart_numb','etag',
               'etagnost','author','client_name','client_tel','prim','ya_verifed_pr','domclick_pub', 'recl_rizn', 'remont']
@@ -113,7 +113,7 @@ admin.site.register(zayavka, zayavkaFields)
 admin.site.register(stat_obj_crm, statistika_fields)
 admin.site.register(reyting_po_sdelkam, reytingFields)
 admin.site.register(reyt_sdelka_otd, OtdReytFields)
-#admin.site.register(cachestvoDomCl, cashDomClickFields)
+admin.site.register(cachestvoDomCl, cashDomClickFields)
 admin.site.register(domclickText, textFields)
 admin.site.register(TmpCianCount, CianFields)
 #admin.site.register(zvonok,ZvonokFields)
