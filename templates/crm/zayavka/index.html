@@ -75,7 +75,7 @@
         {% endif %}
 
         {% if open_zayavki.kanal == "Тел. звонок" %}
-            <td>{{  open_zayavki.date_sozd  }} </td>
+            <td>2{{  open_zayavki.date_sozd  }} 1</td>
             <td><blockquote><strong>Тел. звонок</strong><br>{{ open_zayavki.prim }}</br></blockquote></td>
             <td>{{ open_zayavki.raion }}; {{ open_zayavki.komnat }}; {{ open_zayavki.budget }} руб.</td>
 
@@ -122,7 +122,9 @@
            {% if tgroup == 'Администрация'  or tgroup == 'Юристы'  or tgroup == 'Офис-менеджер' %}
             <td>{% if vzyati_zayavki.kanal == 'Домклик' %}<span class="new badge blue" data-badge-caption="">Домкл</span>
                 {% endif %}
-                {{ vzyati_zayavki.date_sozd }}</td>
+                {% if request.user.username == vzyati_zayavki.author %}<span class="new badge red" data-badge-caption="">Моя заявка!</span>
+                {% endif %}
+                {{ vzyati_zayavki.date_sozd }}1</td>
             <td>{{ vzyati_zayavki.date_vzyatia }}</td>
             <td>{{ vzyati_zayavki.reelt_v_rabote.first_name }} {{ vzyati_zayavki.reelt_v_rabote.last_name }}</td>
 
