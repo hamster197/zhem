@@ -3198,9 +3198,16 @@ def stat_count_crm_obj(request):
                 '-date_sozd').count()
             countss =flat_obj.objects.filter(author_id=i.id).count()
             countss_kadastr = flat_obj.objects.filter(author_id=i.id).exclude(kadastr='').count()
-            countss_w = flat_obj.objects.filter(author_id=i.id, date_sozd__gte=d11).count()
+            countss_w = flat_obj.objects.filter(author_id=i.id, date_sozd__gte=d11).exclude(kadastr='').count()
+            #s = stat_obj_crm(auth_nic  = i.username, auth_ful_name = i.first_name +' '+i.last_name, auth_group = i.groups.get().name,
+            #                 crm_calc_week= countss_w ,crm_calc_kadastr=countss_kadastr ,crm_calc = countss, cian_calc=cian_count)
+            #s.save()
+            zv = zayavka.objects.filter(reelt_auth_id = i.id).count()
+            zv_w = zayavka.objects.filter(reelt_auth_id = i.id, date_sozd__gte=d11, date_sozd__lte=d1).count()
             s = stat_obj_crm(auth_nic  = i.username, auth_ful_name = i.first_name +' '+i.last_name, auth_group = i.groups.get().name,
-                             crm_calc_week= countss_w ,crm_calc_kadastr=countss_kadastr ,crm_calc = countss, cian_calc=cian_count)
+                             crm_calc_week= countss_w ,crm_calc_kadastr=countss_kadastr ,crm_calc = countss, cian_calc=cian_count,
+                             zayav_count = zv, zayav_count_w=zv_w)
+            n2 = str(d11) + ' ' + str(d1)
             s.save()
 
 
@@ -3264,9 +3271,12 @@ def stat_count_crm_obj_past(request):
                 '-date_sozd').count()
             countss =flat_obj.objects.filter(author_id=i.id).count()
             countss_kadastr = flat_obj.objects.filter(author_id=i.id).exclude(kadastr='').count()
-            countss_w = flat_obj.objects.filter(author_id=i.id, date_sozd__gte=d11, date_sozd__lt=d1).count()
+            countss_w = flat_obj.objects.filter(author_id=i.id, date_sozd__gte=d11, date_sozd__lte=d1).exclude(kadastr='').count()
+            zv = zayavka.objects.filter(reelt_auth_id = i.id).count()
+            zv_w = zayavka.objects.filter(reelt_auth_id = i.id, date_sozd__gte=d11, date_sozd__lte=d1).count()
             s = stat_obj_crm(auth_nic  = i.username, auth_ful_name = i.first_name +' '+i.last_name, auth_group = i.groups.get().name,
-                             crm_calc_week= countss_w ,crm_calc_kadastr=countss_kadastr ,crm_calc = countss, cian_calc=cian_count)
+                             crm_calc_week= countss_w ,crm_calc_kadastr=countss_kadastr ,crm_calc = countss, cian_calc=cian_count,
+                             zayav_count = zv, zayav_count_w=zv_w)
             s.save()
 
 

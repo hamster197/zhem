@@ -521,7 +521,7 @@ class zayavka(models.Model):
                                        related_name='rielt_authk', null=True)# default=1)
     reelt_v_rabote = models.ForeignKey('auth.User', verbose_name='В работе у:', on_delete=models.CASCADE,
                                        related_name='rielt_in_work',default='')
-    date_sozd = models.DateTimeField(verbose_name='Дата создания:', auto_now=True)
+    date_sozd = models.DateField(verbose_name='Дата создания:', auto_now=True)
     date_zakr = models.DateField(verbose_name='Дата закрытия:')
     date_vzyatia =models.DateTimeField(verbose_name='Взято в работу:', auto_now=True)
     fio = models.CharField(max_length=45, verbose_name='ФИО клиента:')
@@ -586,6 +586,8 @@ class stat_obj_crm(models.Model):
     crm_calc_kadastr = models.IntegerField(verbose_name='Кол-во обьектов в CRM(без кадастра)', default=0)
     crm_calc_week = models.IntegerField(verbose_name='Кол-во обьектов в CRM(за неделю)', default=0)
     cian_calc = models.IntegerField(verbose_name='Кол-во обьектов в CRM', default=0)
+    zayav_count = models.IntegerField(verbose_name = 'Заявок всего:', default=0)
+    zayav_count_w = models.IntegerField(verbose_name='Заявок за неделю:', default=0)
 
     class Meta:
         verbose_name ='Стат. по обьектам в ЦРМ'
