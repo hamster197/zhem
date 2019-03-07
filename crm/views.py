@@ -2997,7 +2997,8 @@ def New_Zayavka_View(request):
             form = Urist_new_zayavka_Form(request.POST)
             if form.is_valid():
                 zayavka = form.save(commit = False)
-                zayavka.author = group
+                zayavka.author = 'Юристы'#group
+                zayavka.reelt_auth = request.user
                 zayavka.date_zakr = timezone.datetime.now()
                 zayavka.reelt_v_rabote =request.user
                 zayavka.kanal = 'Домклик'
@@ -3008,6 +3009,7 @@ def New_Zayavka_View(request):
             if form.is_valid():
                 zayavka = form.save(commit=False)
                 zayavka.author = request.user
+                zayavka.reelt_auth = request.user
                 zayavka.reelt_v_rabote = request.user
                 zayavka.date_sozd = timezone.datetime.now()
                 zayavka.date_zakr = timezone.datetime.now()
@@ -3027,6 +3029,7 @@ def New_Nov_Zayavka_View(request):
         if form.is_valid():
             zayavka = form.save(commit=False)
             zayavka.author =request.user
+            zayavka.reelt_auth = request.user
             zayavka.reelt_v_rabote = request.user
             zayavka.date_sozd = timezone.datetime.now()
             zayavka.date_zakr = timezone.datetime.now()
@@ -3044,6 +3047,7 @@ def lich_rielt_Zayavka_View(request):
         if form.is_valid():
             zayavka = form.save(commit=False)
             zayavka.author =request.user
+            zayavka.reelt_auth = request.user
             #zayavka.reelt_v_rabote = request.user
             zayavka.date_sozd = timezone.datetime.now()
             zayavka.date_zakr = timezone.datetime.now()
@@ -3054,6 +3058,18 @@ def lich_rielt_Zayavka_View(request):
     else:
         form =  reelt_lich_new_zayv_form()
     return render(request,'crm/zayavka/newUristZayav.html',{'tpform':form})
+
+@login_required
+def tmp_zayav_usr_add(request):
+    zv = zayavka.objects.all()
+    for z in zv:
+        if z.author != 'Юристы':
+            usr = get_object_or_404(User, username=z.author)
+            z.reelt_auth_id = usr.id
+        else:
+            z.reelt_auth_id = 95
+        z.save()
+    return redirect('crm:indexZayavka')
 
 @login_required
 def zaiyavka_Index_view(request):
@@ -3083,14 +3099,14 @@ def zaiyavka_Index_view(request):
         butn_pr='Yes'
     else:
         n4 = zayavka.objects.filter(status='Взят в работу', reelt_v_rabote=request.user).count()
-        vzyati_zayavki = zayavka.objects.filter(status='Взят в работу', reelt_v_rabote=request.user).order_by(
+        vzyati_zayavki = zayavka.objects.filter(status='Взят в работу', ).order_by(
             '-date_sozd')
 
         n5 = zayavka.objects.filter(status='Срыв', reelt_v_rabote=request.user).count()
-        sriv_zayavki = zayavka.objects.filter(status='Срыв', reelt_v_rabote=request.user).order_by(
+        sriv_zayavki = zayavka.objects.filter(status='Срыв',).order_by(
             '-date_sozd')
 
-        n6 = zayavka.objects.filter(status='Сделка', reelt_v_rabote=request.user).count()
+        n6 = zayavka.objects.filter(status='Сделка').count()
         sdelka_zayavki = zayavka.objects.filter(status='Сделка', reelt_v_rabote=request.user).order_by(
             '-date_sozd')
         if flat_obj.objects.filter(author=request.user,date_sozd__gte=poned, date_sozd__lte=voskr).count()>=5:
@@ -3772,6 +3788,7 @@ def new_reyting_po_sdelkam(request, year_pr):
             form = search_by_moth_form(initial={'year': yearf, 'month': mothf1})
             prizn = 1
     else:
+        form = search_by_moth_form()
         ## For tekushiy month By Default Menu
         if year_pr == '0':
             date_end = timezone.datetime.now()
@@ -3821,19 +3838,19 @@ def new_reyting_po_sdelkam(request, year_pr):
                 calendar.monthrange(timezone.datetime.now().year, 9)[1])
             n2 = 'c ' + date_start + ' по ' + date_end + '(3 Квартал 2018)'
             prizn = 3
-        ## For 4 Kvartal TEKUSHIY
-        if year_pr == '4':
+        ## For 4 Kvartal LAST YEAR
+        if year_pr == '44':
             date_start = str(int(timezone.datetime.now().year)- 1) + '-10-01'
             date_end = str(int(timezone.datetime.now().year)-1) + '-12-' + str(
                 calendar.monthrange(timezone.datetime.now().year, 12)[1])
-            n2 = 'c ' + date_start + ' по ' + date_end + '(4 Квартал)'
+            n2 = 'c ' + date_start + ' по ' + date_end + '(4 Квартал 2018)'
             prizn = 3
-        ## For 4 Kvartal LAST Year
-        if year_pr == '44':
+        ## For 4 Kvartal now YEAR
+        if year_pr == '4':
             date_start = str(timezone.datetime.now().year) + '-10-01'
             date_end = str(timezone.datetime.now().year) + '-12-' + str(
                 calendar.monthrange(timezone.datetime.now().year, 12)[1])
-            n2 = 'c ' + date_start + ' по ' + date_end + '(4 Квартал 2018)'
+            n2 = 'c ' + date_start + ' по ' + date_end + '(4 Квартал)'
             prizn = 3
         ## For TEKUSHIY YEAR
         if year_pr == '5':
@@ -4149,8 +4166,10 @@ def new_reyting_po_sdelkam(request, year_pr):
                 ASsum = reyting_po_sdelkam.objects.filter(auth_group='Администрация Адлер').aggregate(Sum('sdelok_sum'))
                 Alsum = str(ASsum.get('sdelok_sum__sum'))
                 if str(Alsum) == 'None':
-                    AlSum = 0
-                AllSum = int(sum) + int(Alsum)
+                    #AlSum = 0
+                    AllSum = int(sum)
+                else:
+                    AllSum = int(sum) + int(Alsum)
                 s = reyt_sdelka_otd(otd=i.name, kommisia=AllSum)
                 s.save()
             else:
@@ -4161,7 +4180,7 @@ def new_reyting_po_sdelkam(request, year_pr):
                 s = reyt_sdelka_otd(otd=i.name, kommisia=sum)
                 s.save()
     otd_reit = reyt_sdelka_otd.objects.all().order_by('-kommisia')#[:4]
-    form = search_by_moth_form()
+    #form = search_by_moth_form()
     return render(request,'crm/stat/sdelkareyting.html', {'MForm': form, 'tn1':n1, 'tn2':n2, 'tnach':nach_pr,
                 'zero':zero_bal, 'udl':udl_bal, 'good':good_bal,'great':great_bal,
                 'Azero': Azero_bal, 'Audl': Audl_bal, 'Agood': Agood_bal, 'Agreat': Agreat_bal,

@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 def main(request):
-    n3 = zayavka.objects.filter(status='Свободен').count()
+    n3 = zayavka.objects.filter(status='Свободен', author__contains='resep').count()
     if not request.user.is_authenticated:
         return {'Ntn3': n3}
     else:

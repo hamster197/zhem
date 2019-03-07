@@ -45,7 +45,7 @@ class feedgalfelds(admin.ModelAdmin):
     list_filter = ['date',]
 
 class zayavkaFields(admin.ModelAdmin):
-    list_display =  ('date_sozd','author','fio','status','reelt_v_rabote','date_vzyatia','kanal')
+    list_display =  ('date_sozd','author','reelt_auth','fio','status','reelt_v_rabote','date_vzyatia','kanal')
 
 class statistika_fields(admin.ModelAdmin):
     list_display = ('auth_ful_name','auth_group','crm_calc','cian_calc')

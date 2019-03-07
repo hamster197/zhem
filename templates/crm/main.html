@@ -99,6 +99,7 @@
         <script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
         <script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
         <script> $(document).ready(function(){ $('.modal').modal(); }); </script>
+        <script>  $(document).ready(function(){$('.tooltipped').tooltip();}); </script>
 
     </head>
 
@@ -258,10 +259,7 @@
                                             </li>
 
                                         </ul>
-                                    <li >
-                                        <a class="collapsible-header" href="{% url 'zvn:index'%}">
-                                            <i class="material-icons">phone_in_talk</i>Ежедневник</a>
-                                    </li>
+
 
                                     {% if request.user.groups.get.name == 'seo' or request.user.groups.get.name == 'Администрация' %}
                                         <ul class="collapsible collapsible-accordion">

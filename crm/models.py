@@ -516,7 +516,9 @@ class feed_gallery(models.Model):
 
 class zayavka(models.Model):
     #for all
-    author=models.CharField(max_length=25 ,verbose_name='Автор:')
+    author = models.CharField(max_length=25 ,verbose_name='Автор(Старый):')
+    reelt_auth = models.ForeignKey('auth.User', verbose_name='Автор:', on_delete=models.CASCADE,
+                                       related_name='rielt_authk', null=True)# default=1)
     reelt_v_rabote = models.ForeignKey('auth.User', verbose_name='В работе у:', on_delete=models.CASCADE,
                                        related_name='rielt_in_work',default='')
     date_sozd = models.DateTimeField(verbose_name='Дата создания:', auto_now=True)

@@ -125,6 +125,7 @@ urlpatterns = [
     url(r'^zayavka/vzyat/(?P<idd>[0-9]+)/$', views.zayavka_vzyata_view, name='VzyatZayav'),
     url(r'^zayavka/sdelka/(?P<idd>[0-9]+)/$', views.zayavka_sdelka_view, name='SdelkaZayav'),
     url(r'^zayavka/sriv/(?P<idd>[0-9]+)/$', views.zayavka_sriv_view, name='SdelkaSriv'),
+    url(r'^zayavka/tmp/$',views.tmp_zayav_usr_add, ),# temp for add new authot(foreinkey)
 
     #statistika
     url(r'^stat_obj/$', views.stat_count_crm_obj, name='crm_obj_index'),
