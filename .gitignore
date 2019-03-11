@@ -7,9 +7,9 @@ image/*.*
 
 *~
 __pycache__
-myvenv
+venv
 db.sqlite3
 /static
-zhem/settings.py
+/zhem/settings.py
 .DS_Store
 .idea
