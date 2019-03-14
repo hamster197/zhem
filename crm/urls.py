@@ -140,6 +140,9 @@ urlpatterns = [
     # for Dashboard
     url(r'^dashboard/$', views.DashBoardView, name='DashBoard'),
 
+    # for RielProcenti
+    url(r'^rproc/index/$', views.index_proc_rielt_view, name='RieltProcIndex'),#index view of riel procenti
+
     #Domcklic texts
     url(r'^dm/index/$', views.dmIndexView, name='dm_index'),
     url(r'^dm/edit/(?P<idd>[0-9]+)/$', views.EditDMtextView, name='dm_edit'),

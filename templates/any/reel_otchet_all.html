@@ -295,7 +295,7 @@
                 {% csrf_token %}
                 <label for="ostatok">Остаток: </label>
                 <input id="ostatok" type="text" name="name_field" value="
-{{ rasr_otchet.komisia|sub:rasr_otchet.vneseno_komisii|sub:rasr_otchet.vneseno_komisii2|sub:rasr_otchet.vneseno_komisii3|sub:rasr_otchet.vneseno_komisii4|sub:rasr_otchet.vneseno_komisii5      }}">
+{{ rasr_otchet.komisia|sub:rasr_otchet.vneseno_komisii|sub:rasr_otchet.vneseno_komisii2|sub:rasr_otchet.vneseno_komisii3|sub:rasr_otchet.vneseno_komisii4|sub:rasr_otchet.vneseno_komisii5 }}">
                 <input type="hidden" name="pk_otchet" value="{{ rasr_otchet.pk }}">
                 <button type="submit"  name="rasr_zakr" class="btn">Закрыть</button>
             </form>

@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import news, UserProfile1, flat_obj, flat_obj_gal, clients, uchastok, otchet_nov, feed, feed_gallery, \
     zayavka, stat_obj_crm, reyting_po_sdelkam, reyt_sdelka_otd, cachestvoDomCl, domclickText, TmpCianCount, \
-    vestum_poryadok_feed
+    vestum_poryadok_feed, rielt_proc
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from zvonki.models import zvonok
@@ -132,10 +132,15 @@ class UserInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = 'Доп. информация'
 
+class UserPrInline(admin.StackedInline):
+    model = rielt_proc
+    can_delete = False
+    verbose_name_plural = 'Доп. информация'
+
 
 # Определяем новый класс настроек для модели User
 class UserAdmin(UserAdmin):
-    inlines = (UserInline,)
+    inlines = (UserInline, UserPrInline)
 
 
 # Перерегистрируем модель User

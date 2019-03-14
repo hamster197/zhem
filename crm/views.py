@@ -17,10 +17,11 @@ from .forms import loginform, newsform, flatform, flat_search_form, newclientfor
     vigruzkaForm, vigruzkaGaleryForm, vigGalForm, flat_pict_form, vigruzkaNovostroikaForm, yandex_flatform, \
     yandex_flateditform, all_otchet_filtr_form, otchet_all_form1, Urist_new_zayavka_Form, sriv_zayavka_form, \
     nov_new_zayv_form, all_zayav_form, reelt_lich_new_zayv_form, search_by_moth_form, seo_pub_form, kadastr_form, \
-    adm_form, DmTextForm, vestum_count_form, vestum_poryadok_form, vestum_pub_form, resep_flatform, flatform_appart
+    adm_form, DmTextForm, vestum_count_form, vestum_poryadok_form, vestum_pub_form, resep_flatform, flatform_appart, \
+    reelt_proc_serch_form
 from .models import news, flat_obj, flat_obj_gal, clients, uchastok, otchet_nov, feed, feed_gallery, zayavka, \
     stat_obj_crm, reyting_po_sdelkam, reyt_sdelka_otd, cachestvoDomCl, UserProfile1, domclickText, TmpCianCount, \
-    vestum_poryadok_feed
+    vestum_poryadok_feed, rielt_proc
 
 
 def login_view(request):
@@ -4541,3 +4542,108 @@ def DashBoardView(request):
                                                      'tmanycount':ManyRoom_count,'thouse_count':Houses_count,'tAllCount':all_count,
                                                      'tOneCrs': OneRoomSrCena, 'tTwoCrs': TwoRoomSrCena,'tTreCrs': TreeRoomSrCena,})
 
+
+#############################################
+### Procenti rieltorov
+############################################
+@login_required
+def index_proc_rielt_view(request):
+    n1 = 'Проценты риелторов'
+    tab = 1
+    if 'search' in request.POST:
+        form = reelt_proc_serch_form(request.POST)
+        if form.is_valid():
+            kvartal = form.cleaned_data['kvartal']
+            year = form.cleaned_data['year']
+            n2 = kvartal + ' '+ year+ ' года'
+            otd1 = rielt_proc.objects.filter(kvartal=kvartal, year=year,
+                                             id_rielt__groups__name='1 Отдел') \
+                .exclude(id_rielt__userprofile1__tech_zap='Да')
+            otd2 = rielt_proc.objects.filter(kvartal=kvartal, year=year,
+                                             id_rielt__groups__name='2 Отдел') \
+                .exclude(id_rielt__userprofile1__tech_zap='Да')
+            otd3 = rielt_proc.objects.filter(kvartal=kvartal, year=year,
+                                             id_rielt__groups__name='3 Отдел') \
+                .exclude(id_rielt__userprofile1__tech_zap='Да')
+            otd4 = rielt_proc.objects.filter(kvartal=kvartal, year=year,
+                                             id_rielt__groups__name='4 Отдел') \
+                .exclude(id_rielt__userprofile1__tech_zap='Да')
+            otdAdl = rielt_proc.objects.filter(kvartal=kvartal, year=year,
+                                               id_rielt__groups__name__contains='Адлер').exclude(
+                id_rielt__userprofile1__tech_zap='Да')
+            form = reelt_proc_serch_form(initial={'year':year,
+                                                  'kvartal':kvartal})
+    if 'pr_save' in request.POST:
+        req = request.POST
+        tab = str(req.__getitem__('pk_group'))
+        pr_pk = str(req.__getitem__('pk_otd'))
+        pr_proc = str(req.__getitem__('name_field'))
+        pr_kv = str(req.__getitem__('pk_kv'))
+        pr_year = str(req.__getitem__('pk_year'))
+        pr_year = pr_year.replace('\xa0','')
+        n2 = pr_kv + ' ' + pr_year + ' года'
+        otd1 = rielt_proc.objects.filter(kvartal=pr_kv, year=pr_year,
+                                         id_rielt__groups__name='1 Отдел') \
+            .exclude(id_rielt__userprofile1__tech_zap='Да')
+        otd2 = rielt_proc.objects.filter(kvartal=pr_kv, year=pr_year,
+                                         id_rielt__groups__name='2 Отдел') \
+            .exclude(id_rielt__userprofile1__tech_zap='Да')
+        otd3 = rielt_proc.objects.filter(kvartal=pr_kv, year=pr_year,
+                                         id_rielt__groups__name='3 Отдел') \
+            .exclude(id_rielt__userprofile1__tech_zap='Да')
+        otd4 = rielt_proc.objects.filter(kvartal=pr_kv, year=pr_year,
+                                         id_rielt__groups__name='4 Отдел') \
+            .exclude(id_rielt__userprofile1__tech_zap='Да')
+        otdAdl = rielt_proc.objects.filter(kvartal=pr_kv, year=pr_year,
+                                           id_rielt__groups__name__contains='Адлер').exclude(
+            id_rielt__userprofile1__tech_zap='Да')
+        pr = get_object_or_404(rielt_proc, pk = pr_pk)
+        pr.proc = int(pr_proc)
+        pr.save()
+        form = reelt_proc_serch_form(initial={'year': pr_year,
+                                              'kvartal': pr_kv})
+    else:
+        now = datetime.now()
+        d_start = datetime(timezone.datetime.now().year, 1, 1)
+        d_end = datetime(timezone.datetime.now().year, 3, calendar.monthrange(timezone.datetime.now().year, 3)[1])
+        if now > d_start and now < d_end:
+            n2 = '1 квартал ' + str(timezone.datetime.now().year) + ' года'
+            form = reelt_proc_serch_form(initial={'year':str(timezone.datetime.now().year),
+                                                  'kvartal':'1 Квартал'})
+            kv = '1 Квартал'
+        d_start = datetime(timezone.datetime.now().year, 3, 1)
+        d_end = datetime(timezone.datetime.now().year, 6, calendar.monthrange(timezone.datetime.now().year, 6)[1])
+        if now > d_start and now < d_end:
+            n2 = '2 квартал ' + str(timezone.datetime.now().year) + ' года'
+            form = reelt_proc_serch_form(initial={'year':str(timezone.datetime.now().year),
+                                                  'kvartal':'2 Квартал'})
+            kv = '2 Квартал'
+        d_start = datetime(timezone.datetime.now().year, 6, 1)
+        d_end = datetime(timezone.datetime.now().year, 9, calendar.monthrange(timezone.datetime.now().year, 9)[1])
+        if now > d_start and now < d_end:
+            n2 = '3 квартал ' + str(timezone.datetime.now().year) + ' года'
+            form = reelt_proc_serch_form(initial={'year': str(timezone.datetime.now().year),
+                                              'kvartal': '3 Квартал'})
+            kv = '3 Квартал'
+        d_start = datetime(timezone.datetime.now().year, 9, 1)
+        d_end = datetime(timezone.datetime.now().year, 12, calendar.monthrange(timezone.datetime.now().year, 12)[1])
+        if now > d_start and now < d_end:
+            n2 = '4 квартал ' + str(timezone.datetime.now().year) + ' года'
+            form = reelt_proc_serch_form(initial={'year':str(timezone.datetime.now().year),
+                                                  'kvartal':'4 Квартал'})
+            kv = '4 Квартал'
+
+        otd1 = rielt_proc.objects.filter(kvartal=kv, year=timezone.datetime.now().year, id_rielt__groups__name='1 Отдел')\
+            .exclude(id_rielt__userprofile1__tech_zap='Да')
+        otd2 = rielt_proc.objects.filter(kvartal=kv, year=timezone.datetime.now().year, id_rielt__groups__name='2 Отдел') \
+            .exclude(id_rielt__userprofile1__tech_zap='Да')
+        otd3 = rielt_proc.objects.filter(kvartal=kv, year=timezone.datetime.now().year, id_rielt__groups__name='3 Отдел') \
+            .exclude(id_rielt__userprofile1__tech_zap='Да')
+        otd4 = rielt_proc.objects.filter(kvartal=kv, year=timezone.datetime.now().year, id_rielt__groups__name='4 Отдел') \
+            .exclude(id_rielt__userprofile1__tech_zap='Да')
+        otdAdl = rielt_proc.objects.filter(kvartal=kv, year=timezone.datetime.now().year,
+                                           id_rielt__groups__name__contains='Адлер').exclude(id_rielt__userprofile1__tech_zap='Да')
+
+    return render(request, 'crm/stat/reieltProcIndex.html', {'tn1':n1, 'tn2':n2, 'ttab':tab, 'tform':form,
+                                                             't1otd':otd1, 't2otd':otd2
+                                                             , 't3otd':otd3, 't4otd':otd4, 'totdAdl':otdAdl})

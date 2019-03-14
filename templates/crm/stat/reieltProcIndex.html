@@ -1,0 +1,289 @@
+{% extends 'crm/main.html' %}
+{% block content %}
+{% load material_form %}
+
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+            <form method="POST">
+            {% csrf_token %}
+            {% form form=tform %}{% endform %}
+            <button type="submit" name="search" class="btn">Поиск</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{ ttab }}
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="tabs">
+
+                            {% if request.user.userprofile1.nach_otd == 'Да' and request.user.groups.get.name == '1 Отдел' or request.user.groups.get.name == 'Администрация' %}
+                                {% if ttab == '1'  %}
+                                    <li class="tab col s2"><a href="#test1" class="active">1 Отдел</a></li>
+                                {% else %}
+                                    <li class="tab col s2"><a href="#test1">1 Отдел</a></li>
+                                {% endif %}
+                            {% endif %}
+                            {% if request.user.userprofile1.nach_otd == 'Да' and request.user.groups.get.name == '2 Отдел' or request.user.groups.get.name == 'Администрация' %}
+                                {% if ttab == '2' %}
+                                    <li class="tab col s2"><a href="#test2" class="active">2 Отдел</a></li>
+                                {% else %}
+                                    <li class="tab col s2"><a href="#test2">2 Отдел</a></li>
+                                {% endif %}
+                            {% endif %}
+                            {% if request.user.userprofile1.nach_otd == 'Да' and request.user.groups.get.name == '3 Отдел' or request.user.groups.get.name == 'Администрация' %}
+                                {% if ttab == '3' %}
+                                    <li class="tab col s2"><a href="#test3" class="active">3 Отдел</a></li>
+                                {% else %}
+                                    <li class="tab col s2"><a href="#test3">3 Отдел</a></li>
+                                {% endif %}
+                            {% endif %}
+                            {% if request.user.userprofile1.nach_otd == 'Да' and request.user.groups.get.name == '4 Отдел' or request.user.groups.get.name == 'Администрация' %}
+                                {% if ttab == '4' %}
+                                    <li class="tab col s2"><a href="#test4" class="active">4 Отдел</a></li>
+                                {% else %}
+                                    <li class="tab col s2"><a href="#test4">4 Отдел</a></li>
+                                {% endif %}
+                            {% endif %}
+                            {% if request.user.groups.get.name == 'Администрация' or request.user.groups.get.name == 'Администрация Адлер' %}
+                                {% if ttab == '5' %}
+                                    <li class="tab col s2"><a href="#test5" class="active">Адлер </a></li>
+                                {% else %}
+                                    <li class="tab col s2"><a href="#test5">Адлер </a></li>
+                                {% endif %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    {% if request.user.userprofile1.nach_otd == 'Да' and request.user.groups.get.name == '1 Отдел' or request.user.groups.get.name == 'Администрация' %}
+                        <div id="test1" class="col s12">
+                                      <table>
+                                        <thead>
+                                            <tr>
+                                            <th>Имя</th>
+                                            <th>Фамилия</th>
+                                            <th>Проценты</th>
+                                            <th></th>
+                                            </tr>
+                                        </thead>
+                                    {% for otd1 in t1otd %}
+                                        <tbody>
+                                            <tr>
+                                            <td>{{ otd1.id_rielt.first_name }}</td>
+                                            <td>{{ otd1.id_rielt.last_name }}</td>
+                                            <td>{{ otd1.proc  }}% / дата изм.:{{ otd1.date_izm }}</td>
+                                            <td><a class="waves-effect waves-light btn modal-trigger" href="#modal{{ otd1.pk }}">Изменить %</a></td>
+                                          <!-- 1 Otdel -->
+                                            <div id="modal{{ otd1.pk }}" class="modal ">
+                                            <div class="modal-content ">
+                                            <h4>{{ otd1.id_rielt.first_name }} {{ otd1.id_rielt.last_name }}</h4>
+                                                <form method="post" class="post-form">
+                                                {% csrf_token %}
+                                                    <label for="ostatok">Остаток: </label>
+                                                    <input id="ostatok" type="number" pattern="\d*" step ='1' min="45" max="55" name="name_field" value="{{ otd1.proc }}">
+                                                    <input type="hidden" name="pk_otd" value="{{ otd1.pk }}">
+                                                    <input type="hidden" name="pk_kv" value="{{ otd1.kvartal }}">
+                                                    <input type="hidden" name="pk_year" value="{{ otd1.year }}">
+                                                    <input type="hidden" name="pk_group" value="1">
+                                                    <button type="submit"  name="pr_save" class="btn">Изменить</button><a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+                                            </div>
+                                            </div>
+                                            </tr>
+                                        </tbody>
+                                    {% endfor %}
+                                      </table>
+                        </div>
+                    {% endif %}
+                    {% if request.user.userprofile1.nach_otd == 'Да' and request.user.groups.get.name == '2 Отдел' or request.user.groups.get.name == 'Администрация' %}
+                        <div id="test2" class="col s12">
+                                   <table>
+                                        <thead>
+                                            <tr>
+                                            <th>Имя</th>
+                                            <th>Фамилия</th>
+                                            <th>Проценты</th>
+                                            <th></th>
+                                            </tr>
+                                        </thead>
+                                    {% for otd2 in t2otd %}
+                                        <tbody>
+                                            <tr>
+                                            <td>{{ otd2.id_rielt.first_name }}</td>
+                                            <td>{{ otd2.id_rielt.last_name }}</td>
+                                            <td>{{ otd2.proc  }}% / дата изм.:{{ otd2.date_izm }}</td>
+                                            <td><a class="waves-effect waves-light btn modal-trigger" href="#modal{{ otd2.pk }}">Изменить %</a></td>
+                                                  <!-- 2 Otdel -->
+                                                    <div id="modal{{ otd2.pk }}" class="modal">
+                                                    <div class="modal-content">
+                                                    <h4>{{ otd2.id_rielt.first_name }} {{ otd2.id_rielt.last_name  }}</h4>
+                                                <form method="post" class="post-form">
+                                                {% csrf_token %}
+                                                    <label for="ostatok">Остаток: </label>
+                                                    <input id="ostatok" type="number" pattern="\d*" step ='1' min="45" max="55" name="name_field" value="{{ otd2.proc }}">
+                                                    <input type="hidden" name="pk_otd" value="{{ otd2.pk }}">
+                                                    <input type="hidden" name="pk_kv" value="{{ otd2.kvartal }}">
+                                                    <input type="hidden" name="pk_year" value="{{ otd2.year }}">
+                                                    <input type="hidden" name="pk_group" value="2">
+                                                    <button type="submit"  name="pr_save" class="btn">Изменить</button><a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+                                                </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+                                                    </div>
+                                                    </div>
+                                            </tr>
+                                        </tbody>
+                                    {% endfor %}
+                                      </table>
+                        </div>
+                    {% endif %}
+                    {% if request.user.userprofile1.nach_otd == 'Да' and request.user.groups.get.name == '3 Отдел' or request.user.groups.get.name == 'Администрация' %}
+                        <div id="test3" class="col s12">
+                                   <table>
+                                        <thead>
+                                            <tr>
+                                            <th>Имя</th>
+                                            <th>Фамилия</th>
+                                            <th>Проценты</th>
+                                            <th></th>
+                                            </tr>
+                                        </thead>
+                                    {% for otd3 in t3otd %}
+                                        <tbody>
+                                            <tr>
+                                            <td>{{ otd3.id_rielt.first_name }}</td>
+                                            <td>{{ otd3.id_rielt.last_name }}</td>
+                                            <td>{{ otd3.proc  }}% / дата изм.:{{ otd3.date_izm }}</td>
+                                            <td><a class="waves-effect waves-light btn modal-trigger" href="#modal{{ otd3.pk }}">Изменить %</a></td>
+                                                  <!-- 3 Otdel -->
+                                                    <div id="modal{{ otd3.pk }}" class="modal">
+                                                    <div class="modal-content">
+                                                    <h4>{{ otd3.id_rielt.first_name }} {{ otd3.id_rielt.last_name }}</h4>
+                                                <form method="post" class="post-form">
+                                                {% csrf_token %}
+                                                    <label for="ostatok">Остаток: </label>
+                                                    <input id="ostatok" type="number" pattern="\d*" step ='1' min="45" max="55" name="name_field" value="{{ otd3.proc }}">
+                                                    <input type="hidden" name="pk_otd" value="{{ otd3.pk }}">
+                                                    <input type="hidden" name="pk_kv" value="{{ otd3.kvartal }}">
+                                                    <input type="hidden" name="pk_year" value="{{ otd3.year }}">
+                                                    <input type="hidden" name="pk_group" value="3">
+                                                    <button type="submit"  name="pr_save" class="btn">Изменить</button><a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+                                                </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+                                                    </div>
+                                                    </div>
+                                            </tr>
+                                        </tbody>
+                                    {% endfor %}
+                                      </table>
+                        </div>
+                    {% endif %}
+                    {% if request.user.userprofile1.nach_otd == 'Да' and request.user.groups.get.name == '4 Отдел' or request.user.groups.get.name == 'Администрация' %}
+                        <div id="test4" class="col s12">
+                                   <table>
+                                        <thead>
+                                            <tr>
+                                            <th>Имя</th>
+                                            <th>Фамилия</th>
+                                            <th>Проценты</th>
+                                            <th></th>
+                                            </tr>
+                                        </thead>
+                                    {% for otd4 in t4otd %}
+                                        <tbody>
+                                            <tr>
+                                            <td>{{ otd4.id_rielt.first_name }}</td>
+                                            <td>{{ otd4.id_rielt.last_name }}</td>
+                                            <td>{{ otd4.proc  }}% / дата изм.:{{ otd4.date_izm }}</td>
+                                            <td><a class="waves-effect waves-light btn modal-trigger" href="#modal{{ otd4.pk }}">Изменить %</a></a></td>
+                                                  <!-- 4 Otdel -->
+                                                <div id="modal{{ otd4.pk }}" class="modal">
+                                                <div class="modal-content">
+                                                <h4>{{ otd4.id_rielt.first_name }} {{ otd4.id_rielt.last_name }}</h4>
+                                                <form method="post" class="post-form">
+                                                {% csrf_token %}
+                                                    <label for="ostatok">Остаток: </label>
+                                                    <input id="ostatok" type="number" pattern="\d*" step ='1' min="45" max="55" name="name_field" value="{{ otd4.proc }}">
+                                                    <input type="hidden" name="pk_otd" value="{{ otd4.pk }}">
+                                                    <input type="hidden" name="pk_kv" value="{{ otd4.kvartal }}">
+                                                    <input type="hidden" name="pk_year" value="{{ otd4.year }}">
+                                                    <input type="hidden" name="pk_group" value="4">
+                                                    <button type="submit"  name="pr_save" class="btn">Изменить</button><a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+                                                </form>
+                                                </div>
+                                                </div>
+                                            </tr>
+                                        </tbody>
+                                    {% endfor %}
+                                      </table>
+                        </div>
+                    {% endif %}
+                    {% if request.user.groups.get.name == 'Администрация' or request.user.groups.get.name == 'Администрация Адлер' %}
+                        <div id="test5" class="col s12">
+                                   <table>
+                                        <thead>
+                                            <tr>
+                                            <th>Имя</th>
+                                            <th>Фамилия</th>
+                                            <th>Проценты</th>
+                                            <th></th>
+                                            </tr>
+                                        </thead>
+                                    {% for otdAdl in totdAdl %}
+                                        <tbody>
+                                            <tr>
+                                            <td>{{ otdAdl.id_rielt.first_name }}</td>
+                                            <td>{{ otdAdl.id_rielt.last_name }}</td>
+                                            <td>{{ otdAdl.proc  }}% / дата изм.:{{ otdAdl.date_izm }}</td>
+                                            <td><a class="waves-effect waves-light btn modal-trigger" href="#modal{{ otdAdl.pk }}">Изменить %</a></td>
+                                                  <!-- Adler 5 Otdel -->
+                                                    <div id="modal{{ otdAdl.pk }}" class="modal">
+                                                    <div class="modal-content">
+                                                    <h4>{{ otdAdl.id_rielt.first_name }} {{ otdAdl.id_rielt.last_name }}</h4>
+                                                <form method="post" class="post-form">
+                                                {% csrf_token %}
+                                                    <label for="ostatok">Остаток: </label>
+                                                    <input id="ostatok" type="number" pattern="\d*" step ='1' min="45" max="55" name="name_field" value="{{ otdAdl.proc }}">
+                                                    <input type="hidden" name="pk_otd" value="{{ otdAdl.pk }}">
+                                                    <input type="hidden" name="pk_kv" value="{{ otdAdl.kvartal }}">
+                                                    <input type="hidden" name="pk_year" value="{{ otdAdl.year }}">
+                                                    <input type="hidden" name="pk_group" value="5">
+                                                    <button type="submit"  name="pr_save" class="btn">Изменить</button><a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+                                                </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+                                                    </div>
+                                                    </div>
+
+
+                                            </tr>
+                                        </tbody>
+                                    {% endfor %}
+                                      </table>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

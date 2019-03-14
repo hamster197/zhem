@@ -2,7 +2,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from crm.models import UserProfile1
+from crm.models import UserProfile1, rielt_proc
+from datetime import timezone, datetime, timedelta
+import calendar
 
 from .forms import loginform, chpassform
 
@@ -27,6 +29,32 @@ def login_view(request):
                         us.search_maxp = 1000
                         us.search_raion = 'Любой'
                         us.save()
+                        now = datetime.now()
+                        d_start = datetime(datetime.now().year, 1, 1)
+                        d_end = datetime(datetime.now().year, 3,
+                                         calendar.monthrange(datetime.now().year, 3)[1])
+                        if now > d_start and now < d_end:
+                            kv = '1 Квартал'
+                        d_start = datetime(datetime.now().year, 3, 1)
+                        d_end = datetime(datetime.now().year, 6,
+                                         calendar.monthrange(datetime.now().year, 6)[1])
+                        if now > d_start and now < d_end:
+                            kv = '2 Квартал'
+                        d_start = datetime(datetime.now().year, 6, 1)
+                        d_end = datetime(datetime.now().year, 9,
+                                         calendar.monthrange(datetime.now().year, 9)[1])
+                        if now > d_start and now < d_end:
+                            kv = '3 Квартал'
+                        d_start = datetime(datetime.now().year, 9, 1)
+                        d_end = datetime(datetime.now().year, 12,
+                                         calendar.monthrange(datetime.now().year, 12)[1])
+                        if now > d_start and now < d_end:
+                            kv = '4 Квартал'
+
+                        if rielt_proc.objects.filter(year=datetime.now().year).count() == 0:
+                            for usr in User.objects.filter(is_active=True):
+                                s = rielt_proc(id_rielt_id=usr.id, kvartal=kv, year=datetime.now().year)
+                                s.save()
                         if request.user.groups.get().name == 'Администрация':
                             return redirect('crm:DashBoard')
                         else:

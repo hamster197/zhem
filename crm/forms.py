@@ -513,3 +513,14 @@ class vestum_poryadok_form(forms.ModelForm):
     class Meta:
         model = vestum_poryadok_feed
         fields = ('poryadok',)
+
+class reelt_proc_serch_form(forms.Form):
+    kv_search = (
+        ('1 Квартал','1 Квартал'),('2 Квартал','2 Квартал'),('3 Квартал','3 Квартал'),('4 Квартал','4 Квартал'))
+    kvartal = forms.ChoiceField(label='Квартал', choices=kv_search,)
+    year_search = (
+    ('2019', '2019'), ('2020', '2020'), ('2021', '2021'), ('2022', '2022'))
+    tek_year = timezone.datetime.now().year
+    year = forms.ChoiceField(label='Год', choices=year_search)
+
+    layout = Layout(Row('kvartal', 'year'),)

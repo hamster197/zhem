@@ -60,7 +60,24 @@ class UserProfile1(models.Model):
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
-        verbose_name_plural='Клиенты'
+        #verbose_name_plural='Клиенты'
+
+class rielt_proc(models.Model):
+    id_rielt = models.ForeignKey(User, related_name='idd_rielt', verbose_name='Риелтор:', on_delete=models.CASCADE)
+    date_izm = models.DateField(auto_now=True, verbose_name='Дата создания')
+    kv_choises = (
+        ('1 Квартал','1 Квартал'),('2 Квартал','2 Квартал'),('3 Квартал','3 Квартал'),('4 Квартал','4 Квартал'))
+    kvartal = models.CharField(verbose_name='Квартал:', choices=kv_choises, max_length=10)
+    year_search = (
+    ('2019', '2019'), ('2020', '2020'), ('2021', '2021'), ('2022', '2022'))
+    year = models.CharField(verbose_name='Год:', choices=year_search, max_length=4)
+    proc = models.IntegerField(verbose_name='Проценты:', default=50,
+                               validators=[MinValueValidator(45), MaxValueValidator(55)])
+    class Meta:
+        verbose_name = 'Проценты риелторов:'
+        verbose_name_plural = 'Проценты риелторов:'
+    # def __str__(self):
+    #     return self.id_rielt
 
 
 class flat_obj(models.Model):
