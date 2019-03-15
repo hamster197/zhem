@@ -4550,7 +4550,8 @@ def DashBoardView(request):
 def index_proc_rielt_view(request):
     n1 = 'Проценты риелторов'
     tab = 1
-    if 'search' in request.POST:
+    n3 = request.POST
+    if 'poisk' in request.POST:
         form = reelt_proc_serch_form(request.POST)
         if form.is_valid():
             kvartal = form.cleaned_data['kvartal']
@@ -4573,6 +4574,9 @@ def index_proc_rielt_view(request):
                 id_rielt__userprofile1__tech_zap='Да')
             form = reelt_proc_serch_form(initial={'year':year,
                                                   'kvartal':kvartal})
+            return render(request, 'crm/stat/reieltProcIndex.html', {'tn1': n1, 'tn2': n2, 'ttab': tab, 'tform': form,
+                                                                     't1otd': otd1, 't2otd': otd2
+                , 't3otd': otd3, 't4otd': otd4, 'totdAdl': otdAdl})
     if 'pr_save' in request.POST:
         req = request.POST
         tab = str(req.__getitem__('pk_group'))
@@ -4602,6 +4606,7 @@ def index_proc_rielt_view(request):
         pr.save()
         form = reelt_proc_serch_form(initial={'year': pr_year,
                                               'kvartal': pr_kv})
+
     else:
         now = datetime.now()
         d_start = datetime(timezone.datetime.now().year, 1, 1)
@@ -4645,5 +4650,5 @@ def index_proc_rielt_view(request):
                                            id_rielt__groups__name__contains='Адлер').exclude(id_rielt__userprofile1__tech_zap='Да')
 
     return render(request, 'crm/stat/reieltProcIndex.html', {'tn1':n1, 'tn2':n2, 'ttab':tab, 'tform':form,
-                                                             't1otd':otd1, 't2otd':otd2
-                                                             , 't3otd':otd3, 't4otd':otd4, 'totdAdl':otdAdl})
+                                                             't1otd':otd1, 't2otd':otd2,
+                                                              't3otd':otd3, 't4otd':otd4, 'totdAdl':otdAdl})
