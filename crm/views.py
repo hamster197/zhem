@@ -1421,11 +1421,32 @@ def new_otchet_view_All(request):
     n3 = zayavka.objects.filter(status='Свободен').count()
     my_ya_obj = flat_obj.objects.filter(author=request.user).count()
     save = 'Сохранить и отправить отчет по сделке'
+
     if request.POST:
         otchetFormAllF = otchet_all_form(request.POST)
         if otchetFormAllF.is_valid():
+
+            now = datetime.now()
+            d_start = datetime(timezone.datetime.now().year, 1, 1)
+            d_end = datetime(timezone.datetime.now().year, 3, calendar.monthrange(timezone.datetime.now().year, 3)[1])
+            if now > d_start and now < d_end:
+                kv = '1 Квартал'
+            d_start = datetime(timezone.datetime.now().year, 3, 1)
+            d_end = datetime(timezone.datetime.now().year, 6, calendar.monthrange(timezone.datetime.now().year, 6)[1])
+            if now > d_start and now < d_end:
+                kv = '2 Квартал'
+            d_start = datetime(timezone.datetime.now().year, 6, 1)
+            d_end = datetime(timezone.datetime.now().year, 9, calendar.monthrange(timezone.datetime.now().year, 9)[1])
+            if now > d_start and now < d_end:
+                kv = '3 Квартал'
+            d_start = datetime(timezone.datetime.now().year, 9, 1)
+            d_end = datetime(timezone.datetime.now().year, 12, calendar.monthrange(timezone.datetime.now().year, 12)[1])
+            if now > d_start and now < d_end:
+                kv = '4 Квартал'
+
             otchet_nov = otchetFormAllF.save(commit=False)
-            s1=''
+            s1 = ''
+            gs1 = ''
             if otchet_nov.reelt1:
                 name = get_object_or_404(User, username = otchet_nov.reelt1)
                 if str(name.groups.get().name).__contains__('Адлер'):
@@ -1433,69 +1454,98 @@ def new_otchet_view_All(request):
                 else:
                     adl_pr = ''
                 s1 =s1+adl_pr+str(name.first_name)+' '+str(name.last_name)+' '
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
+
             if otchet_nov.reelt2:
                 name = get_object_or_404(User, username = otchet_nov.reelt2)
                 if str(name.groups.get().name).__contains__('Адлер'):
                     adl_pr = '( AДЛ )'
                 else:
                     adl_pr = ''
-                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
+                s1 = s1 + '; ' + adl_pr + str(name.first_name) + ' ' + str(name.last_name)
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
+
             if otchet_nov.reelt3:
                 name = get_object_or_404(User, username = otchet_nov.reelt3)
                 if str(name.groups.get().name).__contains__('Адлер'):
                     adl_pr = '( AДЛ )'
                 else:
                     adl_pr = ''
-                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
+                s1 = s1 + '; ' + adl_pr + str(name.first_name) + ' ' + str(name.last_name)
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
+
             if otchet_nov.reelt4:
                 name = get_object_or_404(User, username = otchet_nov.reelt4)
                 if str(name.groups.get().name).__contains__('Адлер'):
                     adl_pr = '( AДЛ )'
                 else:
                     adl_pr = ''
-                s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
+                s1 = s1 + '; ' + str(name.first_name) + ' ' + str(name.last_name)
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
+
             if otchet_nov.reelt5:
                 name = get_object_or_404(User, username = otchet_nov.reelt5)
                 if str(name.groups.get().name).__contains__('Адлер'):
                     adl_pr = '( AДЛ )'
                 else:
                     adl_pr = ''
-                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
+                s1 = s1 + '; ' + adl_pr + str(name.first_name) + ' ' + str(name.last_name)
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
+
             if otchet_nov.reelt6:
                 name = get_object_or_404(User, username = otchet_nov.reelt6)
                 if str(name.groups.get().name).__contains__('Адлер'):
                     adl_pr = '( AДЛ )'
                 else:
                     adl_pr = ''
-                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
+                s1 = s1 + '; ' + adl_pr + str(name.first_name) + ' ' + str(name.last_name)
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
+
             if otchet_nov.reelt7:
                 name = get_object_or_404(User, username = otchet_nov.reelt7)
                 if str(name.groups.get().name).__contains__('Адлер'):
                     adl_pr = '( AДЛ )'
                 else:
                     adl_pr = ''
-                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
+                s1 = s1 + '; ' + adl_pr + str(name.first_name) + ' ' + str(name.last_name)
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
+
             if otchet_nov.reelt8:
                 name = get_object_or_404(User, username = otchet_nov.reelt8)
                 if str(name.groups.get().name).__contains__('Адлер'):
                     adl_pr = '( AДЛ )'
                 else:
                     adl_pr = ''
-                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
+                s1 = s1 + '; ' + adl_pr + str(name.first_name) + ' ' + str(name.last_name)
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
+
             if otchet_nov.reelt9:
                 name = get_object_or_404(User, username = otchet_nov.reelt9)
                 if str(name.groups.get().name).__contains__('Адлер'):
                     adl_pr = '( AДЛ )'
                 else:
                     adl_pr = ''
-                s1 = s1+'; '+adl_pr+str(name.first_name)+' '+str(name.last_name)
+                s1 = s1 + '; ' + adl_pr + str(name.first_name) + ' ' + str(name.last_name)
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
+
             if otchet_nov.reelt10:
                 name = get_object_or_404(User, username = otchet_nov.reelt10)
                 if str(name.groups.get().name).__contains__('Адлер'):
                     adl_pr = '( AДЛ )'
                 else:
                     adl_pr = ''
-                s1 = s1+'; '+str(name.first_name)+' '+str(name.last_name)
+                s1 = s1 + '; ' + str(name.first_name) + ' ' + str(name.last_name)
+                proc = get_object_or_404(rielt_proc, kvartal=kv, year=timezone.datetime.now().year, id_rielt=name.pk).proc
+                gs1 = gs1 + adl_pr + str(name.first_name) + ' ' + str(name.last_name)+ '(' + str(proc) + ')' + ' '
 
             if otchet_nov.reelt1:
                 u_id = User.objects.get(username=otchet_nov.reelt1).groups.get().name
@@ -1541,6 +1591,7 @@ def new_otchet_view_All(request):
 
             otchet_nov.rielt = request.user
             otchet_nov.all_rielts = s1
+            otchet_nov.all_rielts_golovin = gs1
             otchet_nov.date_sozd = timezone.datetime.now()
             if otchet_nov.vneseno_komisii:
                 otchet_nov.vneseno_komisii_date = timezone.datetime.now()
@@ -1589,8 +1640,8 @@ def new_otchet_view_All(request):
             if otchet_nov.reelt10:
                 name = get_object_or_404(User, username = otchet_nov.reelt10)
                 ss = ss+'</br>'+str(name.first_name)+' '+str(name.last_name)+' '+str(otchet_nov.rielt_proc10)+'%'
-            send_mail(fiok+'(Отчет об открытой сделке)', ss, 'zhem-otchet@mail.ru', #['hamster197@mail.ru'], fail_silently=False, html_message=ss)
-                      ['otchet-zhem@mail.ru'], fail_silently=False, html_message=ss)
+            send_mail(fiok+'(Отчет об открытой сделке)', ss, 'zhem-otchet@mail.ru', ['hamster197@mail.ru'], fail_silently=False, html_message=ss)
+                      #['otchet-zhem@mail.ru'], fail_silently=False, html_message=ss)
             if request.user.groups.get().name=='Офис в Адлере' or request.user.groups.get().name=='Администрация Адлер':
                 send_mail(fiok + '(Отчет об открытой сделке Адлер)', ss, 'zhem-otchet@mail.ru',
                           ['2376361@zhem-realty.ru'], fail_silently=False, html_message=ss)

@@ -380,7 +380,8 @@ class otchet_nov(models.Model):
     tel_kl = PhoneNumberField(verbose_name='тел.Клиента(Покупатель):', help_text='(+79881234567)')
     fio_pr = models.CharField(max_length=50, verbose_name='ФИО клиента(Продавца):', blank=False, default='')
     tel_pr = PhoneNumberField(verbose_name='тел.Клиента(Продавца):',blank=False, default='')
-    tel_posr = PhoneNumberField(verbose_name='Тел.посредника', help_text='(+79881234567), если есть',blank=True, default='')
+    tel_posr = PhoneNumberField(verbose_name='Тел.посредника', help_text='(+79881234567), если есть',blank=True,
+                                default='')
     name_posr = models.CharField(max_length=50, verbose_name='ФИО Посрединка(ч.риелт или др аг.):',
                                  help_text=' если есть',blank=True, default='')
     name_agency = models.CharField(max_length=50, verbose_name='Название агенства:',
@@ -392,9 +393,11 @@ class otchet_nov(models.Model):
     ot_kuda_kl = models.CharField(max_length=30, verbose_name='Канал привлечения клиента:', choices=ot_kuda_choises)
 
     rielt = models.ForeignKey('auth.User', verbose_name='Риелтор:', on_delete=models.CASCADE)
-    rielt_proc = models.IntegerField(verbose_name='Проценты риелтора-инициатора сделки:',default=100, validators=[MaxValueValidator(100)], blank=True)
+    rielt_proc = models.IntegerField(verbose_name='Проценты риелтора-инициатора сделки:',default=100,
+                                     validators=[MaxValueValidator(100)], blank=True)
 
-    ploshad = models.DecimalField(verbose_name='Площадь:', decimal_places=2, max_digits=4,validators=[MinValueValidator(5)], help_text='min 5')
+    ploshad = models.DecimalField(verbose_name='Площадь:', decimal_places=2, max_digits=4,
+                                  validators=[MinValueValidator(5)], help_text='min 5')
     stoimost = models.IntegerField(verbose_name='Стоимость объекта:', validators=[MinValueValidator(300000)],
                                    help_text='min 300 000', default=0)
     komisia =  models.IntegerField(verbose_name='Комисия:', validators=[MinValueValidator(1000)], help_text='min 1 000',
@@ -415,51 +418,73 @@ class otchet_nov(models.Model):
     rasrochka = models.CharField(max_length=3,verbose_name='Расрочка:', choices=rasr_choises, default='Нет')
     prim = models.CharField(max_length=1050, verbose_name='Примечание', default=' ', blank=True)
 
-    o_choises = (('',''),('1 Отдел','1 Отдел'),('2 Отдел','2 Отдел'),('3 Отдел','3 Отдел'),('4 Отдел','4 Отдел'),('5 Отдел','5 Отдел'),('6 Отдел','6 Отдел'),('Офис в Адлере','Офис в Адлере'))
+    o_choises = (('',''),('1 Отдел','1 Отдел'),('2 Отдел','2 Отдел'),('3 Отдел','3 Отдел'),('4 Отдел','4 Отдел'),
+                 ('5 Отдел','5 Отдел'),('6 Отдел','6 Отдел'),('Офис в Адлере','Офис в Адлере'))
 
     a_choises = [(c.username, c.last_name+ ' '+c.first_name ) for c in User.objects.filter(is_active=True).order_by('last_name')]
 
-    reelt1 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №1',blank=True, help_text='Обязательно к заполнению!')
+    reelt1 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №1',
+                              blank=True, help_text='Обязательно к заполнению!')
     otd_reelt1 = models.CharField(max_length=25, verbose_name='Отдел:',default='')#,choices=o_choises,default='')
-    rielt_proc1 = models.IntegerField(verbose_name='Доля(%) риелтора №1 в сделке:', validators=[MaxValueValidator(100)], default=100, blank=True, help_text='Обязательно к заполнению!')
+    rielt_proc1 = models.IntegerField(verbose_name='Доля(%) риелтора №1 в сделке:', validators=[MaxValueValidator(100)],
+                                      default=100, blank=True, help_text='Обязательно к заполнению!')
 
-    reelt2 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №2', blank=True, help_text='Необязательно к заполнению')
+    reelt2 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №2',
+                              blank=True, help_text='Необязательно к заполнению')
     otd_reelt2 = models.CharField(max_length=25, verbose_name='Отдел:',default='',blank=True)#,choices=o_choises,default='')
-    rielt_proc2 = models.IntegerField(verbose_name='Доля(%)  риелтора №2 в сделке:', validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
+    rielt_proc2 = models.IntegerField(verbose_name='Доля(%)  риелтора №2 в сделке:',
+                                      validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
 
-    reelt3 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №3', blank=True, help_text='Необязательно к заполнению')
+    reelt3 = models.CharField(max_length=100, choices=a_choises, default=' ',
+                              verbose_name='Риелтор в сделке №3', blank=True, help_text='Необязательно к заполнению')
     otd_reelt3 = models.CharField(max_length=25, verbose_name='Отдел:',default='', blank=True)#choices=o_choises,default='')
-    rielt_proc3 = models.IntegerField(verbose_name='Доля(%) риелтора №3 в сделке:', validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
+    rielt_proc3 = models.IntegerField(verbose_name='Доля(%) риелтора №3 в сделке:',
+                                      validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
 
-    reelt4 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №4', blank=True, help_text='Необязательно к заполнению')
+    reelt4 = models.CharField(max_length=100, choices=a_choises, default=' ',
+                              verbose_name='Риелтор в сделке №4', blank=True, help_text='Необязательно к заполнению')
     otd_reelt4 = models.CharField(max_length=25, verbose_name='Отдел:',default='',blank=True)#,choices=o_choises,default='')
-    rielt_proc4 = models.IntegerField(verbose_name='Доля(%) риелтора №4 в сделке:', validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
+    rielt_proc4 = models.IntegerField(verbose_name='Доля(%) риелтора №4 в сделке:',
+                                      validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
 
-    reelt5 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №5', blank=True, help_text='Необязательно к заполнению')
+    reelt5 = models.CharField(max_length=100, choices=a_choises, default=' ',
+                              verbose_name='Риелтор в сделке №5', blank=True, help_text='Необязательно к заполнению')
     otd_reelt5 = models.CharField(max_length=25, verbose_name='Отдел:',default='',blank=True)#,choices=o_choises,default='')
-    rielt_proc5 = models.IntegerField(verbose_name='Доля(%) риелтора №5 в сделке:', validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
+    rielt_proc5 = models.IntegerField(verbose_name='Доля(%) риелтора №5 в сделке:',
+                                      validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
 
-    reelt6 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №6', blank=True, help_text='Необязательно к заполнению')
+    reelt6 = models.CharField(max_length=100, choices=a_choises, default=' ',
+                              verbose_name='Риелтор в сделке №6', blank=True, help_text='Необязательно к заполнению')
     otd_reelt6 = models.CharField(max_length=25, verbose_name='Отдел:',default='',blank=True)#,choices=o_choises,default='')
-    rielt_proc6 = models.IntegerField(verbose_name='Доля(%) риелтора №6 в сделке:', validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
+    rielt_proc6 = models.IntegerField(verbose_name='Доля(%) риелтора №6 в сделке:',
+                                      validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
 
-    reelt7 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №7', blank=True, help_text='Необязательно к заполнению')
+    reelt7 = models.CharField(max_length=100, choices=a_choises, default=' ',
+                              verbose_name='Риелтор в сделке №7', blank=True, help_text='Необязательно к заполнению')
     otd_reelt7 = models.CharField(max_length=25, verbose_name='Отдел:',default='', blank=True)#,choices=o_choises,default='')
-    rielt_proc7 = models.IntegerField(verbose_name='Доля(%) риелтора №7 в сделке:', validators=[MaxValueValidator(100)], default=0,help_text='Необязательно к заполнению')
+    rielt_proc7 = models.IntegerField(verbose_name='Доля(%) риелтора №7 в сделке:',
+                                      validators=[MaxValueValidator(100)], default=0,help_text='Необязательно к заполнению')
 
-    reelt8 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №8', blank=True, help_text='Необязательно к заполнению')
+    reelt8 = models.CharField(max_length=100, choices=a_choises, default=' ',
+                              verbose_name='Риелтор в сделке №8', blank=True, help_text='Необязательно к заполнению')
     otd_reelt8 = models.CharField(max_length=25, verbose_name='Отдел:',default='', blank=True)#,choices=o_choises,default='')
-    rielt_proc8 = models.IntegerField(verbose_name='Доля(%) риелтора №8 в сделке:', validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
+    rielt_proc8 = models.IntegerField(verbose_name='Доля(%) риелтора №8 в сделке:',
+                                      validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
 
-    reelt9 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №9', blank=True, help_text='Необязательно к заполнению')
+    reelt9 = models.CharField(max_length=100, choices=a_choises, default=' ',
+                              verbose_name='Риелтор в сделке №9', blank=True, help_text='Необязательно к заполнению')
     otd_reelt9 = models.CharField(max_length=25, verbose_name='Отдел:',default='',blank=True)#,choices=o_choises,default='')
-    rielt_proc9 = models.IntegerField(verbose_name='Доля(%) риелтора №9 в сделке:', validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
+    rielt_proc9 = models.IntegerField(verbose_name='Доля(%) риелтора №9 в сделке:',
+                                      validators=[MaxValueValidator(100)], default=0, help_text='Необязательно к заполнению')
 
-    reelt10 = models.CharField(max_length=100, choices=a_choises, default=' ', verbose_name='Риелтор в сделке №10', blank=True, help_text='Необязательно к заполнению')
+    reelt10 = models.CharField(max_length=100, choices=a_choises, default=' ',
+                               verbose_name='Риелтор в сделке №10', blank=True, help_text='Необязательно к заполнению')
     otd_reelt10 = models.CharField(max_length=25, verbose_name='Отдел:',default='', blank=True)#,choices=o_choises,default='')
-    rielt_proc10 = models.IntegerField(verbose_name='Доля(%) риелтора №10 в сделке:', default=0, validators=[MaxValueValidator(100)], blank=True, help_text='Необязательно к заполнению')
+    rielt_proc10 = models.IntegerField(verbose_name='Доля(%) риелтора №10 в сделке:', default=0,
+                                       validators=[MaxValueValidator(100)], blank=True, help_text='Необязательно к заполнению')
 
-    all_rielts = models.CharField(max_length=250, default='', verbose_name='все риелторы в сделке:')
+    all_rielts = models.CharField(max_length=250, default='', verbose_name='Все риелторы в сделке:')
+    all_rielts_golovin = models.CharField(max_length=250, default='', verbose_name='Все риелторы в сделке(для Головина):')
     adler_pr = models.CharField(max_length=15,verbose_name='Адлер', blank=True)
     old_date_choises = (('Да', 'Да'), ('Нет', 'Нет'))
     old_date = models.CharField(max_length=3, verbose_name='Сделка проводится задним числом?',default='Нет', choices=old_date_choises)

@@ -139,12 +139,18 @@
 
          {%  for open_otchet in tOpOtchet %}
           <tr>
-            <td><a href="{% url 'crm:otch_detail' idd=open_otchet.pk %}">{{ open_otchet.all_rielts }}
+            <td> {% if open_otchet.all_rielts_golovin != '' and tgroup == 'Администрация' or tgroup == 'Администрация Адлер'  %}
+                        <a href="{% url 'crm:otch_detail' idd=open_otchet.pk %}">{{ open_otchet.all_rielts_golovin }}
+                {% else %}
+                    <a href="{% url 'crm:otch_detail' idd=open_otchet.pk %}">{{ open_otchet.all_rielts }}
+                {% endif %}
 
-                    {% if open_otchet.date_zakr|timesince >= "1440 min" %}<span class="new badge red" data-badge-caption="">Просрочка!</span>{% endif %}</td>
+        {% if open_otchet.date_zakr|timesince >= "1440 min" %}<span class="new badge red" data-badge-caption="">Просрочка!</span>{% endif %}</td>
         {% if tgroup == 'Администрация' or tgroup == 'Администрация Адлер' %}
-            <td><a href="{% url 'crm:otch_edit' idd=open_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Редактировать</button></a></td>
-          <td><a href="{% url 'crm:sdelka_zakr' idd=open_otchet.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Закрыть</button></a></td>
+            <td><a href="{% url 'crm:otch_edit' idd=open_otchet.pk %}"><button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-edit"></span>Редактировать</button></a></td>
+          <td><a href="{% url 'crm:sdelka_zakr' idd=open_otchet.pk %}"><button type="submit" class="btn btn-primary">
+              <span class="glyphicon glyphicon-edit"></span>Закрыть</button></a></td>
         {% endif %}
             <td>{{ open_otchet.date_sozd }} </td>
             <td>{{ open_otchet.date_zakr }}</td>
