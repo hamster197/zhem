@@ -447,7 +447,7 @@ class reelt_lich_new_zayv_form(forms.ModelForm):
 class all_zayav_form(forms.ModelForm):
     class Meta:
         model = zayavka
-        fields =('fio','tel_kl','kanal','raion','komnat','ploshad','budget','prim')
+        fields =('fio','tel_kl','date_zvoka','kanal','raion','komnat','f_oplata','ploshad','budget','prim')
 
 class sriv_zayavka_form(forms.ModelForm):
     class Meta:

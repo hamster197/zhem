@@ -37,9 +37,12 @@
               {{ open_zayavki.reelt_auth.groups.get.name }}; <strong>{{ open_zayavki.reelt_auth.userprofile1.tel }}</strong>
               / {{ open_zayavki.kanal }}</strong><br>
 
-                <a class="btn tooltipped" data-position="bottom" data-tooltip="{{ open_zayavki.prim }}">Примечание:</a>
+                <a class="btn tooltipped" data-position="bottom" data-tooltip="Дата звонка:{{ open_zayavki.date_zvoka }}/
+                    {{ open_zayavki.prim }}/ +7 *** *** ** 
+                    {{ open_zayavki.tel_kl|slugify|get_digit:"4" }}{{ open_zayavki.tel_kl|slugify|get_digit:"3" }}
+                    {{ open_zayavki.tel_kl|slugify|get_digit:"2" }}{{ open_zayavki.tel_kl|slugify|get_digit:"1" }}">Примечание:</a>
               </blockquote></td>
-            <td>{{ open_zayavki.raion }}; {{ open_zayavki.nazv_novostr }} {{ open_zayavki.komnat }}; {{ open_zayavki.budget }} руб.</td>
+            <td>{{ open_zayavki.raion }}; {{ open_zayavki.nazv_novostr }} {{ open_zayavki.komnat }}; {{ open_zayavki.f_oplata }}; {{ open_zayavki.budget }} руб.</td>
             {%  if tbutn_pr == 'Yes' or tbutn_pr == 'no'  %}
                 <td><a href="{% url 'crm:VzyatZayav' idd=open_zayavki.pk %}"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>Взять заявку</button></a></td</td>
             {% else %}
@@ -87,7 +90,7 @@
             {{ vzyati_zayavki.reelt_v_rabote.groups.get.name }} {{ vzyati_zayavki.reelt_v_rabote.userprofile1.tel }}</td>
             <td>
                 {{ vzyati_zayavki.fio }}; {{ vzyati_zayavki.tel_kl  }};
-                {{ vzyati_zayavki.nazv_novostr }} {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }}; {{ vzyati_zayavki.budget }} руб.
+                {{ vzyati_zayavki.nazv_novostr }} {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }}; {{ vzyati_zayavki.f_oplata }}; {{ vzyati_zayavki.budget }} руб.
             </td>
             <td><a class="btn tooltipped" data-position="bottom" data-tooltip="{{ vzyati_zayavki.prim }}">Примечание</a></td</td>
             <td><a href="{% url 'crm:SdelkaSriv' idd=vzyati_zayavki.pk %}"><button type="submit" class="btn btn-primary">
@@ -127,9 +130,9 @@
                     {{ vzyati_zayavki.reelt_v_rabote.groups.get.name }} {{ vzyati_zayavki.reelt_v_rabote.userprofile1.tel }}</td>
                     <td>
                     {{ vzyati_zayavki.fio }}; {{ vzyati_zayavki.tel_kl  }};
-                    {{ vzyati_zayavki.nazv_novostr }} {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }}; {{ vzyati_zayavki.budget }} руб.
+                    {{ vzyati_zayavki.nazv_novostr }} {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }};{{ vzyati_zayavki.f_oplata }} / {{ vzyati_zayavki.budget }} руб.
                     </td>
-                    <td><a class="btn tooltipped" data-position="bottom" data-tooltip="{{ vzyati_zayavki.prim }}">Примечание</a></td</td>
+                    <td><a class="btn tooltipped" data-position="bottom" data-tooltip="Дата звонка: {{ vzyati_zayavki.date_zvoka }}/ {{ vzyati_zayavki.prim }}">Примечание</a></td</td>
                     <td><a href="{% url 'crm:SdelkaSriv' idd=vzyati_zayavki.pk %}"><button type="submit" class="btn btn-primary">
                     <span class="glyphicon glyphicon-edit"></span>В отработанные</button></a></td</td>
              {% endif %}
@@ -212,9 +215,9 @@
                     {{ vzyati_zayavki.reelt_v_rabote.groups.get.name }} {{ vzyati_zayavki.reelt_v_rabote.userprofile1.tel }}</td>
                     <td>
                     {{ vzyati_zayavki.fio }}; {{ vzyati_zayavki.tel_kl  }};
-                    {{ vzyati_zayavki.nazv_novostr }} {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }}; {{ vzyati_zayavki.budget }} руб.
+                    {{ vzyati_zayavki.nazv_novostr }} {{ vzyati_zayavki.raion }}; {{ vzyati_zayavki.komnat }};{{ vzyati_zayavki.f_oplata }} {{ vzyati_zayavki.budget }} руб.
                     </td>
-                    <td><a class="btn tooltipped" data-position="bottom" data-tooltip="{{ vzyati_zayavki.prim }}">Примечание</a></td</td>
+                    <td><a class="btn tooltipped" data-position="bottom" data-tooltip="Дата звонка: {{ vzyati_zayavki.date_zvoka }}/ {{ vzyati_zayavki.prim }}">Примечание</a></td</td>
                     <td><a href="{% url 'crm:SdelkaSriv' idd=vzyati_zayavki.pk %}"><button type="submit" class="btn btn-primary">
                     <span class="glyphicon glyphicon-edit"></span>В отработанные</button></a></td</td>
              {% endif %}

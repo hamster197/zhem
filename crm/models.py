@@ -562,12 +562,15 @@ class zayavka(models.Model):
     reelt_auth = models.ForeignKey('auth.User', verbose_name='Автор:', on_delete=models.CASCADE,
                                        related_name='rielt_authk', null=True)# default=1)
     reelt_v_rabote = models.ForeignKey('auth.User', verbose_name='В работе у:', on_delete=models.CASCADE,
-                                       related_name='rielt_in_work',default='')
+                                       related_name='rielt_in_work', default='')
     date_sozd = models.DateField(verbose_name='Дата создания:', auto_now=True)
+    date_zvoka = models.DateField(verbose_name='Дата звонка клиента:', )
     date_zakr = models.DateField(verbose_name='Дата закрытия:')
     date_vzyatia =models.DateTimeField(verbose_name='Взято в работу:', auto_now=True)
-    fio = models.CharField(max_length=45, verbose_name='ФИО клиента:')
+    fio = models.CharField(max_length=45, verbose_name='Имя клиента(ФИО):')
     tel_kl = PhoneNumberField('Тел клиента:',  help_text='+79881234567')
+    opl_choises = (('Наличные','Наличные'),('Ипотека','Ипотека'),('Мат.капитал','Мат.капитал'))
+    f_oplata = models.CharField(verbose_name='Форма оплаты:', choices=opl_choises, max_length=35, default='')
     raion_choise =  (('Неважно','Неважно'),('Ахун', 'Ахун'),('Адлер', 'Адлер'),('Бытха', 'Бытха'),
         ('Виноградная', 'Виноградная'),('Дагомыс', 'Дагомыс'),('Донская', 'Донская'),('Донская(Пасечная)', 'Донская(Пасечная)'),
         ('Донская(Тимерярева)', 'Донская(Тимерярева)'), ('Завокзальный', 'Завокзальный'),('Заречный', 'Заречный'),
