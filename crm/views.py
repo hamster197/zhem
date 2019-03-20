@@ -3259,8 +3259,9 @@ def stat_count_crm_obj(request):
             s = stat_obj_crm(auth_nic  = i.username, auth_ful_name = i.first_name +' '+i.last_name, auth_group = i.groups.get().name,
                              crm_calc_week= countss_w ,crm_calc_kadastr=countss_kadastr ,crm_calc = countss, cian_calc=cian_count,
                              zayav_count = zv, zayav_count_w=zv_w)
-            n2 = str(d11) + ' ' + str(d1)
+            #n2 =str(d11) + ' ' + str(d1)
             s.save()
+    n2 = n2 + ' (c ' + str(d11) + ' по ' + str(d1) + ')'
 
 
     otdel1 = stat_obj_crm.objects.filter(auth_group='1 Отдел').order_by('-crm_calc')
@@ -3303,7 +3304,8 @@ def stat_count_crm_obj(request):
 def stat_count_crm_obj_past(request):
     #d1 = timezone.datetime.now().date()
     d1 = timezone.datetime.now().date()-timedelta(days=timezone.datetime.now().weekday())
-    d11 = timezone.datetime.now().date()-timedelta(days=7)
+    #d11 = timezone.datetime.now().date()-timedelta(days=7)
+    d11 = d1 - timedelta(days=7)
     crm_obj_week_count = flat_obj.objects.filter(author_id=request.user.id, date_sozd__gte=d11).count()
     n1 = 'Статистика'
     n2 = 'CRM прошлая неделя'
@@ -3330,6 +3332,7 @@ def stat_count_crm_obj_past(request):
                              crm_calc_week= countss_w ,crm_calc_kadastr=countss_kadastr ,crm_calc = countss, cian_calc=cian_count,
                              zayav_count = zv, zayav_count_w=zv_w)
             s.save()
+    n2 = n2 + ' (c ' + str(d11) + ' по ' + str(d1) + ')'
 
 
     otdel1 = stat_obj_crm.objects.filter(auth_group='1 Отдел').order_by('-crm_calc')
