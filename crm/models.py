@@ -72,7 +72,7 @@ class rielt_proc(models.Model):
     ('2019', '2019'), ('2020', '2020'), ('2021', '2021'), ('2022', '2022'))
     year = models.CharField(verbose_name='Год:', choices=year_search, max_length=4)
     proc = models.IntegerField(verbose_name='Проценты:', default=50,
-                               validators=[MinValueValidator(45), MaxValueValidator(55)])
+                               validators=[MinValueValidator(40), MaxValueValidator(55)])
     class Meta:
         verbose_name = 'Проценты риелторов:'
         verbose_name_plural = 'Проценты риелторов:'
