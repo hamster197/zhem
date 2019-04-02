@@ -374,7 +374,7 @@ def flat_del_view(request, idd, sidd):
 def my_flatview_pub(request):
     n3 = zayavka.objects.filter(status='Свободен').count()
     n1='Квартиры'
-    n2='опубликованные'
+    n2='опубликованные на Домклик'
     d11 =timezone.datetime.now().date()-timedelta(days=timezone.datetime.now().weekday())
     crm_obj_week_count = flat_obj.objects.filter(author_id=request.user.id, date_sozd__gte=d11).count()
     my_ya_obj = flat_obj.objects.filter(author=request.user).count()
@@ -399,12 +399,12 @@ def my_flatview_pub(request):
                 flatlist = flat_obj.objects.filter(status_obj='Опубликован',
                                                cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc),
                                                ploshad__gte=int(minp), ploshad__lte=int(maxp),
-                                               type = 'flat').order_by('-date_sozd')
+                                               type = 'flat', domclick_pub='Да').order_by('-date_sozd')
             else:
                 flatlist = flat_obj.objects.filter(status_obj='Опубликован',raion=raionc,
                                                cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc),
                                                ploshad__gte=int(minp), ploshad__lte=int(maxp),
-                                               type = 'flat').order_by('-date_sozd')
+                                               type = 'flat', domclick_pub='Да').order_by('-date_sozd')
     else:
         id = request.user.pk
         us = get_object_or_404(UserProfile1, pk = id)
@@ -420,12 +420,12 @@ def my_flatview_pub(request):
             flatlist = flat_obj.objects.filter(status_obj='Опубликован',
                                            cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc),
                                            ploshad__gte=int(minp), ploshad__lte=int(maxp),
-                                           type='flat').order_by('-date_sozd')
+                                           type='flat', domclick_pub='Да').order_by('-date_sozd')
         else:
             flatlist = flat_obj.objects.filter(status_obj='Опубликован', raion=raionc,
                                            cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc),
                                            ploshad__gte=int(minp), ploshad__lte=int(maxp),
-                                           type='flat').order_by('-date_sozd')
+                                           type='flat', domclick_pub='Да').order_by('-date_sozd')
         if request.user.groups.get().name == 'Офис-менеджер' :
             flatlist = flat_obj.objects.filter(kadastr_pr='Нет', kadastr='').order_by('-date_sozd')
     return render(request,'crm/flat/all_flat_index.html',{'tpflatlist':flatlist,'tpaFlatSearch':aFlatSearch,'tn1':n1,'tn2':n2, 'tn3':n3,
