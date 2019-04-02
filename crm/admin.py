@@ -14,8 +14,8 @@ class flatgaladm(admin.StackedInline):
 
 class flatfields(admin.ModelAdmin):
     inlines = [flatgaladm]
-    list_display = ( 'pk','author','type','date_sozd','cena_agenstv','etagnost','adress','dom_numb','kvart_numb',
-                    'kadastr','ya_verifed_pr','domclick_pub', 'recl_rizn')
+    list_display = ( 'pk','author','type','date_sozd','cena_agenstv','etagnost','raion','adress','dom_numb','kvart_numb',
+                    'kadastr','domclick_pub')#, 'recl_rizn', 'ya_verifed_pr',
     list_filter = ['type','domclick_pub','ya_verifed_pr','recl_rizn','komnat','author']
     search_fields = ['pk']
     fields = ['new_pk','type','kadastr','raion','cena_agenstv','adress','kvart_numb','etag',
@@ -33,7 +33,8 @@ class clientfields(admin.ModelAdmin):
 
 
 class sdelka_nov(admin.ModelAdmin):
-    list_display = ('date_sozd','date_zakr','nazv_nov', 'fio_kl','rielt','stoimost','komisia','vneseno_komisii','sdelka_zakrita')
+    list_display = ('date_sozd','date_zakr','nazv_nov', 'fio_kl','rielt','stoimost','komisia','vneseno_komisii'
+                    ,'sdelka_zakrita')
     list_filter = ['ot_kuda_kl', 'date_sozd', 'sdelka_zakrita', 'rielt',]
 
 class feedfelds(admin.ModelAdmin):

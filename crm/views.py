@@ -331,6 +331,7 @@ def my_flatview_edit(request,idd):
         return render(request, 'crm/flat/flatedit.html', {'tpflatpostform': flat,'tn1':n1,'tn2':n2, 'tn3':n3,'t_my_ya_obj':my_ya_obj
                                                         , 'tcrm_obj_week_count': crm_obj_week_count,})
 
+@login_required
 def flat_photo_new_view(request, idd):
     n1 = 'Редактировать фото'
     n2 = 'Фото'
