@@ -1,0 +1,103 @@
+<root>
+    <item>{% for post in tppost %}
+        <id>
+            <![CDATA[ {{ post.pk }} ]]>
+        </id>
+        <topic>
+        </topic>
+        <part>
+            <![CDATA[ квартиры ]]>
+        </part>
+        <bargain>
+            <![CDATA[ Продам ]]>
+        </bargain>
+        <publicdate>
+            <![CDATA[ {{ post.date_sozd|date:"U" }} ]]>
+        </publicdate>
+        <lastupdated>
+            <![CDATA[ {% now "U" %} ]]>
+        </lastupdated>
+        <expiration> </expiration>
+        <lat> </lat>
+        <lng> </lng>
+        <fias> </fias>
+        <kladr> </kladr>
+        <address>Краснодарский край, город Сочи, {{ post.adress }}, {{ post.dom_numb }}</address>
+        <country>Россия</country>
+        <place>Сочи</place>
+        <street>{{ post.adress }}</street>
+        <house>{{ post.dom_numb }}</house>
+        <object>
+            <![CDATA[ квартира ]]>
+        </object>
+        <housetype> </housetype>
+        <floor>
+            <![CDATA[ {{ post.etag }} ]]>
+        </floor>
+        <nfloor>
+            <![CDATA[ {{ post.etagnost }} ]]>
+        </nfloor>
+        <areas_live1> </areas_live1>
+        <areas_kitchen> </areas_kitchen>
+        <areas_total>
+            <![CDATA[ {{ post.ploshad }} ]]>
+        </areas_total>
+        <rooms>
+            <![CDATA[ {{ post.komnat }} ]]>
+        </rooms>
+        <price1>
+            <![CDATA[ {{ post.cena_agenstv }} ]]>
+        </price1>
+        <currency>
+            <![CDATA[ 0 ]]>
+        </currency>
+        <full_description>
+            <![CDATA[
+            {{ post.prim }}
+            ]]>
+        </full_description>
+        <mortage> </mortage>
+        <line-phone>
+            <![CDATA[ 0 ]]>
+        </line-phone>
+        <internet>
+            <![CDATA[ 0 ]]>
+        </internet>
+        <room-furniture>
+            <![CDATA[ 0 ]]>
+        </room-furniture>
+        <balcony>
+            <![CDATA[ 0 ]]>
+        </balcony>
+        <lift>
+            <![CDATA[ 0 ]]>
+        </lift>
+        <rubbish-chute>
+            <![CDATA[ 0 ]]>
+        </rubbish-chute>
+        <alarm>
+            <![CDATA[ 0 ]]>
+        </alarm>
+        {% for i in post.idd_gal.all %}
+            {% if i.npict.url %}
+        <image{{ forloop.counter }}>
+            http://77.222.63.187{{ i.npict.url }}
+        </image{{ forloop.counter }}>
+            {% endif %}
+        {% endfor %}
+        <phone>
+            <![CDATA[ +7 (800) 234-80-80 ]]>
+        </phone>
+        <name>
+            <![CDATA[ {{  post.author.first_name }} {{ post.author.last_name }} ]]>
+        </name>
+        <company>
+            <![CDATA[ ООО «Жемчужина» ]]>
+        </company>
+        <mail>
+            <![CDATA[ info@zhem-realty.ru ]]>
+        </mail>
+    {% endfor %}
+
+    </item>
+</root>

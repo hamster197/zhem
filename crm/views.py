@@ -998,8 +998,8 @@ def NewYandexFeedview(request):
 
 #for Mail ru & ula
 def MailRuFeedview(request):
-    post = flat_obj.objects.filter( type='flat').order_by('-pk')[:100]
-    doma = flat_obj.objects.filter( type='house1').order_by('-pk')
+    post = flat_obj.objects.filter( type='flat').order_by('-pk')
+    doma = flat_obj.objects.filter( type='house').order_by('-pk')
     gal = flat_obj_gal.objects.all()
     #post = flat_obj.objects.filter(author.userprofile1.tel='' ).order_by('-datep')
     #post = flat_obj.objects.order_by('-datep')
@@ -1012,7 +1012,8 @@ def MailRuFeedview(request):
     dm = get_object_or_404(domclickText, day = int(date1))
     #dm = '21312321'
     # end of autoручной ввод текста сео
-    return render(request,'any/MailFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date, 'tdom':doma, 'tdm':dm }, content_type="text/xml")
+    return render(request,'any/MailFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date, 'tdom':doma, 'tdm':dm },
+                  content_type="text/xml")
 
 #forYandex
 def GRFeedview(request):
@@ -1030,8 +1031,24 @@ def GRFeedview(request):
     dm = get_object_or_404(domclickText, day = int(date1))
     #dm = '21312321'
     # end of autoручной ввод текста сео
-    return render(request,'any/GRFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date, 'tdom':doma, 'tdm':dm }, content_type="text/xml")
+    return render(request,'any/GRFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date, 'tdom':doma, 'tdm':dm },
+                  content_type="text/xml")
 
+
+#for Move.tu
+def MoveFeedview(request):
+    post = flat_obj.objects.filter(domclick='Да', type='flat').order_by('-datep')[:10]
+    doma = flat_obj.objects.filter(domclick='Да', type='house1').order_by('-datep')
+    gal = flat_obj_gal.objects.all()
+    # auto ввод текста сео
+    date1 = timezone.now().day
+    dm = get_object_or_404(domclickText, day = int(date1))
+    # ручной ввод текста сео
+    #dm = '21312321'
+    # end of autoручной ввод текста сео
+    date = datetime.now()
+    return render(request,'any/MoveFeed.html',{'tppost': post, 'tpgal':gal, 'tdate':date, 'tdom':doma, 'tdm':dm },
+                  content_type="text/xml")
 
 #forSait
 def sait_vigr_view(request):
