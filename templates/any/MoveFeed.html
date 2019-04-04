@@ -45,8 +45,10 @@
         <rooms>
             <![CDATA[ {{ post.komnat }} ]]>
         </rooms>
-        <price1>
+        <price1>{% load l10n %}
+                {% localize off %}
             <![CDATA[ {{ post.cena_agenstv }} ]]>
+                {% endlocalize %}
         </price1>
         <currency>
             <![CDATA[ 0 ]]>
@@ -86,7 +88,7 @@
             {% endif %}
         {% endfor %}
         <phone>
-            <![CDATA[ +7 (800) 234-80-80 ]]>
+            <![CDATA[ +7 (988) 233-95-56 ]]>
         </phone>
         <name>
             <![CDATA[ {{  post.author.first_name }} {{ post.author.last_name }} ]]>
