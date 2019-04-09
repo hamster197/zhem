@@ -18,7 +18,7 @@ from .forms import loginform, newsform, flatform, flat_search_form, newclientfor
     yandex_flateditform, all_otchet_filtr_form, otchet_all_form1, Urist_new_zayavka_Form, sriv_zayavka_form, \
     nov_new_zayv_form, all_zayav_form, reelt_lich_new_zayv_form, search_by_moth_form, seo_pub_form, kadastr_form, \
     adm_form, DmTextForm, vestum_count_form, vestum_poryadok_form, vestum_pub_form, resep_flatform, flatform_appart, \
-    reelt_proc_serch_form
+    reelt_proc_serch_form, adm_usr_uvl
 from .models import news, flat_obj, flat_obj_gal, clients, uchastok, otchet_nov, feed, feed_gallery, zayavka, \
     stat_obj_crm, reyting_po_sdelkam, reyt_sdelka_otd, cachestvoDomCl, UserProfile1, domclickText, TmpCianCount, \
     vestum_poryadok_feed, rielt_proc
@@ -216,7 +216,7 @@ def news_postform(request):
 @login_required
 def flat_postForm(request):
     n1='Квартиры'
-    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail'
+    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail, Realtymag.ru'
     n3 = zayavka.objects.filter(status='Свободен').count()
     if request.POST:
         if request.user.userprofile1.ya == 'Да':
@@ -260,7 +260,7 @@ def flat_postForm(request):
 @login_required
 def flat_apparts_postForm(request):
     n1='Апартаменты'
-    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail'
+    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail, Realtymag.ru'
     n3 = zayavka.objects.filter(status='Свободен').count()
     if request.POST:
         if request.user.userprofile1.ya == 'Да':
@@ -1146,7 +1146,7 @@ def cliend_detail_view(request, idd):
 @login_required
 def new_dom_view(request):
     n1='Дома'
-    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail'
+    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail, Realtymag.ru'
     if request.POST:
         form = doma_new_post(request.POST)
         if form.is_valid():
@@ -1277,7 +1277,7 @@ def dom_print_view(request, idd):
 @login_required()
 def new_uc_view(request):
     n1='Участки'
-    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail'
+    n2='подача на Cайт, RegionalRealty, ДомКлик, Юла, Yandex, Mail, Realtymag.ru'
     if request.POST:
         form=uc_new_post(request.POST)
         if form.is_valid():
@@ -4400,13 +4400,28 @@ def my_admi_view(request):
                 return render(request, 'any/my_adm.html', {'tn1': n1, 'tn2': n2, 'tform': form, 'tdel': del1,
                                                            'tPrVsForm':PrVsForm,'tVsForm':vsForm, 'tallreelt':all_reelt,})
 
-
+        if 'usr_uvl' in request.POST:
+            UForm = adm_usr_uvl(request.POST)
+            if UForm.is_valid():
+                form = adm_form()
+                u_usr = UForm.cleaned_data['uvl_usr']
+                n_usr = UForm.cleaned_data['new_usr']
+                subj = flat_obj.objects.filter(author__username=u_usr)
+                n11 = str(subj.count())
+                for i in subj:
+                    i.author = n_usr
+                    del1 = str(i.author.username) + ' ' + str(n11)
+                    i.save()
+                return render(request, 'any/my_adm.html', {'tn1': n1, 'tn2': n2, 'tform': form, 'tdel': del1,
+                                                        'tPrVsForm': PrVsForm, 'tVsForm': vsForm,
+                                                        'tuvlForm':UForm, 'tallreelt': all_reelt, })
 
 
     #else:
     form = adm_form()
+    uvl_form = adm_usr_uvl()
     return render(request,'any/my_adm.html',{'tn1':n1, 'tn2':n2,'tform':form,'tdel':del1, 'tVsForm':vsForm,
-                                             'tPrVsForm':PrVsForm, 'tallreelt':all_reelt})
+                                             'tuvlForm':uvl_form, 'tPrVsForm':PrVsForm, 'tallreelt':all_reelt})
 @login_required
 def DashBoardView(request):
     ########################

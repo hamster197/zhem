@@ -1,4 +1,4 @@
-
+from django.contrib.auth.models import User
 from django.utils import timezone
 from material import *
 from django import forms
@@ -349,13 +349,6 @@ class otchet_all_form1(forms.ModelForm):#edit for administraciya
 
 
 class all_otchet_filtr_form(forms.Form):
-    #fdate = '01.' + str(timezone.datetime.now().month) + '.' + str(timezone.datetime.now().year)
-    #st_date = forms.DateField(label='Дата открытия сделки(начало периода)', initial=fdate)
-    #end_date = forms.DateField(label='Дата открытия сделки(конец периода)', initial=timezone.datetime.now())
-
-    #layout = Layout(
-    #    Row('st_date', 'end_date'),
-    #)
     month_choises =(('Январь' , 'Январь'),('Февраль','Февраль'),
     ('Март', 'Март'), ('Апрель', 'Апрель'), ('Май', 'Май'), ('Июнь', 'Июнь'), ('Июль', 'Июль'),
     ('Август', 'Август'), ('Сентябрь', 'Сентябрь'), ('Октябрь', 'Октябрь'), ('Ноябрь', 'Ноябрь'),('Декабрь', 'Декабрь'))
@@ -504,6 +497,18 @@ class adm_form(forms.Form):
     layout = Layout(
         Row('st_date', 'end_date'),
     )
+
+############################################
+### for my admin(User Uvolen)
+############################################
+class adm_usr_uvl(forms.Form):
+    uvl_usr = forms.ModelChoiceField(queryset=User.objects.filter(is_active=True), label='Уволить:', required=True)
+    new_usr = forms.ModelChoiceField(queryset=User.objects.filter(is_active=True), initial=162,
+                                     label='Перенести обьекты на:')
+    layout = Layout(
+        Row('uvl_usr', 'new_usr'),
+    )
+
 
 class vestum_count_form(forms.Form):
     vs_count = forms.IntegerField(label='Балы для всех в Вестуме:')
