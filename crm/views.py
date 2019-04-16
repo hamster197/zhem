@@ -490,12 +490,12 @@ def my_flatview_unpub(request):
             us.search_maxc = maxc
             us.save()
             if raionc == 'Любой':
-                flatlist = flat_obj.objects.filter(status_obj='Опубликован',
+                flatlist = flat_obj.objects.filter(status_obj='Опубликован', domclick_pub='Да',
                                                cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc),
                                                ploshad__gte=int(minp), ploshad__lte=int(maxp),
                                                type = 'flat').order_by('-date_sozd')
             else:
-                flatlist = flat_obj.objects.filter(status_obj='Опубликован',raion=raionc,
+                flatlist = flat_obj.objects.filter(status_obj='Опубликован',raion=raionc, domclick_pub='Да',
                                                cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc),
                                                ploshad__gte=int(minp), ploshad__lte=int(maxp),
                                                type = 'flat').order_by('-date_sozd')
@@ -511,11 +511,11 @@ def my_flatview_unpub(request):
                                               'search_minc': us.search_minc, 'search_maxc': us.search_maxc,
                                               'search_raion': us.search_raion})
         if raionc == 'Любой':
-            flatlist=flat_obj.objects.filter(author=auser, type ='flat',
+            flatlist=flat_obj.objects.filter(author=auser, type ='flat', domclick_pub='Да',
                                          cena_agenstv__gte = int(minc), cena_agenstv__lte = int(maxc),
                                          ploshad__gte = int(minp), ploshad__lte = int(maxp),).order_by('-date_sozd',)
         else:
-            flatlist=flat_obj.objects.filter(author=auser, type ='flat',
+            flatlist=flat_obj.objects.filter(author=auser, type ='flat', domclick_pub='Да',
                                          cena_agenstv__gte = int(minc), cena_agenstv__lte = int(maxc),
                                          ploshad__gte = int(minp), ploshad__lte = int(maxp),).order_by('-date_sozd',)
     return render(request,'crm/flat/all_flat_index.html',{'tpflatlist':flatlist,'tpaFlatSearch':aFlatSearch,'tn1':n1,
