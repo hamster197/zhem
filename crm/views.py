@@ -519,7 +519,8 @@ def my_flatview_unpub(request):
                                          cena_agenstv__gte = int(minc), cena_agenstv__lte = int(maxc),
                                          ploshad__gte = int(minp), ploshad__lte = int(maxp),).order_by('-date_sozd',)
     return render(request,'crm/flat/all_flat_index.html',{'tpflatlist':flatlist,'tpaFlatSearch':aFlatSearch,'tn1':n1,
-                                                          'tcrm_obj_week_count':crm_obj_week_count,'tn2':n2, 'tn3':n3,'t_my_ya_obj':my_ya_obj})
+                                                          'tcrm_obj_week_count':crm_obj_week_count,'tn2':n2,
+                                                          'tn3':n3,'t_my_ya_obj':my_ya_obj})
 ###################################################
 ###  end My Flat list
 ###################################################
@@ -3262,13 +3263,14 @@ def stat_count_crm_obj(request):
     user = User.objects.all()
     for i in user:
         if i.is_active:
-            date = datetime.now() - timedelta(days=10)
+            #date = datetime.now() - timedelta(days=10)
             #cian_count = feed.objects.filter(author_id=i.id, pub='Да', date_sozd__gte=date).order_by('-date_sozd').count()
-            cian_count = flat_obj.objects.filter(author_id=i.id, status_gilya='Нежилое помещение', date_sozd__gte=d11, date_sozd__lt=d1 ).order_by(
-                '-date_sozd').count()
+            # cian_count = flat_obj.objects.filter(author_id=i.id, status_gilya='Нежилое помещение', date_sozd__gte=d11, date_sozd__lt=d1 ).order_by(
+            #     '-date_sozd').count()
             countss =flat_obj.objects.filter(author_id=i.id).count()
-            countss_kadastr = flat_obj.objects.filter(author_id=i.id).exclude(kadastr='').count()
-            countss_w = flat_obj.objects.filter(author_id=i.id, date_sozd__gte=d11).exclude(kadastr='').count()
+            countss_kadastr = flat_obj.objects.filter(author_id=i.id).exclude(domclick_pub='Нет').count()
+            countss_w = flat_obj.objects.filter(author_id=i.id, date_sozd__gte=d11).exclude(domclick_pub='Нет').count()
+            cian_count = flat_obj.objects.filter(author_id=i.id, date_sozd__gte=d11).count()
             #s = stat_obj_crm(auth_nic  = i.username, auth_ful_name = i.first_name +' '+i.last_name, auth_group = i.groups.get().name,
             #                 crm_calc_week= countss_w ,crm_calc_kadastr=countss_kadastr ,crm_calc = countss, cian_calc=cian_count)
             #s.save()
@@ -3337,7 +3339,7 @@ def stat_count_crm_obj_past(request):
     user = User.objects.all()
     for i in user:
         if i.is_active:
-            date = datetime.now() - timedelta(days=10)
+            #date = datetime.now() - timedelta(days=10)
             #cian_count = feed.objects.filter(author_id=i.id, pub='Да', date_sozd__gte=date).order_by('-date_sozd').count()
             cian_count = flat_obj.objects.filter(author_id=i.id, status_gilya='Нежилое помещение', date_sozd__gte=d11, date_sozd__lt=d1 ).order_by(
                 '-date_sozd').count()
