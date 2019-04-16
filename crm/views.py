@@ -3341,11 +3341,12 @@ def stat_count_crm_obj_past(request):
         if i.is_active:
             #date = datetime.now() - timedelta(days=10)
             #cian_count = feed.objects.filter(author_id=i.id, pub='Да', date_sozd__gte=date).order_by('-date_sozd').count()
-            cian_count = flat_obj.objects.filter(author_id=i.id, status_gilya='Нежилое помещение', date_sozd__gte=d11, date_sozd__lt=d1 ).order_by(
-                '-date_sozd').count()
+            # cian_count = flat_obj.objects.filter(author_id=i.id, status_gilya='Нежилое помещение', date_sozd__gte=d11, date_sozd__lt=d1 ).order_by(
+            #     '-date_sozd').count()
             countss =flat_obj.objects.filter(author_id=i.id).count()
             countss_kadastr = flat_obj.objects.filter(author_id=i.id).exclude(kadastr='').count()
             countss_w = flat_obj.objects.filter(author_id=i.id, date_sozd__gte=d11, date_sozd__lte=d1).exclude(domclick_pub='Нет').count()#.exclude(kadastr='').count()
+            cian_count = flat_obj.objects.filter(author_id=i.id, date_sozd__gte=d11, date_sozd__lte=d1).count()
             zv = zayavka.objects.filter(reelt_auth_id = i.id).count()
             zv_w = zayavka.objects.filter(reelt_auth_id = i.id, date_sozd__gte=d11, date_sozd__lte=d1).count()
             s = stat_obj_crm(auth_nic  = i.username, auth_ful_name = i.first_name +' '+i.last_name, auth_group = i.groups.get().name,
