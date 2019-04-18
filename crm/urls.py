@@ -48,7 +48,9 @@ urlpatterns = [
     url(r'^flats/Seo_flats_Unpub/$', views.all_flatviewSeo_unpub, name='seo_flat_unpub'),
     url(r'^flats/allflats_pub_form/(?P<idd>[0-9]+)/$', views.seo_flat_pub, name='form_flatpub'),
 
-    url(r'^flats/myflats_unpub/$', views.my_flatview_unpub, name='my_flatunpub'),
+    url(r'^flats/myflats_unpub/$', views.my_flatview_unpub, name='my_flatunpub'),# My Flats
+    url(r'^flats/myflats_fake_pub/$', views.my_flatview_unpub_Fake, name='my_flatunpub_fake'),# My Fake Flats
+
     url(r'^flat/edit(?P<idd>[0-9]+)/$', views.my_flatview_edit, name='flat_edit'),
     url(r'^flat/(?P<idd>[0-9]+)/$', views.myflatDetail, name='flat_detail'),
     url(r'^flat/print/(?P<idd>[0-9]+)/$', views.myflatPrint, name='flat_print'),

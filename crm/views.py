@@ -467,7 +467,7 @@ def excl_flatview_pub(request):
 @login_required
 def my_flatview_unpub(request):
     n1='Квартиры'
-    n2='личные'
+    n2='личные(Домклик)'
     n3 = zayavka.objects.filter(status='Свободен').count()
     my_ya_obj = flat_obj.objects.filter(author=request.user).count()
     d11 =timezone.datetime.now().date()-timedelta(days=timezone.datetime.now().weekday())
@@ -524,7 +524,70 @@ def my_flatview_unpub(request):
 ###################################################
 ###  end My Flat list
 ###################################################
+###################################################
+###  start My Flat list(Fakes)
+###################################################
 
+@login_required
+def my_flatview_unpub_Fake(request):
+    n1='Квартиры'
+    n2='личные(Фейки)'
+    n3 = zayavka.objects.filter(status='Свободен').count()
+    my_ya_obj = flat_obj.objects.filter(author=request.user).count()
+    d11 =timezone.datetime.now().date()-timedelta(days=timezone.datetime.now().weekday())
+    crm_obj_week_count = flat_obj.objects.filter(author_id=request.user.id, date_sozd__gte=d11).count()
+    auser = request.user
+    if request.POST:
+        aFlatSearch = flat_search_form(request.POST)
+        if aFlatSearch.is_valid():
+            minp = aFlatSearch.cleaned_data['search_minp']
+            maxp = aFlatSearch.cleaned_data['search_maxp']
+            minc = aFlatSearch.cleaned_data['search_minc']
+            maxc = aFlatSearch.cleaned_data['search_maxc']
+            raionc = aFlatSearch.cleaned_data['search_raion']
+            id = request.user.pk
+            us = get_object_or_404(UserProfile1, pk=id)
+            us.search_raion = raionc
+            us.search_minp = minp
+            us.search_maxp = maxp
+            us.search_minc = minc
+            us.search_maxc = maxc
+            us.save()
+            if raionc == 'Любой':
+                flatlist = flat_obj.objects.filter(status_obj='Опубликован', domclick_pub='Нет',
+                                               cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc),
+                                               ploshad__gte=int(minp), ploshad__lte=int(maxp),
+                                               type = 'flat').order_by('-date_sozd')
+            else:
+                flatlist = flat_obj.objects.filter(status_obj='Опубликован',raion=raionc, domclick_pub='Нет',
+                                               cena_agenstv__gte=int(minc), cena_agenstv__lte=int(maxc),
+                                               ploshad__gte=int(minp), ploshad__lte=int(maxp),
+                                               type = 'flat').order_by('-date_sozd')
+    else:
+        id = request.user.pk
+        us = get_object_or_404(UserProfile1, pk = id)
+        minp = us.search_minp
+        maxp = us.search_maxp
+        minc = us.search_minc
+        maxc = us.search_maxc
+        raionc = us.search_raion
+        aFlatSearch=flat_search_form(initial={'search_minp': us.search_minp, 'search_maxp': us.search_maxp,
+                                              'search_minc': us.search_minc, 'search_maxc': us.search_maxc,
+                                              'search_raion': us.search_raion})
+        if raionc == 'Любой':
+            flatlist=flat_obj.objects.filter(author=auser, type ='flat', domclick_pub='Нет',
+                                         cena_agenstv__gte = int(minc), cena_agenstv__lte = int(maxc),
+                                         ploshad__gte = int(minp), ploshad__lte = int(maxp),).order_by('-date_sozd',)
+        else:
+            flatlist=flat_obj.objects.filter(author=auser, type ='flat', domclick_pub='Нет',
+                                         cena_agenstv__gte = int(minc), cena_agenstv__lte = int(maxc),
+                                         ploshad__gte = int(minp), ploshad__lte = int(maxp),).order_by('-date_sozd',)
+    return render(request,'crm/flat/all_flat_index.html',{'tpflatlist':flatlist,'tpaFlatSearch':aFlatSearch,'tn1':n1,
+                                                          'tcrm_obj_week_count':crm_obj_week_count,'tn2':n2,
+                                                          'tn3':n3,'t_my_ya_obj':my_ya_obj})
+###################################################
+###  end My Flat list(Fakes)
+###################################################
 @login_required
 def all_flatview_pub(request):
     n1='Квартиры'
