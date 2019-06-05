@@ -4576,7 +4576,10 @@ def DashBoardView(request):
     sum_sochi = reyt_sdelka_otd.objects.filter(otd__contains='Отдел').aggregate(Sum("kommisia"))
     sum_adler = reyt_sdelka_otd.objects.filter(otd__contains='Адлер').aggregate(Sum("kommisia"))
     s_sochi = sum_sochi.get('kommisia__sum') * 0.45
-    s_adler = sum_adler.get('kommisia__sum') * 0.45
+    if sum_adler.get('kommisia__sum'):
+        s_adler = sum_adler.get('kommisia__sum') * 0.45
+    else:
+        s_adler = 0
     ########################
     ## End for All pribil
     ########################
